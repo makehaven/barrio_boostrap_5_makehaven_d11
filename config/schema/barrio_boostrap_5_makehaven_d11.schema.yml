@@ -1,0 +1,5 @@
+# Schema for the Drupal 11 Barrio subtheme.
+
+barrio_boostrap_5_makehaven_d11.settings:
+  type: bootstrap_barrio.settings
+  label: 'Barrio Boostrap 5 MakeHaven D11 settings'

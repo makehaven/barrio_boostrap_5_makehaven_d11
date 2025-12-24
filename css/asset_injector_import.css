@@ -1,0 +1,6419 @@
+/* Imported from Asset Injector CSS so the Drupal 11 theme can ship with the same
+ * styling. Generated via scripts/import-asset-injector-css.php. */
+/* === Admin Style (asset_injector config: admin_style) === */
+/* Style the navigation container */
+.main-content .nav-tabs {
+  display: flex; /* Align the tabs horizontally */
+  border-bottom: 2px solid #ddd; /* Bottom border for tabs */
+  padding: 0; /* Remove default padding */
+  margin-bottom: 20px; /* Add some margin below the tabs */
+  list-style: none; /* Remove bullet points */
+}
+
+/* Style each tab item */
+.main-content .nav-item {
+  margin: 0; /* Remove default margin */
+}
+
+/* Style each tab link */
+.main-content .nav-link {
+  display: block; /* Make links fill the tab area */
+  padding: 10px 15px; /* Add padding for spacing */
+  text-decoration: none; /* Remove underline from links */
+  color: #333; /* Default text color */
+  border: 1px solid #ddd; /* Border around each tab */
+  border-bottom: none; /* Remove bottom border */
+  background-color: #f9f9f9; /* Background color for inactive tabs */
+  margin-right: 5px; /* Space between tabs */
+  border-radius: 5px 5px 0 0; /* Rounded corners at the top */
+}
+
+/* Active tab styles */
+.main-content .nav-link.active {
+  background-color: #fff; /* White background for active tab */
+  color: #000; /* Active tab text color */
+  font-weight: bold; /* Bold text for active tab */
+  border-bottom: 2px solid #fff; /* Ensure the active tab merges seamlessly with the tab content */
+}
+
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .main-content .nav-tabs {
+    flex-wrap: wrap; /* Wrap tabs on smaller screens */
+  }
+  .main-content .nav-link {
+    margin-bottom: 5px; /* Add some space below each tab */
+  }
+}
+
+.main-content .nav-tabs .nav-link:hover,.main-content .nav-tabs .nav-link:focus {
+    color: #212529;
+}
+/*
+
+.toolbar-tray-horizontal.toolbar-tray {
+    width: 100% !important;
+    top: 40px !important;
+}
+
+*/
+
+aside#admin-toolbar {
+    padding-top: 40px;
+}
+
+label.crm-menubar-toggle-btn {
+    min-width: 420px;
+}
+
+/* it was hiding import format not sure why this fixes*/
+ .js-filter-wrapper {
+    display: block !important;
+}
+
+/* stop editor from too wide */
+
+.ck.ck-editor__main {
+    max-width: 1400px;
+}
+
+/* === Appointment Create Disable Repopulated Fields (asset_injector config: appointment_create_disable_repopulated_fields) === */
+/* Grey out the fields */
+#edit-field-appointment-host-0-target-id,
+#edit-field-appointment-date-0-value,
+#edit-title-0-value {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+/* Disable pointer events to prevent interaction */
+#edit-field-appointment-host-0-target-id,
+#edit-field-appointment-date-0-value,
+#edit-title-0-value {
+    pointer-events: none;
+}
+
+div#edit-title-wrapper {
+    visibility: hidden;
+}
+
+.node-appointment-form #edit-field-appointment-status-wrapper {
+    display: none;
+}
+
+.node-appointment-edit-form #edit-field-appointment-status-wrapper {
+display: block;
+}
+
+div#edit-field-appointment-result-wrapper {
+    display: none;
+}
+
+div#edit-field-appointment-feedback-wrapper {
+    display: none;
+}
+
+.node-appointment-edit-form div#edit-field-appointment-result-wrapper {
+    display: block;
+}
+
+node-appointment-edit-form div#edit-field-appointment-feedback-wrapper {
+    display: block;
+}
+
+/* === Appointment View (asset_injector config: appointment_view) === */
+/* Container styling */
+#block-barrio-boostrap-5-makehaven-d11-makerbootstrap-system-main .content .node--type-appointment {
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Header/Contextual options separation */
+#block-barrio-boostrap-5-makehaven-d11-makerbootstrap-system-main .content .node--type-appointment > header {
+  border-bottom: 1px solid #dee2e6;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+/* Field label styling */
+#block-barrio-boostrap-5-makehaven-d11-makerbootstrap-system-main .content .field__label {
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 0.25rem;
+}
+
+/* For fields with inline labels */
+#block-barrio-boostrap-5-makehaven-d11-makerbootstrap-system-main .content .field--label-inline {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+#block-barrio-boostrap-5-makehaven-d11-makerbootstrap-system-main .content .field--label-inline .field__label {
+  margin-right: 0.5rem;
+  white-space: nowrap;
+}
+
+/* For fields with labels above */
+#block-barrio-boostrap-5-makehaven-d11-makerbootstrap-system-main .content .field--label-above {
+  margin-bottom: 1rem;
+}
+
+/* Field item text styling */
+#block-barrio-boostrap-5-makehaven-d11-makerbootstrap-system-main .content .field__item {
+  color: #212529;
+  line-height: 1.5;
+}
+
+/* Status field: emphasize status text */
+#block-barrio-boostrap-5-makehaven-d11-makerbootstrap-system-main .content .field--name-field-appointment-status .field__item {
+  font-weight: 700;
+  color: #198754;
+}
+
+/* Appointment Date & Slot fields (inline look) */
+#block-barrio-boostrap-5-makehaven-d11-makerbootstrap-system-main .content .field--name-field-appointment-date,
+#block-barrio-boostrap-5-makehaven-d11-makerbootstrap-system-main .content .field--name-field-appointment-slot,
+#block-barrio-boostrap-5-makehaven-d11-makerbootstrap-system-main .content .field--name-node-author,
+#block-barrio-boostrap-5-makehaven-d11-makerbootstrap-system-main .content .field--name-field-appointment-host {
+  margin-bottom: 1rem;
+}
+
+/* Purpose field: standard spacing */
+#block-barrio-boostrap-5-makehaven-d11-makerbootstrap-system-main .content .field--name-field-appointment-purpose {
+  margin-bottom: 1rem;
+}
+
+/* Appointment Badges: display as badges */
+#block-barrio-boostrap-5-makehaven-d11-makerbootstrap-system-main .content .field--name-field-appointment-badges .field__item a {
+  display: inline-block;
+  padding: 0.25rem 0.4rem;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  background-color: #6c757d;
+  border-radius: 0.2rem;
+  text-decoration: none;
+  margin-right: 0.25rem;
+}
+#block-barrio-boostrap-5-makehaven-d11-makerbootstrap-system-main .content .field--name-field-appointment-badges .field__item a:hover {
+  background-color: #5a6268;
+}
+
+/* Appointment Result styling */
+#block-barrio-boostrap-5-makehaven-d11-makerbootstrap-system-main .content .field--name-field-appointment-result .field__item {
+  font-weight: 700;
+  color: #0d6efd;
+}
+
+/* Link styling within the appointment */
+#block-barrio-boostrap-5-makehaven-d11-makerbootstrap-system-main .content .node--type-appointment a {
+  color: #0d6efd;
+  text-decoration: none;
+}
+#block-barrio-boostrap-5-makehaven-d11-makerbootstrap-system-main .content .node--type-appointment a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 576px) {
+  #block-barrio-boostrap-5-makehaven-d11-makerbootstrap-system-main .content .node--type-appointment {
+    padding: 1rem;
+  }
+  #block-barrio-boostrap-5-makehaven-d11-makerbootstrap-system-main .content .field--label-inline {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  #block-barrio-boostrap-5-makehaven-d11-makerbootstrap-system-main .content .field--label-inline .field__label {
+    margin-bottom: 0.25rem;
+  }
+}
+
+/* === Assets (asset_injector config: assets) === */
+.field .field__item .contextual-region.node.node--type-item.node--view-mode-minimal-list {
+    border-bottom: solid;
+    border-bottom: solid;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.field .field__item .field__item .contextual-region.node.node--type-item.node--view-mode-minimal-list {
+    border-bottom: none;
+}
+
+
+/* Styles for the container based on hazard classes */
+.hazard-class-1 {
+  background-color: #d4edda; /* Light green for minor hazards */
+  color: #155724; /* Dark green text */
+  padding: 10px; /* Add padding for visual separation */
+  border-radius: 5px; /* Rounded corners */
+  margin-bottom: 10px; /* Spacing between elements */
+}
+
+.hazard-class-2 {
+  background-color: #fff3cd; /* Light yellow background */
+  color: #856404; /* Dark yellow text */
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.hazard-class-3 {
+  background-color: #f8d7da; /* Light red background */
+  color: #721c24; /* Dark red text */
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.hazard-class-4 {
+  background-color: #f5c6cb; /* Darker red background */
+  color: #721c24; /* Dark red text */
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+
+
+
+.field--type-entity-reference .field__label 
+{font-weight: bold;}
+
+
+/* Ensure styles only apply in full view mode of the item */
+.node--type-item.node--view-mode-full .field--name-field-item-image {
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically if needed */
+    text-align: center;
+    width: 100%; /* Ensures it spans the full width */
+}
+
+/* Ensure the anchor (a) and image are centered */
+.node--type-item.node--view-mode-full .field--name-field-item-image a {
+    display: flex;
+    justify-content: center;
+}
+
+/* Override float left on images */
+.node--type-item.node--view-mode-full .field--type-image {
+    float: none !important;
+    margin: 0 auto;
+    display: block;
+}
+
+
+
+
+
+/* Ensure the container for both buttons aligns to the right */
+#block-asset-reservation-button-reservation-button .content,
+#block-reservation-button-staff .content {
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    gap: 10px; /* Space between buttons */
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+
+/* Target reservation buttons without affecting other links */
+#block-asset-reservation-button-reservation-button .views-field a,
+#block-reservation-button-staff .views-field a {
+    display: inline-block;
+    padding: 8px 14px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 4px;
+    border: 1px solid #bbb;
+    transition: background 0.2s ease-in-out, border 0.2s ease-in-out;
+    white-space: nowrap; /* Prevents wrapping inside buttons */
+}
+
+/* Specific button styles */
+#block-asset-reservation-button-reservation-button .views-field a {
+    background-color: #007bff; /* Blue button */
+    color: white;
+}
+
+#block-asset-reservation-button-reservation-button .views-field a:hover {
+    background-color: #0056b3;
+}
+
+#block-reservation-button-staff .views-field a {
+    background-color: #28a745; /* Green for staff reservation */
+    color: white;
+}
+
+#block-reservation-button-staff .views-field a:hover {
+    background-color: #218838;
+}
+
+/* Responsive: Center buttons on small screens */
+@media (max-width: 576px) {
+    #block-asset-reservation-button-reservation-button .content,
+    #block-reservation-button-staff .content {
+        justify-content: center;
+    }
+}
+
+
+/* Container: target both reservation button blocks */
+#block-staff-reservation-button .content,
+#block-asset-reservation-button-reservation-button .content {
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    align-items: center;
+    gap: 10px; /* Space between buttons */
+    width: 100%;
+}
+
+/* Reservation button styling (Bootstrap 5 look) */
+.buttton {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    background-color: #0d6efd;
+    border: 1px solid #0d6efd;
+    padding: 0.375rem 0.75rem; /* roughly 6px 12px */
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    text-decoration: none;
+}
+
+.buttton:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+    text-decoration: none;
+}
+
+/* Responsive: center buttons on very small screens */
+@media (max-width: 576px) {
+    #block-staff-reservation-button .content,
+    #block-asset-reservation-button-reservation-button .content {
+        justify-content: center;
+    }
+}
+
+div#block-asset-reservation-button-reservation-button, div#block-staff-reservation-button {
+    border: 0px;
+    background: transparent;
+}
+
+
+div#block-staff-reservation-button a.buttton, div#block-asset-reservation-button-reservation-button a.buttton, {
+    background: #4082e3;
+    border: 1px solid #4082e3
+    padding: 10px;
+    color: white;
+    border-radius: 3px;
+}
+
+
+div#block-staff-reservation-button {
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+
+div#block-staff-reservation-button .views-field.views-field-nothing {
+    margin-top: 0px;
+}
+
+/* === Badges (asset_injector config: badges) === */
+/* Apply to the container within .group-prerequisite */
+.group-prerequisite .field__item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; /* Adjusts spacing between items */
+  padding: 10px; /* Adds padding around the container */
+  border: 1px solid #ccc; /* Adds outer border */
+  background-color: #fff; /* Fills container with white */
+  border-radius: 8px; /* Optional: rounds the corners of the outer container */
+}
+
+/* Apply to the container within .group-prerequisite */
+.group-prerequisite .field__item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; /* Adjusts spacing between items */
+  padding: 10px; /* Adds padding around the container */
+  border: 1px solid #ccc; /* Adds outer border */
+  background-color: #fff; /* Fills container with white */
+  border-radius: 8px; /* Optional: rounds the corners of the outer container */
+}
+
+/* Style individual items within .group-prerequisite */
+.group-prerequisite .field__item {
+  flex: 1 1 25px; /* Allows items to grow and shrink, sets a minimum width */
+  max-width: 150px; /* Ensures a maximum width for each item */
+  text-align: center; /* Centers content inside the item */
+  padding: 0px; /* Adds slight padding for visual separation */
+  background: none; /* Removes background color */
+  border: none; /* Removes inner border */
+  box-shadow: none; /* Removes inner box shadow */
+}
+
+/* Style images within .group-prerequisite */
+.group-prerequisite .field__item img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px; /* Slightly rounds the image corners */
+}
+
+/* Style the badge title */
+.group-prerequisite .field__item h5 {
+  margin-top: 10px; /* Adds spacing above the title */
+  font-size: 1rem; /* Adjusts font size */
+  color: #333; /* Optional: changes text color */
+}
+
+
+.group-prerequisite .field__item {
+    flex: 1 1 25px;
+    max-width: 150px;
+    text-align: center;
+    padding: 5px;
+    background: none;
+    border: none;
+    box-shadow: none;
+    background: white;
+    margin: 10px;
+    float: left;
+    align-content: center;
+}
+
+/* Targeting the specific section inside .group-prerequisite */
+.group-prerequisite .layout__region.layout__region--content {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center-aligns content horizontally */
+  text-align: center; /* Centers text inside the elements */
+}
+
+/* Adjust margin of the title to reduce space */
+.group-prerequisite .field--name-taxonomy-term-title h5 {
+  margin-top: 5px; /* Reduces space above the title */
+}
+
+
+
+.field.field--name-field-training-documentation.field--type-entity-reference a {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0.25rem;
+}
+
+
+
+
+
+/* Badge member Listing */
+
+/* Style for the badge certificate container in .view-taxonomy-badges */
+.view-taxonomy-badges .boxes.views-row {
+  width: 450px; /* Set a fixed width for the certificate */
+  margin: 20px auto; /* Center-align with auto margins and add spacing */
+  padding: 20px; /* Add padding inside the certificate */
+  border: 2px solid #ccc; /* Add a border to resemble a certificate frame */
+  border-radius: 10px; /* Slightly round the corners */
+  background-color: #fffcdd; /* White background for the certificate */
+  background-image: url('path/to/watermark-image.png'); /* Add watermark image */
+  background-size: 300px; /* Set size of watermark */
+  background-position: center; /* Center the watermark */
+  background-repeat: no-repeat; /* Prevent the watermark from repeating */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  text-align: center; /* Center-align text and content */
+  position: relative; /* For positioning icons */
+}
+
+/* Add a ribbon icon at the top */
+/* Add a prize ribbon icon as a watermark */
+.view-taxonomy-badges .boxes.views-row::before {
+  content: "";
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: 42px 69px; /* Adjust the size of the icon */
+  width: 47px;
+  height: 59px;
+  position: absolute;
+  top: 76px;
+  left: 50%;
+  transform: translateX(-50%); /* Center the icon horizontally */
+  opacity: 0.5; /* Adjust opacity for a watermark effect */
+  background-image: url('data:image/svg+xml,%3Csvg xmlns%3D%22http%3A//www.w3.org/2000/svg%22 height%3D%2224px%22 viewBox%3D%220 -960 960 960%22 width%3D%2224px%22 fill%3D%22%23e8eaed%22%3E%3Cpath d%3D%22M240-40v-329L110-580l185-300h370l185 300-130 211v329l-240-80-240 80Zm80-111 160-53 160 53v-129H320v129Zm20-649L204-580l136 220h280l136-220-136-220H340Zm98 383L296-558l57-57 85 85 169-170 57 56-226 227ZM320-280h320-320Z%22/%3E%3C/svg%3E');
+    transform: scale(4);
+	
+}
+
+
+/* Adjust image size */
+.view-taxonomy-badges .field--name-field-member-photo img {
+  width: 150px; /* Adjust size to fit within the certificate */
+  height: auto;
+  border-radius: 50%; /* Make the photo circular */
+  margin-bottom: 10px; /* Add spacing below the photo */
+}
+
+/* Style for badge name */
+.view-taxonomy-badges .field--name-field-badge-requested {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Style for the watermark text */
+.view-taxonomy-badges .field__label {
+  font-size: 1rem;
+  color: #666;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+/* Style for member name */
+.view-taxonomy-badges .field--name-field-first-name,
+.view-taxonomy-badges .field--name-field-last-name {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+/* Additional spacing and alignment adjustments */
+.view-taxonomy-badges .group-left,
+.view-taxonomy-badges .group-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+/* Style the main container */
+.field--name-field-badge-checkout-requirement {
+  background-color: #f9f9f9; /* Light background color */
+  border: 1px solid #ddd; /* Subtle border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 15px; /* Add padding for spacing */
+  margin: 15px 0; /* Add spacing around the element */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between icon and text */
+}
+
+/* Add an icon before the label */
+.field--name-field-badge-checkout-requirement::before {
+  content: '\1F393'; /* Unicode for a graduation cap emoji */
+  font-size: 24px; /* Size of the icon */
+  color: #007bff; /* Icon color */
+  display: inline-block;
+}
+
+/* Style the label */
+.field--name-field-badge-checkout-requirement .field__label {
+  font-weight: bold; /* Bold text for emphasis */
+  color: #333; /* Darker text color */
+  margin-bottom: 5px;
+  font-size: 1.1rem;
+}
+
+/* Style the item description */
+.field--name-field-badge-checkout-requirement .field__item {
+  color: #555; /* Subtle text color */
+  font-size: 1rem; /* Adjust font size */
+  margin-top: 5px;
+}
+
+/* making pending badges grey background */
+.view-badges-earned-block tr.Pending {
+    background: #a9a9a9;
+}
+
+/* === Badge Quizes (asset_injector config: badge_quizes) === */
+/* Overall form container styling */
+.answering-form {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Question title styling */
+.answering-form h2 {
+    font-size: 2.2em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Question text styling */
+.answering-form .field__item p {
+    font-size: 1.5em;
+    color: #555;
+}
+
+/* Table styling for the answer options */
+.answering-form table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+/* Table rows and cells */
+.answering-form table tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.answering-form table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.answering-form table tbody td {
+    padding: 20px;
+}
+
+/* Styling the radio buttons */
+.answering-form .form-radio {
+    width: 25px;
+    height: 25px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+/* Styling the labels for answer options */
+.answering-form td p {
+    font-size: 2em;
+    color: #333;
+}
+
+/* Styling the submit button */
+.answering-form .form-actions .btn {
+    background-color: #8b1919;
+    color: #fff;
+    font-size: 1.5em;
+    padding: 15px 25px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.answering-form .form-actions .btn:hover {
+    background-color: #a32222;
+}
+
+/* Making the form's checkboxes or radio buttons larger */
+.answering-form .form-check-input {
+    transform: scale(1.);
+    margin-right: 5px;
+}
+
+/* Styling the legend in the quiz form */
+#quiz-question-answering-form fieldset.fieldgroup.form-composite legend .fieldset-legend {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #333;
+    padding: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+}
+
+/* Aligning the radio buttons and labels horizontally */
+#quiz-question-answering-form fieldset.fieldgroup.form-composite .form-check {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+/* Styling the labels for the radio buttons */
+#quiz-question-answering-form fieldset.fieldgroup.form-composite .form-check-label {
+    font-size: 1.5em;
+    color: #333;
+    cursor: default;
+}
+
+/* Styling for the quiz intro */
+.quiz-config-overview {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+/* Table styling for the quiz overview */
+.quiz-config-overview .quiz-config-overview-table {
+    width: 100%;
+    margin-top: 15px;
+    border-collapse: collapse;
+}
+
+/* Table header styling */
+.quiz-config-overview th {
+    text-align: left;
+    font-size: 1.3em;
+    font-weight: bold;
+    padding: 15px;
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+/* Table row styling */
+.quiz-config-overview td {
+    padding: 15px;
+    font-size: 1.2em;
+    color: #555;
+}
+
+/* Alternate row colors */
+.quiz-config-overview tr:nth-child(even) {
+    background-color: #f7f7f7;
+}
+
+.quiz-config-overview tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+/* Styling the start quiz button */
+.quiz-config-overview .quiz-config-overview-take .quiz-start-link {
+    display: inline-block;
+    background-color: #8b1919;
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 15px 30px;
+    margin-top: 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.quiz-config-overview .quiz-config-overview-take .quiz-start-link:hover {
+    background-color: #a32222;
+    transform: scale(1.5);
+}
+
+.answering-form .form-check-input {
+    transform: scale(1.5);
+    margin-right: 5px;
+}
+
+/* Styling the quiz feedback form */
+#quiz-take-question-feedback-form fieldset.js-form-wrapper {
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for feedback containers */
+.quiz-report-score-container {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.5em;
+}
+
+/* Correct answer feedback */
+.quiz-report-score-container.q-correct {
+    background-color: #d4edda;
+    color: #155724;
+    border: 2px solid #c3e6cb;
+}
+
+/* Incorrect answer feedback */
+.quiz-report-score-container.q-wrong {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 2px solid #f5c6cb;
+}
+
+/* Add "Feedback" label before feedback text */
+.quiz-report-score-container::before {
+    content: "Feedback: ";
+    font-weight: bold;
+    font-size: 1.2em;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Feedback paragraph styling */
+.quiz-report-score-container + p {
+    background-color: #d4edda63;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.5em;
+    color: #333;
+    border: 1px solid #ccc;
+    margin-top: 15px;
+}
+
+/* Styling the table to be responsive */
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* Fieldset styling for quiz questions */
+#quiz-question-answering-form fieldset.fieldgroup.form-composite {
+    border: 2px solid #8b1919;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.path-quiz .clearfix.text-formatted.field.field--name-body.field--type-text-long.field--label-above {
+    font-size: 20px;
+}
+
+
+.path-quiz a.btn.btn-primary.btn-lg {
+    margin-bottom: 40px;
+}
+
+.path-quiz .btn-primary {
+    background-color: #8b1919;
+    border-color: #8b1919;
+}
+
+
+
+.path-quiz .quiz-report-score-container.q-correct {
+    display: none;
+}
+
+
+/* Styling for the quiz not available message */
+.quiz-not-available {
+    background-color: #ffe6e6; /* Light red background */
+    color: #8b1919; /* Dark red text */
+    border: 2px solid #8b1919; /* Dark red border */
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0; /* Spacing around the message */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+}
+
+/* === Blog (asset_injector config: blog) === */
+.field.field--name-field-blog-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* === Bug Hide Ical Not Working (asset_injector config: bug_hide_ical_not_working) === */
+.iCal_links-section a:first-child {
+    display: none;
+}
+
+/* === C (asset_injector config: c) === */
+/* Style the entire comment form container */
+.comment-wrapper {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the comment form */
+.comment-form {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the form title */
+.comment-form__title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Improve textarea appearance */
+.comment-form textarea {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+
+/* Style the submit button */
+.comment-form button {
+    background: #007bff;
+    color: white;
+    font-size: 16px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.comment-form button:hover {
+    background: #0056b3;
+}
+
+/* Ensure responsiveness */
+@media (max-width: 600px) {
+    .comment-form {
+        padding: 10px;
+    }
+    .comment-form textarea {
+        font-size: 14px;
+    }
+    .comment-form button {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+}
+
+/* === Calendar (asset_injector config: calendar) === */
+thead > tr {
+    border-bottom: 0px solid #000;
+}
+
+
+
+
+td.fc-day-top.fc-sun.fc-past {
+    background: lightgrey;
+}
+
+/* === Chatbot Footer (asset_injector config: chatbot_footer) === */
+.site-footer .content .chat
+{
+color: black;
+}
+
+.site-footer .content .chat a
+{
+color: blue;
+}
+
+/* === Contribution Donation Pages (asset_injector config: contribution_donation_pages) === */
+/* General Image Styling */
+figure.image img {
+    width: 100%;
+}
+
+/* Center Align Form and Limit Width */
+#crm-main-content-wrapper {
+    margin: 0 auto;
+    max-width: 900px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Input Field Styling */
+.crm-form-text, .crm-select2 {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+/* Input Focus Highlight */
+.crm-form-text:focus, .crm-select2:focus {
+    border-color: #0073e6;
+    outline: none;
+    box-shadow: 0 0 3px rgba(0, 115, 230, 0.5);
+}
+
+/* Improve Label Styling */
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* Highlight Required Fields */
+.crm-marker {
+    color: red;
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+/* Section Styling */
+fieldset {
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+/* Section Headers */
+legend {
+    font-size: 18px;
+    font-weight: bold;
+    color: #444;
+    padding: 0 10px;
+}
+
+/* Submit Button Styling */
+.crm-form-submit {
+    background-color: #0073e6;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+}
+
+/* Submit Button Hover */
+.crm-form-submit:hover {
+    background-color: #005bb5;
+}
+
+/* Donation Buttons Styling */
+.content .price-set-row {
+    margin: 10px auto;
+    max-width: 420px;
+    background-color: transparent;
+}
+
+/* Default State: Light Gray Background */
+.content .price-set-row label {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #aaa; /* Default light gray */
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: none;
+}
+
+/* Button Hover State */
+.content .price-set-row label:hover {
+    background-color: #d47474; /* Slightly darker red on hover */
+}
+
+/* Hide Radio Inputs */
+.content .price-set-row input[type="radio"] {
+    display: none;
+}
+
+/* Selected State: Dark Red Background with White Text */
+.content .price-set-row input[type="radio"]:checked + label {
+    background-color: #8b1919; /* Darker red when selected */
+    color: white; /* Ensure text is white for better visibility */
+    border: 2px solid white;
+}
+
+/* Ensure spans inside labels are also white */
+.content .price-set-row label span {
+    color: inherit;
+}
+
+/* Donation Amount Label on New Line */
+.contribution_amount-content label:first-of-type {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+/* Footer Text Styling */
+#footer_text {
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+    #crm-main-content-wrapper {
+        padding: 10px;
+    }
+
+    .content .price-set-row {
+        max-width: 100%;
+    }
+
+    .crm-form-text, .crm-select2 {
+        font-size: 14px;
+    }
+
+    .crm-form-submit {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+}
+
+/* Intro Image Styling */
+#intro_text figure img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+
+#crm-container.crm-public .price-set-row .highlight .crm-price-amount-label {
+    color: white;
+}
+
+#crm-container.crm-public .price-set-row .highlight .crm-price-amount-amount {
+    color: white;
+}
+
+
+/* Hide the original radio buttons */
+.soft_credit_type_id-section .content input[type="radio"] {
+    display: none;
+}
+
+/* Style the labels as buttons */
+.soft_credit_type_id-section .content label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #aaa; /* Default light gray */
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect for the buttons */
+.soft_credit_type_id-section .content label:hover {
+    background-color: #888;
+}
+
+/* Styling for the selected button */
+.soft_credit_type_id-section .content input[type="radio"]:checked + label {
+    background-color: #8b1919; /* Dark red when selected */
+    color: white;
+    border: 2px solid white;
+}
+
+/* Style the 'Clear' link */
+.soft_credit_type_id-section .content .crm-clear-link {
+    color: #8b1919;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px;
+    margin-left: 10px;
+}
+
+/* Hover effect for the 'Clear' link */
+.soft_credit_type_id-section .content .crm-clear-link:hover {
+    text-decoration: underline;
+}
+
+/* Description styling */
+.soft_credit_type_id-section .content .description {
+    margin-top: 10px;
+    color: #666;
+    font-size: 14px;
+}
+
+
+/* Hide the original radio buttons */
+.payment_options-group .content input[type="radio"] {
+    display: none;
+}
+
+/* Style the labels as buttons */
+.payment_options-group .content label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #aaa; /* Default light gray */
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect for the buttons */
+.payment_options-group .content label:hover {
+    background-color: #888; /* Slightly darker gray on hover */
+}
+
+/* Style the selected button */
+.payment_options-group .content input[type="radio"]:checked + label {
+    background-color: #8b1919; /* Dark red when selected */
+    color: white;
+    border: 2px solid white;
+}
+
+/* Ensure spacing and alignment for the fieldset */
+.payment_options-group {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* Style the legend */
+.payment_options-group legend {
+    font-size: 18px;
+    font-weight: bold;
+    color: #444;
+    padding: 0 10px;
+}
+
+/* Clear floats for consistent layout */
+.payment_options-group .clear {
+    clear: both;
+}
+
+/* Add responsiveness for smaller screens */
+@media (max-width: 768px) {
+    .payment_options-group .content label {
+        display: block;
+        margin-bottom: 10px; /* Add spacing between buttons */
+    }
+}
+
+
+/* Style the fieldset container */
+.custom_post_profile-group fieldset {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Style the legend */
+.custom_post_profile-group fieldset legend {
+    font-size: 18px;
+    font-weight: bold;
+    color: #444;
+    padding: 0 10px;
+}
+
+/* Hide the original radio buttons */
+.custom_post_profile-group .crm-multiple-checkbox-radio-options input[type="radio"] {
+    display: none;
+}
+
+/* Style the labels as buttons */
+.custom_post_profile-group .crm-multiple-checkbox-radio-options label {
+    display: inline-block;
+    width: 150px; /* Ensures enough width for the text */
+    text-align: center; /* Centers the text */
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #aaa; /* Default gray */
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    box-sizing: border-box;
+}
+
+/* Hover effect for radio button labels */
+.custom_post_profile-group .crm-multiple-checkbox-radio-options label:hover {
+    background-color: #888; /* Slightly darker gray */
+}
+
+/* Selected state */
+.custom_post_profile-group .crm-multiple-checkbox-radio-options input[type="radio"]:checked + label {
+    background-color: #8b1919; /* Dark red */
+    color: white;
+    border: 2px solid white; /* Add a white border for emphasis */
+}
+
+/* Define the custom property for button width */
+.crm-container .crm-multiple-checkbox-radio-options {
+    --checkbox-width: 10em; /* You can easily adjust this value */
+}
+
+/* Hide the original radio buttons */
+.crm-container .crm-multiple-checkbox-radio-options input[type="radio"] {
+    display: none;
+}
+
+/* Style the labels as buttons */
+.crm-container .crm-multiple-checkbox-radio-options label {
+    display: inline-block;
+    width: var(--checkbox-width); /* Use the custom property for width */
+    text-align: center;
+    padding: 10px;
+    margin: 5px;
+    background-color: #aaa; /* Default gray */
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    box-sizing: border-box;
+}
+
+/* Hover effect for radio button labels */
+.crm-container .crm-multiple-checkbox-radio-options label:hover {
+    background-color: #888; /* Slightly darker gray */
+}
+
+/* Selected state */
+.crm-container .crm-multiple-checkbox-radio-options input[type="radio"]:checked + label {
+    background-color: #8b1919; /* Dark red */
+    color: white;
+    border: 2px solid white; /* Add a white border for emphasis */
+}
+
+/* Adjust width and alignment for small screens */
+@media (max-width: 768px) {
+    .crm-container .crm-multiple-checkbox-radio-options label {
+        width: 100%; /* Full width on smaller screens */
+    }
+}
+
+
+/* Adjust width and alignment for small screens */
+@media (max-width: 768px) {
+    .custom_post_profile-group .crm-multiple-checkbox-radio-options label {
+        width: 100%; /* Full width on smaller screens */
+    }
+}
+
+/* Style the input field for the donor recognition name */
+.custom_post_profile-group .crm-form-text {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Highlight the input field on focus */
+.custom_post_profile-group .crm-form-text:focus {
+    border-color: #8b1919; /* Match the red theme */
+    box-shadow: 0 0 3px rgba(139, 25, 25, 0.5);
+    outline: none;
+}
+
+/* Description styling */
+.custom_post_profile-group .description {
+    margin: 10px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Label styling */
+.custom_post_profile-group .label label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* Clear float fix */
+.custom_post_profile-group .clear {
+    clear: both;
+}
+
+#crm-container.crm-public .price-set-row .crm-price-amount-amount {
+    top: 5px;
+}
+
+
+/* Stack checkboxes vertically */
+.crm-section .crm-multiple-checkbox-radio-options .crm-option-label-pair {
+    display: block; /* Ensures vertical stacking */
+    margin-bottom: 10px; /* Adds spacing between items */
+}
+
+/* Hide the original checkbox */
+.crm-section .crm-multiple-checkbox-radio-options input[type="checkbox"] {
+    display: none;
+}
+
+/* Style the labels as buttons */
+.crm-section .crm-multiple-checkbox-radio-options label {
+    display: block; /* Ensures the entire label is clickable */
+    width: 100%; /* Full width for consistency */
+    padding: 10px;
+    background-color: #aaa; /* Default gray */
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect for the label */
+.crm-section .crm-multiple-checkbox-radio-options label:hover {
+    background-color: #888; /* Slightly darker gray */
+}
+
+/* Style for selected (checked) labels */
+.crm-section .crm-multiple-checkbox-radio-options input[type="checkbox"]:checked + label {
+    background-color: #8b1919; /* Dark red for selected state */
+    color: white;
+    border: 2px solid white; /* Optional: Add a border to emphasize selection */
+}
+
+/* Target only the specific section's checkbox label pairs for full width */
+#editrow-custom_60 .crm-multiple-checkbox-radio-options .crm-option-label-pair {
+    width: 100%; /* Ensure vertical stacking */
+}
+
+
+/* paste this into your theme's CSS injector or stylesheet 
+   This targets the standard CiviCRM "Name and Address" profile 
+*/
+
+/* 1. Turn the main container into a Grid */
+.crm-profile-name-name_and_address fieldset {
+    display: grid !important;
+    grid-template-columns: repeat(12, 1fr); /* 12 column grid for flexibility */
+    gap: 15px; /* Space between items */
+    border: none !important; /* Optional: Clean up default borders */
+}
+
+/* 2. Reset CiviCRM default spacing/floats for these specific rows */
+.crm-profile-name-name_and_address .crm-section {
+    float: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column; /* Ensure label sits on top of input */
+}
+
+/* 3. Make inputs fill their new grid boxes */
+.crm-profile-name-name_and_address input[type="text"],
+.crm-profile-name-name_and_address select,
+.crm-profile-name-name_and_address .select2-container {
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* 4. Hide the "clear" divs CiviCRM inserts (they break grids) */
+.crm-profile-name-name_and_address .clear {
+    display: none !important;
+}
+
+/* --- ROW LAYOUTS --- */
+
+/* First & Last Name: Side by Side (6 columns each = 50%) */
+#editrow-first_name,
+#editrow-last_name {
+    grid-column: span 6;
+}
+
+/* Street Address & City: Full Width (12 columns = 100%) */
+#editrow-street_address-1,
+#editrow-city-1 {
+    grid-column: span 12;
+}
+
+/* State, Zip, Country: Beside Each Other (4 columns each = 33%) */
+#editrow-state_province-1,
+#editrow-postal_code-1,
+#editrow-country-1 {
+    grid-column: span 4;
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+/* On small screens, stack everything back to 1 column */
+@media (max-width: 768px) {
+    #editrow-first_name,
+    #editrow-last_name,
+    #editrow-state_province-1,
+    #editrow-postal_code-1,
+    #editrow-country-1 {
+        grid-column: span 12;
+    }
+}
+
+/* =========================================
+   CIVICRM CUSTOM LAYOUT - MAKEHAVEN
+   ========================================= */
+
+/* --- GENERAL RESET --- */
+/* Force inputs and Select2 containers to respect the grid width */
+.crm-profile-name-name_and_address input[type="text"],
+.crm-profile-name-name_and_address select,
+.crm-profile-name-name_and_address .select2-container,
+.crm-profile-name-name_and_address .select2-drop,
+.billing_name_address-section input[type="text"],
+.billing_name_address-section select,
+.billing_name_address-section .select2-container,
+.billing_name_address-section .select2-drop {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important; /* Prevents flex items from overflowing */
+}
+
+/* Fix specific Select2 internal structure */
+.select2-container .select2-choice {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    height: 34px; /* Optional: Consistent height */
+    line-height: 34px;
+}
+
+/* Hide the "clear" divs CiviCRM inserts (they break grids) */
+.crm-profile-name-name_and_address .clear,
+.billing_name_address-section .clear {
+    display: none !important;
+}
+
+/* Reset CiviCRM default margins/floats for rows inside our grids */
+.crm-profile-name-name_and_address .crm-section,
+.billing_name_address-section .crm-section {
+    float: none !important;
+    width: auto !important; /* changed from 100% to auto to respect grid */
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column; /* Ensure label sits on top of input */
+    justify-content: space-between !important; /* Forces inputs to align at bottom even if labels vary in height */
+    height: 100% !important; /* Ensures the section fills the grid cell height */
+    border: none !important;
+    min-width: 0; /* CRITICAL: Prevents grid overlap */
+}
+
+/* --- FIX LABEL & ASTERISK ALIGNMENT --- */
+/* Force the label text and the red star to stay on the same line */
+.crm-profile-name-name_and_address .crm-section .label,
+.billing_name_address-section .crm-section .label {
+    float: none !important;
+    width: 100% !important;
+    text-align: left !important;
+    margin: 0 !important;
+    display: flex !important; /* Use flexbox to align items */
+    flex-direction: row !important; /* Ensure they sit side-by-side */
+    align-items: center !important; /* Vertically center them */
+    flex-wrap: nowrap !important; /* Prevent wrapping */
+}
+
+/* Target the asterisk specifically */
+.crm-marker {
+    display: inline-block !important;
+    float: none !important;
+    margin-left: 4px !important; /* Add slight space between text and star */
+    position: static !important; /* Reset any absolute positioning */
+}
+
+/* Force internal content to fill the grid cell */
+.crm-profile-name-name_and_address .crm-section .content,
+.billing_name_address-section .crm-section .content {
+    float: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+
+/* =========================================
+   SECTION 1: MAIN CONTACT (Name & Address)
+   ========================================= */
+
+/* Turn the fieldset into a 12-column Grid */
+fieldset.crm-profile-name-name_and_address {
+    display: grid !important;
+    grid-template-columns: repeat(12, 1fr); 
+    gap: 20px; /* Increased gap slightly for breathing room */
+    border: none !important; 
+}
+
+/* FIX: Reset the LEGEND (Title) so it doesn't squish the form */
+fieldset.crm-profile-name-name_and_address legend {
+    float: none !important;
+    width: 100% !important;
+    grid-column: 1 / -1; /* Make it span the full top row */
+    margin-bottom: 15px !important;
+    border-bottom: 1px solid #eee; /* Optional styling */
+    padding-bottom: 5px;
+}
+
+/* Row 1: First & Last Name (Side by Side - 50% each) */
+#editrow-first_name,
+#editrow-last_name {
+    grid-column: span 6;
+}
+
+/* Row 2: Street Address & Supplemental Address (Full Width) */
+#editrow-street_address-1,
+#editrow-supplemental_address_2-Primary {
+    grid-column: span 12;
+}
+
+/* Row 3: City (Full Width) */
+#editrow-city-1 {
+    grid-column: span 12;
+}
+
+/* Row 4: State & Country (Side by Side - 50% each) */
+#editrow-state_province-1,
+#editrow-country-1 {
+    grid-column: span 6;
+}
+
+/* Row 5: Zip Code (Full Width on new line) */
+#editrow-postal_code-1 {
+    grid-column: span 12;
+}
+
+
+/* =========================================
+   SECTION 2: BILLING ADDRESS (Credit Card)
+   ========================================= */
+
+/* Turn the Billing Container into a 12-column Grid */
+.billing_name_address-section {
+    display: grid !important;
+    grid-template-columns: repeat(12, 1fr); 
+    gap: 20px; 
+    margin-top: 10px !important;
+}
+
+/* Row 1: First, Middle, Last Name (3 cols - 33% each) */
+.billing_first_name-section,
+.billing_middle_name-section,
+.billing_last_name-section {
+    grid-column: span 4;
+}
+
+/* Row 2: Street Address (Full Width) */
+.billing_street_address-5-section {
+    grid-column: span 12;
+}
+
+/* Row 3: City (Full Width) */
+.billing_city-5-section {
+    grid-column: span 12;
+}
+
+/* Row 4: Country & State (Side by Side - 50% each) */
+.billing_country_id-5-section,
+.billing_state_province_id-5-section {
+    grid-column: span 6;
+}
+
+/* Row 5: Zip Code (Full Width on new line) */
+.billing_postal_code-5-section {
+    grid-column: span 12;
+}
+
+
+/* =========================================
+   MOBILE RESPONSIVENESS
+   ========================================= */
+/* On phones (screens smaller than 768px), force everything to 1 column */
+@media (max-width: 768px) {
+    /* Reset Contact Info */
+    #editrow-first_name,
+    #editrow-last_name,
+    #editrow-state_province-1,
+    #editrow-postal_code-1,
+    #editrow-country-1,
+    #editrow-supplemental_address_2-Primary {
+        grid-column: span 12 !important;
+    }
+
+    /* Reset Billing Info */
+    .billing_first_name-section,
+    .billing_middle_name-section,
+    .billing_last_name-section,
+    .billing_country_id-5-section,
+    .billing_state_province_id-5-section,
+    .billing_postal_code-5-section {
+        grid-column: span 12 !important;
+    }
+}
+
+
+
+/* Center the Other Amount Section */
+.other_amount-section {
+    text-align: center !important;
+    float: none !important;
+    margin: 10px auto !important;
+}
+
+/* Force the label to sit on top and center */
+.other_amount-section .label {
+    float: none !important;
+    width: 100% !important;
+    text-align: center !important;
+    display: block !important;
+}
+
+/* Remove margin/float from the input container */
+.other_amount-section .content {
+    float: none !important;
+    margin-left: 0 !important;
+    display: block !important;
+    text-align: center !important;
+}
+
+/* Ensure the input box itself is centered */
+.other_amount-section input {
+    display: inline-block !important;
+    float: none !important;
+}
+
+/* === Crm Contact Layout Tweaks (asset_injector config: crm_contact_layout_tweaks) === */
+.customFieldGroup {
+    border: solid grey;
+    margin: 30px 5px;
+}
+
+.collapsible-title {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 42px;
+}
+
+
+.crm-summary-row {
+    padding-bottom: 10px;
+}
+
+.crm-summary-row {
+    margin-top: 10px;
+    border-bottom: 1px solid #80808059;
+}
+
+#crm-container #customFields .contact_panel .customFieldGroup
+{
+	width: auto
+}
+
+/* === Crm Event Tweaks (asset_injector config: crm_event_tweaks) === */
+.messages.status.no-popup {
+    font-size: 150%;
+    line-height: 35px;
+    padding: 25px;
+    border: solid grey;
+    border-radius: 20px;
+    /* background: #eee; */
+    margin-bottom: 30px;
+}
+
+
+
+.main-content .block-views.block-views-blockevent-sliding-scale-info-event-sliding-info
+{
+	  padding: 0px 0px;
+    border: 0px solid grey;
+    border-radius: 0px;
+    background: transparent;
+    margin: 15px 0px;
+}
+
+/* === Crm Funding Table Formatting (asset_injector config: crm_funding_table_formatting) === */
+/* This targets all elements with a class starting with crmf-custom_84_ */
+[data-table] [class^="crmf-custom_84_"] a,
+[data-table] [class^="crmf-custom_57_"] a,
+[data-table] [class^="crmf-custom_103_"] a {
+  font-size: 0; /* Hides original text */
+  color: blue; /* Sets the color for the new text */
+}
+
+/* Adding content with ::after */
+[data-table] [class^="crmf-custom_84_"] a::after {
+  content: "Application";
+  font-size: 16px;
+  text-decoration: underline;
+}
+
+[data-table] [class^="crmf-custom_57_"] a::after {
+  content: "Draft";
+  font-size: 16px;
+  text-decoration: underline;
+}
+
+[data-table] [class^="crmf-custom_103_"] a::after {
+  content: "Submitted";
+  font-size: 16px;
+  text-decoration: underline;
+}
+
+/* Targeting elements with a class starting with crmf-custom_63_ */
+[data-table] [class^="crmf-custom_63_"] div {
+  display: block;
+  max-height: 100px; /* Maximum height */
+  overflow: hidden; /* Hide overflow */
+  white-space: normal; /* Allows the text to break into multiple lines */
+  text-overflow: ellipsis; /* Add ellipsis for single line overflow, won't apply to multiline */
+  line-height: 16px; /* Line height */
+  min-width: 200px;
+}
+
+/* the above did not work... want to revisit but for now do it more broadly */
+
+#records-14 td a:not(.action-item):not(.crm-hover-button) {
+  font-size: 0 !important;
+  visibility: hidden !important;
+}
+
+
+#records-14 td a:not(.action-item):not(.crm-hover-button)::after {
+  content: "link";
+  visibility: visible !important;
+  font-size: initial !important;
+}
+
+  th[data-data="summary_63"] {
+    width: 150px !important; /* Adjust width as needed */
+  }
+
+/* === Equipment Listing Page (asset_injector config: equipment_listing_page) === */
+.group-left img {
+    max-width: 100%;
+}
+
+/* === Equipment Pages (asset_injector config: equipment_pages) === */
+.field--name-field-item-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.field--name-field-badge-quiz-reference .field__item a {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0.25rem;
+}
+
+.field--name-field-badge-quiz-reference .field__item a:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+    text-decoration: none;
+    color: #fff;
+}
+
+
+.field--name-field-badge-quiz-reference .field__item a::before {
+    content: "Take ";
+    font-weight: bold; /* Optional: to make the word "Take" bold */
+    color: inherit; /* Ensure it matches the button text color */
+}
+
+/* === Event Page (asset_injector config: event_page) === */
+.views-field-field-civi-event-image img {
+    width: 100%;
+    height: auto;
+}
+
+/* === Event Page And Listing Tweaks (asset_injector config: event_page_and_listing_tweaks) === */
+@media (max-width: 767px) {
+  .view-id-event_interest_areas.view-display-id-event_interests {
+    display: none;
+  }
+}
+
+/* --- Style the overall tab container --- */
+.nav-tabs {
+  border-bottom: none; /* Remove the default bottom border */
+  gap: 8px; /* Add space between the tabs */
+}
+
+/* --- Style each individual tab link --- */
+.nav-tabs .nav-link {
+  border: 1px solid #dee2e6; /* Light grey border */
+  border-radius: 30px; /* This creates the "pill" shape */
+  color: #495057; /* Dark grey text for readability */
+  background-color: #f8f9fa; /* Very light grey background */
+  font-weight: 500;
+  transition: all 0.2s ease-in-out; /* Smooth transition for hover effects */
+}
+
+/* --- Style for hover effect on inactive tabs --- */
+.nav-tabs .nav-link:not(.active):hover {
+  background-color: #e9ecef; /* Slightly darken the background on hover */
+  border-color: #ced4da;
+}
+
+/* --- Style for the currently ACTIVE tab --- */
+.nav-tabs .nav-link.active {
+  background-color: #dc3545; /* Use a strong brand color (e.g., red) */
+  color: #ffffff; /* White text for high contrast */
+  border-color: #dc3545; /* Match the border to the background */
+}
+
+
+a.button.crm-register-button, .crm-container a.button, .crm-container a.button:link, button#_qf_Register_upload-bottom
+{
+font-size: 18px;
+padding: 5px 10px;
+background: #8b1919 !important;
+
+}
+
+
+a.button.crm-register-button:hover {
+    background: #b41e1e;
+}
+
+
+article.contextual-region.civicrm-entity.civicrm-entity--type-civicrm-event.civicrm-entity--view-mode-event-teaser {
+    padding: 25px;
+    border: solid grey;
+    border-radius: 19px;
+    background: #eee;
+    /* margin-bottom: 30px; */
+    min-width: 450px;
+    width: max-content;
+    float: left;
+    margin: 21px;
+    width: 100%;
+}
+
+
+/* format the entrepreneur fields on event registration */
+.page-civicrm-event-register div.crm-container fieldset label:after {
+    content: "\a";
+    white-space: pre;
+}
+
+.page-civicrm-event-register div#s2id_custom_48 {
+    width: 100%!important;
+}
+
+
+.views-field-field-civi-event-image img {
+    width: 100%;
+    height: auto;
+}
+
+
+
+.messages.status.no-popup {
+    font-size: 150%;
+    line-height: 35px;
+    padding: 25px;
+    border: solid grey;
+    border-radius: 20px;
+    /* background: #eee; */
+    margin-bottom: 30px;
+}
+
+
+
+.main-content .block-views.block-views-blockevent-sliding-scale-info-event-sliding-info, div#block-program-sliding-info 
+{
+	  padding: 0px 0px;
+    border: 0px solid grey;
+    border-radius: 0px;
+    background: transparent;
+    margin: 15px 0px;
+}
+
+
+
+
+
+
+.action-link.section.iCal_links-section {
+    margin-top: 35px;
+    height: 60px;
+}
+
+
+.crm-section.event_description-section img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+.views-field-field-event-skill-level .field-content {
+    display: inline-block;
+    padding: 0.35em 0.65em;
+    border-radius: 15px;
+    color: white;
+    font-size: 22px;
+    float: right;
+    overflow: visible;
+    height: auto; /* Ensure the height is auto to fit content */
+    line-height: normal; /* Align text properly within the height */
+
+}
+.views-field-field-event-skill-level .introductory {
+    background-color: green;
+    color: white;
+    padding: 0.35em  0.65em;
+    font-size: 0.75em;
+    font-weight: 700;
+    border-radius: 0.375rem;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+}
+
+.views-field-field-event-skill-level .intermediate {
+    background-color: orange;
+    color: white;
+    padding: 0.35em 0.65em;
+    font-size: 0.75em;
+    font-weight: 700;
+    border-radius: 0.375rem;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+}
+
+.views-field-field-event-skill-level .advanced {
+    background-color: black;
+    color: white;
+    padding: 0.35em 0.65em;
+    font-size: 0.75em;
+    font-weight: 700;
+    border-radius: 0.375rem;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+}
+
+
+span.views-field.views-field-field-civi-event-age-requirement {
+    background-color: #6c757d;
+    color: white;
+    padding: 0.35em 0.65em;
+    font-size: 1em;
+    font-weight: 700;
+    border-radius: 0.375rem;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle; /* Aligns the text in the middle relative to its line-height */
+    position: relative;
+    top: 0; /* Adjust the top position if needed */
+    margin-left: 10px; /* Add some space to the left if it’s next to other elements */
+}
+
+span.views-field.views-field-field-civi-event-age-requirement {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+@media (max-width: 768px) {
+    .views-field-field-event-skill-level,
+    .views-field-event-type-id {
+        display: block;
+        margin-bottom: 5px; /* Adds space between the badges */
+    }
+
+    .views-field-field-event-skill-level .introductory,
+    .views-field-event-type-id .badge {
+        display: inline-block;
+        width: 100%; /* Make badges full-width */
+        text-align: center; /* Center the text */
+        margin-bottom: 5px; /* Adds space between the badges */
+    }
+    
+    .views-field-field-event-skill-level .field-content
+    {
+    	width: 100%;
+    }
+    
+    span.views-field.views-field-field-civi-event-age-requirement
+        {
+    	width: 100%;
+    }
+    
+}
+
+
+
+.crm-section.event_summary-section {
+    background: lightgrey;
+    padding: 10px;
+    border-radius: 20px;
+    margin-bottom: 23px;
+    font-size: 20px;
+    line-height: 30px;
+}
+
+#crm-container.crm-public .crm-section, .crm-section {
+    margin-bottom: 20px;
+}
+
+.view-civi-event-listing .views-field.views-field-summary {
+    font-size: 24px;
+    padding-top: 25px;
+}
+
+
+/* Scoped styling for tagged event lists and individual events */
+.main-content .view-content.row .views-row article.civicrm-entity--type-civicrm-event,
+.content article.civicrm-entity--type-civicrm-event {
+  border-radius: 5px; /* Round the corners for a smoother look */
+  padding: 15px; /* Add spacing inside the article */
+  margin-bottom: 20px; /* Space between articles */
+}
+
+/* Floating image with proper spacing */
+.main-content .field--name-field-civi-event-image,
+.content .field--name-field-civi-event-image {
+  float: left; /* Float the image to the left */
+  margin-right: 20px; /* Space between image and text */
+  margin-bottom: 15px; /* Space below image */
+  max-width: 220px; /* Limit the image width for consistency */
+}
+
+/* Event title styling */
+.main-content .field--name-title,
+.content .field--name-title {
+  font-size: 1.5rem; /* Larger font size for prominence */
+  font-weight: bold; /* Make the title bold */
+  margin-bottom: 10px; /* Add space below the title */
+}
+
+/* Event summary styling */
+.main-content .field--name-summary,
+.content .field--name-summary {
+  font-size: 1rem; /* Standard font size for summary */
+  line-height: 1.5; /* Improve readability */
+  margin-top: 10px; /* Space above the summary */
+}
+
+/* Button styling for event details */
+.main-content .views-field-nothing .btn,
+.content .views-field-nothing .btn {
+  color: #fff; /* Button text color */
+  border: none; /* Remove border */
+  border-radius: 50px; /* Rounded pill style */
+  padding: 10px 20px; /* Add spacing inside the button */
+  text-align: center; /* Center-align text */
+  display: inline-block; /* Inline block for consistent sizing */
+  font-size: 1rem; /* Button font size */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+/* Ensure buttons have hover effects */
+.main-content .views-field-nothing .btn:hover,
+.content .views-field-nothing .btn:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+  text-decoration: none; /* Remove underline on hover */
+}
+
+
+
+.crm-socialnetwork a.btn.btn-default {
+    color: white;
+    background: grey;
+}
+
+#crm-container.crm-public .label, #crm-container.crm-public .price-field-amount {
+    font-size: 16px;
+}
+
+
+#crm-container.crm-public .calc-value, #crm-container.crm-public .content {
+    font-size: 16px;
+}
+
+
+
+#crm-container.crm-public table.form-layout-compressed.fee_block-table {
+    font-size: 16px;
+}
+
+.view.view-event-sliding-scale-info .view-content.row {
+    grid: none;
+}
+
+/* === Event Registration (asset_injector config: event_registration) === */
+/* Improve spacing and layout */
+.crm-public-form-item {
+    margin-bottom: 20px;
+}
+
+/* Styling fieldset for a cleaner look */
+.crm-profile {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+
+/* Legend styling for better visual hierarchy */
+.crm-profile legend {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Align checkbox and labels nicely */
+.crm-option-label-pair {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Add space between checkboxes */
+.crm-option-label-pair input {
+    margin-right: 10px;
+}
+
+/* Hover effect for better UX */
+.crm-option-label-pair:hover {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+/* Style the 'clear' div to avoid layout shifts */
+.clear {
+    height: 0;
+    clear: both;
+    margin-bottom: 15px;
+}
+
+/* Enhance textarea appearance */
+.crm-form-textarea {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-family: inherit;
+    resize: vertical;
+}
+
+div#s2id_custom_52 {
+    min-width: 100%;
+}
+
+.crm-section {
+    clear: both;
+}
+
+/* Style select dropdowns */
+.crm-form-select {
+    width: 100%;
+    max-width: 300px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Improve mobile responsiveness */
+@media (max-width: 768px) {
+    .crm-option-label-pair {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .crm-profile {
+        padding: 10px;
+    }
+}
+
+
+/* Ensure all checkboxes and radio options are vertically stacked */
+.crm-multiple-checkbox-radio-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Optional: Add space between options */
+}
+
+/* Increase width of the select box for Venture Pipeline stage */
+#custom_52 {
+    width: 100%; /* Use full width of the parent container */
+    max-width: 600px; /* Ensure it can fit long options */
+    min-width: 300px; /* Prevent it from becoming too narrow */
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Ensure legend appears on its own row */
+.crm-profile legend {
+    display: block;
+    margin-bottom: 10px; /* Add spacing after the legend */
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #333;
+}
+
+/* Adjust content layout for better spacing */
+.crm-section {
+    margin-bottom: 20px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    #custom_52 {
+        max-width: 100%; /* Ensure the select box fits smaller screens */
+    }
+
+    .crm-multiple-checkbox-radio-options {
+        gap: 8px;
+    }
+}
+
+
+#editrow-custom_57 {
+    clear: both;
+}
+
+
+.crm-container .crm-multiple-checkbox-radio-options {
+    gap: 0px;
+}
+
+#crm-container.crm-public .crm-section, .crm-section {
+    margin-bottom: 0px;
+}
+
+
+#_qf_Confirm_next-top, #_qf_Confirm_next-bottom {
+    font-size: 30px;
+    background-color: #8b1919;
+}
+
+
+
+
+/* General checkbox styling */
+input[type="checkbox"] {
+  width: 20px; /* Larger checkbox size */
+  height: 20px; /* Consistent height */
+  cursor: pointer; /* Pointer cursor for better UX */
+  accent-color: #007bff; /* Modern blue color (Bootstrap primary) */
+  border: 2px solid #007bff; /* Visible border */
+  border-radius: 4px; /* Slight rounded corners */
+  margin-right: 8px; /* Spacing between checkbox and label */
+  vertical-align: middle; /* Aligns checkbox vertically with label */
+}
+
+/* Style for labels associated with checkboxes */
+input[type="checkbox"] + label {
+  font-size: 16px; /* Slightly larger label text */
+  color: #333; /* Darker label color for readability */
+  line-height: 1.5; /* Better line spacing */
+  cursor: pointer; /* Makes the label clickable */
+}
+
+/* Optional hover effect for all checkboxes */
+input[type="checkbox"]:hover {
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle hover glow */
+}
+
+
+
+.crm-profile .clear {
+    margin-bottom: 0px;
+}
+    
+    
+.crm-profile .helprow-post {
+    padding-top: 0px;
+    line-height: 100%;
+    padding-bottom: 20px;
+}
+
+/* === Facilitator Deactivate Recurring Editing (asset_injector config: facilitator_deactivate_recurring_editing) === */
+div#field-coordinator-hours-add-more-wrapper .smartdate--widget .fieldset-wrapper input, 
+div#field-coordinator-hours-add-more-wrapper .smartdate--widget select#edit-field-coordinator-hours-0-duration, 
+div#field-coordinator-hours-add-more-wrapper .smartdate--widget select#edit-field-coordinator-hours-0-repeat-end, 
+div#field-coordinator-hours-add-more-wrapper .smartdate--widget select#edit-field-coordinator-hours-0-repeat, 
+div#field-coordinator-hours-add-more-wrapper .smartdate--widget select#edit-field-coordinator-hours-0-repeat,
+div#field-coordinator-hours-add-more-wrapper .duration-wrapper.js-form-item.js-form-type-select.form-type-select.js-form-item-field-coordinator-hours-0-duration.form-item-field-coordinator-hours-0-duration.mb-3,
+div#field-coordinator-hours-add-more-wrapper .js-form-item.js-form-type-select.form-type-select.js-form-item-field-coordinator-hours-0-repeat-end.form-item-field-coordinator-hours-0-repeat-end.mb-3,
+div#field-coordinator-hours-add-more-wrapper .js-form-item.js-form-type-number.form-type-number.js-form-item-field-coordinator-hours-0-interval.form-item-field-coordinator-hours-0-interval.mb-3,
+div#field-coordinator-hours-add-more-wrapper summary,
+div#field-coordinator-hours-add-more-wrapper .field-add-more-submit,
+div#field-coordinator-hours-add-more-wrapper div#edit-field-coordinator-hours-0-time-wrapper,
+div#field-coordinator-hours-add-more-wrapper .smartdate--widget .form-select{
+    background: lightgrey;
+    pointer-events: none;
+    display:none;
+
+}
+
+a#edit-field-coordinator-hours-0-manage-instances {
+    background: #007bff;
+    padding: 20px 10px;
+    margin: 100px;
+    color: white;
+    font-size: large;
+    border-radius: 6px;
+}
+
+/* === Facilitator Edit Screen (asset_injector config: facilitator_edit_screen) === */
+.smartdate--widget .byday-checkboxes input {
+    display: block;
+}
+
+
+/* --- Fix for Smart Date 'On Days' Checkboxes --- */
+
+/* 1. Flex container to align items in a row */
+.byday-checkboxes .container-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Space between buttons */
+}
+
+/* 2. Hide the native checkbox input (but keep it accessible) */
+.byday-checkboxes .form-checkboxes input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* 3. Style the labels to look like buttons */
+.byday-checkboxes label.option {
+  display: inline-block;
+  padding: 8px 16px;       /* Top/Bottom, Left/Right padding */
+  background-color: #fff;  /* White background */
+  border: 1px solid #8e929c; /* Standard grey border */
+  border-radius: 20px;     /* Makes them 'pill' shaped */
+  color: #333;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+/* 4. Hover State */
+.byday-checkboxes label.option:hover {
+  background-color: #f2f2f4;
+  border-color: #333;
+}
+
+/* 5. SELECTED STATE: Turn Blue when clicked */
+/* This targets the label immediately following a checked checkbox */
+.byday-checkboxes input[type="checkbox"]:checked + label.option {
+  background-color: #003cc5; /* Drupal Claro Blue */
+  border-color: #003cc5;
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Optional: Add a checkmark icon when selected */
+.byday-checkboxes input[type="checkbox"]:checked + label.option::before {
+  content: "✓";
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+/* === Fix For Ckeditor Link Balloon Not Showing In Lighboxes In Island (asset_injector config: fix_for_ckeditor_link_balloon_not_showing_in_lighboxes_in_island) === */
+.ui-widget-content.ui-front.crm-container .ck.ck-body {
+    z-index: 2500;
+    position: relative;
+}
+.ck.ck-reset_all.ck-body.ck-rounded-corners {
+    position: relative;
+    z-index: 2500;
+}
+
+/* === Front Home Page (asset_injector config: front_home_page) === */
+/* =================================================================== */
+/* === GLOBAL & GENERAL FRONT PAGE STYLES ============================ */
+/* =================================================================== */
+
+/* Hide the page title "home" on the front page */
+.path-frontpage .page-title,
+.path-frontpage h1#page-title,
+.path-frontpage #block-barrio-boostrap-5-makehaven-d11-page-title {
+  display: none !important;
+}
+
+.info-line-section.larger.no-bg { width: 100%; padding: 0; }
+.service { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; margin-bottom: 30px; }
+.service-content { text-align: center; padding: 20px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 10px; }
+.front-icons { width: 150px; height: 150px; margin-bottom: 15px; }
+.service-title { font: 700 24px/1.2 Montserrat, Verdana, sans-serif; text-transform: uppercase; margin-top: 15px; margin-bottom: 15px; }
+.service-title.title-underblock.dark { color: #333; }
+.service p { font-size: 16px; color: #666; margin: 10px 0 15px; }
+.service-content a { color: #007bff; text-decoration: none; transition: color 0.3s ease; }
+.service-content a:hover { color: #0056b3; }
+.section { padding: 60px 0; position: relative; }
+.section-header { margin-bottom: 40px; }
+.section-title.shadow-title { font-size: 36px; font-weight: 700; text-align: center; text-transform: uppercase; color: #333; position: relative; z-index: 1; }
+.section-title.shadow-title:before { content: attr(data-title); position: absolute; top: 0; left: 50%; transform: translateX(-50%); font-size: 48px; color: rgba(0, 0, 0, 0.1); z-index: -1; }
+.container img { max-width: 100%; height: auto; border-radius: 10px; margin-bottom: 15px; }
+.callout { padding: 30px; background-color: #eee; border: 2px solid #ddd; border-radius: 10px; margin-top: 30px; }
+.callout-wrapper { display: flex; justify-content: space-between; }
+.mb30 { margin-bottom: 30px; }
+.mb10 { margin-bottom: 10px; }
+.social-icons { text-align: center; margin: 20px 0; }
+.social-icons img { width: 75px; height: 75px; margin: 0 15px; transition: transform 0.3s ease; }
+.social-icons img:hover { transform: scale(1.1); }
+.social-icons p { text-align: center; }
+.social-icons p a { display: inline-block; margin: 0 10px; vertical-align: middle; }
+html, body { overflow-x: hidden; }
+
+/* =================================================================== */
+/* === HERO SLIDESHOW (FINAL, CLEANED VERSION) ======================= */
+/* =================================================================== */
+
+/* 1. The main hero wrapper */
+#block-slideshow-front-slideshow {
+  position: relative;
+  width: 100%;
+  height: 90vh;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: #2c2c2c; /* Fallback color */
+}
+
+/* 2. All inner containers of the slideshow must fill the wrapper */
+#block-slideshow-front-slideshow .view-content,
+#block-slideshow-front-slideshow .skin-default,
+#block-slideshow-front-slideshow .views_slideshow_cycle_main,
+#block-slideshow-front-slideshow .views_slideshow_cycle_teaser_section {
+  position: relative;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 3. Each individual slide stacks on top of each other */
+#block-slideshow-front-slideshow .views_slideshow_cycle_slide {
+  position: absolute !important;
+  top: 0; left: 0; right: 0; bottom: 0;
+}
+
+/* 4. The image itself must cover the entire slide */
+#block-slideshow-front-slideshow .views_slideshow_cycle_slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* 5. The text overlay container */
+#block-slideshow-front-slideshow .view-header {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 10;
+  pointer-events: none; /* Allows clicks to pass through empty space */
+}
+
+/* 6. Position and style the text and buttons */
+#block-slideshow-front-slideshow .vcenter-container.front-text {
+  position: absolute;
+  top: 250px; /* Your desired vertical offset */
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(92%, 1200px);
+  text-align: center;
+  pointer-events: auto; /* Re-enables clicks on this specific element */
+}
+
+#block-slideshow-front-slideshow h1.text-white {
+  color: #fff;
+  margin: 0 0 18px;
+  font: 700 clamp(38px, 6vw, 68px)/1.15 Montserrat, Verdana, sans-serif;
+  text-shadow: 0 0 8px rgba(0,0,0,.95), 0 0 14px rgba(0,0,0,.85);
+}
+
+#block-slideshow-front-slideshow .block-action .btn {
+  color: #fff !important;
+  background: #8b1919  !important;
+  border: 2px solid #fff !important;
+  font-weight: 700;
+  padding: 12px 22px;
+  margin: 10px 8px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  transition: all .2s ease;
+}
+
+#block-slideshow-front-slideshow .block-action .btn:hover {
+  background: #fff !important;
+  color: #8b1919 !important;
+  transform: translateY(-2px);
+}
+
+/* =================================================================== */
+/* === OTHER FRONT PAGE BLOCKS & GLOBAL RULES ======================== */
+/* =================================================================== */
+
+.highlighted, .block-system-breadcrumb-block, .tabs { display: none; }
+#main-wrapper { max-width: 100%; margin: auto; }
+@media (min-width: 1400px) { .container { max-width: 100%; margin: 0; padding: 0; } }
+
+div#block-barrio-boostrap-5-makehaven-d11-fronttoolstomakeanything,
+div#block-barrio-boostrap-5-makehaven-d11-frontemailsignup,
+div#block-barrio-boostrap-5-makehaven-d11-frontthreethingsfront {
+  z-index:10; background: #d3d3d39c;
+}
+div#block-barrio-boostrap-5-makehaven-d11-frontthreethingsfront,
+div#block-barrio-boostrap-5-makehaven-d11-frontemailsignup {
+	background-color: #8b1919;
+}
+div#block-barrio-boostrap-5-makehaven-d11-fronttoolstomakeanything .content,
+div#block-barrio-boostrap-5-makehaven-d11-frontemailsignup .content,
+div#block-barrio-boostrap-5-makehaven-d11-frontthreethingsfront .content {
+  max-width: 1000px; margin: auto;
+}
+main#content .section { padding: 0; }
+.block-content-basic h2 { font-family: 'Roboto Condensed',sans-serif; font-weight: 700; text-align: center; color: white; font-size: 50px; padding-top: 50px; }
+.callout.bordered.no-margin, .path-frontpage .node__content { display: none; }
+
+/* Desktop styles for other blocks */
+div#block-barrio-boostrap-5-makehaven-d11-frontthreethingsfront { min-height: 630px; }
+div#block-barrio-boostrap-5-makehaven-d11-fronttoolstomakeanything { min-height: 1400px; }
+div#block-barrio-boostrap-5-makehaven-d11-fronttoolstomakeanything h2 { color: darkslategrey; }
+#block-barrio-boostrap-5-makehaven-d11-frontthreethingsfront .service-content { background: transparent; border: 0; }
+#block-barrio-boostrap-5-makehaven-d11-frontthreethingsfront .service-title.title-underblock.dark,
+#block-barrio-boostrap-5-makehaven-d11-frontthreethingsfront .service p,
+div#block-barrio-boostrap-5-makehaven-d11-frontemailsignup p { color: white; }
+
+/* Mailchimp form styles */
+div#block-barrio-boostrap-5-makehaven-d11-frontemailsignup {
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1rem;
+}
+#mc_embed_signup { background-color: transparent; border: none; padding: 0; margin: 0; width: 100%; text-align: center;}
+#mc_embed_signup_scroll { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; }
+#mc_embed_signup_scroll .button {
+  background-color: #8b1919;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 3px;
+  font-size: 16px;
+  cursor: pointer;
+}
+#mc_embed_signup_scroll .button:hover { background-color: #0056b3; }
+#mc_embed_signup_scroll .mc-field-group,
+#mc_embed_signup_scroll .optionalParent,
+#mc_embed_signup_scroll .indicates-required,
+#mc_embed_signup_scroll h2 {
+    display: none;
+}
+
+/* Mobile styles */
+@media (max-width: 767px) {
+  #block-slideshow-front-slideshow h1.text-white { font-size: 40px; }
+  div#block-barrio-boostrap-5-makehaven-d11-frontthreethingsfront { min-height: 1600px; z-index: 10; }
+  div#block-barrio-boostrap-5-makehaven-d11-fronttoolstomakeanything { min-height: 3200px; }
+  div#block-barrio-boostrap-5-makehaven-d11-frontemailsignup { min-height: 250px; }
+}
+
+/* === General Crm Tweaks (asset_injector config: general_crm_tweaks) === */
+.crm-container #civicrm-footer.crm-public-footer
+{display:none;}
+
+div#editrow-first_name {
+    clear: both;
+}
+
+div#editrow-gender_id {
+    clear: both;
+}
+
+
+div#crm-container
+ {
+    background: white;
+}
+
+/* === General Style Changes After Sept 2025 (asset_injector config: general_style_changes_after_sept_2025) === */
+table {
+    text-wrap: auto;
+    overflow: visible;
+
+}
+
+tbody, td, tfoot, th, thead, tr {
+    text-wrap: auto;
+     overflow: visible;
+}
+
+a.btn.btn-secondary {
+    color: white;
+}
+
+footer.site-footer {
+    height: 450px;
+}
+
+
+.bucket-links a {
+    margin-right: 25px;
+    margin-top: 75px;
+}
+
+
+.bucket-upload-form .form-type-managed-file {
+    padding: 25px;
+    border: solid #c4c4c4;
+    border-radius: 20px;
+    background: #eeeeee99;
+    margin-top: 50px;
+}
+
+
+a.btn.btn-outline-primary {
+    background: white;
+    color: black;
+    border: 2px solid grey;
+}
+
+/* === General Style Improvements (asset_injector config: general_style_improvements) === */
+/* hides things when class of user only */
+
+body:not(.user-logged-in) .user-only {
+  display: none;
+}
+
+
+/* By default, guest-only elements are visible */
+.visitor-only {
+  display: block;
+}
+
+/* Hide guest-only elements when a user is logged in */
+body.user-logged-in .visitor-only {
+  display: none;
+}
+
+
+
+div#page {
+    min-width: 400px;
+}
+
+div#sidebar_first {
+    border: 0px;
+    padding: 15px;
+}
+
+
+.featured-bottom, #main-wrapper {
+    max-width: 1200px;
+    margin: auto;
+}
+
+
+@media (min-width: 768px) {
+    .container, .container-md, .container-sm {
+        max-width: 100%;
+    }
+}
+
+table.table {
+    background: white;
+}
+
+
+.feed-icons {
+    display: none;
+}
+
+
+.crm-form-submit button
+{
+	font-size: 18px;
+padding: 5px 10px;
+    background: #8b1919;
+}
+
+.btn {
+    background-color: #8b1919;
+  }  
+    
+    
+    .btn:hover {
+    background-color: #720c0c;
+}
+
+
+.crm-form-submit button:hover {
+    background: #b41e1e;
+}
+
+
+.site-footer {
+    margin-top: 30px;
+}
+
+#to make titles on tabels black rather than white
+
+th.views-field {
+    color: black;
+}
+
+a.button {
+    display: inline-block;
+;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    font-size: medium;
+    font-weight: 700;
+    line-height: 1rem;
+    color: white;
+    background-color: #8b1919;
+    padding: 12px;
+    margin: 10px 0px;
+}
+
+
+
+#block-barrio-boostrap-5-makehaven-d11-page-title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#block-barrio-boostrap-5-makehaven-d11-page-title .content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#block-barrio-boostrap-5-makehaven-d11-page-title .title {
+    text-align: center;
+}
+
+.btn.btn-info {
+    background: #78c0f3;
+}
+
+th.views-field {
+    color: black;
+    background: lightgrey;
+}
+
+
+a.buttton {
+    background: grey;
+    padding: 10px;
+    color: white;
+    border-radius: 3px;
+}
+
+
+.site-footer {
+    margin-top: 0px;
+}
+
+table tr th
+{
+	color: grey;
+}
+
+
+.boxes.views-row {
+    padding: 25px;
+    border: solid grey;
+    border-radius: 20px;
+    background: #eee;
+    margin-bottom: 30px;
+    min-width: 400px;
+    max-width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* fixes content of sidebar tables not to wrap */
+.sidebar_first .view-content.row {
+    display: block;
+}
+
+
+.sidebar_first  table caption {
+    caption-side: top;
+    color: black;
+    font-size: large;
+    font-weight: bold;
+}
+
+/* Calendar */
+
+th.fc-widget-header.fc-future a {
+    color: white;
+}
+
+
+
+/* views exposed filter styles */
+
+/* General form container styling */
+.view-filters .views-exposed-form {
+    background-color: #f8f9fa; /* Light background for better visibility */
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+/* Spacing and layout adjustments for form elements */
+.view-filters .views-exposed-form .form-item {
+    flex: 1 1 200px; /* Allows flexible wrapping */
+    margin-bottom: 15px;
+    padding: 0 10px; /* Add horizontal padding */
+}
+
+/* Style input fields */
+.view-filters .views-exposed-form input.form-control,
+.view-filters .views-exposed-form select.form-select {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    padding: 10px;
+    font-size: 14px;
+}
+
+/* Adjust fieldset styling */
+.view-filters .views-exposed-form fieldset {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
+}
+
+/* Legend styling */
+.view-filters .views-exposed-form fieldset legend {
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0 5px;
+}
+
+/* Button styling */
+.view-filters .views-exposed-form .form-actions .button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+/* Flexbox container for fields */
+.view-filters .views-exposed-form .d-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Space between form items */
+}
+
+/* Small descriptions */
+.view-filters .views-exposed-form .description {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .view-filters .views-exposed-form .d-flex {
+        flex-direction: column;
+    }
+
+    .view-filters .views-exposed-form .form-item {
+        padding: 0;
+    }
+}
+
+.btn-primary {
+    background-color: #8b1919;
+    border-color: #8b1919;
+}
+
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: #710a0a;
+}
+
+button#edit-submit {
+    color: white;
+}
+
+a.btn.btn-primary {
+    color: white;
+}
+
+.btn-primary {
+    color: white;
+}
+.btn-primary, .btn-primary:hover, .btn-primary:focus {
+    color: white;
+}
+
+.btn:hover {
+    background-color: #720c0c;
+    color: white;
+}
+
+.button a {
+    color: white;
+}
+
+.view .more-link a {
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    font-size: medium;
+    font-weight: 700;
+    line-height: 1rem;
+    color: white;
+    background-color: #8b1919;
+    padding: 12px;
+    margin: 10px 0px;
+}
+
+
+
+/* webforms */
+
+.webform-type-fieldset {
+    border-width: 10px;
+    border: solid;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.webform-type-fieldset span.fieldset-legend {
+    font-size: 25px;
+    font-weight: bold;
+    color: #861216;
+}
+
+
+/* Login Block */
+
+div#block-barrio-boostrap-5-makehaven-d11-userlogin {
+    padding: 25px;
+    border: solid grey;
+    border-radius: 20px;
+    background: #eee;
+    margin-bottom: 30px;
+    min-width: 400px;
+    max-width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+/* style for reusable box */
+.box
+{
+    padding: 25px;
+    border: solid grey;
+    border-radius: 20px;
+    background: #eee;
+    margin-bottom: 30px;
+    min-width: 400px;
+    max-width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+
+/* lending library comment box */
+
+.node--type-library-item #comment-form
+{
+    padding: 25px;
+    border: solid grey;
+    border-radius: 20px;
+    background: #eee;
+    margin-bottom: 30px;
+    min-width: 400px;
+    max-width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.node--type-library-item .comment-add.nav-link {
+    display: none;
+}
+
+/* Cards for member resoruces */
+
+.card {
+    flex: 1 1 300px;
+    box-sizing: border-box;
+}
+
+/* Responsive styling for screens wider than 768px */
+@media (min-width: 768px) {
+    .card-container {
+        justify-content: space-around;
+    }
+}
+
+/* Styling for 3 cards across on large screens */
+@media (min-width: 1024px) {
+    .card {
+        flex: 1 1 calc(33.33% - 20px); /* Three across */
+    }
+}
+
+/* fix for comments wrappign in lending library - investigate later*/
+
+@media (min-width: 560px) {
+    .node .comment-comment-node-library-item-form .field--type-image {
+        float: none;
+    }
+}
+
+
+
+blockquote {
+    font-style: italic;
+    color: #6c757d; /* Optional: A subtle grey text color */
+    padding: 1rem 1.5rem;
+    border-left: 5px solid #dee2e6; /* Creates a vertical bar on the left */
+    background-color: #f8f9fa; /* Optional: Light background for contrast */
+    margin: 1.5rem 0; /* Adds spacing above and below */
+    border-radius: 0.25rem; /* Optional: Softens the edges */
+}
+
+blockquote p {
+    margin: 0; /* Ensures no additional spacing around paragraphs inside */
+}
+
+.field--name-body img, 
+.field--type-text-with-summary img {
+    max-width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Avoid extra space below the image */
+    margin: 0 auto; /* Center the image horizontally */
+}
+
+@media (max-width: 400px) {
+    .user-logged-in nav#navbar-top {
+        height: 90px;
+    }
+}
+
+
+/** Makes editable fields edit links a button */
+
+a.use-ajax[data-dialog-type="modal"] {
+    display: inline-block;
+    padding: 0.25rem 0.5rem; /* Small button padding */
+    font-size: 0.875rem; /* Small font size */
+    line-height: 1.5;
+    border-radius: 0.2rem;
+    text-decoration: none;
+    color: #fff; /* White text color */
+    background-color: #007bff; /* Bootstrap primary button color */
+    border: 1px solid #007bff; /* Border color */
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+a.use-ajax[data-dialog-type="modal"]:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+    border-color: #0056b3;
+    text-decoration: none;
+}
+
+
+.main-content .nav-link
+{padding: 0px 0px;}
+
+
+/** login block **/
+
+/* Target the login block */
+.block-user-login-block {
+  position: relative;
+    padding: 25px;
+    border: 5px solid #8b1919;
+    border-radius: 20px;
+    background: #eee;
+    margin-bottom: 30px;
+    min-width: 400px;
+    max-width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+/* Add the custom message before the form */
+.block-user-login-block:before {
+  content: "Members, please log in to access content and all features.";
+  display: block;
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  color: #dc3545; /* Red color for emphasis */
+}
+
+.block-user-login-block a.create-account-link {
+    display: none;
+}
+
+
+/** Some space below filters on views **/
+
+.views-exposed-form {
+    margin-bottom: 25px;
+}
+
+
+/** Hide teaser overflows **/
+
+.node--view-mode-teaser
+{
+overflow: hidden;	
+}
+
+/** two column layout images **/
+
+.group-left img {
+    max-width: 100%;
+    height: auto;
+    padding-right: 5px;
+}
+
+
+/** Hazard band style for tool pages **/
+
+.field.field--name-field-item-hazard-band {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+}
+
+/** width for smaller mobile**/
+.node--view-mode-teaser, .field-group-fieldset, .view-civi-event-listing .views-row {
+
+    min-width: 400px;
+
+}
+
+div#main-wrapper {
+    max-width: 1200px;
+}
+
+
+/* Correct tables showing sections groupings on bottom */
+
+/* Style table captions */
+.table caption {
+    caption-side: top;  /* Ensure captions are placed above the table */
+    font-size: 1.75em;  /* Increase font size */
+    font-weight: bold;  /* Make it bold */
+    text-align: left;  /* Align text to the left */
+    padding: 10px 0;  /* Add some spacing */
+    color: #333;  /* Dark text for readability */
+}
+
+
+.form-check {
+    min-height: 2rem;
+}
+
+.layout-one-sidebar .block-system-main-block .content {
+    max-width: 900px;
+} 
+
+
+
+img.image-style-wide {
+    width: 100%;
+    height: auto;
+}
+
+table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+
+
+/*
+ * A cleaner, modern theme for a Drupal Grid View.
+ * Creates equal-height columns with simple line separators.
+ */
+
+/* 1. Target the ROW (.views-row)
+ * We still use Flexbox to get perfect equal-height columns.
+ * We add a top border to create horizontal separation between rows.
+*/
+.views-view-grid .views-row {
+  display: flex;
+  flex-wrap: wrap;
+  border-top: 1px solid #e0e0e0; /* Horizontal line between rows */
+}
+
+/* Remove the top border from the very first row */
+.views-view-grid .views-row:first-child {
+  border-top: none;
+}
+
+/* 2. Target the COLUMN (.views-col)
+ * This is our content cell. We add padding for breathing room
+ * and a left border to create the vertical separation.
+*/
+.views-view-grid .views-col {
+  box-sizing: border-box;
+  padding: 24px; /* Generous padding for content */
+  border-left: 1px solid #e0e0e0; /* Vertical line between columns */
+}
+
+/* Remove the left border from the first column in each row */
+.views-view-grid .views-col:first-child {
+  border-left: none;
+}
+
+/* === Gin Theme (asset_injector config: gin_theme) === */
+.chatbot-gin .ai-deepchat--header.active {
+    color: white;
+    background-color: grey;
+}
+
+
+.chatbot-gin.ai-deepchat.chat-container
+{
+margin-bottom: 0px;
+}
+
+.card {
+    background: white;
+}
+
+.view-filters label {
+    color: black;
+}
+
+a.gin-back-to-admin {
+    display: none!important;
+}
+
+
+.node--view-mode-teaser {
+    padding: 15px;
+    border: 2px solid grey;
+    border-radius: 10px;
+    background: #eee;
+    margin-bottom: 20px;
+    min-width: 450px;
+    max-width: 1000px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Auto-apply grid only if .card elements exist in the view */
+.view .view-content:has(.card) { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:1rem; }
+.view .view-content:has(.card) > .row,
+.view .view-content:has(.card) > .row > .col { display:contents; }
+
+
+/* Card look */
+.view .card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e1e3e6;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,.06);
+  overflow: hidden; /* keeps image corners neat */
+  transition: transform .15s ease;
+}
+.view .card:hover { transform: translateY(-2px); }
+
+/* Image at top */
+.view .card-img-top img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Body + equal heights */
+.view .card-body {
+  padding: 0.9rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  flex: 1;
+}
+.view .card-title { font-size: 1rem; margin: 0; }
+.view .card-text { margin-top: auto; color: #555; font-size: .92rem; }
+
+/* Responsive tweaks */
+@media (max-width: 900px) {
+  .view .view-content { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+}
+@media (max-width: 560px) {
+  .view .view-content { grid-template-columns: 1fr; }
+}
+
+
+.view-badges-earned-block .card-img-top img
+ {
+    width: 100%;
+    height: 250px;
+ }
+ 
+ 
+ 
+ .main-content .views-field-nothing .btn, .content .views-field-nothing .btn {
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.btn, a.btn.btn-primary, .btn-primary {
+    background-color: #8b1919;
+}
+
+.main-content .views-field-nothing .btn:hover, .content .views-field-nothing .btn:hover {
+    background-color: #bc3030;
+    text-decoration: none;
+}
+
+ .btn {
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #8b1919;
+}
+
+/* === Gl (asset_injector config: gl) === */
+.view .card{
+  height:100%;
+  display:flex; flex-direction:column;
+  border:1px solid #e1e3e6; border-radius:10px;
+  background:#fff; box-shadow:0 2px 6px rgba(0,0,0,.06);
+  overflow:hidden; transition:transform .15s ease;
+}
+.view .card:hover{ transform:translateY(-2px); }
+
+.view .card-img-top img{
+  width:100%; height:150px; object-fit:cover; display:block;
+}
+
+.view .card-body{
+  padding:.9rem 1rem;
+  display:flex; flex-direction:column; gap:.35rem; flex:1;
+}
+.view .card-title{ font-size:1rem; margin:0; }
+.view .card-text{ margin-top:auto; color:#555; font-size:.92rem; }
+
+@media (max-width:900px){
+  .view .view-content{ grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); }
+}
+@media (max-width:560px){
+  .view .view-content{ grid-template-columns:1fr; }
+}
+
+
+/* Cards framework – only for views tagged with .cards-grid */
+.view.cards-grid .view-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+.view.cards-grid .view-content > .row,
+.view.cards-grid .view-content > .row > .col { display: contents; }
+
+.view.cards-grid .card {
+  height: 100%;
+  display: flex; flex-direction: column;
+  border: 1px solid #e1e3e6; border-radius: 10px;
+  background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.06);
+  overflow: hidden; transition: transform .15s ease;
+}
+.view.cards-grid .card:hover { transform: translateY(-2px); }
+
+.view.cards-grid .card-img-top img {
+  width: 100%; height: 150px; object-fit: cover; display: block;
+}
+.view.cards-grid .card-body {
+  padding: .9rem 1rem;
+  display: flex; flex-direction: column; gap: .35rem; flex: 1;
+}
+.view.cards-grid .card-title { font-size: 1rem; margin: 0; }
+.view.cards-grid .card-text  { margin-top: auto; color: #555; font-size: .92rem; }
+
+
+/* Auto-scope grid only when .card exists in the view */
+.view .view-content:has(.card) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+.view .view-content:has(.card) > .row,
+.view .view-content:has(.card) > .row > .col { display: contents; }
+
+/* Keep the card look scoped */
+.view .view-content:has(.card) .card { /* same rules as above */ }
+
+/* === Header And Menu Styles (asset_injector config: header_and_menu_styles) === */
+nav#navbar-top {
+    padding-bottom: 40px;
+    padding-top: 0px;
+}
+
+/* General layout for the full-width header */
+.header {
+    width: 100%;
+    background-color: grey; /* Replace with your actual background color */
+    position: relative;
+    z-index: 1; /* Ensure the header is below the admin toolbar */
+}
+
+/* Centered container for content within the header */
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px; /* Adjust according to your content width */
+    margin: 0 auto; /* Center the container */
+    padding: 0 15px; /* Optional padding for spacing */
+}
+
+/* Style for the top header (user menu) */
+.region-top-header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; /* Align user menu to the right */
+}
+
+.region-top-header .nav {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Style for the main navbar */
+#navbar-main {
+    display: flex;
+    justify-content: space-around; /* Space evenly between logo and menu */
+    align-items: center;
+    width: 100%;
+    max-width: 1000px; /* Match this with your desired content width */
+    margin: 0 auto;
+    padding: 0 15px; /* Add padding for better alignment */
+    flex-wrap: nowrap; /* Prevents wrapping of the main menu items */
+    z-index: 2; /* Ensure the navbar stays above the header but below the admin menu */
+}
+
+/* Prevent the main menu from wrapping */
+#navbar-main .navbar-collapse {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: auto; /* Prevents the main menu from taking the full width */
+    flex-grow: 0;
+    flex-basis: auto;
+}
+
+/* Featured Top Section Styles */
+.featured-top {
+    width: 100%;
+    background-color: #f9f9f9; /* Light background for the featured top section */
+    padding: 15px 0; /* Padding around the entire featured top section */
+    margin-top: 20px; /* Space between header and featured top section */
+}
+
+.featured-top__inner {
+    max-width: 1000px; /* Keep the content within the desired width */
+    margin: 0 auto; /* Center the content */
+    padding: 0 15px; /* Optional padding for inner spacing */
+}
+
+.region-featured-top .block-menu {
+    background-color: #ffffff; /* Different background color for the member menu */
+    padding: 10px 20px; /* Padding inside the member menu block */
+    border-radius: 5px; /* Optional: Add rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+}
+
+/* Center the member menu items */
+.region-featured-top .nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Allow items to wrap if necessary */
+    margin: 0 auto;
+}
+
+/* Style individual menu links */
+.region-featured-top .nav-link {
+    color: #333333; /* Darken the link color */
+    font-weight: bold; /* Make the links bolder */
+    text-decoration: none; /* Remove underlines */
+    padding: 10px 20px; /* Add padding around each link */
+    margin: 5px; /* Add space between each menu item */
+    border: 1px solid #dddddd; /* Add a light border around each item */
+    border-radius: 5px; /* Optional: Add rounded corners to the links */
+    background-color: #f4f4f4; /* Slightly darker background to make the links stand out */
+}
+
+/* Style hover and active states */
+.region-featured-top .nav-link:hover,
+.region-featured-top .nav-link.is-active {
+    color: #000000; /* Even darker color on hover/active */
+    background-color: #e0e0e0; /* Darken the background slightly on hover/active */
+    border-color: #cccccc; /* Darken the border on hover/active */
+}
+
+/* Optional: Adjust the member menu on mobile devices */
+@media (max-width: 991px) {
+    .region-featured-top .block-menu {
+        text-align: center;
+    }
+}
+
+a.navbar-brand {
+    display: block;
+    width: 250px; /* Adjust width to make the logo smaller */
+}
+
+/* Adjust layout for mobile screens */
+@media (max-width: 767px) {
+    #navbar-main {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+        margin-left: 0;
+        padding: 0 15px; /* Add padding for better centering */
+    }
+
+    .navbar-brand {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #navbar-main .navbar-collapse {
+        justify-content: center;
+        flex-grow: 1;
+        width: 100%;
+        display: none; /* Hide the menu items by default */
+    }
+
+    /* Ensure the menu items appear only when the hamburger is clicked */
+    #navbar-main .navbar-collapse.show {
+        display: flex; /* Display the menu when expanded */
+        flex-direction: column; /* Stack menu items vertically */
+        align-items: center;
+    }
+
+    /* Add spacing for the account menu on mobile */
+    #block-barrio-boostrap-5-makehaven-d11-useraccountmenu {
+        margin-bottom: 15px;
+    }
+}
+
+/* Adjust layout for larger screens */
+@media (min-width: 768px) {
+    #navbar-main {
+        max-width: 1000px; /* Ensure logo and menu are closer together */
+        justify-content: space-between;
+    }
+
+    #block-barrio-boostrap-5-makehaven-d11-useraccountmenu {
+        margin-left: 20px; /* Add some space on desktop */
+    }
+
+    /* Admin menu adjustments */
+    .toolbar-tray {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px; /* Adjust width as needed */
+        height: 100%;
+        z-index: 1000; /* High z-index to ensure it stays on top */
+    }
+
+    /* Show the admin menu when it’s activated */
+    .toolbar-tab.is-active .toolbar-tray {
+        display: block;
+    }
+
+    /* Offset the main content when the admin menu is active */
+    body.toolbar-tray-horizontal .toolbar-tray.is-active + #navbar-main {
+        margin-left: 250px; /* Match the width of the admin menu */
+    }
+
+    /* Adjust the navbar to be fully visible */
+    #navbar-main {
+        max-width: calc(100% - 250px); /* Adjust based on admin menu width */
+    }
+}
+
+/* Additional styles */
+nav#navbar-main {
+    max-width: 1140px; /* Limits the width of the navbar */
+    margin: 0 auto; /* Centers the navbar horizontally */
+    padding: 0 15px; /* Adds some padding on the sides for better alignment */
+    box-sizing: border-box; /* Ensures padding is included within the width */
+}
+
+nav#navbar-top {
+    padding-bottom: 30px;
+}
+
+.nav-link {
+    padding: .5rem 1.5rem .5rem 0rem;
+}
+
+/* General layout for the toolbar when in horizontal (top) mode */
+div#toolbar-item-administration-tray {
+    position: fixed;
+    top: 40px; /* Adjust to align with your header */
+    z-index: 1001; /* Keep it above other elements */
+    width: 100%; /* Full width when the tray is at the top */
+    left: 0; /* Ensure it starts at the left edge */
+    height: auto;
+}
+
+/* Admin menu for vertical (side) layout */
+.toolbar-tray-horizontal.toolbar-tray {
+    width: 250px; /* Fixed width for the side tray */
+    height: 100%; /* Full height when in vertical mode */
+    top: 0; /* Align to the top of the viewport */
+    left: 0; /* Align to the left of the screen */
+    z-index: 1000; /* Ensure it stays above content */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for better separation */
+}
+
+/* Ensure the main content adjusts when the side tray is active */
+body.toolbar-tray-horizontal .toolbar-tray.is-active + #navbar-main,
+body.toolbar-tray-horizontal .toolbar-tray.is-active ~ .main-content {
+    margin-left: 250px; /* Match the side tray width */
+}
+
+/* Adjust the navbar width to be fully visible */
+#navbar-main {
+    max-width: calc(100% - 250px); /* Ensure the navbar adjusts to the reduced screen width */
+    z-index: 2; /* Keep it above the header but below the admin toolbar */
+    margin-left: auto; /* Align the navbar correctly when side tray is inactive */
+}
+
+/* Adjust the content for when the toolbar is in vertical mode */
+body.toolbar-tray-vertical .toolbar-tray {
+    position: fixed;
+    left: 0;
+    width: 250px; /* Width of the vertical toolbar */
+    height: 100%;
+    top: 0;
+    z-index: 1000; /* Ensure it stays above the content */
+}
+
+body.toolbar-tray-vertical #navbar-main,
+body.toolbar-tray-vertical .main-content {
+    margin-left: 250px; /* Match the side tray width */
+}
+
+body.toolbar-tray-vertical .toolbar-tray.is-active ~ #navbar-main,
+body.toolbar-tray-vertical .toolbar-tray.is-active ~ .main-content {
+    margin-left: 250px; /* Ensure the content shifts when the tray is active */
+}
+
+/* Make sure the content area doesn’t overlap with the toolbar */
+.main-content {
+    margin-left: 0; /* Default state when side tray is not active */
+    transition: margin-left 0.3s ease; /* Smooth transition when the side tray becomes active */
+}
+
+/* Ensure dropdown menus are on top of other elements */
+.dropdown-menu {
+    z-index: 1050; /* Higher than other elements but below modals */
+    position: absolute; /* Necessary for z-index to work properly */
+}
+
+/* Adjusting z-index for the image or any other content that might be overlapping */
+.featured-top {
+    z-index: 1; /* Lower than the dropdown menu */
+    position: relative; /* Ensure stacking context is maintained */
+}
+
+/* Ensure the header doesn't interfere with the dropdown menu */
+.header {
+    z-index: 100; /* Lower than the dropdown but higher than content */
+    position: relative;
+}
+
+/* Ensure the entire dropdown item is clickable */
+.dropdown-menu .dropdown-item {
+    position: relative;
+    padding: var(--bs-dropdown-item-padding-y) var(--bs-dropdown-item-padding-x);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+/* Fix issue where the link was being blocked */
+.dropdown-menu .dropdown-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1; /* Move it behind other elements so it doesn't block the link */
+}
+
+/* Make the anchor tag fill the entire item */
+.dropdown-menu .dropdown-item a {
+    display: block;
+    width: 100%;
+    padding: inherit;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Improve hover effect */
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus {
+    background-color: var(--bs-dropdown-link-hover-bg);
+}
+
+
+.main-content .primary.nav-tabs a {
+    padding: 2px 5px;
+}
+
+
+.sidebar_first .navigation menu--main .nav-link:hover,.sidebar_first .navigation menu--main .nav-link:focus {
+    color: rgb(231, 231, 231);
+    background: grey;
+}
+
+.sidebar_first .navbar-nav .nav-link {
+    font-size: 14px;
+}
+
+
+@media (min-width: 750px) {
+  div#sidebar_first {
+    max-width: 275px;
+  }
+}
+
+
+.sidebar_first .nav-link:hover,.sidebar_first .nav-link:focus {
+    color: rgb(0 0 0);
+    background: lightgray;
+}
+
+/* === Hid (asset_injector config: hid) === */
+.borrower {
+    display: none;
+}
+
+/* === Hide Badges List On Profile Editing For Pending Temp Need Better (asset_injector config: hide_badges_list_on_profile_editing_for_pending_temp_need_better) === */
+.path-user .block-views-blockbadges-earned-block-badges-earned {
+    display: none;
+}
+
+/* === Hide Door Quiz Finish Button (asset_injector config: hide_door_quiz_finish_button) === */
+button#edit-finish
+{display: none}
+
+/* === Hide Instructor Tab For Non Instructor Or Managers (asset_injector config: hide_instructor_tab_for_non_instructor_or_managers) === */
+a.nav-link[class*="nav-link--user-"][class$="-instructor"] {
+    display: none;
+}
+
+/* === Hide Instructor Tab To Non Instructors (asset_injector config: hide_instructor_tab_to_non_instructors) === */
+a.nav-link.nav-link--user-2-instructor
+{display: none;}
+
+/* === Hide Sections On User Dashboard (asset_injector config: hide_sections_on_user_dashboard) === */
+/* Hide "Personal Campaign Pages" section */
+afsearch-user-dashboard div[af-title="Personal Campaign Pages"] {
+    visibility: hidden;
+}
+
+/* Hide "Your Group(s)" section */
+afsearch-user-dashboard div[af-title="Your Group(s)"] {
+    visibility: hidden;
+}
+
+/* Hide "Your Contacts / Organizations" section */
+afsearch-user-dashboard div[af-title="Your Contacts / Organizations"] {
+    visibility: hidden;
+}
+
+
+theme .fa-sort:before {
+    content: "";
+}
+
+/* === Highlighted Area Of Theme (asset_injector config: highlighted_area_of_theme) === */
+/* Adjusting the styles for the content inside .highlighted to stand out */
+.highlighted .content {
+    background-color: #f2f2f2; /* Light grey background for contrast */
+    padding: 1rem; /* Padding for internal spacing */
+    margin: 1rem auto; /* Margin for external spacing */
+    border-radius: 0.25rem; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    border-left: 5px solid #dc3545; /* Solid border for highlight, using brand red */
+}
+
+/* Styling paragraphs inside .highlighted for readability */
+.highlighted .content p {
+    color: #212529; /* Ensuring text is readable against the light grey background */
+    margin-bottom: 0.5rem; /* Space between paragraphs */
+}
+
+/* Adjusting visibility and positioning of the configuration trigger */
+.highlighted .contextual .trigger {
+    visibility: visible;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 10; /* Making sure it's above other content */
+}
+
+/* Styling for contextual links */
+.highlighted .contextual-links {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Updated styles for less glaring but noticeable notices */
+.important-notice {
+    background-color: #fff3cd; /* Soft yellow background */
+    color: #856404; /* Darker text color for contrast without harshness */
+    padding: 1rem;
+    margin: 1rem auto;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ffeeba; /* Light yellow border for subtle emphasis */
+}
+
+.important-notice p {
+    margin-bottom: 0; /* Keeps content compact */
+}
+
+/* Keeping strong tags noticeable */
+.important-notice strong {
+    color: #856404; /* Darker to stand out within the notice */
+    font-weight: bold;
+}
+
+/* === Landing Pages (asset_injector config: landing_pages) === */
+.field--name-field-landing-background img {
+    max-width: 100%;
+    height: auto;
+}
+
+.field.field--name-field-landing-background.field--type-image {
+    width: 66.66666667%;
+    float: left;
+}
+
+
+/* General Layout */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+.col-12 {
+    width: 100%;
+}
+.col {
+    flex: 1 1 100%;
+}
+@media (min-width: 768px) {
+    .col-md-4 {
+        flex: 0 0 33.33%;
+        max-width: 33.33%;
+    }
+    .col {
+        flex: 1 1 33.33%;
+    }
+}
+
+/* Room Cards */
+.room {
+    text-align: center;
+    margin-bottom: 30px;
+    overflow: hidden;
+    width: 100%;
+}
+.room-img-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.room-img {
+    width: 100%;
+    height: 100% !important;
+    object-fit: cover;
+    display: block;
+}
+.room h3 {
+    margin-top: 15px;
+    font-size: 1.5em;
+}
+.room p {
+    margin-top: 10px;
+    color: #666;
+}
+
+/* Typography */
+.section-heading {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+.text-muted {
+    font-size: 1.2em;
+    color: #777;
+    margin-bottom: 30px;
+}
+
+/* Testimonials */
+.testimonial-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.testimonial {
+    text-align: center;
+    width: 30%;
+    margin-bottom: 20px;
+}
+.testimonial img {
+    width: 100%;
+    border-radius: 50%;
+}
+@media (max-width: 768px) {
+    .testimonial {
+        width: 80%;
+    }
+}
+
+/* Video Embeds */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000;
+    margin-top: 20px;
+}
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Section Layout */
+.main-section-under {
+    clear: both;
+    width: 100%;
+}
+hr {
+    margin: 60px 0;
+    color: inherit;
+    border: 0;
+    border-top: 5px solid;
+    opacity: 0.25;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .room-img-container {
+        height: 300px;
+    }
+    .col-md-4, .col-sm-6, .col-12 {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .well {
+        width: 100%;
+    }
+    .field.field--name-field-landing-background.field--type-image {
+        width: 100%;
+        float: none;
+    }
+}
+
+/* Visibility Tweaks */
+ul.menu.nav.navbar-nav {
+    visibility: visible;
+}
+section#block-system-user-menu,
+section#block-masquerade-masquerade,
+a.element-invisible.element-focusable,
+.footer {
+    visibility: hidden;
+}
+h1.page-header {
+    display: none;
+}
+
+/* Newsletter Signup (Mailchimp) */
+#mc_embed_signup input.button,
+#mc_embed_signup input.email {
+    width: 100%;
+}
+#mc_embed_signup input.button,
+#mc_embed_signup .button:hover {
+    background-color: red;
+}
+div#mc_embed_signup {
+    max-width: 300px;
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Navbar */
+button.navbar-toggle {
+    display: none;
+}
+
+/* === Lending Library (asset_injector config: lending_library) === */
+a.button.button--primary.lending-library-button {
+    margin: 0px 15px 0 0;
+}
+
+/* === Lucky Orange Callout (asset_injector config: lucky_orange_callout) === */
+iframe#lo-messenger-frame {
+    border: 5px solid #ab0000 !important;
+    background: lightgrey;
+    /* border: 2px solid #ff0000; */
+    border-radius: 10px;
+}
+
+/* === Material Edit Screen (asset_injector config: material_edit_screen) === */
+.material-profit-display {
+  margin-top: 0.5rem;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+/* === Membe (asset_injector config: membe) === */
+/** Hides extra options in editing screen like revisions **/
+
+.layout-region.layout-region--secondary {
+    display: none;
+}
+
+/* === Member List (asset_injector config: member_list) === */
+/* Limit styles to the specific view */
+
+
+.view-member-list .row {
+    padding-bottom: 30px;
+}
+
+/* Card styling */
+.view-member-list .view-content .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%; /* Makes all cards the same height */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Card image styling */
+.view-member-list .view-content .card .card-img-top img {
+  width: 100%;
+  height: 350px; /* Adjust as needed to control image size */
+  object-fit: cover;
+}
+
+/* Card body and text */
+.view-member-list .view-content .card .card-body {
+  padding: 15px;
+  flex-grow: 1; /* Ensures content takes up available space */
+}
+
+.view-member-list .view-content .card .card-title {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Limit the height of the card text to keep cards uniform */
+.view-member-list .view-content .card .card-text {
+  flex-grow: 1;
+  color: #555;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Button alignment at the bottom */
+.view-member-list .view-content .card .btn {
+  margin-top: auto; /* Push the button to the bottom */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .view-member-list .view-content .col {
+    flex: 1 1 100%; /* Make cards full-width on smaller screens */
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .view-member-list .view-content .col {
+    flex: 1 1 48%; /* Two cards per row on medium screens */
+  }
+}
+
+@media (min-width: 993px) {
+  .view-member-list .view-content .col {
+    flex: 1 1 30%; /* Three cards per row on large screens */
+  }
+}
+
+.area-of-interest {
+    font-size: 10px;
+    padding-top: 10px;
+}
+
+/* Member list specifics */
+.view-member-list .view-content{
+  grid-template-columns:repeat(auto-fill, minmax(280px,1fr));
+  gap:20px;
+}
+.view-member-list .card{ text-align:center; }
+
+.view-member-list .card .card-img-top img{
+  height:350px; object-fit:cover;
+}
+
+.view-member-list .card .card-body{ padding:15px; }
+.view-member-list .card .card-title{ font-size:1.2rem; color:#333; margin-bottom:10px; }
+.view-member-list .card .card-text{ color:#555; overflow:hidden; text-overflow:ellipsis; }
+
+.view-member-list .card .btn{ margin-top:auto; }
+
+.area-of-interest{ font-size:10px; padding-top:10px; }
+
+/* === Member Menu Page Buttons (asset_injector config: member_menu_page_buttons) === */
+/*
+ * Button Grid Styles for Multiple Menus
+ * Selectors are grouped to apply styles to both menus.
+*/
+
+/* 1. Hide the menu titles */
+#block-gin-membermenu-2 h2,
+#block-gin-facilitatormenu-2 h2 {
+  display: none;
+}
+
+/* 2. Set up the <ul> as a flexbox grid container */
+#block-gin-membermenu-2 ul.menu,
+#block-gin-facilitatormenu-2 ul.menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: flex-start;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* 3. Style each <li> as a button card */
+#block-gin-membermenu-2 li.menu-item,
+#block-gin-facilitatormenu-2 li.menu-item {
+  flex-basis: 175px;
+  flex-grow: 0;
+  display: flex;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease-in-out;
+}
+
+#block-gin-membermenu-2 li.menu-item:hover,
+#block-gin-facilitatormenu-2 li.menu-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 4. Style the <a> tag to be the content area */
+#block-gin-membermenu-2 li.menu-item a,
+#block-gin-facilitatormenu-2 li.menu-item a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0rem 1rem .5rem 1rem;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* 5. Style the icon inside the link */
+#block-gin-membermenu-2 li.menu-item a i,
+#block-gin-facilitatormenu-2 li.menu-item a i {
+  font-size: 3rem;
+  color: #b22222;
+  margin-bottom: 0.75rem;
+}
+
+/* 6. Add description text from the 'title' attribute */
+#block-gin-membermenu-2 li.menu-item a::after,
+#block-gin-facilitatormenu-2 li.menu-item a::after {
+  content: attr(title);
+  font-size: 0.9rem;
+  font-weight: normal;
+  color: #6c757d;
+  margin-top: 0.5rem;
+  line-height: 1.2;
+}
+
+
+@media (max-width: 400px) {
+  #block-gin-membermenu-2 li.menu-item, 
+  #block-gin-facilitatormenu-2 li.menu-item {
+    flex-basis: 100%;
+  }
+}
+
+/* === Member Role Css (asset_injector config: member_role_css) === */
+a.nav-link.nav-link--payment-portal {
+    display: none;
+}
+
+/* === Menu For Logged In Authenticated Users (asset_injector config: menu_for_logged_in_authenticated_users) === */
+/* === Sidebar Authenticated User Menu (Vertical List) === */
+#sidebar_first {
+  background: #fff;
+  padding: 15px;
+  border: 1px solid #ddd;
+  margin-bottom: 15px;
+}
+
+/* Hide contextual controls in sidebar menu */
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu-2 .contextual,
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu-2 .contextual-links {
+  display: none !important;
+}
+
+/* Sidebar menu block styling */
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu-2 {
+  width: 100%;
+  background: #fff;
+  border: 0px solid #ddd;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu-2 ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu-2 li {
+  margin-bottom: 10px;
+}
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu-2 a.nav-link {
+  display: block;
+  padding: 10px 15px;
+  color: #333;
+  background: #f7f7f7;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu-2 a.nav-link:hover,
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu-2 a.nav-link:focus {
+  background: #eaeaea;
+}
+a.nav-link.active,
+a.nav-link.is-active {
+  font-weight: bold;
+}
+
+/* === Top Authenticated User Menu (Horizontal Bar) === */
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu {
+  clear: both; /* Forces it to appear below the main public menu */
+  background: #fff;
+  width: 100%;
+  padding: 10px 0;
+  margin-top: 10px;
+  border-top: 1px solid #ddd;
+}
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu li {
+  margin: 0 5px;
+}
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu a {
+  display: block;
+  padding: 8px 12px;
+  color: #333;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu a:hover,
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu a:focus {
+  background: #eaeaea;
+}
+
+/* Mobile: stack top menu items vertically */
+@media (max-width: 768px) {
+  #block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu ul {
+    display: block;
+    text-align: left;
+  }
+  #block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu li {
+    margin: 5px 0;
+  }
+}
+
+#CollapsingNavbar {
+    flex-direction: column;
+}
+
+
+/* Active top-level menu item styling */
+.nav-item.menu-item--expanded.active > a.nav-link {
+  background-color: #ccc; /* Use your desired dark background */
+  margin-bottom: 15px;    /* Adds extra space below the active item */
+}
+
+/* Optional: add space above the submenu list */
+.nav-item.menu-item--expanded.active > ul.menu {
+  margin-top: 15px;
+}
+
+
+/* Active menu link override */
+#block-barrio-boostrap-5-makehaven-d11-membermenu ul li.nav-item > a.nav-link.active.is-active {
+  background-color: #ccc !important; /* Darker background */
+  margin-bottom: 15px !important;    /* Extra space below */
+}
+
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu a {
+  display: block;       /* Ensure it's block-level */
+  text-align: center;   /* Center the link text */
+}
+
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu ul {
+  text-align: center;
+}
+
+
+.nav-item.menu-item--expanded.active > a.nav-link {
+    background-color: #ccc !important;
+}
+
+/* === Newsletter Signup (asset_injector config: newsletter_signup) === */
+.crm-profile-name-Newsletter_Signup .crm-container .crm-button, .crm-profile-name-Newsletter_Signup .crm-container .crm-button:hover
+ {
+    background: #198754;
+    font-size: 25px;
+    padding: 10px 20px;
+}
+.crm-profile-name-Newsletter_Signup button#_qf_Edit_next {
+    margin-left: 220px;
+}
+
+/* === Profile And Account Styles (asset_injector config: profile_and_account_styles) === */
+/* address field style */
+
+/* Hide the country field (always US) */
+#edit-field-member-address-0-address-country-code--2 {
+    display: none;
+}
+
+/* Adjust the layout for City, State, and Zip */
+#edit-field-member-address-0-address-container2 {
+    display: flex;
+    justify-content: flex-start; /* Align fields to the left */
+    gap: 10px; /* Adds a little space between fields */
+}
+
+/* Increase the width of City and State */
+#edit-field-member-address-0-address-locality {
+    flex: 2; /* Make city take up more space */
+}
+
+#edit-field-member-address-0-address-administrative-area {
+    flex: 1.5; /* Make state wider for full words */
+}
+
+/* Set the width of the Zip field */
+#edit-field-member-address-0-address-postal-code {
+    flex: 0 0 120px; /* Fixed width for Zip code */
+    margin-left: 10px; /* Adjust the left margin to bring it closer to State */
+}
+
+
+/* Profile Field Styles */
+
+/* Default layout for larger screens - Fields aligned beside each other */
+#edit-field-member-birthday-wrapper,
+#edit-field-preferred-phone-wrapper,
+#edit-field-member-instagram-wrapper {
+    display: inline-block;
+    vertical-align: top;
+    width: 32%; /* Each field will take up about a third of the available width */
+    margin-right: 1%; /* Add a bit of space between fields */
+}
+
+/* Remove the margin on the last element to avoid extra space */
+#edit-field-member-instagram-wrapper {
+    margin-right: 0;
+}
+
+/* Mobile layout - Stack fields vertically */
+@media (max-width: 768px) {
+    #edit-field-member-birthday-wrapper,
+    #edit-field-preferred-phone-wrapper,
+    #edit-field-member-instagram-wrapper {
+        display: block;
+        width: 100%;
+        margin-right: 0;
+    }
+}
+
+
+
+/* Set flexbox for the fieldset wrapper */
+#edit-group-characteristics .fieldset-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Space between items */
+    align-items: flex-start; /* Align items to the top */
+}
+
+/* Set max-width for individual form items */
+#edit-group-characteristics .js-form-item {
+    max-width: 400px; /* Adjust this to control how wide each checkbox/radio can be */
+    flex: 1 1 auto; /* Allow items to flex and wrap */
+    margin-bottom: 15px; /* Ensure consistent spacing between items */
+}
+
+/* On smaller screens, stack items vertically */
+@media (max-width: 768px) {
+    #edit-group-characteristics .js-form-item {
+        flex: 1 1 100%; /* Full width on mobile */
+        max-width: 100%; /* Ensure they don't go beyond the screen width */
+    }
+}
+
+
+/* Set flexbox for the Preferences fieldset wrapper */
+#edit-group-preferences .fieldset-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 100px; /* Space between items */
+    align-items: flex-start; /* Align items to the top */
+}
+
+/* Set max-width for individual form items in Preferences */
+#edit-group-preferences .js-form-item {
+    max-width: 400px; /* Control how wide each item can be */
+    flex: 1 1 auto; /* Allow items to flex and wrap */
+    margin-bottom: 15px; /* Ensure consistent spacing between items */
+}
+
+/* On smaller screens, stack items vertically in Preferences */
+@media (max-width: 768px) {
+    #edit-group-preferences .js-form-item {
+        flex: 1 1 100%; /* Full width on mobile */
+        max-width: 100%; /* Ensure they don't exceed the screen width */
+    }
+}
+
+/* Set flexbox for the Activity fieldset wrapper */
+#edit-group-activity .fieldset-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 100px; /* Space between items */
+    align-items: flex-start; /* Align items to the top */
+}
+
+/* Set max-width for individual form items in Activity */
+#edit-group-activity .js-form-item {
+    max-width: 400px; /* Control how wide each item can be */
+    flex: 1 1 auto; /* Allow items to flex and wrap */
+    margin-bottom: 15px; /* Ensure consistent spacing between items */
+}
+
+/* On smaller screens, stack items vertically in Activity */
+@media (max-width: 768px) {
+    #edit-group-activity .js-form-item {
+        flex: 1 1 100%; /* Full width on mobile */
+        max-width: 100%; /* Ensure they don't exceed the screen width */
+    }
+}
+
+
+
+/* Make the button larger and more prominent */
+form#profile-main-add-form #edit-submit {
+    padding: 15px 30px; /* Increase padding for a larger button */
+    font-size: 18px; /* Increase font size */
+    font-weight: bold; /* Make the text bold */
+    border-radius: 8px; /* Add rounded corners */
+}
+
+/* Add some white space underneath the button */
+form#profile-main-add-form #edit-actions {
+    margin-bottom: 30px; /* Adds extra space below the button */
+}
+
+
+/* Hide the original button text */
+form#profile-main-add-form #edit-submit {
+    font-size: 0; /* Hides the original text */
+}
+
+/* Use the :before pseudo-element to display the new text */
+form#profile-main-add-form #edit-submit:before {
+    content: "Save Profile and Advance to Next Step"; /* New text */
+    font-size: 18px; /* Set the text size */
+    font-weight: bold; /* Make the text bold */
+    display: block; /* Ensure it displays properly */
+    padding: 15px 30px; /* Maintain the button's padding */
+    font-size: 18px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+
+/* Badge list style */
+
+.view-badges-earned-block tr.Pending {
+    background: #ffa50087;
+}
+
+.view-badges-earned-block tr.Duplicate,.view-badges-earned-block tr.Suspended,.view-badges-earned-block tr.Expired,.view-badges-earned-block tr.Rejected {
+        background: #ff000061
+        border: 3px solid #c00101;
+}
+
+.view-badges-earned-block tr.Active
+{
+background: #ffffff;
+border-bottom: 3px solid #7d7d7d;
+}
+
+
+
+/* Ensure the waiver section is always visible */
+.page-user-register details#edit-legal {
+    display: block; /* Override the default <details> behavior */
+}
+
+.page-user-register details#edit-legal > summary {
+    display: none; /* Hide the toggle button */
+}
+
+/* Styling waiver checkboxes specifically */
+.page-user-register details#edit-legal .js-form-type-checkbox .form-checkbox {
+    transform: scale(1.5);
+    margin-right: 15px;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+/* Styling the checkbox labels within the waiver form */
+.page-user-register details#edit-legal .js-form-type-checkbox .form-check-label {
+    font-size: 1.2em; /* Increase the text size */
+    color: #333; /* Set a clear color */
+    line-height: 1.5; /* Improve readability */
+    display: flex; /* Align label and checkbox horizontally */
+    align-items: center;
+}
+
+/* Add a border around the checkbox container for emphasis */
+.page-user-register details#edit-legal .js-form-type-checkbox {
+    border: 1px solid #bfbfbf;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+    padding-left: 40px;
+}
+
+/* Add hover effect for the container within the waiver form */
+.page-user-register details#edit-legal .js-form-type-checkbox:hover {
+    background-color: #f1f1f1; /* Lighten background on hover */
+    border-color: #000; /* Darken border on hover */
+}
+
+/* Highlight the checkbox on focus */
+.page-user-register details#edit-legal .js-form-type-checkbox .form-checkbox:focus {
+    outline: 2px solid #007bff; /* Blue outline for focus state */
+}
+
+
+.page-user-register div#edit-actions {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.path-user div#edit-field-member-photo-wrapper {
+    border: solid grey;
+    border-radius: 20px;
+    background: #eee;
+    margin-bottom: 30px;
+    padding: 10px;
+}
+
+
+.path-user .image-data__crop-wrapper .vertical-tabs__menu
+{    width: 12em;
+}
+
+.headshot-instructions {
+  background-color: #f9f9f9; /* Light background for contrast */
+  border: 1px solid #ddd; /* Subtle border */
+  padding: 15px; /* Space around text */
+  border-radius: 8px; /* Rounded corners */
+  margin-top: 10px; /* Space from other elements */
+  font-size: 14px; /* Adjust font size for readability */
+}
+
+.headshot-instructions .instructions-title {
+  font-size: 16px; /* Larger font for title */
+  font-weight: bold; /* Bold for emphasis */
+  color: #333; /* Darker color for title */
+  display: block; /* Ensure it starts on a new line */
+  margin-bottom: 10px; /* Space below the title */
+}
+
+.headshot-instructions ul {
+  margin: 0;
+  padding-left: 20px; /* Indentation for the list */
+  list-style: disc; /* Add bullet points */
+}
+
+.headshot-instructions li {
+  margin-bottom: 8px; /* Space between list items */
+}
+
+/* === Public Contribution Pages (asset_injector config: public_contribution_pages) === */
+.page-civicrm-contribute .content-header, .page-civicrm-friend .content-header{
+    background-color: #8b1919;
+}
+
+.page-civicrm-contribute .page-title, .page-civicrm-friend h1.page-title
+{
+color: white;
+}
+
+.page-civicrm-contribute nav.breadcrumb {
+    display: none;
+}
+
+
+.page-civicrm-contribute .crm-container .crm-button{
+	font-size: 18px;
+padding: 5px 10px;
+    background: #8b1919;
+}
+
+
+.page-civicrm-contribute .crm-container .crm-button:hover {
+    background: #b41e1e;
+}
+
+
+.page-civicrm-contribute .greywell {
+    border: solid grey;
+    border-radius: 19px;
+    background: #eee;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 750px;
+    padding: 10px;
+}
+
+/* === Quiz Result Style (asset_injector config: quiz_result_style) === */
+/* --- General Page & Font Styling --- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f4f7f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+.content {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+/* --- 1. Overall Score Display --- */
+#quiz_score_percent {
+    font-size: 2.8em;
+    font-weight: 700;
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px;
+    color: #fff;
+    /* Red for failing, you could create a .passing class with green (#5cb85c) */
+    background-color: #d9534f;
+}
+
+#quiz_score_possible {
+    font-size: 1.1em;
+    text-align: center;
+    background-color: #e9ecef;
+    padding: 8px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+    border: 1px solid #dee2e6;
+}
+
+/* --- 2. Main Question Container --- */
+fieldset.js-form-item {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    position: relative;
+}
+
+fieldset.js-form-item legend span {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #005a87;
+}
+
+/* --- 3. Prominent Learning Feedback (UPDATED LAYOUT) --- */
+.table-responsive + p {
+    margin-top: 25px;
+    padding: 20px;
+    background-color: #eef7fa;
+    border-left: 5px solid #31708f;
+    font-size: 1.25em;
+    border-radius: 0 8px 8px 0;
+    line-height: 1.7;
+    /* Flexbox layout to prevent text wrapping under the icon */
+    display: flex;
+    align-items: flex-start;
+}
+
+.table-responsive + p::before {
+    content: '💡';
+    font-size: 1.5em; /* Made the bulb bigger */
+    margin-right: 15px; /* Adjusted spacing */
+    flex-shrink: 0; /* Prevents icon from shrinking */
+}
+
+/* --- 4. Individual Question Score Badge (REMOVED) --- */
+.quiz-report-score-container {
+    display: none;
+}
+
+/* --- 5. Answer Table Enhancements (UPDATED COLORS) --- */
+.quiz-result-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+}
+
+/* Vertically center all content in the table */
+.quiz-result-table td {
+    vertical-align: middle;
+}
+
+/* Keep text bold for the user's selection */
+.quiz-result-row.quiz-result-chosen > td {
+    font-weight: 600;
+}
+
+/* Add an indicator bar to the first cell of the chosen row */
+.quiz-result-row.quiz-result-chosen > td:first-child {
+    border-left: 4px solid #6c757d;
+    padding-left: 12px;
+}
+
+/* UNIFIED green for ALL correct answer rows */
+.quiz-result-row.quiz-result-correct.quiz-result-chosen,
+.quiz-result-row.quiz-result-correct.quiz-result-not-chosen {
+    background-color: #e8f5e9 !important;
+    color: #1b5e20;
+}
+
+/* Red for incorrect answers the user chose */
+.quiz-result-row.quiz-result-not-correct.quiz-result-chosen {
+    background-color: #fbe9e7 !important;
+    color: #b71c1c;
+}
+
+/* Style the checkmark and X icons */
+.quiz-score-icon {
+    width: 22px;
+    height: 22px;
+    vertical-align: middle;
+}
+
+/* === Registration Fields New Css (asset_injector config: registration_fields_new_css) === */
+.user-register-form div#crm-container {
+    margin-bottom: 30px;
+    min-width: 450px;
+    max-width: 1000px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 25px;
+    border-width: initial;
+    border-style: solid;
+    border-color: grey;
+    border-image: initial;
+    border-radius: 20px;
+    background: rgb(238, 238, 238);
+}
+
+
+/* This media query targets screens 768px wide and larger. */
+@media (min-width: 768px) {
+  
+  /* 1. Change the grid to three columns.
+     We'll make the first column "small" (1fr) and the
+     name fields larger (2fr each).
+  */
+  .fieldset-wrapper {
+    display: grid;
+    /* [Pronoun] [First Name] [Last Name] */
+    grid-template-columns: 1fr 2fr 2fr; 
+    gap: 1rem; /* Sets spacing between all fields */
+    
+    /* This vertically aligns the tops of the field wrappers,
+       which looks cleaner.
+    */
+    align-items: start; 
+  }
+
+  /* 2. Force ONLY the "Account" group to span all 3 columns.
+     We've removed the Pronoun field from this rule.
+  */
+  .fieldset-wrapper > #edit-account {
+    grid-column: 1 / -1; /* Spans from the first column to the last */
+  }
+
+  /* Because we removed the full-width rule for Pronouns, 
+    the grid will now automatically place:
+    - #edit-field-pronoun-txt-wrapper (in column 1)
+    - #edit-field-first-name-wrapper (in column 2)
+    - #edit-field-last-name-wrapper (in column 3)
+  */
+
+  /* 3. Remove the default bottom margin */
+  .fieldset-wrapper > .js-form-wrapper {
+    margin-bottom: 0;
+  }
+}
+/* --- START: Full Replacement Block (Final Fix) --- */
+
+/*
+ * ===================================================================
+ * SECTION 1: Stacking rules for options (applies to ALL screen sizes)
+ * ===================================================================
+*/
+
+/* 1. Target the CONTAINER for the options */
+#editrow-gender_id .edit-value.content,
+#editrow-custom_46 .edit-value.content {
+  display: flow-root !important; /* Contains floats without scrollbars */
+  margin-left: 0 !important; 
+}
+
+/* 2. Target the INPUTS */
+#editrow-gender_id .edit-value.content input[type="radio"],
+#editrow-custom_46 .edit-value.content input[type="checkbox"] {
+   float: left !important;
+   clear: left !important; /* KEY: Force this input to a new line */
+   margin-right: 6px !important; 
+   margin-top: 0 !important;
+   position: relative;
+   top: 4px; 
+}
+
+/* 3. Target the LABELS */
+#editrow-gender_id .edit-value.content label,
+#editrow-custom_46 .edit-value.content label {
+   display: block !important; 
+   float: left !important;  
+   clear: none !important; 
+   width: calc(100% - 40px) !important; 
+   overflow: visible !important; 
+   padding-bottom: 0.75rem !important; /* Space between rows */
+   line-height: 1.2 !important;
+}
+
+/* 4. Hide hidden inputs from layout */
+#editrow-custom_46 .edit-value.content input[type="hidden"] {
+  display: none !important;
+}
+
+/* 5. Make sure the 'clear' div inside these sections doesn't add space */
+/* --- TYPO FIX WAS HERE --- */
+#editrow-gender_id .clear,
+#editrow-custom_46 .clear {
+  display: none !important; 
+}
+
+/* 6. Reset the main label for ALL screens (fixes "Gender Identity" wrap) */
+/* --- TYPO FIX WAS HERE --- */
+#editrow-gender_id .label,
+#editrow-custom_46 .label {
+  float: none !important; 
+  width: auto !important; 
+  margin-bottom: 0.5rem !important; 
+  text-align: left !important;
+}
+
+/*
+ * ===================================================================
+ * SECTION 2: Grid layout (applies ONLY to large screens)
+ * ===================================================================
+*/
+
+@media (min-width: 768px) {
+  
+  #profilewrap34 > fieldset {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0 1.5rem !important; 
+    align-items: start !important;
+  }
+
+  /* --- SPACING FIX ADDED HERE --- */
+  #profilewrap34 > fieldset > #editrow-birth_date {
+    grid-column: 1 / -1 !important;
+    /* This adds the space you requested below the Birth Date */
+    margin-bottom: 1.5rem !important; 
+  }
+
+  #profilewrap34 > fieldset > .crm-section {
+    margin-bottom: 0 !important;
+  }
+}
+/* --- END: Full Replacement Block --- */
+
+
+
+
+
+/* --- START: SMS Consent Section Styling (Updated) --- */
+
+/* 1. Reset the CiviCRM float layout */
+#profilewrap33 .crm-section .label {
+  float: none !important;
+  width: auto !important;
+  text-align: left !important;
+  margin-bottom: 0.5rem !important;
+  padding: 0 !important;
+}
+
+#profilewrap33 .crm-section .edit-value.content {
+  margin-left: 0 !important;
+}
+
+/* 2. Style the "Why" text callout box */
+#profilewrap33 #helprow-custom_74.helprow-pre .content.description {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #333;
+  background-color: #f4f8ff; /* Light blue */
+  border: 1px solid #bde0ff;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* 3. Hide the redundant "SMS Consent" label */
+#profilewrap33 #editrow-custom_74 .label {
+  display: none !important;
+}
+
+/* 4. Style the "Yes/No" radio buttons */
+#profilewrap33 #editrow-custom_74 .edit-value.content {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Hide the original radio button */
+#profilewrap33 #editrow-custom_74 input[type="radio"] {
+  display: none;
+}
+
+/* --- NEW STYLES FOR "Yes"/"No" LABELS --- */
+
+/* This is the unselected state, styled like a form input */
+#profilewrap33 #editrow-custom_74 .edit-value.content label {
+  display: block;
+  flex-grow: 1;
+  text-align: center;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.2s ease;
+  
+  /* Make it look like a form field */
+  background-color: #fff;
+  border: 1px solid #ccc; /* Standard gray border */
+  color: #333; /* Standard text color */
+  font-weight: 600;
+}
+
+/* Add a simple hover effect */
+#profilewrap33 #editrow-custom_74 .edit-value.content label:hover {
+  border-color: #888;
+}
+
+/* --- Style for the SELECTED option --- */
+
+/* Selected "Yes" state */
+#profilewrap33 #editrow-custom_74 input[type="radio"]:checked + label[for="CIVICRM_QFID_1_custom_74"] {
+  background-color: #f4f8ff; /* Light blue background */
+  border-color: #007bff; /* Blue border */
+  color: #007bff; /* Blue text */
+  box-shadow: 0 0 0 2px rgba(0,123,255,0.25); /* Focus ring */
+}
+
+/* Selected "No" state */
+#profilewrap33 #editrow-custom_74 input[type="radio"]:checked + label[for="CIVICRM_QFID_0_custom_74"] {
+  background-color: #f8f9fa; /* Light gray background */
+  border-color: #6c757d; /* Gray border */
+  color: #6c757d; /* Gray text */
+  box-shadow: none;
+}
+/* --- END OF NEW STYLES --- */
+
+/* Hide the 'x' clear link */
+#profilewrap33 #editrow-custom_74 .crm-clear-link {
+  display: none !important;
+}
+
+/* 5. Style the disclaimer text */
+#profilewrap33 #helprow-custom_74.helprow-post .content.description {
+  font-size: 0.875rem;
+  font-style: italic;
+  color: #666;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* 6. Clean up the "Mobile Phone" field */
+#profilewrap33 #editrow-phone-6-2 .label {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+#profilewrap33 #editrow-phone-6-2 .crm-form-text {
+  width: 100%;
+  max-width: 300px;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* --- END: SMS Consent Section Styling (Updated) --- */
+
+
+/* Fix for "Mobile Phone" field floating next to legend */
+#profilewrap33 #editrow-phone-6-2 {
+  clear: both; /* Forces it to a new line */
+  padding-top: 1rem; /* Adds some space below the legend */
+}
+
+
+
+
+div#editrow-street_address-Primary {
+    clear: both;
+}
+
+/* === Registration Path (asset_injector config: registration_path) === */
+fieldset#edit-group-chargebee {
+    visibility: hidden;
+    height: 0px;
+}
+
+.user-register-form #edit-group-administrative {
+    visibility: hidden;
+    height: 0px;
+}
+
+
+.profile-main-add-form div#edit-field-member-payment-method-wrapper, 
+.profile-main-add-form div#edit-field-membership-type-wrapper
+{
+visibility: hidden;
+height: 0px;
+}
+
+
+.profile-main-add-form .form-type-vertical-tabs {
+    display: none;
+}
+
+
+form#profile-main-add-form button#edit-submit {
+    width: 325px;
+}
+
+
+form#profile-main-add-form #edit-submit:before {
+    content: "Save Profile and Advance to Next Step";
+    min-width: 300px;
+    height: 70px;
+}
+
+.profile-main-add-form profile-form fieldset#edit-group-payment {
+    visibility: hidden;
+}
+
+fieldset#edit-group-payment {
+    visibility: hidden;
+    height: 0px;
+}
+
+/* === Report Tables Overflow Viable (asset_injector config: report_tables_overflow_viable) === */
+.table-responsive {
+    overflow-x: visible !important;
+}
+
+table {
+    background: white;
+}
+
+    
+    .featured-bottom, #main-wrapper  .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    max-width: none;
+}
+
+.featured-bottom, #main-wrapper {
+    max-width: none !important;
+}
+
+/* === Reservations (asset_injector config: reservations) === */
+.node-reservation-form fieldset#edit-field-reservation-cancellation--wrapper {
+    display: none;
+}
+
+/* === Selection Options Space For Tablets (asset_injector config: selection_options_space_for_tablets) === */
+#ui-id-1 {
+    font-size: 24px; /* Increase text size */
+    line-height: 1.8; /* Increase spacing for easier selection */
+    padding: 10px 0; /* Add padding for spacing */
+}
+
+#ui-id-1 .ui-menu-item {
+    padding: 15px 20px; /* Increase padding for easier touch */
+    border-bottom: 1px solid #ccc; /* Add separation between options */
+}
+
+#ui-id-1 .ui-menu-item-wrapper {
+    display: block;
+    padding: 15px 20px; /* Larger clickable area */
+    font-weight: bold; /* Make text bolder for readability */
+}
+
+#ui-id-1 .ui-menu-item:hover,
+#ui-id-1 .ui-menu-item.ui-state-active {
+    background-color: #f0f0f0; /* Highlight selected item */
+    color: #333;
+    cursor: pointer;
+}
+
+/* Increase touch target for accessibility */
+@media (max-width: 1024px) {
+    #ui-id-1 .ui-menu-item-wrapper {
+        font-size: 28px;
+        padding: 20px 30px;
+    }
+}
+
+/* === Slack Buttons (asset_injector config: slack_buttons) === */
+/* Common styling for Slack fields */
+.field--name-field-item-slack-channel,
+.field--name-field-interest-slack-channel,
+.field--name-field-member-slack-id-number {
+    font-size: 20px;
+    line-height: 30px;
+    padding-bottom: 20px;
+}
+
+/* Slack link styling for channels and usernames */
+.field--name-field-item-slack-channel .field__item a,
+.field--name-field-interest-slack-channel .field__item a,
+.field--name-field-member-slack-id-number .field__item a {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: #4A154B; /* Slack's branding color */
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Hover effect */
+.field--name-field-item-slack-channel .field__item a:hover,
+.field--name-field-interest-slack-channel .field__item a:hover,
+.field--name-field-member-slack-id-number .field__item a:hover {
+    background-color: #611f69; /* Slightly lighter shade of Slack's branding color */
+}
+
+/* Slack logo before the link for channels */
+.field--name-field-item-slack-channel .field__item a::before,
+.field--name-field-interest-slack-channel .field__item a::before {
+    content: "";
+    display: inline-block;
+    background-image: url('https://a.slack-edge.com/80588/marketing/img/icons/icon_slack_hash_colored.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+/* Slack "@" icon for usernames using inline SVG */
+.field--name-field-member-slack-id-number .field__item a::before {
+    content: "";
+    display: inline-block;
+    background-image: url('https://a.slack-edge.com/80588/marketing/img/icons/icon_slack_hash_colored.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+/* === Social Login Button (asset_injector config: social_login_button) === */
+.block-social-auth-login .auth-link {
+    background: blue;
+    display: inline-flex
+;
+    align-items: center;
+    background-color: #4285F4;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .25);
+    text-decoration: none;
+    transition: box-shadow .2s ease-in-out;
+    /* width: 300px; */
+}
+
+a.social-auth.auth-link::after {
+    content: 'Sign in with Google';
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 0 16px 0 12px;
+    letter-spacing: 0.2px;
+}
+
+img.social-auth.auth-icon {
+    background-color: #fff;
+    padding: 8px;
+    margin: 1px;
+    border-radius: 2px;
+}
+
+
+form#user-login-form{
+    background: lightgray;
+    padding: 25px;
+    margin-bottom: 50px;
+    border-radius: 5px;
+}
+
+div#block-barrio-boostrap-5-makehaven-d11-socialauthlogin {
+    margin-bottom: 50px;
+}
+
+/* === Sponsor Page (asset_injector config: sponsor_page) === */
+.sponsor-table .sponsor-container,
+.sponsor-table .gold-body,
+.sponsor-table .silver-body,
+.sponsor-table .bronze-body {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
+.sponsor-table .sponsor-item,
+.sponsor-table .gold-sponsor-item,
+.sponsor-table .silver-sponsor-item,
+.sponsor-table .bronze-sponsor-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+}
+
+.sponsor-table .sponsor-logo-container,
+.sponsor-table .gold-sponsor-logo-container,
+.sponsor-table .silver-sponsor-logo-container {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.sponsor-table .sponsor-logo,
+.sponsor-table .gold-sponsor-logo,
+.sponsor-table .silver-sponsor-logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.sponsor-table .platinum-box {
+  /* Platinum-specific styles */
+}
+
+.sponsor-table .gold-box {
+  background-color: #FFF1CC;
+}
+
+.sponsor-table .silver-box {
+  background-color: #EAEAEA;
+}
+
+.sponsor-table .bronze-box {
+  background-color: #f4e4cc;
+}
+
+.sponsor-table .panel-heading {
+  color: white;
+}
+
+.sponsor-table .platinum-box .panel-heading {
+  background-color: black;
+}
+
+.sponsor-table .gold-title {
+  color: #D4AF37;
+}
+
+.sponsor-table .silver-title,
+.sponsor-table .silver-sponsor-name {
+  color: #333;
+}
+
+.sponsor-table .bronze-heading {
+  background-color: #8b4513;
+}
+
+.sponsor-table .sponsor-link,
+.sponsor-table .gold-sponsor-link,
+.sponsor-table .silver-sponsor-link,
+.sponsor-table .bronze-sponsor-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sponsor-table .sponsor-link:hover,
+.sponsor-table .gold-sponsor-link:hover,
+.sponsor-table .silver-sponsor-link:hover,
+.sponsor-table .bronze-sponsor-link:hover {
+  text-decoration: none;
+}
+
+.sponsor-table .sponsor-name,
+.sponsor-table .gold-sponsor-name,
+.sponsor-table .silver-sponsor-name,
+.sponsor-table .bronze-sponsor-name {
+  font-weight: bold;
+}
+
+.sponsor-table .sponsor-duration,
+.sponsor-table .gold-sponsor-duration,
+.sponsor-table .silver-sponsor-duration,
+.sponsor-table .bronze-sponsor-duration {
+  font-size: 12px;
+}
+
+/* Adjust font sizes */
+.sponsor-table .sponsor-name { font-size: 30px; }
+.sponsor-table .gold-sponsor-name { font-size: 24px; }
+.sponsor-table .silver-sponsor-name, 
+.sponsor-table .bronze-sponsor-name { font-size: 18px; }
+
+/* Adjust logo container sizes */
+.sponsor-table .sponsor-logo-container { width: 300px; height: 300px; }
+.sponsor-table .gold-sponsor-logo-container { width: 200px; height: 200px; }
+.sponsor-table .silver-sponsor-logo-container { width: 50px; height: 50px; }
+
+/* For better spacing in the Bronze section */
+.sponsor-table .bronze-body {
+  justify-content: space-between;
+}
+
+/* For the Silver section, place logo beside text */
+.sponsor-table .silver-sponsor-item {
+  flex-direction: row;
+}
+
+/* For uneven items due to long text */
+.sponsor-table .sponsor-name {
+  max-width: 280px;
+  text-align: center;
+}
+
+.sponsor-table .sponsor-container {
+  justify-content: center;  /* Center-align items */
+}
+
+.sponsor-table .sponsor-item,
+.sponsor-table .gold-sponsor-item,
+.sponsor-table .silver-sponsor-item,
+.sponsor-table .bronze-sponsor-item {
+  min-width: 200px;  /* Set a minimum width */
+}
+
+.sponsor-table .silver-sponsor-link
+{
+   align-items: left;
+   margin: 0 0 0 10px;
+}
+
+.sponsor-table .sponsor-link
+{
+    line-height: 35px;
+}
+
+/* === Staff Tools Page (asset_injector config: staff_tools_page) === */
+.main-content .menu--staff-tools .nav-item a::after {
+  content: attr(title); /* Get the title attribute's value */
+  display: block; /* Make it appear as a new line */
+  font-size: 0.9em; /* Adjust size for a description */
+  color: gray; /* Set the color to differentiate from the link */
+  margin-top: 5px; /* Add spacing */
+}
+
+a.nav-link.nav-link--staff-tools.is-active {
+    pointer-events: none; /* Disable clicking */
+    cursor: default; /* Change cursor to default arrow */
+    background: white; /* Remove link appearance */
+    border: none; /* Ensure no border */
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Keep text color consistent */
+}
+
+
+.main-content .menu--staff-tools .nav-link {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ddd;
+    /* border-bottom: none; */
+    background-color: #f9f9f9;
+    margin-right: 5px;
+    border-radius: 5px 5px 5px 5px;
+    margin-bottom: 5px;
+}
+
+
+/* Remove bullet points for all unordered lists in the staff tools menu */
+.menu--staff-tools ul {
+    list-style-type: none; /* Removes the bullets */
+    margin: 0; /* Optional: Removes default margin */
+    padding: 0; /* Optional: Removes default padding */
+}
+
+/* Ensure consistent styling for nav items */
+.menu--staff-tools .nav-item {
+    margin: 0; /* Optional: Adjust spacing between items */
+    padding: 0; /* Optional: Adjust padding */
+}
+
+/* Optional: Fine-tune spacing for submenus */
+.menu--staff-tools ul.menu {
+    padding-left: 0; /* Adjust as needed for nested submenus */
+}
+
+/* Base menu styles */
+.menu--staff-tools {
+    font-family: Arial, sans-serif; /* Ensure consistent font */
+}
+
+/* Top-level category headers (e.g., Management, Reports, Utilities) */
+.menu--staff-tools > ul > li.menu-item--expanded > a.nav-link {
+    font-size: 1.5em; /* Larger font size for top-level categories */
+    font-weight: bold; /* Bold text */
+    color: #333; /* Prominent color */
+    padding: 15px 10px; /* Adjust spacing */
+    background-color: #f4f4f4; /* Light background for distinction */
+    border-radius: 5px; /* Optional rounded corners */
+}
+
+/* Regular menu items (e.g., Reimbursement, other links) */
+.menu--staff-tools ul.menu > li > a.nav-link:not(.is-active) {
+    font-size: 1em; /* Normal font size */
+    font-weight: normal; /* Regular weight */
+    color: #555; /* Less prominent color */
+    padding: 10px 10px; /* Adjust spacing */
+    background-color: transparent; /* No background color */
+}
+
+/* Nested sub-menu items */
+.menu--staff-tools ul.menu ul.menu > li > a.nav-link {
+    font-size: 0.9em; /* Smaller font size */
+    font-weight: normal; /* Regular weight */
+    color: #777; /* Light gray color */
+    padding: 5px 10px; /* Minimal padding */
+}
+
+/* Hover effect for all menu items */
+.menu--staff-tools a.nav-link:hover {
+    color: #d9534f; /* Highlight color on hover */
+    text-decoration: underline; /* Optional: underline on hover */
+}
+
+/* Remove bullet points */
+.menu--staff-tools ul {
+    list-style-type: none; /* Removes bullet points */
+    margin: 0;
+    padding: 0;
+}
+
+/* === Store (asset_injector config: store) === */
+.field--name-field-material-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* General Table Styling */
+.view-store.view-id-store table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.view-store.view-id-store td {
+    padding: 15px;
+    vertical-align: top;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Heading Styling */
+.view-store.view-id-store h3 a {
+    color: #333;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+.view-store.view-id-store h3 a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Image Styling */
+.view-store.view-id-store .image-style-large {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* Body Text Styling */
+.view-store.view-id-store .views-field-body {
+    color: #666;
+    font-size: 1em;
+    line-height: 1.5em;
+}
+
+/* Price Styling */
+.view-store.view-id-store .views-field-nothing-1 {
+    color: #333;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* Button Styling */
+.view-store.view-id-store .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.view-store.view-id-store .btn:hover {
+    background-color: #0056b3;
+    text-decoration: none;
+    color: #fff;
+}
+
+.view-store.view-id-store .btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+}
+
+
+.view-id-store .btn.btn-info {
+    min-width: 120px;
+}
+
+/* === Tab Menus (asset_injector config: tab_menus) === */
+/* Inactive tab styling */
+.nav-tabs .nav-link {
+    background-color: #f8f9fa; /* Light gray background */
+    color: #212529;; /* Primary blue text */
+    border: 1px solid #dee2e6; /* Light gray border */
+    margin-right: 5px;
+    border-radius: 5px 5px 0 0; /* Rounded top corners */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+/* Hover effect for inactive tabs */
+.nav-tabs .nav-link:hover {
+    background-color: #e2e6ea; /* Slightly darker gray on hover */
+    color: #0056b3; /* Darker blue text on hover */
+}
+
+
+/* Tab padding and alignment */
+.nav-tabs {
+    border-bottom: 1px solid #dee2e6; /* Bottom border for the tab container */
+}
+
+/* Active tab styling */
+.main-content .nav-tabs .nav-item.show .nav-link,
+.main-content .nav-tabs .nav-link.active {
+    background-color: #6c757d;
+    color: #ffffff;
+    font-weight: bold;
+    border-color: #333 #555 #ffffff;
+}
+
+
+.nav-tabs .nav-item {
+    margin-bottom: -1px; /* Align tabs with content */
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .nav-tabs .nav-item {
+        flex: 1 1 auto; /* Allow tabs to flex and wrap */
+        text-align: center; /* Center text on small screens */
+    }
+}
+
+
+/* Active tab styling */
+.nav-tabs .nav-link.active {
+    background-color: #6c757d;
+    color: #ffffff;
+    font-weight: bold;
+    border-color: #333 #555 #ffffff;
+}
+
+.nav-tabs .nav-link
+{
+    font-size: 20px;
+}
+
+/* === Taxonomy Term Pages (asset_injector config: taxonomy_term_pages) === */
+/* Apply styling to the rows */
+.view-taxonomy-term .view-content .views-row {
+    padding: 30px; /* Retaining this padding */
+    border: 0px solid grey;
+    border-radius: 20px;
+    background: #eee;
+    margin: 10px auto 30px; /* Consolidate margin values */
+    max-width: 450px;
+    float: right;
+}
+
+/* Container for first and last name fields */
+.view-taxonomy-term .view-content .views-row .field--name-field-first-name,
+.view-taxonomy-term .view-content .views-row .field--name-field-last-name {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 5px 10px; /* Spacing inside the elements */
+    background-color: #f0f0f0; /* Light background color */
+    border-radius: 5px; /* Rounded corners */
+    font-weight: bold; /* Bold text */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    vertical-align: middle; /* Align centrally */
+    font-family: 'Arial', sans-serif; /* Font styling */
+    color: #333; /* Text color */
+}
+
+/* Style the containing element for the entire name block */
+.view-taxonomy-term .view-content .views-row .group-right {
+    margin-top: 10px; /* Space above the names */
+}
+
+/* === Temp H (asset_injector config: temp_h) === */
+.navigation
+{display: none;}
+
+.user-logged-in .navigation
+{display: block}
+
+/* === Temp Overrides To Fix In Main Css (asset_injector config: temp_overrides_to_fix_in_main_css) === */
+ol.breadcrumb 
+{
+	
+	   visibility: visible;
+    margin-top: 15px;
+}
+
+    .node .field--type-image {
+        float: none;
+    }
+
+/* === Temp Unhide Registration Fields (asset_injector config: temp_unhide_registration_fields) === */
+fieldset#edit-group-chargebee {
+    visibility: visible		;
+    height: auto;
+}
+
+/* === Title And Navigation Bar (asset_injector config: title_and_navigation_bar) === */
+.user-logged-in nav#navbar-top {
+    height: 0px;
+}
+nav#navbar-top {
+    padding-bottom: 20px;
+    }
+
+
+a.navbar-brand {
+    display: block;
+    width: 350px;
+}
+
+nav#block-barrio-boostrap-5-makehaven-d11-useraccountmenu {
+    max-width: 250px;
+}
+
+/* === Tool Library Pages (asset_injector config: tool_library_pages) === */
+/* Hide comment titles and replace form title */
+.field--name-comment-node-library-item h3.card-title {
+    display: none;
+}
+
+.comment-form__title {
+    display: none; /* Hides the original text */
+}
+
+.comment-form__title::after {
+    content: "Lend or Return"; /* Replaces the text */
+    display: block;
+}
+
+/* Adjust action and time font sizes */
+.field--name-comment-node-library-item .field--name-field-library-action .field__item {
+    font-size: 50px;
+}
+
+.field--name-comment-node-library-item span.comment__time {
+    font-size: 35px;
+}
+
+/* Comment container styling */
+.field.field--name-comment-node-library-item.field--type-comment {
+    padding: 50px;
+    background: darkgrey;
+    border-radius: 10px;
+}
+
+/* Username styling */
+.field--name-comment-node-library-item a.username {
+    font-size: 35px;
+    color: black;
+}
+
+/* Ensure images are responsive */
+.field--name-comment-node-library-item .field--name-field-return-inspection-image img,
+.field--name-comment-node-library-item img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Additional tweaks for images on larger screens */
+@media (min-width: 560px) {
+    .field--name-comment-node-library-item .field--type-image {
+        float: none;
+        margin: 0 1em 0 0;
+    }
+
+    img.image-style-content-width {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .field-group-fieldset, 
+    .node--type-library-item #comment-form {
+        min-width: 100%;
+    }
+}
+
+/* General reset for comment wrapper */
+.comment-wrapper {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Flexbox layout for desktop comments */
+.comment {
+    margin-bottom: 19px;
+    vertical-align: top;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Author Meta Section */
+.comment__meta {
+    flex: 1 1 25%;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-right: 1px solid #ddd;
+    text-align: center;
+}
+
+.comment__meta .comment__author {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.comment__meta img {
+    max-width: 80px;
+    border-radius: 50%;
+}
+
+/* Content Section */
+.comment__content {
+    flex: 3 1 75%;
+    padding: 1rem;
+}
+
+.card-body {
+    margin-bottom: 0.5rem;
+}
+
+.comment__content h3.card-title {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.comment__content img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Nav links */
+.comment__content nav .nav-link {
+    margin-right: 0.5rem;
+    display: inline-block;
+    font-size: 0.9rem;
+}
+
+/* Time and Permalink */
+.comment__time,
+.comment__permalink {
+    font-size: 0.85rem;
+    color: #777;
+}
+
+/* Mobile: Remove flexbox for natural flow */
+@media (max-width: 768px) {
+    .comment {
+        display: block; /* Disable flexbox */
+        margin-bottom: 19px;
+    }
+
+    .comment__meta {
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+        padding: 0.75rem;
+    }
+
+    .comment__meta img {
+        max-width: 60px;
+    }
+
+    .comment__content {
+        padding: 0.75rem;
+    }
+
+    .comment__content h3.card-title {
+        font-size: 0.9rem;
+    }
+}
+
+/* Final small padding adjustment */
+.field.field--name-comment-node-library-item.field--type-comment {
+    padding: 5px;
+}
+
+fieldset#group-requirement {
+    min-width: 100%;
+}
+
+img.image-style-content-width {
+    width: 100%;
+    height: auto;
+}
+
+.node--type-library-item #comment-form
+{
+    min-width: 100%;
+}
+
+/* === Un (asset_injector config: un) === */
+fieldset#edit-group-payment {
+    visibility: visible;
+    height: auto;
+}
+
+/* === Webform (asset_injector config: webform) === */
+/* Apply styles to all webform submission forms */
+.webform-submission-form {
+    background-color: #f9f9f9; /* Light gray background */
+    padding: 20px;
+    border-radius: 5px;
+}
+
+/* Style fieldsets */
+.webform-submission-form fieldset {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+/* Style radio button labels */
+.webform-submission-form .form-check-label {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Style scale labels (min and max) */
+.webform-scale-text-min,
+.webform-scale-text-max {
+    font-weight: bold;
+    color: #555;
+    margin-top: 5px;
+}
+
+/* Style Likert table headers */
+.webform-likert-table th {
+    background-color: #ddd;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Style Likert scale radio buttons */
+.webform-likert-table td {
+    text-align: center;
+}
+
+/* Make radio buttons more visible */
+.webform-submission-form input[type="radio"] {
+    transform: scale(1.2);
+    margin: 5px;
+}
+
+
+
+.webform-scale-flexbox input + label 
+{
+    width: 20%;
+}
+
+
+@media (max-width: 767px) { /* Adjust breakpoint as needed */
+    .webform-scale-flexbox .webform-scale-option {
+        flex: 0;
+        margin: 0 -5px;
+    }
+
+    .webform-scale-flexbox label.form-check-label {
+        min-width: 25px;
+    }
+
+    .webform-scale-flexbox .form-check {
+        padding-left: 1em;
+    }
+
+	.webform-scale-flexbox td {
+    text-align: center; /* Centers everything inside each td */
+    vertical-align: middle; /* Aligns content properly */
+}
+    .form-type-webform-likert table.sticky-header {
+        display: block;
+    }  
+   
+.webform-likert-table .radio.form-check {
+    text-align: left;
+}
+	
+}
+
+/* === Webforms General Syle (asset_injector config: webforms_general_syle) === */
+/* Apply flexbox to the webform name composite wrapper */
+.js-webform-type-webform-name .fieldset-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem; /* Adds spacing between fields */
+}
+
+/* Set the width of the fields for larger screens */
+.js-webform-type-webform-name .js-form-item {
+    flex: 1 1 45%; /* Each field takes up about half the width of the row */
+}
+
+/* Stack fields on smaller screens */
+@media (max-width: 768px) {
+    .js-webform-type-webform-name .js-form-item {
+        flex: 1 1 100%; /* Full width on smaller screens */
+    }
+}
+
+
+#block-barrio-boostrap-5-makehaven-d11-makerbootstrap-system-main .field.field--name-webform.field--type-webform {
+    background: lightgrey;
+    padding: 25px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+/* === Wishes (asset_injector config: wishes) === */
+/* Not voted (outline button) */
+.flag.flag-wish-vote.action-flag a {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    background-color: #ffffff;
+    border: 1px solid #861216;
+    border-radius: 4px;
+    color: #861216;
+    text-decoration: none;
+}
+
+/* Hover effect for not voted */
+.flag.flag-wish-vote.action-flag a:hover {
+    background-color: #861216;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Voted (filled button) */
+.flag.flag-wish-vote.action-unflag a {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    background-color: #861216;
+    border: 1px solid #861216;
+    border-radius: 4px;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Hover effect for voted */
+.flag.flag-wish-vote.action-unflag a:hover {
+    background-color: #a8181f;
+    border-color: #a8181f;
+    text-decoration: none;
+}
+
+/* Ensure proper spacing between buttons */
+.flag.flag-wish-vote {
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.flag.flag-wish-vote {
+    margin-top: 10px;
+}
+
+
+.flag.flag-wish-vote {
+    margin-top: 10px;
+    float: left;
+}
+
+
+/* Remove unnecessary padding and border without blocking interaction */
+.view-wishes .view-eva {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    margin: 15px auto; /* Center the content but don't add excessive margins */
+    z-index: 0;
+    padding-left: 115px;
+}
+
+.flag-wish-vote a {
+    width: 100px;
+    margin-right: 15px;
+}
+
+/* Ensure vote button and count align properly */
+.flag-wish-vote {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* Adjust spacing between button and count */
+    z-index: 10; /* Ensure it is above other elements */
+    position: relative; /* Ensure it remains clickable */
+}
+
+
+.field.field--name-field-wish-type.field--type-list-string.field--label-above {
+    clear: both;
+    padding-top: 15px;
+}
