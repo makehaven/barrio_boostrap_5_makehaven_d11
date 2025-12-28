@@ -1,9 +1,11 @@
 name: 'Barrio Boostrap 5 MakeHaven D11'
 type: theme
 description: 'Drupal 11-ready variant of the MakeHaven theme'
-core: 8.x
 core_version_requirement: ^10 || ^11
 base theme: bootstrap_barrio
+
+dependencies:
+  - color:color
 
 libraries:
   - barrio_boostrap_5_makehaven_d11/bootstrap_cdn
