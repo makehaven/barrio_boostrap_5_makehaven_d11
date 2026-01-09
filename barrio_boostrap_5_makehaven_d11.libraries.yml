@@ -3,10 +3,49 @@ global-styling:
   js:
     js/global.js: {}
   css:
+    base:
+      css/base/tokens.css: {}
+      css/base/base.css: {}
+      css/base/typography.css: {}
+      css/base/general.css: {}
+      css/base/reusable.css: {}
+      css/base/theme-overrides.css: {}
+    layout:
+      css/layout/header.css: {}
+      css/layout/footer.css: {}
+      css/layout/sidebar.css: {}
     component:
-      css/style.css: {}
+      //cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css:
+        type: external
+      css/components/blocks.css: {}
+      css/components/buttons.css: {}
+      css/components/teasers.css: {}
+      css/components/events.css: {}
+      css/components/webforms.css: {}
+      css/components/progress-bar.css: {}
+      css/components/tabs.css: {}
+      css/components/badges.css: {}
+      css/components/highlighted.css: {}
+      css/components/calendar.css: {}
+      css/components/views.css: {}
+      css/components/login.css: {}
+      css/components/cards.css: {}
+      css/components/comments.css: {}
+      css/components/images.css: {}
+      css/components/navigation.css: {}
+    theme:
+      css/pages/frontpage.css: {}
+      css/pages/taxonomy.css: {}
+      css/pages/registration.css: {}
+      css/pages/contribution.css: {}
+      css/pages/profile.css: {}
+      css/pages/landing.css: {}
+      css/pages/blog.css: {}
+      css/pages/equipment.css: {}
+      css/pages/civicrm.css: {}
+      css/pages/tools.css: {}
+      css/pages/events-calendar.css: {}
       css/colors.css: {}
-      css/asset_injector_import.css: {}
 
 bootstrap_cdn:
   js:

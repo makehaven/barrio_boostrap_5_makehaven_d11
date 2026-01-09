@@ -1,0 +1,34 @@
+/* Reusable box patterns */
+
+.box,
+.boxes.views-row,
+.block-user-login-block,
+.node--type-library-item #comment-form {
+    padding: var(--mh-space-xl);
+    border: 1px solid var(--mh-color-border);
+    border-radius: var(--mh-radius-lg);
+    background: var(--mh-color-neutral-100);
+    margin-bottom: var(--mh-space-xl);
+    max-width: var(--mh-container-max);
+    margin-right: auto;
+    margin-left: auto;
+    box-shadow: var(--mh-shadow-sm);
+}
+
+.block-user-login-block {
+    border-width: 4px;
+    border-color: var(--mh-color-brand-primary);
+    position: relative;
+}
+
+.block-user-login-block:before {
+    content: "Members, please log in to access content and all features.";
+    display: block;
+    font-weight: 600;
+    color: var(--mh-color-brand-primary);
+    margin-bottom: var(--mh-space-sm);
+}
+
+.block-user-login-block a.create-account-link {
+    display: none;
+}

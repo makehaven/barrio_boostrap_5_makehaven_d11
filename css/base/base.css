@@ -1,0 +1,20 @@
+/* Universal structure */
+
+.featured-bottom,
+#main-wrapper {
+    max-width: var(--mh-container-max);
+    margin: 0 auto;
+}
+
+.links-inline .nav-link {
+    float: left;
+}
+
+.field-content.image-float-left {
+    float: left;
+    padding: var(--mh-space-xs) var(--mh-space-xl) 0 0;
+}
+
+.field-group-fieldset {
+    width: 100%;
+}

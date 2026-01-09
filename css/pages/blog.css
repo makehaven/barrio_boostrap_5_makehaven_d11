@@ -1,0 +1,12 @@
+/* Blog */
+
+.field.field--name-field-blog-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Teaser spacing */
+.view-blog .views-row {
+    margin-bottom: var(--mh-space-xl);
+}
+

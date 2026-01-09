@@ -1,0 +1,81 @@
+/*
+ * Makerspace design tokens shared across the theme.
+ * Use these CSS custom properties instead of hard-coded values so that
+ * components inherit the same visual language.
+ */
+:root {
+  /* Typography */
+  --mh-font-sans: "Montserrat", "Roboto", "Helvetica Neue", Arial, sans-serif;
+  --mh-font-display: "Roboto Condensed", var(--mh-font-sans);
+  --mh-font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+  --mh-font-size-base: 1rem;
+  --mh-line-height-base: 1.5;
+
+  /* Brand colors */
+  --mh-color-brand-primary: #8b1919;
+  --mh-color-brand-primary-strong: #710a0a;
+  --mh-color-brand-primary-muted: #b41e1e;
+  --mh-color-brand-secondary: #78c0f3;
+  --mh-color-accent-gold: #ffc658;
+
+  /* Neutral scale */
+  --mh-color-neutral-900: #1e1f24;
+  --mh-color-neutral-800: #303030;
+  --mh-color-neutral-700: #4a4a4a;
+  --mh-color-neutral-600: #616161;
+  --mh-color-neutral-500: #7c7c7c;
+  --mh-color-neutral-400: #9e9e9e;
+  --mh-color-neutral-300: #c2c2c2;
+  --mh-color-neutral-200: #dcdcdc;
+  --mh-color-neutral-150: #e7e7e7;
+  --mh-color-neutral-100: #f2f2f2;
+  --mh-color-surface: #ffffff;
+  --mh-color-surface-muted: #f8f9fa;
+  --mh-color-border: #d9d9d9;
+
+  /* Status colors */
+  --mh-color-success: #1f8c5b;
+  --mh-color-warning: #ffb347;
+  --mh-color-danger: var(--mh-color-brand-primary);
+  --mh-color-info: #4ea1d3;
+
+  /* Layout */
+  --mh-container-max: 1200px;
+  --mh-content-max: 900px;
+  --mh-sidebar-max: 275px;
+  --mh-header-height: 4.5rem;
+  --mh-gutter: 1.5rem;
+
+  /* Spacing scale */
+  --mh-space-3xs: 0.125rem;
+  --mh-space-2xs: 0.25rem;
+  --mh-space-xs: 0.5rem;
+  --mh-space-sm: 0.75rem;
+  --mh-space-md: 1rem;
+  --mh-space-lg: 1.5rem;
+  --mh-space-xl: 2rem;
+  --mh-space-2xl: 3rem;
+  --mh-space-3xl: 4rem;
+
+  /* Borders & shadows */
+  --mh-radius-sm: 0.25rem;
+  --mh-radius-md: 0.5rem;
+  --mh-radius-lg: 0.75rem;
+  --mh-radius-pill: 999px;
+  --mh-shadow-xs: 0 1px 2px rgb(0 0 0 / 0.08);
+  --mh-shadow-sm: 0 2px 4px rgb(0 0 0 / 0.12);
+  --mh-shadow-md: 0 6px 20px rgb(19 19 20 / 0.12);
+
+  /* Animation */
+  --mh-transition-fast: 120ms ease-in-out;
+  --mh-transition-base: 180ms ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}

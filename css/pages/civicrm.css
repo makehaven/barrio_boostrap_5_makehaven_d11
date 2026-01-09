@@ -1,0 +1,30 @@
+/* Shared CivicRM layout fixes */
+
+body[class*="path-civicrm"],
+body[class*="page-civicrm"] {
+  background-color: var(--mh-color-neutral-100);
+}
+
+body[class*="path-civicrm"] #crm-main-content-wrapper,
+body[class*="page-civicrm"] #crm-main-content-wrapper {
+  max-width: calc(var(--mh-container-max) + 120px);
+  width: 100%;
+  margin: 0 auto var(--mh-space-xl);
+  padding: var(--mh-space-lg) var(--mh-space-xl);
+  background: var(--mh-color-surface);
+  border: 1px solid var(--mh-color-border);
+  border-radius: var(--mh-radius-lg);
+  box-shadow: var(--mh-shadow-sm);
+}
+
+body.path-civicrm-event-info #crm-container,
+body.page-civicrm-event-info #crm-container {
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  body[class*="path-civicrm"] #crm-main-content-wrapper,
+  body[class*="page-civicrm"] #crm-main-content-wrapper {
+    padding: var(--mh-space-md);
+  }
+}

@@ -1,0 +1,158 @@
+/* General style primitives shared across pages */
+
+body:not(.user-logged-in) .user-only {
+    display: none;
+}
+
+.visitor-only {
+    display: block;
+}
+
+body.user-logged-in .visitor-only {
+    display: none;
+}
+
+#page {
+    min-width: 320px;
+}
+
+#main-wrapper,
+.featured-bottom {
+    max-width: var(--mh-container-max);
+    margin: 0 auto;
+    padding: 0 var(--mh-gutter);
+}
+
+#main {
+    max-width: calc(var(--mh-container-max) + 200px);
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .container,
+    .container-md,
+    .container-sm {
+        max-width: 100%;
+    }
+}
+
+.feed-icons {
+    display: none;
+}
+
+.site-footer {
+    margin-top: var(--mh-space-2xl);
+}
+
+.site-footer .block {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+}
+
+.block-page-title-block {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--mh-space-lg);
+}
+
+.block-page-title-block .content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.block-page-title-block .title {
+    text-align: center;
+}
+
+table,
+.table,
+.views-table {
+    width: 100%;
+    background-color: var(--mh-color-surface);
+    border-radius: var(--mh-radius-md);
+    box-shadow: var(--mh-shadow-xs);
+    display: table; /* Reset from block for better alignment if overflow isn't needed */
+    max-width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: var(--mh-space-lg);
+    border: 1px solid var(--mh-color-border);
+    overflow: hidden;
+}
+
+table tr,
+.table tr {
+    white-space: normal;
+    transition: background-color var(--mh-transition-fast);
+}
+
+/* Header styling */
+table thead th,
+table tr th,
+table tr th a,
+.views-table thead th {
+    background-color: var(--mh-color-neutral-100);
+    color: var(--mh-color-neutral-900) !important; /* Force dark text for readability */
+    font-weight: 700;
+    text-align: left;
+    padding: var(--mh-space-sm) var(--mh-space-md);
+    border-bottom: 2px solid var(--mh-color-neutral-300);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.025em;
+}
+
+/* Cell styling */
+table td,
+.table td,
+.views-table td {
+    padding: var(--mh-space-sm) var(--mh-space-md);
+    border-bottom: 1px solid var(--mh-color-neutral-150);
+    vertical-align: middle;
+}
+
+/* Zebra striping */
+table tbody tr:nth-child(even),
+.table tbody tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Hover effect */
+table tbody tr:hover,
+.table tbody tr:hover {
+    background-color: var(--mh-color-neutral-150);
+}
+
+/* Last row cleanup */
+table tr:last-child td {
+    border-bottom: none;
+}
+
+
+.sidebar_first .view-content.row {
+    display: block;
+}
+
+.sidebar_first table caption {
+    caption-side: top;
+    color: var(--mh-color-neutral-900);
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+blockquote {
+    font-style: italic;
+    color: var(--mh-color-neutral-700);
+    padding: var(--mh-space-md) var(--mh-space-xl);
+    border-left: 5px solid var(--mh-color-neutral-300);
+    background-color: var(--mh-color-neutral-100);
+    margin: var(--mh-space-lg) 0;
+    border-radius: var(--mh-radius-sm);
+}
+
+blockquote p {
+    margin-bottom: 0;
+}

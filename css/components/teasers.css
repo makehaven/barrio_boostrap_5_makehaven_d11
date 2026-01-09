@@ -1,0 +1,104 @@
+/* Teasers and Event Listing */
+
+.node--view-mode-teaser,
+.field-group-fieldset,
+.view-civi-event-listing .views-row,
+body.path-facilitator-schedules .views-row,
+body.path-library .views-row {
+    padding: 25px;
+    border: 1px solid var(--mh-color-border); /* Thinner, cleaner border */
+    border-radius: 16px; /* Modern radius */
+    background: var(--mh-color-surface); /* White background usually looks cleaner than #eee */
+    margin-bottom: var(--mh-space-lg); /* Reduced spacing */
+    width: 100%;
+    /* max-width: 1000px; Remove max-width to let grid control size */
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure equal height in flex containers */
+    box-shadow: var(--mh-shadow-sm);
+    transition: box-shadow var(--mh-transition-base), transform var(--mh-transition-base);
+}
+
+.node--view-mode-teaser:hover,
+.view-civi-event-listing .views-row:hover,
+body.path-facilitator-schedules .views-row:hover,
+body.path-library .views-row:hover {
+    box-shadow: var(--mh-shadow-md);
+    transform: translateY(-2px);
+}
+
+/* Titles: No underline, brand color */
+.node--view-mode-teaser h2,
+.view-civi-event-listing .views-row h1,
+.view-civi-event-listing .views-row h2,
+body.path-facilitator-schedules .views-row h2,
+body.path-library .views-row h2 {
+    margin-top: 0;
+}
+
+.node--view-mode-teaser h2 a,
+.view-civi-event-listing .views-row h1 a,
+.view-civi-event-listing .views-row h2 a,
+body.path-facilitator-schedules .views-row h2 a,
+body.path-library .views-row h2 a {
+    color: var(--mh-color-brand-primary);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.node--view-mode-teaser h2 a:hover,
+.view-civi-event-listing .views-row h1 a:hover,
+.view-civi-event-listing .views-row h2 a:hover,
+body.path-facilitator-schedules .views-row h2 a:hover,
+body.path-library .views-row h2 a:hover {
+    color: var(--mh-color-brand-primary-strong);
+    text-decoration: underline;
+}
+
+/* Content spacing */
+.node--view-mode-teaser .content,
+.view-civi-event-listing .views-row .views-field,
+body.path-facilitator-schedules .views-row .views-field,
+body.path-library .views-row .views-field {
+    flex-grow: 1; /* Push footer/links to bottom */
+}
+
+/* Read More / Links */
+.node--view-mode-teaser .links,
+.node--view-mode-teaser .more-link,
+body.path-facilitator-schedules .views-row .more-link,
+body.path-library .views-row .more-link {
+    margin-top: var(--mh-space-md);
+    text-align: right;
+}
+
+.node--view-mode-teaser .links a,
+.node--view-mode-teaser .more-link a,
+.view-civi-event-listing .views-field-nothing a,
+body.path-facilitator-schedules .views-row .more-link a,
+body.path-library .views-row .more-link a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--mh-space-xs) var(--mh-space-lg);
+    background-color: var(--mh-color-neutral-100);
+    color: var(--mh-color-neutral-900);
+    border: 1px solid var(--mh-color-neutral-300);
+    border-radius: var(--mh-radius-pill);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all var(--mh-transition-fast);
+}
+
+.node--view-mode-teaser .links a:hover,
+.node--view-mode-teaser .more-link a:hover,
+.view-civi-event-listing .views-field-nothing a:hover,
+body.path-facilitator-schedules .views-row .more-link a:hover,
+body.path-library .views-row .more-link a:hover {
+    background-color: var(--mh-color-brand-primary);
+    color: var(--mh-color-surface);
+    border-color: var(--mh-color-brand-primary);
+}

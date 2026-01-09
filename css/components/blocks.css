@@ -1,0 +1,20 @@
+/* Highlighted blocks */
+
+.main-content .block-views,
+section.region-featured-bottom-first .block,
+.view-eva,
+.field--type-entity-reference .field--name-instructor-profiles {
+    padding: var(--mh-space-md) var(--mh-space-lg);
+    border: 1px solid var(--mh-color-border);
+    border-radius: var(--mh-radius-md);
+    background: var(--mh-color-neutral-100);
+    margin: var(--mh-space-md) 0;
+    box-shadow: var(--mh-shadow-xs);
+}
+
+.field--type-entity-reference .field--name-instructor-profiles .view-eva {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+}

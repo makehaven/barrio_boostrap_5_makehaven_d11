@@ -115,7 +115,7 @@ $info = [
   ],
 
   // Preview files.
-  'preview_library' => 'barrio_boostrap_5_makehaven_d11/color.preview',
+  'preview_library' => 'barrio_boostrap_5_makerspace/color.preview',
   'preview_html' => 'color/preview.html',
 
   // Attachments.
@@ -123,7 +123,7 @@ $info = [
     'drupalSettings' => [
       'color' => [
         // Put the logo path into JavaScript for the live preview.
-        'logo' => theme_get_setting('logo.url', 'barrio_boostrap_5_makehaven_d11'),
+        'logo' => theme_get_setting('logo.url', 'barrio_boostrap_5_makerspace'),
       ],
     ],
   ],

@@ -1,0 +1,159 @@
+/* Equipment, Library, and Facilitator Listing Page Styling */
+
+/* Page layout container */
+body.path-rooms-zones-equipment #main-wrapper,
+body.path-facilitator #main-wrapper,
+body.path-library #main-wrapper,
+body.page-view-library-tool-directory #main-wrapper {
+  max-width: var(--mh-container-max);
+  margin: 0 auto;
+  padding: 0 var(--mh-gutter);
+}
+
+body.path-rooms-zones-equipment,
+body.path-facilitator,
+body.path-library,
+body.page-view-library-tool-directory {
+  background: #f1f1f1;
+}
+
+/* Common Card Styling: Visuals (Borders, Shadow, Bg) */
+:is(.view-equipment, .view-library-tool-directory, .view-facilitator-schedules) :is(.views-row, .card),
+body.path-rooms-zones-equipment .node--view-mode-teaser,
+body.path-rooms-zones-equipment .view-content .views-row {
+  background: #ffffff !important;
+  border: 1px solid #b9b9b9 !important;
+  border-radius: 16px !important;
+  padding: var(--mh-space-lg) !important;
+  margin-bottom: var(--mh-space-lg) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+  /* width: 100% removed to allow grid/columns */
+}
+
+/* Layout: Equipment List (Side-by-Side / Row) */
+body.path-rooms-zones-equipment .node--view-mode-teaser,
+body.path-rooms-zones-equipment .view-content .views-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--mh-space-lg);
+  align-items: flex-start;
+  width: 100%; /* Equipment rows should be full width */
+}
+
+
+/* Layout: Library & Facilitator (Vertical / Stacked) */
+:is(.view-library-tool-directory, .view-facilitator-schedules) :is(.views-row, .card) {
+  display: flex;
+  flex-direction: column; /* Stack image/header above content */
+  gap: var(--mh-space-md);
+  height: 100%;
+}
+
+/* Fix inner Bootstrap card classes if present */
+:is(.view-equipment, .view-library-tool-directory, .view-facilitator-schedules) .card-body {
+    padding: 0;
+    background: transparent;
+}
+
+/* Equipment Inner Layout */
+body.path-rooms-zones-equipment .group-left {
+  flex: 0 0 35%; /* Reduced width for image column */
+  min-width: 200px;
+}
+
+body.path-rooms-zones-equipment .group-right {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--mh-space-sm);
+}
+
+/* Headings */
+:is(.view-equipment, .view-library-tool-directory, .view-facilitator-schedules) :is(.views-row, .card) :is(h2, h4, .card-title),
+body.path-rooms-zones-equipment .group-right h2 {
+  font-size: 1.5rem;
+  color: var(--mh-color-brand-primary);
+  margin-bottom: var(--mh-space-xs);
+  margin-top: 0;
+  font-weight: 700;
+}
+
+:is(.view-equipment, .view-library-tool-directory, .view-facilitator-schedules) :is(.views-row, .card) :is(h2, h4, .card-title) a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Images */
+:is(.view-equipment, .view-library-tool-directory, .view-facilitator-schedules) :is(.views-row, .card) img,
+body.path-rooms-zones-equipment .group-left img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px; /* Slightly smaller radius for inner image */
+}
+
+/* Exposed forms */
+body.path-rooms-zones-equipment .views-exposed-form {
+  background: #f6f7f9;
+  border: 1px solid var(--mh-color-border);
+  border-radius: 16px;
+  padding: var(--mh-space-lg);
+  max-width: 900px;
+  margin: 0 auto var(--mh-space-xl);
+}
+
+/* Field styling within cards */
+.node--view-mode-teaser .field--label-above,
+.node--view-mode-teaser .field--label-inline {
+  border-top: 1px solid var(--mh-color-border);
+  padding-top: var(--mh-space-xs);
+  margin-top: var(--mh-space-xs);
+  display: flex;
+  flex-direction: column;
+  gap: var(--mh-space-2xs);
+}
+
+.node--view-mode-teaser .field__label {
+  font-weight: 600;
+  color: var(--mh-color-neutral-900);
+}
+
+/* Status pills */
+.field--name-field-item-status .field__item a {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--mh-space-2xs) var(--mh-space-sm);
+  border-radius: var(--mh-radius-pill);
+  background: #d8f5d1;
+  color: #176b2c;
+  border: 1px solid #95d89f;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* Badges and requirements */
+.field--name-field-member-badges .field__item,
+.field--name-field-item-requirements .field__item {
+  background: #f8f9fa;
+  border: 1px solid var(--mh-color-border);
+  border-radius: var(--mh-radius-md);
+  padding: var(--mh-space-2xs) var(--mh-space-sm);
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.field--name-field-member-badges .field__items,
+.field--name-field-item-requirements .field__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mh-space-xs);
+}
+
+@media (max-width: 992px) {
+  :is(.view-equipment, .view-library-tool-directory, .view-facilitator-schedules) :is(.views-row, .card),
+  body.path-rooms-zones-equipment .node--view-mode-teaser {
+    flex-direction: column;
+  }
+}

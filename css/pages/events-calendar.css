@@ -1,0 +1,201 @@
+/* Events calendar page (/events/calendar/public/starts) */
+
+body.path-events-calendar-public-starts {
+  background-color: var(--mh-color-neutral-100);
+}
+
+body.path-events-calendar-public-starts #main-wrapper {
+  max-width: calc(var(--mh-container-max) + 160px);
+}
+
+body.path-events-calendar-public-starts .view-events-calendar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mh-space-lg);
+}
+
+body.path-events-calendar-public-starts .view-events-calendar .view-content,
+body.path-events-calendar-public-starts .view-events-calendar .fullcalendar-view-wrapper,
+body.path-events-calendar-public-starts .view-events-calendar .fullcalendar {
+  background: var(--mh-color-surface);
+  border: 1px solid var(--mh-color-border);
+  border-radius: var(--mh-radius-lg);
+  padding: var(--mh-space-md);
+  box-shadow: var(--mh-shadow-sm);
+}
+
+body.path-events-calendar-public-starts .fc {
+  font-family: var(--mh-font-sans);
+  max-width: 100%;
+}
+
+body.path-events-calendar-public-starts table {
+  display: table;
+  width: 100%;
+  max-width: 100%;
+  overflow: visible;
+}
+
+body.path-events-calendar-public-starts table thead,
+body.path-events-calendar-public-starts table tbody,
+body.path-events-calendar-public-starts table tfoot {
+  display: table-header-group;
+}
+
+body.path-events-calendar-public-starts .fc table {
+  display: table;
+  width: 100%;
+  white-space: normal;
+  overflow: visible;
+  table-layout: fixed;
+}
+
+body.path-events-calendar-public-starts .fc .fc-toolbar {
+  flex-wrap: wrap;
+  gap: var(--mh-space-sm);
+  margin-bottom: var(--mh-space-md);
+  padding: var(--mh-space-sm) 0;
+}
+
+body.path-events-calendar-public-starts .fc .fc-toolbar-title {
+  font-family: var(--mh-font-display);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  color: var(--mh-color-neutral-900);
+}
+
+body.path-events-calendar-public-starts .fc .fc-button {
+  background-color: var(--mh-color-brand-primary);
+  border: none;
+  border-radius: var(--mh-radius-md);
+  color: var(--mh-color-surface);
+  padding: var(--mh-space-xs) var(--mh-space-md);
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+body.path-events-calendar-public-starts .fc .fc-button:disabled {
+  background-color: var(--mh-color-neutral-300);
+  color: var(--mh-color-neutral-600);
+}
+
+body.path-events-calendar-public-starts .fc .fc-button:hover,
+body.path-events-calendar-public-starts .fc .fc-button:focus {
+  background-color: var(--mh-color-brand-primary-strong);
+}
+
+body.path-events-calendar-public-starts .fc-scrollgrid {
+  border: none;
+  background: var(--mh-color-surface);
+  border-radius: var(--mh-radius-lg);
+}
+
+body.path-events-calendar-public-starts .fc-theme-standard th,
+body.path-events-calendar-public-starts .fc-theme-standard td {
+  border: 1px solid var(--mh-color-border);
+  width: 14.28%;
+}
+
+body.path-events-calendar-public-starts .fc-col-header-cell {
+  background: var(--mh-color-neutral-150);
+  color: var(--mh-color-neutral-700);
+  font-weight: 600;
+}
+
+body.path-events-calendar-public-starts .fc-daygrid-day-number {
+  color: var(--mh-color-neutral-700);
+  font-weight: 600;
+}
+
+body.path-events-calendar-public-starts .fc-daygrid-day-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: var(--mh-space-2xs) var(--mh-space-xs);
+}
+
+body.path-events-calendar-public-starts .fc-daygrid-day.fc-day-today {
+  background-color: rgba(139, 25, 25, 0.08);
+}
+
+body.path-events-calendar-public-starts .fc-h-event,
+body.path-events-calendar-public-starts .fc-daygrid-event {
+  border: none;
+  border-radius: var(--mh-radius-md);
+  padding: var(--mh-space-2xs) var(--mh-space-xs);
+  font-size: 0.9rem;
+  box-shadow: var(--mh-shadow-xs);
+}
+
+body.path-events-calendar-public-starts .fc-daygrid-event-dot {
+  border-color: var(--mh-color-brand-primary);
+}
+
+body.path-events-calendar-public-starts .fc-daygrid-event:hover {
+  filter: brightness(0.95);
+}
+
+body.path-events-calendar-public-starts .fc-event-title,
+body.path-events-calendar-public-starts .fc-event-title-container {
+  font-weight: 600;
+  color: var(--mh-color-neutral-900);
+}
+
+body.path-events-calendar-public-starts .fc-list-table,
+body.path-events-calendar-public-starts .fc-list-day-cushion {
+  color: var(--mh-color-neutral-900);
+}
+
+body.path-events-calendar-public-starts .fc-list-day {
+  background: var(--mh-color-neutral-150);
+  font-weight: 600;
+}
+
+body.path-events-calendar-public-starts .fc-list-event {
+  border-left: 4px solid var(--mh-color-brand-primary);
+  border-radius: var(--mh-radius-md);
+  margin: var(--mh-space-xs) var(--mh-space-sm);
+}
+
+body.path-events-calendar-public-starts .fc-list-event-graphic {
+  display: none;
+}
+
+body.path-events-calendar-public-starts .fc .fc-toolbar.fc-header-toolbar {
+  border-bottom: 1px solid var(--mh-color-border);
+  padding-bottom: var(--mh-space-sm);
+}
+
+body.path-events-calendar-public-starts .fc .fc-daygrid-day {
+  background: var(--mh-color-surface);
+  min-height: 140px;
+}
+
+body.path-events-calendar-public-starts .fc .fc-daygrid-day-frame {
+  padding: var(--mh-space-xs);
+  min-height: 140px;
+}
+
+body.path-events-calendar-public-starts .fc .fc-daygrid-day-top {
+  align-items: center;
+}
+
+body.path-events-calendar-public-starts .fc .fc-daygrid-day-number {
+  color: var(--mh-color-neutral-700);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+body.path-events-calendar-public-starts .views-exposed-form {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  body.path-events-calendar-public-starts .fc .fc-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  body.path-events-calendar-public-starts .view-events-calendar .fullcalendar-view-wrapper {
+    padding: var(--mh-space-sm);
+  }
+}

@@ -7,7 +7,7 @@
 
   'use strict';
 
-  Drupal.behaviors.barrio_boostrap_5_makehaven = {
+  Drupal.behaviors.barrio_boostrap_5_makerspace = {
     attach: function (context, settings) {
 
     }
