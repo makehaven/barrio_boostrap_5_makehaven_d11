@@ -1,119 +1,82 @@
-/* Landing Pages */
+/* Makerspace Landing Page Styles */
 
-.field--name-field-landing-background img {
-    max-width: 100%;
-    height: auto;
+/* --- Layout & Grid --- */
+.landing-page-container {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
-
-.field.field--name-field-landing-background.field--type-image {
-    width: 66.66666667%;
-    float: left;
-}
-
 
 /* General Layout */
 .row {
     display: flex;
     flex-wrap: wrap;
+    margin-right: -15px; /* Boostrap standard */
+    margin-left: -15px;
 }
+
 .col-12 {
     width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 .col {
     flex: 1 1 100%;
+    padding-left: 15px;
+    padding-right: 15px;
 }
-@media (min-width: 768px) {
+
+/* Specific Landing Page Top Section Layout */
+.field--name-field-landing-background img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px; /* Added for polish */
+}
+
+/* Desktop: Image takes 2/3rds, floats left */
+@media (min-width: 992px) {
+    .field.field--name-field-landing-background.field--type-image {
+        width: 66.66666667%;
+        float: left;
+        padding-right: 30px; /* Space between image and text */
+        margin-bottom: 20px;
+    }
+}
+
+/* Fix for row ordering if used */
+.row .col-md-4 {
+    order: 1;
+}
+
+.row img {
+    max-width: 100%;
+    height: auto;
+}
+
+@media (min-width: 992px) {
+    .row .col-md-4 {
+        order: 2;
+        margin-top: -50px; /* Overlap effect if desired, from previous css */
+    }
+    
     .col-md-4 {
         flex: 0 0 33.33%;
         max-width: 33.33%;
+        padding-left: 15px;
+        padding-right: 15px;
     }
     .col {
         flex: 1 1 33.33%;
     }
 }
 
-/* Room Cards */
-.room {
-    text-align: center;
-    margin-bottom: 30px;
-    overflow: hidden;
-    width: 100%;
-}
-.room-img-container {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.room-img {
-    width: 100%;
-    height: 100% !important;
-    object-fit: cover;
-    display: block;
-}
-.room h3 {
-    margin-top: 15px;
-    font-size: 1.5em;
-}
-.room p {
-    margin-top: 10px;
-    color: #666;
-}
-
-/* Typography */
-.section-heading {
-    font-size: 2em;
-    margin-bottom: 10px;
-}
-.text-muted {
-    font-size: 1.2em;
-    color: #777;
-    margin-bottom: 30px;
-}
-
-/* Testimonials */
-.testimonial-container {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-.testimonial {
-    text-align: center;
-    width: 30%;
-    margin-bottom: 20px;
-}
-.testimonial img {
-    width: 100%;
-    border-radius: 50%;
-}
-@media (max-width: 768px) {
-    .testimonial {
-        width: 80%;
-    }
-}
-
-/* Video Embeds */
-.video-container {
+.row.main-section-under {
+    top: 50px;
     position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-    background: #000;
-    margin-top: 20px;
-}
-.video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
+    clear: both; /* Ensure it sits below floated elements */
     width: 100%;
-    height: 100%;
 }
-
-/* Section Layout */
 .main-section-under {
     clear: both;
     width: 100%;
@@ -126,47 +89,304 @@ hr {
     opacity: 0.25;
 }
 
-/* Mobile Styles */
-@media (max-width: 768px) {
-    .room-img-container {
-        height: 300px;
-    }
-    .col-md-4, .col-sm-6, .col-12 {
-        width: 100%;
-        margin-bottom: 20px;
-    }
-    .well {
-        width: 100%;
-    }
-    .field.field--name-field-landing-background.field--type-image {
-        width: 100%;
-        float: none;
-    }
+/* --- Components --- */
+
+/* Room Cards */
+.room {
+  text-align: center;
+  margin-bottom: 30px;
+  width: 100%;
+  overflow: hidden;
+}
+.room-img-container {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa;
+  margin-bottom: 15px;
+}
+.room-img {
+  width: 100%;
+  height: 100% !important; /* Force height per user css */
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+.room:hover .room-img {
+  transform: scale(1.05);
+}
+.room h3 {
+  margin-top: 15px;
+  font-size: 1.5em;
+  font-weight: 600;
+  color: #333;
+}
+.room p {
+  margin-top: 10px;
+  color: #666;
+  line-height: 1.5;
 }
 
-/* Visibility Tweaks */
-ul.menu.nav.navbar-nav {
-    visibility: visible;
+/* Typography & Headings */
+.section-heading {
+  font-size: 2em;
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: #222;
+  text-align: center;
+  width: 100%;
 }
-section#block-system-user-menu,
-section#block-masquerade-masquerade,
-a.element-invisible.element-focusable,
-.footer {
+.text-muted {
+  font-size: 1.2em;
+  color: #777;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.rooms-section-header {
+    height: 175px;
+}
+
+.well {
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+/* Testimonials */
+.testimonial-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+.testimonial {
+  text-align: center;
+  flex: 1 1 300px;
+  width: 30%;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+.testimonial img {
+  width: 250px; /* Fixed width */
+  height: 250px; /* Fixed height */
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+.testimonial blockquote {
+  font-style: italic;
+  color: #555;
+}
+
+/* Tools Grid */
+.container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.tool-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.tool-item {
+    width: 30%;
+    text-align: center;
+    border: 1px solid #e3e3e3;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    padding: 10px;
+}
+
+.tool-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.tool-item h3 {
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: #333;
+}
+
+/* Explore More / Profile Styles */
+.explore-more-section {
+    text-align: center;
+    margin: 40px 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.profile-header {
+    margin-bottom: 20px;
+}
+
+.profile-pic {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.profile-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.profile-description {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+.links-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.link-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: #861216; /* Red background */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 14px;
+    transition: background-color 0.3s ease;
+    min-width: 250px;
+}
+
+.link-button:hover {
+    background-color: #750f13;
+    color: #fff;
+}
+
+.link-thumbnail {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    display: block; /* Ensure visibility */
+}
+
+/* FontAwesome Icons in Links - Fix missing icons */
+.link-button i, 
+.link-button .fa, 
+.link-button .fab, 
+.link-button .fas, 
+.link-button .far {
+    font-size: 30px; /* Increased size per request */
+    margin-right: 15px;
+    display: inline-block;
+    color: #fff;
+}
+
+/* Specific fix for "a i" generic selector */
+a i {
+    font-size: 40px;
+    padding-right: 15px;
+}
+
+.link-button p {
+    margin: 0;
+    font-size: 20px; /* Slightly adjusted for better fit */
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.link-button:visited,
+.link-button:focus,
+.link-button:hover {
+    color: #fff;
+}
+
+.text-align-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Video Embeds */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+.video-container iframe,
+.video-container object,
+.video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* --- Visibility & Utility Tweaks (per reference) --- */
+
+/* Hide unnecessary Drupal interface elements on Landing Pages */
+.node--type-landing-page section#block-system-user-menu,
+.node--type-landing-page section#block-masquerade-masquerade,
+.node--type-landing-page .footer,
+.node--type-landing-page h1.page-header,
+.node--type-landing-page .breadcrumb,
+.node--type-landing-page div#block-barrio-boostrap-5-makehaven-page-title,
+.node--type-landing-page ol.breadcrumb {
+  display: none !important;
+  visibility: hidden;
+}
+
+.h1, h1 {
+    margin-top: 0px;
+}
+
+a.element-invisible.element-focusable {
     visibility: hidden;
 }
-h1.page-header {
-    display: none;
+
+.region.region-content {
+    padding-top: 25px;
 }
 
-/* Newsletter Signup (Mailchimp) */
-#mc_embed_signup input.button,
-#mc_embed_signup input.email {
-    width: 100%;
+/* Make nav visible but control others */
+ul.menu.nav.navbar-nav {
+  visibility: visible;
 }
-#mc_embed_signup input.button,
-#mc_embed_signup .button:hover {
-    background-color: red;
-}
+
+/* Newsletter Signup (Mailchimp) overrides */
 div#mc_embed_signup {
     max-width: 300px;
     align-content: center;
@@ -174,7 +394,183 @@ div#mc_embed_signup {
     margin-right: auto;
 }
 
-/* Navbar */
-button.navbar-toggle {
+#mc_embed_signup input.button, #mc_embed_signup input.email {
+    width: 100%;
+}
+
+#mc_embed_signup input.button, #mc_embed_signup .button:hover {
+    background-color: red;
+}
+
+/* Mobile Tweaks */
+@media (max-width: 768px) {
+  .room-img-container {
+    height: 300px; /* Adjusted per user request */
+  }
+  .navbar-toggle, button.navbar-toggle {
     display: none;
+  }
+  
+  .col-md-4, .col-sm-6, .col-12, .col {
+      width: 100%;
+      margin-bottom: 20px;
+      flex: 0 0 100%;
+      max-width: 100%;
+  }
+  .room {
+      width: 100%;
+  }
+  .well {
+      width: 100%;
+  }
+  .testimonial {
+      width: 80%;
+      margin-bottom: 20px;
+  }
+  .tool-item {
+      width: 45%;
+  }
+  
+  /* Ensure the landing image is displayed normally */
+  .field--name-field-landing-background {
+    position: static !important;
+    width: 100% !important;
+    float: none !important; /* Disable float on mobile */
+    display: block;
+    margin-bottom: 20px;
+    padding-right: 0;
+  }
+  .field--name-field-landing-background img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  /* Force the body content to clear floats and span full width */
+  .field--name-body {
+    width: 100%;
+    display: block;
+    clear: both;
+  }
+  /* Optional: adjust container padding and text sizes */
+  .container {
+    padding: 0 10px;
+  }
+  .container h1 {
+    font-size: 28px;
+    line-height: 1.2;
+    margin-bottom: 15px;
+  }
+  .container p {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+  .button-container a.button {
+    font-size: 18px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+  }
+  .button-container p {
+    margin: 10px 0;
+  }
+
+  .field.field--name-field-landing-background.field--type-image {
+      width: 100%;
+      float: none;
+  }
+}
+
+@media (max-width: 480px) {
+    .tool-item {
+        width: 100%;
+    }
+}
+
+.field.field--name-field-landing-tracking-code.field--type-string.field--label-visually_hidden {
+    visibility: hidden;
+}
+
+/* --- Feature Grid (Paragraph within Paragraph) --- */
+
+/* Hide labels for the grid fields */
+.paragraph--type--landing-section-feature-grid .field--name-field-landing-grid-item > .field__label {
+    display: none !important;
+}
+
+/* Grid Container */
+.paragraph--type--landing-section-feature-grid .field--name-field-landing-grid-item .field__items {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    justify-content: center;
+}
+
+/* Grid Item Wrapper - Removed max-width per user request */
+.paragraph--type--landing-section-feature-grid .field--name-field-landing-grid-item .field__items .field__item {
+    flex: 0 0 33.3333%;
+    padding: 15px;
+}
+
+/* Inner Item Styling */
+.paragraph--type--landing-grid-item {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* FORCE IMAGE VISIBILITY: Ensure the image container and image are visible */
+.paragraph--type--landing-grid-item .field--name-field-landing-grid-image,
+.paragraph--type--landing-grid-item .field--name-field-landing-grid-image .field__item,
+.paragraph--type--landing-grid-item .field--name-field-media-image-3,
+.paragraph--type--landing-grid-item img {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important; /* Reset height temporarily to debug */
+    width: 100% !important;
+}
+
+/* Image styling - we apply specific styling via the style selection */
+.paragraph--type--landing-grid-item img {
+    object-fit: cover;
+    border-radius: 10px; /* Default */
+    margin-bottom: 10px;
+}
+
+.paragraph--type--landing-grid-item .field--name-field-landing-grid-text {
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.4;
+}
+
+/* Responsive Grid Adjustments */
+@media (max-width: 992px) {
+    .paragraph--type--landing-section-feature-grid .field--name-field-landing-grid-item .field__items .field__item {
+        flex: 0 0 50%;
+    }
+}
+
+@media (max-width: 768px) {
+    .paragraph--type--landing-section-feature-grid .field--name-field-landing-grid-item .field__items .field__item {
+        flex: 0 0 100%;
+    }
+}
+
+/* --- Feature Grid Styles (Style Field Variations) --- */
+
+/* Default / Square */
+.feature-grid--default .paragraph--type--landing-grid-item img,
+.feature-grid--square .paragraph--type--landing-grid-item img {
+    border-radius: 0;
+}
+
+/* Rounded */
+.feature-grid--rounded .paragraph--type--landing-grid-item img {
+    border-radius: 12px;
+}
+
+/* Circle */
+.feature-grid--circle .paragraph--type--landing-grid-item img {
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
 }

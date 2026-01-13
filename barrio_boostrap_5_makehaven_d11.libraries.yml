@@ -65,3 +65,12 @@ color.preview:
     color/preview.js: {}
   dependencies:
     - color/drupal.color
+
+  footer_fourth: 'Footer fourth'
+  footer_fifth: 'Footer fifth'
+
+landing_page:
+  version: 1.0
+  css:
+    theme:
+      css/pages/landing.css: {}
