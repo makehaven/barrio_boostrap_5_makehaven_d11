@@ -497,7 +497,8 @@ div#mc_embed_signup {
 }
 
 /* Grid Container */
-.paragraph--type--landing-section-feature-grid .field--name-field-landing-grid-item .field__items {
+.paragraph--type--landing-section-feature-grid .field--name-field-landing-grid-item .field__items,
+.paragraph--type--landing-section-feature-grid .field--name-field-landing-grid-item.field__items {
     display: flex;
     flex-wrap: wrap;
     margin-right: -15px;
@@ -506,7 +507,8 @@ div#mc_embed_signup {
 }
 
 /* Grid Item Wrapper - Removed max-width per user request */
-.paragraph--type--landing-section-feature-grid .field--name-field-landing-grid-item .field__items .field__item {
+.paragraph--type--landing-section-feature-grid .field--name-field-landing-grid-item .field__items .field__item,
+.paragraph--type--landing-section-feature-grid .field--name-field-landing-grid-item.field__items > .field__item {
     flex: 0 0 33.3333%;
     padding: 15px;
 }
@@ -525,7 +527,6 @@ div#mc_embed_signup {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
-    height: auto !important; /* Reset height temporarily to debug */
     width: 100% !important;
 }
 
@@ -534,6 +535,7 @@ div#mc_embed_signup {
     object-fit: cover;
     border-radius: 10px; /* Default */
     margin-bottom: 10px;
+    height: 220px !important;
 }
 
 .paragraph--type--landing-grid-item .field--name-field-landing-grid-text {
@@ -544,13 +546,15 @@ div#mc_embed_signup {
 
 /* Responsive Grid Adjustments */
 @media (max-width: 992px) {
-    .paragraph--type--landing-section-feature-grid .field--name-field-landing-grid-item .field__items .field__item {
+    .paragraph--type--landing-section-feature-grid .field--name-field-landing-grid-item .field__items .field__item,
+    .paragraph--type--landing-section-feature-grid .field--name-field-landing-grid-item.field__items > .field__item {
         flex: 0 0 50%;
     }
 }
 
 @media (max-width: 768px) {
-    .paragraph--type--landing-section-feature-grid .field--name-field-landing-grid-item .field__items .field__item {
+    .paragraph--type--landing-section-feature-grid .field--name-field-landing-grid-item .field__items .field__item,
+    .paragraph--type--landing-section-feature-grid .field--name-field-landing-grid-item.field__items > .field__item {
         flex: 0 0 100%;
     }
 }
@@ -573,4 +577,5 @@ div#mc_embed_signup {
     border-radius: 50%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
+    height: auto !important;
 }

@@ -44,3 +44,18 @@ function barrio_boostrap_5_makehaven_d11_preprocess_node(&$variables) {
     $variables['#attached']['library'][] = 'barrio_boostrap_5_makehaven_d11/landing_page';
   }
 }
+
+/**
+ * Implements hook_preprocess_paragraph().
+ */
+function barrio_boostrap_5_makehaven_d11_preprocess_paragraph(&$variables) {
+  if (empty($variables['paragraph'])) {
+    return;
+  }
+
+  if ($variables['paragraph']->bundle() !== 'landing_section_feature_grid') {
+    return;
+  }
+
+  $variables['#attached']['library'][] = 'barrio_boostrap_5_makehaven_d11/landing_page';
+}
