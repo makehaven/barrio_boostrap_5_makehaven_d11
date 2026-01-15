@@ -39,7 +39,6 @@ global-styling:
       css/pages/registration.css: {}
       css/pages/contribution.css: {}
       css/pages/profile.css: {}
-      css/pages/landing.css: {}
       css/pages/blog.css: {}
       css/pages/equipment.css: {}
       css/pages/civicrm.css: {}
