@@ -202,3 +202,85 @@ form#profile-main-add-form #edit-submit:before {
 .headshot-instructions li {
   margin-bottom: 8px; /* Space between list items */
 }
+
+
+/* =============================================
+   PROFILE VIEW PAGE STYLES (.path-user)
+   Fixes duplicated content and improves layout
+   on the /user/{uid} profile view page.
+   ============================================= */
+
+/* --- Hide duplicated content --- */
+
+/* Hide the "Member profiles" label on the top-level entity reference */
+.path-user:not(.path-user-edit) article.profile > .field--name-main-profiles > .field__label {
+  display: none;
+}
+
+/* Hide the redundant realname h2 inside the EVA view (page title already shows it) */
+.path-user:not(.path-user-edit) .view-profile-user-info .views-field-realname {
+  display: none;
+}
+
+/* Hide redundant first/last name and pronouns from the minimal rendered_entity */
+.path-user:not(.path-user-edit) .view-profile-user-info .views-field-rendered-entity .field--name-field-first-name,
+.path-user:not(.path-user-edit) .view-profile-user-info .views-field-rendered-entity .field--name-field-last-name,
+.path-user:not(.path-user-edit) .view-profile-user-info .views-field-rendered-entity .field--name-field-pronoun-txt {
+  display: none;
+}
+
+/* Hide the nested "Member profiles" label inside the minimal view mode */
+.path-user:not(.path-user-edit) .view-profile-user-info .views-field-rendered-entity .field--name-main-profiles > .field__label {
+  display: none;
+}
+
+/* Remove the bordered card appearance from the profile entity wrapper */
+.path-user:not(.path-user-edit) .field--name-main-profiles > .field__item > .profile {
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+/* --- Profile header: photo and bio --- */
+
+/* Profile photo styling */
+.path-user:not(.path-user-edit) .field--name-field-member-photo img {
+  border-radius: var(--mh-radius-md);
+  max-width: 180px;
+  height: auto;
+  box-shadow: var(--mh-shadow-sm);
+}
+
+/* Bio section */
+.path-user:not(.path-user-edit) .field--name-field-member-bio {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: var(--mh-space-lg);
+  color: var(--mh-color-neutral-700);
+}
+
+/* Section spacing for goals, interests, contact fields */
+.path-user:not(.path-user-edit) .field--name-field-member-goal,
+.path-user:not(.path-user-edit) .field--name-field-member-areas-interest,
+.path-user:not(.path-user-edit) .field--name-field-preferred-phone,
+.path-user:not(.path-user-edit) .field--name-field-emergency-contact-phone,
+.path-user:not(.path-user-edit) .field--name-field-emergency-contact-name {
+  margin-bottom: var(--mh-space-md);
+}
+
+/* Section labels */
+.path-user:not(.path-user-edit) article.profile .field__label {
+  font-weight: 600;
+  color: var(--mh-color-neutral-800);
+  margin-bottom: var(--mh-space-xs);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* Member tenure - subtle styling */
+.path-user:not(.path-user-edit) .form-type-item .label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--mh-color-neutral-600);
+}

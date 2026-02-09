@@ -1,0 +1,232 @@
+/*
+ * Migrated CSS from Asset Injectors
+ * This file contains styles originally in the legacy theme or injectors
+ * that are being integrated into the D11 theme.
+ */
+
+/* === Migrated from header_and_menu_styles === */
+
+nav#navbar-top {
+    padding-bottom: 40px;
+    padding-top: 0px;
+}
+
+/* General layout for the full-width header */
+.header {
+    width: 100%;
+    background-color: #b4b4b4; /* Matched from D11 header.css */
+    position: relative;
+    z-index: 1; 
+}
+
+/* Centered container for content within the header */
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: var(--mh-container-max); 
+    margin: 0 auto; 
+    padding: 0 15px; 
+}
+
+/* Style for the top header (user menu) */
+.region-top-header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; 
+}
+
+.region-top-header .nav {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Style for the main navbar */
+#navbar-main {
+    display: flex;
+    justify-content: space-around; 
+    align-items: center;
+    width: 100%;
+    max-width: var(--mh-container-max); 
+    margin: 0 auto;
+    padding: 0 15px; 
+    flex-wrap: nowrap; 
+    z-index: 2; 
+}
+
+/* Prevent the main menu from wrapping */
+#navbar-main .navbar-collapse {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: auto; 
+    flex-grow: 0;
+    flex-basis: auto;
+}
+
+/* Featured Top Section Styles */
+.featured-top {
+    width: 100%;
+    background-color: var(--mh-color-neutral-100); 
+    padding: var(--mh-space-md) 0; 
+    margin-top: var(--mh-space-md); 
+}
+
+.featured-top__inner {
+    max-width: var(--mh-container-max); 
+    margin: 0 auto; 
+    padding: 0 15px; 
+}
+
+.region-featured-top .block-menu {
+    background-color: var(--mh-color-surface); 
+    padding: var(--mh-space-sm) var(--mh-space-md); 
+    border-radius: var(--mh-radius-md); 
+    box-shadow: var(--mh-shadow-sm); 
+}
+
+/* Center the member menu items */
+.region-featured-top .nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; 
+    margin: 0 auto;
+}
+
+/* Style individual menu links */
+.region-featured-top .nav-link {
+    color: var(--mh-color-neutral-800); 
+    font-weight: bold; 
+    text-decoration: none; 
+    padding: var(--mh-space-sm) var(--mh-space-md); 
+    margin: var(--mh-space-3xs); 
+    border: 1px solid var(--mh-color-border); 
+    border-radius: var(--mh-radius-sm); 
+    background-color: var(--mh-color-neutral-150); 
+}
+
+/* Style hover and active states */
+.region-featured-top .nav-link:hover,
+.region-featured-top .nav-link.is-active {
+    color: #000000; 
+    background-color: var(--mh-color-neutral-200); 
+    border-color: var(--mh-color-neutral-400); 
+}
+
+/* Adjust layout for mobile screens */
+@media (max-width: 767px) {
+    #navbar-main {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+        margin-left: 0;
+    }
+
+    .navbar-brand {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #navbar-main .navbar-collapse {
+        justify-content: center;
+        flex-grow: 1;
+        width: 100%;
+    }
+
+    /* Updated ID for D11 */
+    #block-barrio-boostrap-5-makehaven-d11-useraccountmenu {
+        margin-bottom: 15px;
+    }
+}
+
+@media (min-width: 768px) {
+    #navbar-main {
+        max-width: 1000px; 
+        justify-content: space-between;
+    }
+
+    /* Updated ID for D11 */
+    #block-barrio-boostrap-5-makehaven-d11-useraccountmenu {
+        margin-left: 20px; 
+    }
+}
+
+/* === Migrated from title_and_navigation_bar === */
+
+.user-logged-in nav#navbar-top {
+    height: auto; 
+}
+
+a.navbar-brand {
+    display: block;
+    width: 250px; 
+}
+
+/* Updated ID for D11 */
+nav#block-barrio-boostrap-5-makehaven-d11-useraccountmenu {
+    max-width: 250px;
+}
+
+/* === Migrated from menu_for_logged_in_authenticated_users === */
+
+/* Updated IDs for D11 */
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu-2 {
+  width: 100%;
+  background: var(--mh-color-surface);
+  border: 1px solid var(--mh-color-border);
+  padding: var(--mh-space-md);
+  margin-bottom: var(--mh-space-md);
+}
+
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu-2 ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu-2 li {
+  margin-bottom: var(--mh-space-xs);
+}
+
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu-2 a.nav-link {
+  display: block;
+  padding: var(--mh-space-sm) var(--mh-space-md);
+  color: var(--mh-color-neutral-800);
+  background: var(--mh-color-neutral-100);
+  text-decoration: none;
+  border-radius: var(--mh-radius-sm);
+  transition: background var(--mh-transition-fast);
+}
+
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu-2 a.nav-link:hover,
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu-2 a.nav-link:focus {
+  background: var(--mh-color-neutral-200);
+}
+
+/* Top Authenticated User Menu */
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu {
+  clear: both;
+  background: var(--mh-color-surface);
+  width: 100%;
+  padding: var(--mh-space-sm) 0;
+  margin-top: var(--mh-space-sm);
+  border-top: 1px solid var(--mh-color-border);
+}
+
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#block-barrio-boostrap-5-makehaven-d11-authenticatedusermenu a {
+  display: block;
+  padding: var(--mh-space-xs) var(--mh-space-sm);
+  color: var(--mh-color-neutral-800);
+  text-decoration: none;
+  transition: background var(--mh-transition-fast);
+}

@@ -14,6 +14,7 @@ global-styling:
       css/layout/header.css: {}
       css/layout/footer.css: {}
       css/layout/sidebar.css: {}
+      css/layout/legacy-migrated.css: {}
     component:
       //cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css:
         type: external
@@ -33,10 +34,12 @@ global-styling:
       css/components/comments.css: {}
       css/components/images.css: {}
       css/components/navigation.css: {}
+      css/components/member-icons.css: {}
     theme:
       css/pages/frontpage.css: {}
       css/pages/taxonomy.css: {}
       css/pages/registration.css: {}
+      css/pages/registration-legacy.css: {}
       css/pages/contribution.css: {}
       css/pages/profile.css: {}
       css/pages/blog.css: {}

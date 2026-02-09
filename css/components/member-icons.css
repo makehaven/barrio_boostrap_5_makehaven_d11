@@ -1,0 +1,74 @@
+/*
+ * Member Menu Icons
+ * Redesigned for clarity and relevance.
+ * Migrated from Asset Injector: member_menu_icons
+ */
+
+/* Base icon styling for member menu grids and sidebar blocks */
+.menu-item a::before,
+[id^="block-barrio-boostrap-5-makehaven-membermenu"] a.nav-link::before,
+[id^="block-barrio-boostrap-5-makerspace-membermenu"] a.nav-link::before,
+[id^="block-barrio-boostrap-5-makehaven-d11-membermenu"] a.nav-link::before,
+body.path-my-membership .block-system-menu-block li.menu-item a::before,
+body.path-community-engagement .block-system-menu-block li.menu-item a::before,
+body.path-individual-actions .block-system-menu-block li.menu-item a::before,
+body.path-resources .block-system-menu-block li.menu-item a::before {
+  font-family: "bootstrap-icons" !important;
+  display: block; 
+  text-align: center;
+  line-height: 1;
+  font-weight: bold !important;
+  font-size: 3rem;       
+  color: #b22222;       
+  margin-bottom: 0.75rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* 1. Membership & Personal */
+a[href*="/user/current/edit"]::before     { content: "\f4e1"; } /* Person Gear (Account Settings) */
+a[href*="/user/current/main"]::before     { content: "\f4e3"; } /* Person Check (Member Profile) */
+a[href*="/user/sms"]::before              { content: "\f249"; } /* Chat Dots (SMS Settings) */
+a[href*="/user/current/badges"]::before   { content: "\f155"; } /* Award (My Badges) */
+a[href*="/additional-household"]::before  { content: "\f4e9"; } /* Person Plus (Add Household Member) */
+a[href*="/user/storage"]::before,
+a[href*="/storage"]::before               { content: "\f1d7"; } /* Box Seam (Manage Storage) */
+
+/* 2. Billing & Finance */
+a[href*="/payment-portal"]::before        { content: "\f2d3"; } /* Credit Card (Billing Change) */
+a[href*="/increase"]::before               { content: "\f42b"; } /* Graph Up (Increase Payments) */
+a[href*="/reimbursement"]::before         { content: "\f233"; } /* Cash (Reimbursement) */
+
+/* 3. Shop & Tools */
+a[href*="/facilitator-utilities"]::before { content: "\f62c"; } /* Tools (Facilitator Utils) */
+a[href*="/equipment"]::before             { content: "\f5d1"; } /* Hammer (Equipment List) */
+a[href*="/library"]::before               { content: "\f62b"; } /* Bookshelf (Lending Library) */
+a[href*="/rooms"]::before                 { content: "\f314"; } /* Door Closed (Rooms) */
+a[href*="/paints-and-voc"]::before        { content: "\f493"; } /* Palette (Paints and VOC) */
+
+/* 4. Community & Communication */
+a[href*="/member-contacts"]::before       { content: "\f4ee"; } /* People (Member List) */
+a[href*="/member-faq"]::before,
+a[href*="/member-faq"]::before            { content: "\f4fa"; } /* Question Circle (FAQ) */
+a[href*="/community-resources"]::before   { content: "\f1d8"; } /* Box (Supplies & Resources) */
+a[href*="slack.com"]::before              { content: "\f56a"; } /* Slack */
+a[href*="/node/add/blog"]::before         { content: "\f4cb"; } /* Pencil Square (Write Blog) */
+a[href*="/propose-meetup"]::before        { content: "\f1f1"; } /* Calendar Event (Propose Meetup) */
+
+/* 5. Support & Engagement */
+a[href*="/referral-program"]::before      { content: "\f473"; } /* Megaphone (Referral Program) */
+a[href*="/volunteer-leadership"]::before  { content: "\f59f"; } /* Star (Volunteer Leadership) */
+a[href*="/node/add/wish"]::before,
+a[href*="/wishes"]::before                { content: "\f467"; } /* Magic (Wish List) */
+a[href*="/help-makehaven"]::before,
+a[href*="/donate"]::before                { content: "\f431"; } /* Heart (Help MakeHaven) */
+
+/* 6. Assets & Files */
+a[href*="bucket.makehaven.org"]::before   { content: "\f282"; } /* Bucket (File Bucket) */
+a[href*="/logos-and-branding"]::before    { content: "\f5f3"; } /* Vector Pen (Logos and Branding) */
+
+/* 7. Roles & Programs */
+a[href*="/coordinator"]::before,
+a[href*="/apply-facilitator"]::before     { content: "\f4e6"; } /* Person Badge (Apply to be a Facilitator) */
+a[href*="/facilitator-program"]::before   { content: "\f378"; } /* Person Workspace */
+a[href*="/volunteer-leadership"]::before  { content: "\f149"; } /* Clipboard Check */

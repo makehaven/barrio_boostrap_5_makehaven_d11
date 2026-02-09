@@ -1,0 +1,133 @@
+/*
+ * Registration and Onboarding Styles
+ * Migrated from injectors: registration_fields_new_css, registration_path
+ */
+
+/* General container for CiviCRM forms on registration */
+.user-register-form div#crm-container {
+    margin-bottom: var(--mh-space-xl);
+    min-width: 450px;
+    max-width: var(--mh-container-max);
+    margin-right: auto;
+    margin-left: auto;
+    padding: var(--mh-space-lg);
+    border: 1px solid var(--mh-color-border);
+    border-radius: var(--mh-radius-lg);
+    background: var(--mh-color-neutral-100);
+}
+
+/* Grid layout for name and pronoun fields */
+@media (min-width: 768px) {
+  .user-register-form .fieldset-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr; 
+    gap: var(--mh-space-md);
+    align-items: start; 
+  }
+
+  .user-register-form .fieldset-wrapper > #edit-account {
+    grid-column: 1 / -1;
+  }
+
+  .user-register-form .fieldset-wrapper > .js-form-wrapper {
+    margin-bottom: 0;
+  }
+}
+
+/* Stacking rules for CiviCRM radio/checkbox options */
+#editrow-gender_id .edit-value.content,
+#editrow-custom_46 .edit-value.content {
+  display: flow-root !important;
+  margin-left: 0 !important; 
+}
+
+#editrow-gender_id .edit-value.content input[type="radio"],
+#editrow-custom_46 .edit-value.content input[type="checkbox"] {
+   float: left !important;
+   clear: left !important;
+   margin-right: 6px !important; 
+   margin-top: 0 !important;
+   position: relative;
+   top: 4px; 
+}
+
+#editrow-gender_id .edit-value.content label,
+#editrow-custom_46 .edit-value.content label {
+   display: block !important; 
+   float: left !important;  
+   clear: none !important; 
+   width: calc(100% - 40px) !important; 
+   overflow: visible !important; 
+   padding-bottom: var(--mh-space-sm) !important;
+   line-height: 1.2 !important;
+}
+
+/* Birth Date spacing fix */
+@media (min-width: 768px) {
+  #profilewrap34 > fieldset {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0 var(--mh-space-lg) !important; 
+    align-items: start !important;
+  }
+
+  #profilewrap34 > fieldset > #editrow-birth_date {
+    grid-column: 1 / -1 !important;
+    margin-bottom: var(--mh-space-lg) !important; 
+  }
+}
+
+/* SMS Consent Section Styling */
+#profilewrap33 .crm-section .label {
+  float: none !important;
+  width: auto !important;
+  text-align: left !important;
+  margin-bottom: var(--mh-space-xs) !important;
+  padding: 0 !important;
+}
+
+#profilewrap33 #helprow-custom_74.helprow-pre .content.description {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--mh-color-neutral-900);
+  background-color: #f4f8ff; 
+  border: 1px solid #bde0ff;
+  padding: var(--mh-space-md);
+  border-radius: var(--mh-radius-md);
+  margin-bottom: var(--mh-space-md);
+}
+
+#profilewrap33 #editrow-custom_74 .edit-value.content {
+  display: flex;
+  gap: var(--mh-space-md);
+}
+
+#profilewrap33 #editrow-custom_74 input[type="radio"]:checked + label {
+  background-color: #f4f8ff;
+  border-color: var(--mh-color-info);
+  color: var(--mh-color-info);
+  box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+}
+
+/* Visibility controls for registration path */
+.user-register-form #edit-group-administrative,
+fieldset#edit-group-chargebee,
+fieldset#edit-group-payment {
+    display: none;
+    visibility: hidden;
+    height: 0px;
+}
+
+.profile-main-add-form div#edit-field-member-payment-method-wrapper, 
+.profile-main-add-form div#edit-field-membership-type-wrapper,
+.profile-main-add-form .form-type-vertical-tabs {
+    display: none;
+    visibility: hidden;
+}
+
+/* Large multi-step submit button */
+form#profile-main-add-form button#edit-submit {
+    width: 325px;
+    padding: var(--mh-space-md);
+    font-weight: bold;
+}
