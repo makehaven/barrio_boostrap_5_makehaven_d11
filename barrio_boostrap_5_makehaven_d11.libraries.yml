@@ -2,6 +2,7 @@ global-styling:
   version: VERSION
   js:
     js/global.js: {}
+    js/sidebar-menu-fix.js: {} # Add the new JS file here
   css:
     base:
       css/base/tokens.css: {}
@@ -48,6 +49,11 @@ global-styling:
       css/pages/tools.css: {}
       css/pages/events-calendar.css: {}
       css/colors.css: {}
+  dependencies: # Ensure it loads after Bootstrap and jQuery
+    - core/jquery
+    - core/popperjs
+    - core/drupal
+    - barrio_boostrap_5_makehaven_d11/bootstrap_cdn
 
 bootstrap_cdn:
   js:

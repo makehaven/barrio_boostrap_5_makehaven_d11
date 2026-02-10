@@ -1,404 +1,134 @@
-/* Secondary/top navigation */
+/**
+ * @file
+ * Enables Bootstrap 5 multi-level flyout
+ */
 
-.featured-top {
-  width: 100%;
-  background-color: var(--mh-color-neutral-100);
-  padding: var(--mh-space-lg) 0;
-  margin-top: var(--mh-space-lg);
-}
-
-.featured-top__inner {
-  max-width: var(--mh-container-max);
-  margin: 0 auto;
-  padding: 0 var(--mh-gutter);
-}
-
-.region-secondary-menu .nav,
-.region-top-header .nav {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: var(--mh-space-sm);
-}
-
-.region-secondary-menu .nav-link,
-.region-top-header .nav-link {
-  color: var(--mh-color-neutral-800);
-  font-size: 0.95rem;
-  padding: 0 var(--mh-space-sm);
-}
-
-.region-secondary-menu .nav-link i,
-.region-featured-top .nav-link i,
-.region-sidebar-first .nav-link i {
-  display: block;
-  font-size: 1.75rem;
-  margin-bottom: var(--mh-space-2xs);
-  color: var(--mh-color-brand-primary);
-}
-
-/* Navbar active state fix */
-.navbar-nav .nav-item .nav-link.is-active,
-.navbar-nav .nav-item .nav-link.active,
-.navbar-nav .nav-item.active .nav-link {
-  color: var(--mh-color-brand-primary) !important;
-  background-color: transparent !important; /* Prevent grey background mismatch */
-  /* Ensure height/padding doesn't change */
-  border-bottom: 2px solid var(--mh-color-brand-primary) !important;
-  margin-bottom: -2px; /* Offset border to prevent layout shift */
-}
-
-.dropdown-item.active,
-.dropdown-item .active {
-    background-color: var(--mh-color-neutral-150) !important;
-    color: var(--mh-color-neutral-900) !important;
-}
-
-
-/* Primary member menu presented in the featured top region */
-
-.region-featured-top .block-menu {
-  background-color: var(--mh-color-surface);
-  border: 1px solid var(--mh-color-border);
-  border-radius: var(--mh-radius-lg);
-  padding: var(--mh-space-md) var(--mh-space-lg);
-  box-shadow: var(--mh-shadow-sm);
-}
-
-.region-featured-top .nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--mh-space-sm);
-  justify-content: center;
-}
-
-.region-featured-top .nav-link {
-  font-weight: 600;
-  color: var(--mh-color-neutral-900);
-  border: 1px solid var(--mh-color-border);
-  border-radius: var(--mh-radius-md);
-  padding: var(--mh-space-sm) var(--mh-space-md);
-  transition: background-color var(--mh-transition-base), border-color var(--mh-transition-base);
-}
-
-.region-featured-top .nav-link:hover,
-.region-featured-top .nav-link.is-active {
-  background-color: var(--mh-color-neutral-150);
-  border-color: var(--mh-color-neutral-300);
-}
-
-/* Sidebar authenticated user menu */
-
-.region-sidebar-first .block-menu {
-  width: 100%;
-  background: var(--mh-color-surface);
-  border: 1px solid var(--mh-color-border);
-  border-radius: var(--mh-radius-lg);
-  padding: var(--mh-space-md);
-}
-
-.region-sidebar-first .block-menu ul.menu {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--mh-space-xs);
-}
-
-.region-sidebar-first .block-menu a.nav-link {
-  display: block;
-  padding: var(--mh-space-sm) var(--mh-space-md);
-  border-radius: var(--mh-radius-md);
-  font-weight: 600;
-  color: var(--mh-color-neutral-800);
-  border: 1px solid transparent;
-  transition: background-color var(--mh-transition-base), border-color var(--mh-transition-base);
-}
-
-.region-sidebar-first .block-menu a.nav-link:hover,
-.region-sidebar-first .block-menu a.nav-link:focus {
-  background: var(--mh-color-neutral-150);
-  border-color: var(--mh-color-neutral-300);
-}
-
-.region-sidebar-first .block-menu a.nav-link.is-active {
-  background: var(--mh-color-neutral-200);
-  border-color: var(--mh-color-neutral-400);
-}
-
-.nav-item.menu-item--expanded.active > a.nav-link {
-  background-color: var(--mh-color-neutral-200) !important;
-  margin-bottom: var(--mh-space-sm);
-}
-
-#block-barrio-boostrap-5-makerspace-authenticatedusermenu-2 {
-  background: var(--mh-color-surface);
-  border: 1px solid var(--mh-color-border);
-  border-radius: var(--mh-radius-lg);
-  padding: var(--mh-space-md);
-  box-shadow: var(--mh-shadow-sm);
-}
-
-#block-barrio-boostrap-5-makerspace-authenticatedusermenu-2 > ul.nav {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--mh-space-sm);
-}
-
-#block-barrio-boostrap-5-makerspace-authenticatedusermenu-2 > ul.nav > li {
-  border: 1px solid transparent;
-  border-radius: var(--mh-radius-md);
-  transition: background-color var(--mh-transition-base), border-color var(--mh-transition-base);
-}
-
-#block-barrio-boostrap-5-makerspace-authenticatedusermenu-2 > ul.nav > li > a {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: var(--mh-color-neutral-900);
-  font-weight: 600;
-  padding: var(--mh-space-sm) var(--mh-space-md);
-}
-
-#block-barrio-boostrap-5-makerspace-authenticatedusermenu-2 > ul.nav > li.active,
-#block-barrio-boostrap-5-makerspace-authenticatedusermenu-2 > ul.nav > li:hover {
-  background: var(--mh-color-neutral-150);
-  border-color: var(--mh-color-neutral-300);
-}
-
-#block-barrio-boostrap-5-makerspace-authenticatedusermenu-2 ul.menu {
-  list-style: none;
-  margin: var(--mh-space-xs) 0 var(--mh-space-sm) var(--mh-space-md);
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--mh-space-2xs);
-}
-
-#block-barrio-boostrap-5-makerspace-authenticatedusermenu-2 ul.menu li {
-  border-left: 2px solid var(--mh-color-border);
-  padding-left: var(--mh-space-sm);
-}
-
-#block-barrio-boostrap-5-makerspace-authenticatedusermenu-2 ul.menu a {
-  color: var(--mh-color-neutral-800);
-  display: block;
-  padding: var(--mh-space-2xs) 0;
-  font-weight: 500;
-}
-
-#block-barrio-boostrap-5-makerspace-authenticatedusermenu-2 ul.menu a.is-active {
-  color: var(--mh-color-brand-primary);
-  font-weight: 600;
-}
-
-/* Collapsed navbar adjustments */
-
-#CollapsingNavbar {
-  flex-direction: column;
-}
-
-.dropdown-menu {
-  z-index: 1050;
-  background-color: var(--mh-color-surface);
-  box-shadow: var(--mh-shadow-sm);
-}
-
-.dropdown-menu .dropdown-item {
-  display: flex;
-  align-items: center;
-  gap: var(--mh-space-sm);
-  color: var(--mh-color-neutral-900);
-}
-
-.dropdown-menu .dropdown-item:hover,
-.dropdown-menu .dropdown-item:focus {
-  background-color: var(--mh-color-neutral-150);
-  color: #000;
-}
-
-.dropdown-menu .dropdown-item a {
-  display: block;
-  flex: 1;
-  color: inherit;
-  text-decoration: none;
-}
-
+/* Only for mobile */
 @media (max-width: 767px) {
-  .region-featured-top .nav {
-    flex-direction: column;
+
+  nav.menu--main {
+    margin-left: 16px;
+    width: 100%;
+    padding-bottom: 12px;
   }
 
-  .region-top-header .nav,
-  .region-secondary-menu .nav {
-    flex-wrap: wrap;
-    justify-content: center;
+  /* Enables first level dropdown from main nav links */
+  a.nav-link .dropdown>.dropdown-menu.show {
+      display: block;
+      border: 0;
+      margin-top: 5px !important;
   }
+
+  ul.dropdown-menu {
+    border: 0;
+  }
+
+  .dropdown-menu .menu-item--expanded>a:after {
+    visibility: hidden;
+  }
+
+  ul.dropdown-menu.show li.menu-item--expanded>ul.dropdown-menu {
+    display: block;
+    border: 0;
+  }
+
 }
 
-/* Resource/member menu grids */
+/* Only for non-mobile */
+@media (min-width: 768px) {
 
-[id^="block-barrio-boostrap-5-makehaven-membermenu"],
-[id^="block-barrio-boostrap-5-makerspace-membermenu"],
-.menu-block-member-menu,
-body.path-my-membership .block-system-menu-block,
-body.path-community-engagement .block-system-menu-block,
-body.path-individual-actions .block-system-menu-block {
-  width: 100%;
-  margin: var(--mh-space-2xl) auto;
+  /* Enables first level dropdown from main nav links */
+  .dropdown:hover>.dropdown-menu {
+    display: block;
+  }
+
 }
 
-[id^="block-barrio-boostrap-5-makehaven-membermenu"] .block-title,
-[id^="block-barrio-boostrap-5-makerspace-membermenu"] .block-title,
-body.path-my-membership .block-title,
-body.path-community-engagement .block-title,
-body.path-individual-actions .block-title {
-  text-align: center;
-  font-family: var(--mh-font-display);
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
-  margin-bottom: var(--mh-space-lg);
+/* Force manu items with no link to still use pointer */
+span.nav-link {
+  cursor: pointer;
 }
 
-[id^="block-barrio-boostrap-5-makehaven-membermenu"] ul.menu,
-[id^="block-barrio-boostrap-5-makerspace-membermenu"] ul.menu,
-.menu-block-member-menu ul.menu,
-body.path-my-membership .block-system-menu-block ul.menu,
-body.path-community-engagement .block-system-menu-block ul.menu,
-body.path-individual-actions .block-system-menu-block ul.menu {
-  list-style: none;
+.dropdown-menu .menu-item--expanded:hover>a:after {
+  visibility: hidden;
+}
+
+.dropdown-menu .menu-item--expanded:hover {
+  border-right: 1px solid #fff;
+}
+
+/* Enables next level dropdowns to go horizontal */
+.dropdown-menu .menu-item--expanded>.dropdown-menu {
+  top: 0px;
+  left: 100%;
+  margin-top: -1px;
+  margin-left: 0px;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+
+/* Creates right arrow which vanishes on rollover/expansion */
+.dropdown-menu .menu-item--expanded>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #ccc;
+  margin-top: 7px;
+  margin-right: -5px;
+}
+
+.dropdown-item {
+  padding: 5px 15px;
+}
+/* Remove margin and padding around each flyout's containing UL, so that there is no "gap" where hover does not function, and flyouts vanish as you roll over the gap */
+ul.dropdown-menu {
   padding: 0;
   margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--mh-space-lg);
-  justify-content: center;
 }
 
-[id^="block-barrio-boostrap-5-makehaven-membermenu"] li.menu-item,
-[id^="block-barrio-boostrap-5-makerspace-membermenu"] li.menu-item,
-.menu-block-member-menu li.menu-item,
-body.path-my-membership .block-system-menu-block li.menu-item,
-body.path-community-engagement .block-system-menu-block li.menu-item,
-body.path-individual-actions .block-system-menu-block li.menu-item {
-  flex: 1 1 220px;
-  max-width: 260px;
-  background: var(--mh-color-surface);
-  border: 1px solid var(--mh-color-border);
-  border-radius: var(--mh-radius-lg);
-  box-shadow: var(--mh-shadow-sm);
-  transition: transform var(--mh-transition-base), box-shadow var(--mh-transition-base);
-  display: flex; 
+/* Make sure links in the active trail reverse out to white so that they do not diappear when the LIs highlight */
+.dropdown-menu li.active>a {
+  color: #fff;
 }
 
-[id^="block-barrio-boostrap-5-makehaven-membermenu"] li.menu-item:hover,
-[id^="block-barrio-boostrap-5-makerspace-membermenu"] li.menu-item:hover,
-.menu-block-member-menu li.menu-item:hover,
-body.path-my-membership .block-system-menu-block li.menu-item:hover,
-body.path-community-engagement .block-system-menu-block li.menu-item:hover,
-body.path-individual-actions .block-system-menu-block li.menu-item:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--mh-shadow-md);
+/* Custom: Disable dropdown behavior for sidebar menus when the sidebar-menu-flat class is present */
+.sidebar-menu-flat .menu .dropdown-menu {
+  position: static !important;
+  display: flex !important;
+  flex-direction: column !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding-left: var(--mh-space-md) !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
+  margin-top: 0 !important;
+  min-width: unset !important;
 }
 
-[id^="block-barrio-boostrap-5-makehaven-membermenu"] a.nav-link,
-[id^="block-barrio-boostrap-5-makerspace-membermenu"] a.nav-link,
-.menu-block-member-menu a.nav-link,
-body.path-my-membership .block-system-menu-block li.menu-item a,
-body.path-community-engagement .block-system-menu-block li.menu-item a,
-body.path-individual-actions .block-system-menu-block li.menu-item a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 200px;
-  padding: var(--mh-space-lg);
-  color: var(--mh-color-neutral-900);
-  text-decoration: none;
-  gap: var(--mh-space-xs);
-  font-weight: 600;
-  text-align: center;
+/* Custom: Ensure sub-menu items are always block level and flow vertically in flat sidebar menus */
+.sidebar-menu-flat .menu .dropdown-menu .dropdown-item {
+  display: block !important;
+  padding: var(--mh-space-xs) var(--mh-space-sm) !important;
+  background-color: transparent !important;
+  color: var(--mh-color-neutral-800) !important;
 }
 
-/* Titles/After content for menu icons */
-[id^="block-barrio-boostrap-5-makehaven-membermenu"] a.nav-link::after,
-[id^="block-barrio-boostrap-5-makerspace-membermenu"] a.nav-link::after,
-.menu-block-member-menu a.nav-link::after,
-body.path-my-membership .block-system-menu-block li.menu-item a::after,
-body.path-community-engagement .block-system-menu-block li.menu-item a::after,
-body.path-individual-actions .block-system-menu-block li.menu-item a::after {
-  content: attr(title);
-  color: var(--mh-color-neutral-600);
-  font-weight: 400;
-  font-size: 0.95rem;
-  margin-top: var(--mh-space-2xs);
+/* Custom: Remove any togglers that might appear in flat sidebar menus */
+.sidebar-menu-flat .menu .dropdown-toggle::after {
+  display: none !important;
 }
 
-/* Spacing for icons */
-.menu-block-member-menu a.nav-link::before,
-[id^="block-barrio-boostrap-5-makehaven-membermenu"] a.nav-link::before,
-[id^="block-barrio-boostrap-5-makerspace-membermenu"] a.nav-link::before,
-body.path-my-membership .block-system-menu-block li.menu-item a::before,
-body.path-community-engagement .block-system-menu-block li.menu-item a::before,
-body.path-individual-actions .block-system-menu-block li.menu-item a::before {
-  margin-bottom: var(--mh-space-xs);
+/* Custom: Ensure parent menu items of expanded sub-menus don't have special active styles that might look like dropdown indicators in flat sidebar menus */
+.sidebar-menu-flat .menu .menu-item--expanded > a.nav-link {
+  margin-bottom: 0 !important;
+  border-bottom: none !important;
 }
-
-/* Member menu icon glyphs */
-
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) .menu-item a::before {
-  font-family: "bootstrap-icons";
-  display: block;
-  text-align: center;
-  line-height: 1;
-  font-size: 2.5rem;
-  color: var(--mh-color-brand-primary);
-  margin-bottom: var(--mh-space-xs);
-}
-
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/facilitator-utilities"]::before { content: "\f62c"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/facilitator/schedules"]::before { content: "\f1f9"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/coordinator"]::before { content: "\f4e6"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/events"]::before { content: "\f212"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/appointments"]::before { content: "\f1e7"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/room-rentals"]::before,
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/event-space"]::before { content: "\f1e5"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/propose-meetup"]::before { content: "\f1f1"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/equipment"]::before { content: "\f5d1"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/library"]::before { content: "\f62b"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/store"]::before { content: "\f23f"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/community-resources"]::before { content: "\f1d8"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/rooms"]::before { content: "\f581"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/user/current/edit"]::before { content: "\f4e1"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/user/current/main"]::before { content: "\f4e3"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/member-contacts"]::before { content: "\f4ee"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/user/sms"]::before { content: "\f249"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/user/current/badges"]::before { content: "\f155"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/additional-household"]::before { content: "\f4e9"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/reimbursement"]::before { content: "\f233"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/payment-portal"]::before { content: "\f2d3"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/increase"]::before { content: "\f42b"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/referral-program"]::before { content: "\f3f4"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/user/storage"]::before { content: "\f1d8"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/storage"]::before { content: "\f1d7"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/node/add/blog"]::before { content: "\f4cb"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="slack.com"]::before { content: "\f56a"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="campaign-archive"]::before { content: "\f32f"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="youtube.com"]::before { content: "\f4f4"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="bucket.makehaven.org"]::before { content: "\f282"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="1FAIpQLSf4_q_t3hQruHqN"]::before { content: "\f248"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="1FAIpQLScd-GdCaxhcpbl"]::before { content: "\f53f"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/safety-concern"]::before,
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/accident-report"]::before { content: "\f33b"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/node/add/wish"]::before,
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/wishes"]::before { content: "\f467"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/workspace"]::before { content: "\f8cc"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/facilitator-program"]::before { content: "\f378"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/volunteer-leadership"]::before { content: "\f149"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/workshop-proposal"]::before { content: "\f241"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/paints-and-voc"]::before { content: "\f493"; }
-:is(.region-featured-top, .region-sidebar-first, [id^="block-barrio-boostrap-5-makehaven-membermenu"], [id^="block-barrio-boostrap-5-makerspace-membermenu"], .menu-block-member-menu, body.path-my-membership, body.path-community-engagement, body.path-individual-actions) a[href*="/logos-and-branding"]::before { content: "\f4af"; }
