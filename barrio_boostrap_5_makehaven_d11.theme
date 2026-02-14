@@ -82,5 +82,11 @@ function barrio_boostrap_5_makehaven_d11_preprocess_views_view_field(array &$var
   // Keep author-provided markup, but normalize whitespace around removed
   // comments to prevent odd spacing.
   $clean = preg_replace('/\s{2,}/', ' ', $clean);
-  $variables['output'] = trim($clean);
+  $output = trim($clean);
+
+  if ($output === '' && !empty($variables['view']) && $variables['view']->id() === 'reservations_referencing_civicrm_event' && $variables['display_id'] === 'event_registration_button') {
+    $output = t('Reservation: Not linked');
+  }
+
+  $variables['output'] = $output;
 }
