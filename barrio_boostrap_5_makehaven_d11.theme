@@ -59,3 +59,28 @@ function barrio_boostrap_5_makehaven_d11_preprocess_paragraph(&$variables) {
 
   $variables['#attached']['library'][] = 'barrio_boostrap_5_makehaven_d11/landing_page';
 }
+
+/**
+ * Implements hook_preprocess_views_view_field().
+ */
+function barrio_boostrap_5_makehaven_d11_preprocess_views_view_field(array &$variables) {
+  if (empty($variables['output']) || !is_string($variables['output'])) {
+    return;
+  }
+
+  // Guardrail: tokenized custom text fields can accidentally include nested
+  // rendered field output with Twig debug comments when theme debug is on.
+  if (strpos($variables['output'], 'THEME DEBUG') === FALSE) {
+    return;
+  }
+
+  $clean = preg_replace('/<!--[\s\S]*?-->/', '', $variables['output']);
+  if ($clean === NULL) {
+    return;
+  }
+
+  // Keep author-provided markup, but normalize whitespace around removed
+  // comments to prevent odd spacing.
+  $clean = preg_replace('/\s{2,}/', ' ', $clean);
+  $variables['output'] = trim($clean);
+}

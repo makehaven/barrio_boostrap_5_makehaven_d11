@@ -1,0 +1,1174 @@
+/*
+ * Event listing + CiviCRM event page refinements.
+ * Scoped to event routes so global styles remain unchanged.
+ */
+
+/* /events listing: modern card-based presentation */
+body.page-view-event-set {
+  background:
+    radial-gradient(circle at 5% 0%, rgb(139 25 25 / 0.06), transparent 40%),
+    linear-gradient(180deg, #fff 0%, #f6f7f8 100%);
+}
+
+body.page-view-event-set #main-wrapper {
+  max-width: min(1400px, 96vw);
+  margin-inline: auto;
+}
+
+body.page-view-event-set .view-event-set .view-header,
+body.page-view-event-set .view-event-set .view-filters {
+  background: var(--mh-color-surface);
+  border: 1px solid var(--mh-color-border);
+  border-radius: var(--mh-radius-lg);
+  box-shadow: var(--mh-shadow-xs);
+  padding: var(--mh-space-lg);
+  margin-bottom: var(--mh-space-lg);
+}
+
+body.page-view-event-set .view-event-set .view-filters form.views-exposed-form,
+body.page-view-event-set .view-event-set .view-filters .d-flex.flex-wrap {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+
+body.page-view-event-set .view-event-set .view-content > .row {
+  --bs-gutter-x: 0;
+  --bs-gutter-y: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: clamp(1rem, 1.8vw, 1.35rem);
+  row-gap: 1.35rem;
+  margin: 0;
+  padding-bottom: 1.25rem;
+}
+
+body.page-view-event-set .tabs,
+body.page-view-event-set .block-local-tasks-block {
+  display: block;
+}
+
+body.page-view-event-set .view-event-set .card {
+  height: 100%;
+  width: 100%;
+  max-width: none;
+  border: 1px solid var(--mh-color-border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--mh-shadow-sm);
+  background: var(--mh-color-surface);
+  transition: transform var(--mh-transition-base), box-shadow var(--mh-transition-base);
+}
+
+body.page-view-event-set .view-event-set .view-content .col {
+  display: flex;
+  min-width: 0;
+  padding: 0;
+}
+
+body.page-view-event-set .view-event-set .card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--mh-shadow-md);
+}
+
+body.page-view-event-set .view-event-set .card-img-top img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+}
+
+body.page-view-event-set .view-event-set .card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mh-space-sm);
+  flex: 1 1 auto;
+  padding: var(--mh-space-lg);
+  position: relative;
+  padding-bottom: 2.7rem;
+}
+
+body.page-view-event-set .view-event-set .card-title {
+  margin: 0;
+  font-family: var(--mh-font-display);
+  font-size: clamp(1.1rem, 1.5vw, 1.45rem);
+  line-height: 1.25;
+  color: var(--mh-color-neutral-900);
+}
+
+body.page-view-event-set .view-event-set .card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+body.page-view-event-set .view-event-set .card-title a:hover {
+  color: var(--mh-color-brand-primary);
+}
+
+body.page-view-event-set .view-event-set .card-text {
+  display: block;
+  color: var(--mh-color-neutral-800);
+  line-height: 1.55;
+}
+
+body.page-view-event-set .view-event-set .card-text br {
+  display: none;
+}
+
+body.page-view-event-set .view-event-set .card-text strong:empty {
+  display: none;
+}
+
+body.page-view-event-set .view-event-set .card-text .Full {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.35rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #d11f1f, #a11515);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.78rem;
+  line-height: 1.1;
+  width: auto;
+  min-width: 2.25rem;
+  vertical-align: middle;
+}
+
+body.page-view-event-set .view-event-set .card-text time {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--mh-space-sm);
+  padding: var(--mh-space-2xs) var(--mh-space-sm);
+  border-radius: var(--mh-radius-pill);
+  background: #f0f2f5;
+  color: var(--mh-color-neutral-700);
+  font-weight: 600;
+  width: fit-content;
+}
+
+body.page-view-event-set .view-event-set .card-text .experience-level {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: var(--mh-space-sm);
+  padding: 0.16rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.15;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+body.page-view-event-set .view-event-set .card-text .experience-level.introductory,
+body.page-view-event-set .view-event-set .card-text .experience-level.beginner {
+  background: #e7f7ea;
+  color: #1f6b34;
+  border-color: #bde3c6;
+}
+
+body.page-view-event-set .view-event-set .card-text .experience-level.intermediate {
+  background: #fff3d9;
+  color: #7b5400;
+  border-color: #ecd498;
+}
+
+body.page-view-event-set .view-event-set .card-text .experience-level.advanced,
+body.page-view-event-set .view-event-set .card-text .experience-level.expert,
+body.page-view-event-set .view-event-set .card-text .experience-level.master {
+  background: #1f1f1f;
+  color: #fff;
+  border-color: #1f1f1f;
+}
+
+body.page-view-event-set .view-event-set .card-text strong {
+  display: inline-block;
+  align-items: center;
+  width: auto;
+  margin-left: 0.35rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--mh-radius-pill);
+  background: linear-gradient(180deg, #d11f1f, #a11515);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+body.page-view-event-set .view-event-set .card-text .summary {
+  margin-top: var(--mh-space-sm);
+  margin-bottom: 0;
+  color: var(--mh-color-neutral-700);
+  font-size: 0.95rem;
+  min-height: 9.6rem;
+  max-height: 9.6rem;
+  overflow: hidden;
+  position: relative;
+  display: -webkit-box;
+  line-clamp: 5;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+body.page-view-event-set .view-event-set .card-text .summary::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3.5rem;
+  background: linear-gradient(
+    180deg,
+    rgb(255 255 255 / 0%) 0%,
+    rgb(255 255 255 / 76%) 45%,
+    #fff 100%
+  );
+  pointer-events: none;
+}
+
+body.page-view-event-set .view-event-set .card-text .btn {
+  margin-top: 0;
+  width: auto;
+  position: absolute;
+  left: var(--mh-space-lg);
+  right: var(--mh-space-lg);
+  bottom: 0.5rem;
+  border-radius: var(--mh-radius-pill);
+  padding-inline: 1.05rem;
+  border: 1px solid var(--mh-color-brand-primary);
+  background: var(--mh-color-brand-primary);
+  color: #fff;
+}
+
+body.page-view-event-set .view-event-set .card-text .btn:hover,
+body.page-view-event-set .view-event-set .card-text .btn:focus {
+  border-color: var(--mh-color-brand-primary-strong);
+  background: var(--mh-color-brand-primary-strong);
+  color: #fff;
+}
+
+/* CiviCRM event info + registration shell */
+body .main-content .block-views,
+body section.region-featured-bottom-first .block,
+body .view-eva,
+body .field--type-entity-reference .field--name-instructor-profiles {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  margin: 0;
+  box-shadow: none;
+}
+
+body .crm-container {
+  background: transparent !important;
+}
+
+body .crm-container.crm-public fieldset:not(.collapsed, .crm-inactive-dashlet-fieldset, .af-container-style-pane),
+body .crm-container.crm-public .crm-container.crm-public .af-container:not(.af-container-style-pane),
+body .crm-container.crm-public :is(.additional_participants-section, .event_fee_s_-section, .email-5-section, #crm-profile-block, .crm-event-info-form-block) {
+  background-color: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+body #civicrm-footer,
+body div#civicrm-footer {
+  display: none !important;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper,
+body.page-civicrm-event-register #crm-main-content-wrapper {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: clamp(0.5rem, 2vw, 1.25rem);
+}
+
+body.page-civicrm-event-register #crm-main-content-wrapper {
+  background: #fff;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper h1,
+body.page-civicrm-event-register #crm-main-content-wrapper h1 {
+  margin-bottom: var(--mh-space-lg);
+  font-family: var(--mh-font-display);
+  font-size: clamp(1.85rem, 3vw, 2.5rem);
+  line-height: 1.15;
+  color: var(--mh-color-neutral-900);
+}
+
+/* Event info layout and section cards */
+body.page-civicrm-event-info #crm-main-content-wrapper .event-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mh-space-lg);
+  max-width: none;
+  margin: 0;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event-info > .clear,
+body.page-civicrm-event-info #crm-main-content-wrapper .event-info > .crm-actionlinks-top {
+  display: none;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event-info > .crm-section {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #e6e7ea;
+  border-radius: 0;
+  padding: 0 0 var(--mh-space-lg);
+  margin: 0;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event-info > .event_summary-section {
+  border: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-bottom: 0 !important;
+  border-radius: 0 !important;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .crm-section.event_summary-section .views-field-body,
+body.page-civicrm-event-info #crm-main-content-wrapper .crm-section.event_summary-section > p:first-of-type {
+  border-left: 3px solid rgb(139 25 25 / 55%);
+  background: rgb(255 255 255 / 68%);
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event-info > .event_description-section {
+  order: 2;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event-info > .event_date_time-section,
+body.page-civicrm-event-info #crm-main-content-wrapper .event-info > .event_address-section,
+body.page-civicrm-event-info #crm-main-content-wrapper .event-info > .event_fees-section,
+body.page-civicrm-event-info #crm-main-content-wrapper .event-info > .crm-actionlinks-bottom,
+body.page-civicrm-event-info #crm-main-content-wrapper .event-info > .iCal_links-section {
+  order: 3;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event-info > .crm-actionlinks-bottom {
+  display: flex;
+  justify-content: flex-start;
+  background: transparent;
+  border: 1px solid #dfe3e8;
+  border-radius: 12px;
+  padding: var(--mh-space-md);
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event-info > .crm-actionlinks-bottom .button {
+  min-width: 11rem;
+  justify-content: center;
+  border-radius: 999px;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event-info table {
+  margin: 0;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event-info table td {
+  padding: 0.45rem 0;
+  border-bottom: 1px dashed #ddd;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event-info table td:last-child {
+  text-align: right;
+  font-weight: 700;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgb(0 0 0 / 0.12);
+  margin-bottom: var(--mh-space-md);
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section h2,
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section h3,
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section h4 {
+  margin: 0 0 var(--mh-space-sm);
+  font-family: var(--mh-font-display);
+  letter-spacing: 0.02em;
+  color: var(--mh-color-neutral-900);
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section p {
+  margin: 0 0 var(--mh-space-xs);
+  color: var(--mh-color-neutral-800);
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field {
+  margin-bottom: var(--mh-space-xs);
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field-start-date .field-content {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: var(--mh-space-sm);
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  background: #eef1f5;
+  color: #2e3f52;
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field-field-event-skill-level .introductory,
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field-field-event-skill-level .intermediate,
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field-field-event-skill-level .advanced,
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field-field-event-skill-level .expert {
+  display: inline-flex !important;
+  align-items: center;
+  margin: 0.1rem 0.35rem 0.35rem 0;
+  padding: 0.2rem 0.58rem;
+  border-radius: 999px;
+  font-size: 0.84rem;
+  font-weight: 700 !important;
+  line-height: 1.2;
+  white-space: nowrap;
+  border: 1px solid transparent !important;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field-field-event-skill-level .introductory {
+  background: #e7f7ea !important;
+  border-color: #bfe8c8 !important;
+  color: #1f6b34 !important;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field-field-event-skill-level .intermediate {
+  background: #fff3d9 !important;
+  border-color: #ecd498 !important;
+  color: #7b5400 !important;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field-field-event-skill-level :is(.advanced, .expert) {
+  background: #1f1f1f !important;
+  border-color: #1f1f1f !important;
+  color: #fff !important;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field-field-civi-event-age-requirement {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.25rem;
+  margin-right: 0.35rem;
+  padding: 0.2rem 0.58rem;
+  border-radius: 999px;
+  background: #eff4fa !important;
+  border-color: #d4dfeb !important;
+  border: 1px solid #d4dfeb !important;
+  color: #3a546f !important;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field-field-civi-event-age-requirement .views-label {
+  margin-right: 0.2rem;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field-event-type-id .field-content {
+  display: inline-flex !important;
+  align-items: center;
+  margin-top: 0.15rem;
+  margin-bottom: var(--mh-space-sm);
+  padding: 0.2rem 0.62rem;
+  border-radius: 999px;
+  background: #f3eefc !important;
+  border-color: #ddd0f7 !important;
+  border: 1px solid #ddd0f7 !important;
+  color: #4e347f !important;
+  font-size: 0.84rem;
+  font-weight: 700 !important;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field-field-civi-event-remaining .field-content,
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field-field-civi-event-remaining h3.field-content {
+  display: inline-flex !important;
+  align-items: center;
+  margin-top: var(--mh-space-sm);
+  padding: 0.36rem 0.95rem !important;
+  border-radius: 999px;
+  background: #8b1919 !important;
+  color: #fff !important;
+  font-size: 0.98rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.02em !important;
+  text-transform: uppercase;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section > :is(p, div) {
+  max-width: 100%;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field-field-civi-event-instructor .views-label {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field-field-civi-event-badges:has(.field-content:empty),
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field-field-civi-event-tags:has(.field-content:empty),
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field-field-civi-event-sessions:has(.field-content:empty),
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field-field-civi-event-recording:has(.field-content:empty),
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field-field-civi-event-documents:has(.field-content:empty) {
+  display: none;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section a[href*="edit"],
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section a[href*="reservation"] {
+  display: inline-flex;
+  align-items: center;
+  margin-top: var(--mh-space-sm);
+  margin-right: var(--mh-space-sm);
+  font-size: 0.82rem;
+  color: var(--mh-color-neutral-600);
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section.mh-enhanced-summary .views-field-start-date,
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section.mh-enhanced-summary .views-field-field-event-skill-level,
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section.mh-enhanced-summary .views-field-field-civi-event-age-requirement,
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section.mh-enhanced-summary .views-field-event-type-id,
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section.mh-enhanced-summary .views-field-field-civi-event-remaining {
+  display: none !important;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .mh-event-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.42rem;
+  margin: 0 0 0.55rem;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .mh-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  padding: 0.22rem 0.62rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .mh-chip-date {
+  background: #eef1f5;
+  border-color: #d8dee7;
+  color: #2e3f52;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .mh-chip-level-intro {
+  background: #e7f7ea;
+  border-color: #bfe8c8;
+  color: #1f6b34;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .mh-chip-level-mid {
+  background: #fff3d9;
+  border-color: #ecd498;
+  color: #7b5400;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .mh-chip-level-advanced {
+  background: #1f1f1f;
+  border-color: #1f1f1f;
+  color: #fff;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .mh-chip-age {
+  background: #eff4fa;
+  border-color: #d4dfeb;
+  color: #3a546f;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .mh-chip-type {
+  background: #f3eefc;
+  border-color: #ddd0f7;
+  color: #4e347f;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .mh-capacity-panel {
+  border: 1px solid #e0e5ec;
+  border-radius: 10px;
+  background: #fff;
+  padding: 0.5rem 0.65rem;
+  margin-bottom: var(--mh-space-md);
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .mh-capacity-top {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.3rem;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .mh-capacity-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #42556a;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .mh-capacity-spots {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.12rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .mh-capacity-spots.is-open {
+  background: #e7f7ea;
+  color: #1f6b34;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .mh-capacity-spots.is-medium {
+  background: #fff3d9;
+  color: #7b5400;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .mh-capacity-spots.is-high,
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .mh-capacity-spots.is-full {
+  background: #8b1919;
+  color: #fff;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .mh-capacity-pct {
+  margin-left: auto;
+  font-size: 0.78rem;
+  color: #4e5f73;
+  font-weight: 700;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .mh-capacity-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: #edf1f5;
+  overflow: hidden;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .mh-capacity-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: #4d7aa7;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .mh-capacity-fill.is-medium {
+  background: #c58b00;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .mh-capacity-fill.is-high,
+body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .mh-capacity-fill.is-full {
+  background: #8b1919;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_description-section {
+  border: 1px solid #dfe3e8;
+  border-radius: 14px;
+  background: #fff;
+  padding: var(--mh-space-lg);
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_description-section .crm-event-entityview-content {
+  max-width: 75ch;
+  line-height: 1.7;
+  color: var(--mh-color-neutral-800);
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event_description-section blockquote {
+  margin: 0 0 var(--mh-space-md);
+  padding: var(--mh-space-md);
+  border-left: 4px solid var(--mh-color-brand-primary);
+  background: #fbfcfe;
+  border-radius: 10px;
+}
+
+/* Top event info bar (separate Views block above event_summary-section). */
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row.mh-enhanced-info-bar .views-field-start-date,
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row.mh-enhanced-info-bar .views-field-field-event-skill-level,
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row.mh-enhanced-info-bar .views-field-field-civi-event-age-requirement,
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row.mh-enhanced-info-bar .views-field-event-type-id,
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row.mh-enhanced-info-bar .views-field-field-civi-event-full-pct,
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row.mh-enhanced-info-bar .views-field-field-civi-event-remaining {
+  display: none !important;
+}
+
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-event-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.42rem;
+  margin: 0 0 0.55rem;
+}
+
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  padding: 0.22rem 0.62rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-chip-date {
+  background: #eef1f5;
+  border-color: #d8dee7;
+  color: #2e3f52;
+}
+
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-chip-level-intro {
+  background: #e7f7ea;
+  border-color: #bfe8c8;
+  color: #1f6b34;
+}
+
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-chip-level-mid {
+  background: #fff3d9;
+  border-color: #ecd498;
+  color: #7b5400;
+}
+
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-chip-level-advanced {
+  background: #1f1f1f;
+  border-color: #1f1f1f;
+  color: #fff;
+}
+
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-chip-age {
+  background: #eff4fa;
+  border-color: #d4dfeb;
+  color: #3a546f;
+}
+
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-chip-type {
+  background: #f3eefc;
+  border-color: #ddd0f7;
+  color: #4e347f;
+}
+
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-capacity-panel {
+  border: 1px solid #e0e5ec;
+  border-radius: 10px;
+  background: #fff;
+  padding: 0.5rem 0.65rem;
+  margin-bottom: var(--mh-space-md);
+}
+
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-capacity-top {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.3rem;
+}
+
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-capacity-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #42556a;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-capacity-spots {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.12rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-capacity-spots.is-open {
+  background: #e7f7ea;
+  color: #1f6b34;
+}
+
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-capacity-spots.is-medium {
+  background: #fff3d9;
+  color: #7b5400;
+}
+
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-capacity-spots.is-high,
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-capacity-spots.is-full {
+  background: #8b1919;
+  color: #fff;
+}
+
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-capacity-pct {
+  margin-left: auto;
+  font-size: 0.78rem;
+  color: #4e5f73;
+  font-weight: 700;
+}
+
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-capacity-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: #edf1f5;
+  overflow: hidden;
+}
+
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-capacity-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: #4d7aa7;
+}
+
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-capacity-fill.is-medium {
+  background: #c58b00;
+}
+
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-capacity-fill.is-high,
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-capacity-fill.is-full {
+  background: #8b1919;
+}
+
+/* Event registration form polish */
+body.page-civicrm-event-register #Register .messages.status {
+  border: 1px solid rgb(201 166 92 / 0.45);
+  border-radius: 14px;
+  background: linear-gradient(180deg, #fff8e8, #fff2d1);
+  color: #5e470d;
+  font-weight: 600;
+  padding: var(--mh-space-lg);
+}
+
+body.page-civicrm-event-register #Register .crm-event-register-form-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mh-space-lg);
+}
+
+body.page-civicrm-event-register #Register,
+body.page-civicrm-event-register #Register .crm-event-register-form-block,
+body.page-civicrm-event-register #Register form {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+body.page-civicrm-event-register #Register .crm-section,
+body.page-civicrm-event-register #Register fieldset,
+body.page-civicrm-event-register #Register .crm-public-form-item,
+body.page-civicrm-event-register #Register .crm-profile {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+body.page-civicrm-event-register #Register .crm-event-register-form-block > .crm-section,
+body.page-civicrm-event-register #Register .crm-event-register-form-block > fieldset {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+
+body.page-civicrm-event-register #Register .crm-public-form-item.crm-section,
+body.page-civicrm-event-register #Register fieldset.crm-profile {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+}
+
+body.page-civicrm-event-register #Register .crm-public-form-item > fieldset.crm-profile {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+}
+
+body.page-civicrm-event-register #Register fieldset.crm-profile legend {
+  margin-bottom: var(--mh-space-sm);
+}
+
+body.page-civicrm-event-register #Register fieldset.crm-profile .crm-section {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 0 var(--mh-space-sm);
+}
+
+body.page-civicrm-event-register #Register fieldset.crm-profile .crm-section:last-child {
+  margin-bottom: 0;
+}
+
+body.page-civicrm-event-register #Register .crm-event-register-form-block > .crm-section:empty {
+  display: none;
+}
+
+body.page-civicrm-event-register #Register .crm-event-register-form-block > fieldset legend {
+  font-family: var(--mh-font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--mh-color-neutral-900);
+  padding: 0 var(--mh-space-sm);
+}
+
+body.page-civicrm-event-register #Register label,
+body.page-civicrm-event-register #Register .label {
+  font-weight: 600;
+  color: var(--mh-color-neutral-800);
+}
+
+body.page-civicrm-event-register #Register input[type="text"],
+body.page-civicrm-event-register #Register input[type="email"],
+body.page-civicrm-event-register #Register input[type="tel"],
+body.page-civicrm-event-register #Register input[type="number"],
+body.page-civicrm-event-register #Register input.crm-form-text,
+body.page-civicrm-event-register #Register select,
+body.page-civicrm-event-register #Register textarea {
+  width: 100%;
+  max-width: 100%;
+  min-height: 2.65rem;
+  border: 1px solid #cbd3dc;
+  border-radius: 10px;
+  padding: 0.45rem 0.65rem;
+  background: #fff;
+}
+
+body.page-civicrm-event-register #Register fieldset.crm-profile-name-event_registration {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--mh-space-md);
+  margin: 0 0 var(--mh-space-lg);
+  border: 0;
+  padding: 0;
+}
+
+body.page-civicrm-event-register #Register fieldset.crm-profile-name-event_registration .crm-section {
+  margin: 0;
+  padding: 0;
+}
+
+body.page-civicrm-event-register fieldset.crm-profile-name-event_registration
+  .editrow_email-Primary-section,
+body.page-civicrm-event-register fieldset.crm-profile-name-event_registration
+  .editrow_phone-Primary-1-section,
+body.page-civicrm-event-register fieldset.crm-profile-name-event_registration
+  .editrow_custom_69-section {
+  grid-column: 1 / -1;
+}
+
+body.page-civicrm-event-register #Register fieldset.crm-profile-name-event_registration
+  .editrow_first_name-section,
+body.page-civicrm-event-register #Register fieldset.crm-profile-name-event_registration
+  .editrow_last_name-section {
+  width: 100%;
+}
+
+body.page-civicrm-event-register #Register .crm-section .clear {
+  display: none;
+}
+
+body.page-civicrm-event-register #Register .form-item-first_name,
+body.page-civicrm-event-register #Register .form-item-last_name {
+  margin: 0;
+  padding: 0;
+}
+
+body.page-civicrm-event-register #Register .form-item-first_name,
+body.page-civicrm-event-register #Register .form-item-last_name {
+  display: block;
+}
+
+body.page-civicrm-event-register #Register label,
+body.page-civicrm-event-register #Register .label {
+  font-weight: 600;
+  color: var(--mh-color-neutral-800);
+}
+
+body.page-civicrm-event-register #Register .crm-section.event_demographics,
+body.page-civicrm-event-register #Register .crm-section.event_demographics .form-item {
+  display: block;
+}
+
+body.page-civicrm-event-register #Register .event_demographics .form-item {
+  margin-bottom: var(--mh-space-xs);
+  width: auto;
+}
+
+body.page-civicrm-event-register #Register fieldset.crm-profile-name-Event_Demographics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--mh-space-md);
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+body.page-civicrm-event-register #Register fieldset.crm-profile-name-Event_Demographics .crm-section {
+  margin: 0;
+  padding: 0;
+}
+
+body.page-civicrm-event-register #Register fieldset.crm-profile-name-Event_Demographics
+  .crm-multiple-checkbox-radio-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.5rem;
+}
+
+body.page-civicrm-event-register #Register .event_demographics .gender legend,
+body.page-civicrm-event-register #Register .event_demographics .ethnicity legend {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+body.page-civicrm-event-register #Register #Register-buttons,
+body.page-civicrm-event-register #Register .crm-submit-buttons {
+  margin-top: var(--mh-space-md);
+}
+
+body.page-civicrm-event-register #Register .helprow-custom_63-section,
+body.page-civicrm-event-register #Register .editrow_custom_63-section {
+  background: #f3f4f7;
+  border: 1px solid #d7dae0;
+  border-radius: 12px;
+  padding: var(--mh-space-md);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  margin-bottom: var(--mh-space-md);
+}
+
+body.page-civicrm-event-register #Register .editrow_custom_63-section {
+  margin-top: 0;
+}
+
+body.page-civicrm-event-register #Register input:focus,
+body.page-civicrm-event-register #Register select:focus,
+body.page-civicrm-event-register #Register textarea:focus {
+  outline: 2px solid rgb(139 25 25 / 0.18);
+  border-color: var(--mh-color-brand-primary);
+  box-shadow: none;
+}
+
+body.page-civicrm-event-register #Register .crm-section.editrow-email-Primary-section input,
+body.page-civicrm-event-register #Register .crm-section.editrow-phone-Primary-1-section input {
+  max-width: none;
+}
+
+body.page-civicrm-event-register #Register .price-set-row {
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  margin-bottom: var(--mh-space-sm);
+  background: transparent;
+  box-shadow: none;
+}
+
+body.page-civicrm-event-register #Register .price-set-row:hover,
+body.page-civicrm-event-register #Register .price-set-row:focus-within {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body.page-civicrm-event-register #Register .price-set-row *:hover {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body.page-civicrm-event-register #Register #billing-payment-block {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+/* Stripe container appears even when field mount fails locally. */
+body.page-civicrm-event-register #crm-payment-js-billing-form-container {
+  border: 0;
+  border-top: 1px dashed #b5c0cd;
+  border-bottom: 1px dashed #b5c0cd;
+  border-radius: 0;
+  background: transparent;
+  padding: var(--mh-space-sm) 0;
+  min-height: 3rem;
+}
+
+body.page-civicrm-event-register #crm-payment-js-billing-form-container iframe,
+body.page-civicrm-event-register #card-element {
+  width: 100% !important;
+  min-height: 2.75rem;
+}
+
+body.page-civicrm-event-register #Register .crm-submit-buttons {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  background: rgb(255 255 255 / 0.92);
+  border-top: 1px solid #e4e8ed;
+  padding-top: var(--mh-space-sm);
+  margin-top: var(--mh-space-lg);
+}
+
+body.page-civicrm-event-register #Register .crm-submit-buttons .button,
+body.page-civicrm-event-register #Register .crm-submit-buttons .btn {
+  min-height: 2.75rem;
+  min-width: 10rem;
+  border-radius: var(--mh-radius-pill);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  body.page-view-event-set .view-event-set .view-content > .row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  body.page-civicrm-event-info #crm-main-content-wrapper .event-info > .crm-actionlinks-bottom .button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  body.page-view-event-set .view-event-set .view-content > .row {
+    grid-template-columns: 1fr;
+  }
+
+  body.page-view-event-set .view-event-set .view-header,
+  body.page-view-event-set .view-event-set .view-filters,
+  body.page-view-event-set .view-event-set .card-body,
+  body.page-civicrm-event-info #crm-main-content-wrapper .event-info > .crm-section,
+  body.page-civicrm-event-register #Register .crm-event-register-form-block > .crm-section,
+  body.page-civicrm-event-register #Register .crm-event-register-form-block > fieldset {
+    padding: var(--mh-space-md);
+  }
+}

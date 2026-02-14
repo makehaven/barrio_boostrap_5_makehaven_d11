@@ -134,7 +134,9 @@ html, body { overflow-x: hidden; }
 /* === OTHER FRONT PAGE BLOCKS & GLOBAL RULES ======================== */
 /* =================================================================== */
 
-.highlighted, .block-system-breadcrumb-block, .tabs { display: none; }
+.path-frontpage .highlighted,
+.path-frontpage .block-system-breadcrumb-block,
+.path-frontpage .tabs { display: none; }
 .path-frontpage #main-wrapper {
   max-width: 100%;
   margin: 0;
