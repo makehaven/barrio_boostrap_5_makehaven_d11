@@ -49,6 +49,7 @@ global-styling:
       css/pages/civicrm.css: {}
       css/pages/tools.css: {}
       css/pages/events-calendar.css: {}
+      css/pages/reservation-node.css: {}
       css/colors.css: {}
       css/pages/events-modern.css: {}
   dependencies: # Ensure it loads after Bootstrap and jQuery

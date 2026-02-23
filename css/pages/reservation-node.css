@@ -1,0 +1,95 @@
+body.page-node-type-reservation .mh-reservation-page,
+.node--type-reservation.mh-reservation-page {
+  max-width: 960px;
+}
+
+body.page-node-type-reservation .mh-reservation-page__title,
+.node--type-reservation.mh-reservation-page .mh-reservation-page__title {
+  margin-bottom: var(--mh-space-sm);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+body.page-node-type-reservation .mh-reservation-page__overall,
+.node--type-reservation.mh-reservation-page .mh-reservation-page__overall {
+  margin-bottom: var(--mh-space-lg);
+}
+
+body.page-node-type-reservation .mh-reservation-card,
+.node--type-reservation.mh-reservation-page .mh-reservation-card {
+  margin-bottom: 20px;
+  border: 1px solid var(--mh-color-border);
+  border-radius: var(--mh-radius-md);
+  overflow: hidden;
+}
+
+body.page-node-type-reservation .mh-reservation-summary-list,
+.node--type-reservation.mh-reservation-page .mh-reservation-summary-list {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--mh-space-xs) var(--mh-space-md);
+  margin: 0;
+}
+
+body.page-node-type-reservation .mh-reservation-summary-list dt,
+.node--type-reservation.mh-reservation-page .mh-reservation-summary-list dt {
+  font-weight: 700;
+  margin: 0;
+}
+
+body.page-node-type-reservation .mh-reservation-summary-list dd,
+.node--type-reservation.mh-reservation-page .mh-reservation-summary-list dd {
+  margin: 0;
+}
+
+body.page-node-type-reservation .mh-reservation-sessions,
+.node--type-reservation.mh-reservation-page .mh-reservation-sessions {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+body.page-node-type-reservation .mh-reservation-session-row,
+.node--type-reservation.mh-reservation-page .mh-reservation-session-row {
+  margin-bottom: var(--mh-space-xs);
+}
+
+body.page-node-type-reservation .mh-reservation-session-date,
+.node--type-reservation.mh-reservation-page .mh-reservation-session-date {
+  display: inline-block;
+  min-width: 12rem;
+  font-weight: 700;
+}
+
+body.page-node-type-reservation .mh-reservation-dedupe-note,
+.node--type-reservation.mh-reservation-page .mh-reservation-dedupe-note {
+  margin-top: var(--mh-space-sm);
+  color: var(--mh-color-neutral-700);
+  font-size: 0.95rem;
+}
+
+body.page-node-type-reservation .mh-reservation-assets,
+body.page-node-type-reservation .mh-reservation-resources,
+.node--type-reservation.mh-reservation-page .mh-reservation-assets,
+.node--type-reservation.mh-reservation-page .mh-reservation-resources {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+body.page-node-type-reservation .mh-reservation-resource-meta,
+.node--type-reservation.mh-reservation-page .mh-reservation-resource-meta {
+  color: var(--mh-color-neutral-700);
+  margin-left: var(--mh-space-xs);
+}
+
+@media (max-width: 768px) {
+  body.page-node-type-reservation .mh-reservation-summary-list,
+  .node--type-reservation.mh-reservation-page .mh-reservation-summary-list {
+    grid-template-columns: 1fr;
+  }
+
+  body.page-node-type-reservation .mh-reservation-session-date,
+  .node--type-reservation.mh-reservation-page .mh-reservation-session-date {
+    min-width: 0;
+    display: block;
+  }
+}

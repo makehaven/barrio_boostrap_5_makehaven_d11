@@ -1,0 +1,120 @@
+{#
+/**
+ * @file
+ * Theme override for reservation nodes in full view mode.
+ */
+#}
+<article{{ attributes.addClass('mh-reservation-page') }}>
+  {{ title_prefix }}
+  {% if not page %}
+    <h2{{ title_attributes }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h2>
+  {% else %}
+    <h1{{ title_attributes.addClass('mh-reservation-page__title') }}>Reservations</h1>
+  {% endif %}
+  {{ title_suffix }}
+
+  {% if reservation_page.overall %}
+    <p class="mh-reservation-page__overall">
+      <strong>Schedule:</strong> {{ reservation_page.overall.from }} to {{ reservation_page.overall.to }}
+    </p>
+  {% endif %}
+
+  <section class="card mh-reservation-card mh-reservation-card--summary">
+    <div class="card-header">
+      <h2 class="card-title h4 mb-0">Reservation Summary</h2>
+    </div>
+    <div class="card-body">
+      <dl class="mh-reservation-summary-list">
+        <dt>Status</dt>
+        <dd>{{ reservation_page.status }}</dd>
+        <dt>Purpose</dt>
+        <dd>{{ reservation_page.purpose }}</dd>
+        <dt>Sessions</dt>
+        <dd>{{ reservation_page.sessions|length }}</dd>
+        <dt>Assets</dt>
+        <dd>{{ reservation_page.assets|length }}</dd>
+        <dt>Cancelled</dt>
+        <dd>{{ reservation_page.cancelled ? 'Yes' : 'No' }}</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="card mh-reservation-card">
+    <div class="card-header">
+      <h2 class="card-title h4 mb-0">Reserved Sessions</h2>
+    </div>
+    <div class="card-body">
+      {% if reservation_page.sessions %}
+        <ol class="mh-reservation-sessions">
+          {% for session in reservation_page.sessions %}
+            <li class="mh-reservation-session-row">
+              <span class="mh-reservation-session-date">{{ session.date_label }}</span>
+              <span class="mh-reservation-session-time">{{ session.time_label }}</span>
+            </li>
+          {% endfor %}
+        </ol>
+      {% else %}
+        <p class="mb-0">No sessions are set for this reservation.</p>
+      {% endif %}
+      {% if reservation_page.duplicate_sessions_collapsed > 0 %}
+        <p class="mh-reservation-dedupe-note mb-0">
+          Duplicate sessions hidden: {{ reservation_page.duplicate_sessions_collapsed }}
+        </p>
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="card mh-reservation-card">
+    <div class="card-header">
+      <h2 class="card-title h4 mb-0">Assets</h2>
+    </div>
+    <div class="card-body">
+      {% if reservation_page.assets %}
+        <ul class="mh-reservation-assets">
+          {% for asset in reservation_page.assets %}
+            <li><a href="{{ asset.url }}">{{ asset.title }}</a></li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="mb-0">No assets are linked.</p>
+      {% endif %}
+      {% if reservation_page.duplicate_assets_collapsed > 0 %}
+        <p class="mh-reservation-dedupe-note mb-0">
+          Duplicate assets hidden: {{ reservation_page.duplicate_assets_collapsed }}
+        </p>
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="card mh-reservation-card">
+    <div class="card-header">
+      <h2 class="card-title h4 mb-0">Related Resources</h2>
+    </div>
+    <div class="card-body">
+      <ul class="mh-reservation-resources mb-0">
+        {% if reservation_page.related_event %}
+          <li>
+            <a href="{{ reservation_page.related_event.url }}">{{ reservation_page.related_event.label }}</a>
+            <span class="mh-reservation-resource-meta">(Event ID: {{ reservation_page.related_event.event_id }})</span>
+          </li>
+        {% endif %}
+        <li><a href="/class-cancellations-policies">Event Policies</a></li>
+        <li><a href="/event-and-workshop-faq">Event and Workshop FAQ</a></li>
+        <li><a href="mailto:events@makehaven.org">events@makehaven.org</a></li>
+      </ul>
+    </div>
+  </section>
+
+  {% if reservation_page.notes %}
+    <section class="card mh-reservation-card">
+      <div class="card-header">
+        <h2 class="card-title h4 mb-0">Reservation Notes</h2>
+      </div>
+      <div class="card-body">
+        {{ reservation_page.notes }}
+      </div>
+    </section>
+  {% endif %}
+</article>

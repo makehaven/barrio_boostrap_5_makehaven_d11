@@ -331,6 +331,99 @@ body.page-civicrm-event-info #crm-main-content-wrapper .event-info > .crm-sectio
   margin: 0;
 }
 
+body.page-civicrm-event-info .block-views-blockreservations-referencing-civicrm-event-civicrm-event-reservation-block {
+  border: 1px solid #dfe3e8;
+  border-radius: 8px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+body.page-civicrm-event-info .block-views-blockreservations-referencing-civicrm-event-civicrm-event-reservation-block::before {
+  content: "Reservations";
+  display: block;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #dfe3e8;
+  background: #f5f6f8;
+  color: #25364a;
+  font-family: var(--mh-font-display);
+  font-size: clamp(1.25rem, 2.1vw, 1.65rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+body.page-civicrm-event-info .block-views-blockreservations-referencing-civicrm-event-civicrm-event-reservation-block .view-content {
+  max-height: 24rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  padding: 0.3rem 0.6rem 0.4rem;
+}
+
+body.page-civicrm-event-info .contextual-region.view.view-event-sliding-scale-info.view-id-event_sliding_scale_info {
+  padding-bottom: 10px;
+}
+
+body.page-civicrm-event-info .block-views-blockreservations-referencing-civicrm-event-civicrm-event-reservation-block .view-content > .item-list > ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body.page-civicrm-event-info .block-views-blockreservations-referencing-civicrm-event-civicrm-event-reservation-block .views-row {
+  border-bottom: 0;
+}
+
+body.page-civicrm-event-info .block-views-blockreservations-referencing-civicrm-event-civicrm-event-reservation-block .views-row:last-child {
+  border-bottom: 0;
+}
+
+body.page-civicrm-event-info .block-views-blockreservations-referencing-civicrm-event-civicrm-event-reservation-block .views-row:has(.field-content:empty),
+body.page-civicrm-event-info .block-views-blockreservations-referencing-civicrm-event-civicrm-event-reservation-block li:has(.field-content:empty) {
+  display: none;
+}
+
+body.page-civicrm-event-info .mh-event-reservation-row {
+  display: grid;
+  gap: 0.25rem 0.75rem;
+  padding: 0.8rem 0.4rem 0.9rem;
+  border-bottom: 1px solid #eceff3;
+}
+
+body.page-civicrm-event-info .mh-event-reservation-asset {
+  color: var(--mh-color-neutral-900);
+}
+
+body.page-civicrm-event-info .mh-event-reservation-meta {
+  color: var(--mh-color-neutral-700);
+  font-size: 0.95rem;
+}
+
+body.page-civicrm-event-info .mh-event-reservation-by {
+  margin-left: 0.35rem;
+  color: var(--mh-color-neutral-600);
+}
+
+body.page-civicrm-event-info .mh-event-reservation-view {
+  width: fit-content;
+  font-size: 0.9rem;
+}
+
+body.page-civicrm-event-info .block-views-blockevent-sliding-scale-info-event-sliding-info:has(.view-event-sliding-scale-info:not(:has(.view-content))) {
+  display: none;
+}
+
+/* Event registration helper view can render blank rows; suppress row output container. */
+body.page-civicrm-event-info .block-views-blockreservations-referencing-civicrm-event-event-registration-button {
+  margin: 0;
+  padding: 0;
+}
+
+body.page-civicrm-event-info .block-views-blockreservations-referencing-civicrm-event-event-registration-button .view-content {
+  display: none;
+}
+
 body.page-civicrm-event-info #crm-main-content-wrapper .event-info > .event_summary-section {
   border: 0 !important;
   padding: 0 !important;
@@ -389,6 +482,35 @@ body.page-civicrm-event-info #crm-main-content-wrapper .event-info table td {
 body.page-civicrm-event-info #crm-main-content-wrapper .event-info table td:last-child {
   text-align: right;
   font-weight: 700;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event-info table td.price_set_field-label.crm-event-label {
+  margin: 10px;
+  padding: 10px !important;
+}
+
+body.page-civicrm-event-info td.price_set_field-label.crm-event-label td {
+  margin: 10px;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event-info table.fee_block-table td.price_set_option-label.crm-event-label {
+  padding: 10px 12px 10px 16px !important;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event-info table.fee_block-table {
+  width: auto;
+  min-width: 26rem;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event-info table.fee_block-table td.fee_amount-value {
+  width: 8.5rem;
+  white-space: nowrap;
+  text-align: right;
+  padding-right: 12px;
+}
+
+body.page-civicrm-event-info #crm-main-content-wrapper .event-info table.fee_block-table tbody tr:hover {
+  background-color: transparent !important;
 }
 
 body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section img {

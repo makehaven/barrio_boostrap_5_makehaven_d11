@@ -116,6 +116,13 @@ body.user-logged-in nav#navbar-top {
   color: #000;
 }
 
+/* Prevent member-menu icon pseudo-elements from appearing in primary nav Donate link. */
+.region-primary-menu a[href*="/donate"]::before,
+.region-primary-menu a[href*="donate"]::before {
+  content: none !important;
+  display: none !important;
+}
+
 @media (max-width: 991px) {
   #navbar-main {
     align-items: flex-start;
