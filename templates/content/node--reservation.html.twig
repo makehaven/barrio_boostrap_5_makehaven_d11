@@ -11,13 +11,13 @@
       <a href="{{ url }}" rel="bookmark">{{ label }}</a>
     </h2>
   {% else %}
-    <h1{{ title_attributes.addClass('mh-reservation-page__title') }}>Reservations</h1>
+    <h2{{ title_attributes.addClass('mh-reservation-page__title') }}>Reservations</h2>
   {% endif %}
   {{ title_suffix }}
 
   {% if reservation_page.overall %}
     <p class="mh-reservation-page__overall">
-      <strong>Schedule:</strong> {{ reservation_page.overall.from }} to {{ reservation_page.overall.to }}
+      <strong>Range / reservation instances:</strong> {{ reservation_page.overall.from }} to {{ reservation_page.overall.to }}
     </p>
   {% endif %}
 
@@ -26,18 +26,68 @@
       <h2 class="card-title h4 mb-0">Reservation Summary</h2>
     </div>
     <div class="card-body">
-      <dl class="mh-reservation-summary-list">
-        <dt>Status</dt>
-        <dd>{{ reservation_page.status }}</dd>
-        <dt>Purpose</dt>
-        <dd>{{ reservation_page.purpose }}</dd>
-        <dt>Sessions</dt>
-        <dd>{{ reservation_page.sessions|length }}</dd>
-        <dt>Assets</dt>
-        <dd>{{ reservation_page.assets|length }}</dd>
-        <dt>Cancelled</dt>
-        <dd>{{ reservation_page.cancelled ? 'Yes' : 'No' }}</dd>
-      </dl>
+      <ul class="mh-reservation-summary-metrics" aria-label="Reservation summary metrics">
+        <li class="mh-reservation-summary-metric">
+          <span class="mh-reservation-summary-metric__label">Status</span>
+          <span class="mh-reservation-summary-metric__value">{{ reservation_page.status }}</span>
+        </li>
+        <li class="mh-reservation-summary-metric">
+          <span class="mh-reservation-summary-metric__label">Purpose</span>
+          <span class="mh-reservation-summary-metric__value">{{ reservation_page.purpose }}</span>
+        </li>
+        <li class="mh-reservation-summary-metric">
+          <span class="mh-reservation-summary-metric__label">Sessions</span>
+          <span class="mh-reservation-summary-metric__value">{{ reservation_page.sessions|length }}</span>
+        </li>
+        <li class="mh-reservation-summary-metric">
+          <span class="mh-reservation-summary-metric__label">Assets</span>
+          <span class="mh-reservation-summary-metric__value">{{ reservation_page.assets|length }}</span>
+        </li>
+        <li class="mh-reservation-summary-metric">
+          <span class="mh-reservation-summary-metric__label">Cancelled</span>
+          <span class="mh-reservation-summary-metric__value">{{ reservation_page.cancelled ? 'Yes' : 'No' }}</span>
+        </li>
+      </ul>
+      {% if reservation_page.related_event %}
+        <p class="mh-reservation-related-event mb-0">
+          <span class="mh-reservation-related-event__label">Related Event:</span>
+          <a href="{{ reservation_page.related_event.url }}">{{ reservation_page.related_event.event_title }}</a>
+        </p>
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="card mh-reservation-card">
+    <div class="card-header">
+      <h2 class="card-title h4 mb-0">Assets</h2>
+    </div>
+    <div class="card-body">
+      {% if reservation_page.assets %}
+        <ul class="mh-reservation-assets mh-reservation-assets--cards">
+          {% for asset in reservation_page.assets %}
+            <li class="mh-reservation-asset-row">
+              {% if asset.image_url %}
+                <a href="{{ asset.url }}" class="mh-reservation-asset-image-link">
+                  <img
+                    src="{{ asset.image_url }}"
+                    alt="{{ asset.image_alt }}"
+                    class="mh-reservation-asset-image"
+                    loading="lazy"
+                  >
+                </a>
+              {% endif %}
+              <a href="{{ asset.url }}" class="mh-reservation-asset-title">{{ asset.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="mb-0">No assets are linked.</p>
+      {% endif %}
+      {% if reservation_page.duplicate_assets_collapsed > 0 %}
+        <p class="mh-reservation-dedupe-note mb-0">
+          Duplicate assets hidden: {{ reservation_page.duplicate_assets_collapsed }}
+        </p>
+      {% endif %}
     </div>
   </section>
 
@@ -63,47 +113,6 @@
           Duplicate sessions hidden: {{ reservation_page.duplicate_sessions_collapsed }}
         </p>
       {% endif %}
-    </div>
-  </section>
-
-  <section class="card mh-reservation-card">
-    <div class="card-header">
-      <h2 class="card-title h4 mb-0">Assets</h2>
-    </div>
-    <div class="card-body">
-      {% if reservation_page.assets %}
-        <ul class="mh-reservation-assets">
-          {% for asset in reservation_page.assets %}
-            <li><a href="{{ asset.url }}">{{ asset.title }}</a></li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        <p class="mb-0">No assets are linked.</p>
-      {% endif %}
-      {% if reservation_page.duplicate_assets_collapsed > 0 %}
-        <p class="mh-reservation-dedupe-note mb-0">
-          Duplicate assets hidden: {{ reservation_page.duplicate_assets_collapsed }}
-        </p>
-      {% endif %}
-    </div>
-  </section>
-
-  <section class="card mh-reservation-card">
-    <div class="card-header">
-      <h2 class="card-title h4 mb-0">Related Resources</h2>
-    </div>
-    <div class="card-body">
-      <ul class="mh-reservation-resources mb-0">
-        {% if reservation_page.related_event %}
-          <li>
-            <a href="{{ reservation_page.related_event.url }}">{{ reservation_page.related_event.label }}</a>
-            <span class="mh-reservation-resource-meta">(Event ID: {{ reservation_page.related_event.event_id }})</span>
-          </li>
-        {% endif %}
-        <li><a href="/class-cancellations-policies">Event Policies</a></li>
-        <li><a href="/event-and-workshop-faq">Event and Workshop FAQ</a></li>
-        <li><a href="mailto:events@makehaven.org">events@makehaven.org</a></li>
-      </ul>
     </div>
   </section>
 

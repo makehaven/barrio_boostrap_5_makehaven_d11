@@ -60,6 +60,9 @@ function barrio_boostrap_5_makehaven_d11_preprocess_node(&$variables) {
  */
 function _barrio_boostrap_5_makehaven_d11_build_reservation_page_data(NodeInterface $node): array {
   $date_formatter = \Drupal::service('date.formatter');
+  $file_url_generator = \Drupal::service('file_url_generator');
+  $image_style_storage = \Drupal::entityTypeManager()->getStorage('image_style');
+  $thumbnail_style = $image_style_storage->load('thumbnail');
   $status_value = (string) ($node->get('field_reservation_status')->value ?? '');
   $purpose_value = (string) ($node->get('field_reservation_purpose')->value ?? '');
   $cancelled = (string) ($node->get('field_reservation_cancellation')->value ?? '') === '1';
@@ -121,17 +124,66 @@ function _barrio_boostrap_5_makehaven_d11_build_reservation_page_data(NodeInterf
       continue;
     }
     $seen_assets[$asset_id] = TRUE;
+    $image_url = NULL;
+    $image_alt = '';
+    if ($asset_node->hasField('field_item_image') && !$asset_node->get('field_item_image')->isEmpty()) {
+      $image_item = $asset_node->get('field_item_image')->first();
+      if ($image_item && $image_item->entity) {
+        $file_uri = $image_item->entity->getFileUri();
+        if ($thumbnail_style) {
+          $image_url = $thumbnail_style->buildUrl($file_uri);
+        }
+        else {
+          $image_url = $file_url_generator->generateString($file_uri);
+        }
+        $image_alt = (string) ($image_item->alt ?? '');
+      }
+    }
+
     $assets[] = [
       'title' => $asset_node->label(),
       'url' => $asset_node->toUrl()->toString(),
+      'image_url' => $image_url,
+      'image_alt' => $image_alt !== '' ? $image_alt : $asset_node->label(),
     ];
   }
 
   $related_event = NULL;
   $civicrm_event_id = (int) ($node->get('field_reservation_civicrm_event')->target_id ?? 0);
   if ($civicrm_event_id > 0) {
+    $related_event_title = '';
+
+    // Prefer explicitly linked event node title when present.
+    if ($node->hasField('field_reservation_event') && !$node->get('field_reservation_event')->isEmpty()) {
+      $event_node = $node->get('field_reservation_event')->entity;
+      if ($event_node) {
+        $related_event_title = trim((string) $event_node->label());
+      }
+    }
+
+    // Fall back to CiviCRM event title by event ID.
+    if ($related_event_title === '') {
+      try {
+        $database = \Drupal::database();
+        if ($database->schema()->tableExists('civicrm_event')) {
+          $title = $database->select('civicrm_event', 'ce')
+            ->fields('ce', ['title'])
+            ->condition('id', $civicrm_event_id)
+            ->range(0, 1)
+            ->execute()
+            ->fetchField();
+          if (is_string($title) && trim($title) !== '') {
+            $related_event_title = trim($title);
+          }
+        }
+      }
+      catch (\Throwable $e) {
+        // Keep fallback label if CiviCRM table is unavailable in this context.
+      }
+    }
+
     $related_event = [
-      'label' => 'View related event',
+      'label' => 'Related Event',
       'url' => Url::fromUri('internal:/civicrm/event/info', [
         'query' => [
           'id' => $civicrm_event_id,
@@ -139,6 +191,7 @@ function _barrio_boostrap_5_makehaven_d11_build_reservation_page_data(NodeInterf
         ],
       ])->toString(),
       'event_id' => $civicrm_event_id,
+      'event_title' => $related_event_title !== '' ? $related_event_title : 'Event ' . $civicrm_event_id,
     ];
   }
 
