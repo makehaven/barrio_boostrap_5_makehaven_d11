@@ -469,19 +469,13 @@ body.page-civicrm-event-info #crm-main-content-wrapper .event-info > .crm-action
 }
 
 body.page-civicrm-event-info #crm-main-content-wrapper .event-info table {
-  margin: 0;
-  border-collapse: collapse;
+  margin: 0 0 var(--mh-space-lg);
   width: 100%;
 }
 
 body.page-civicrm-event-info #crm-main-content-wrapper .event-info table td {
-  padding: 0.45rem 0;
-  border-bottom: 1px dashed #ddd;
-}
-
-body.page-civicrm-event-info #crm-main-content-wrapper .event-info table td:last-child {
-  text-align: right;
-  font-weight: 700;
+  text-align: left;
+  font-weight: 400;
 }
 
 body.page-civicrm-event-info #crm-main-content-wrapper .event-info table td.price_set_field-label.crm-event-label {

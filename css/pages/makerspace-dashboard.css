@@ -1,0 +1,234 @@
+/* Mobile-first readability improvements for /makerspace-dashboard pages. */
+body[class*="path-makerspace-dashboard"] .makerspace-dashboard-wrapper {
+  width: 100%;
+}
+
+body[class*="path-makerspace-dashboard"] .makerspace-dashboard-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+body[class*="path-makerspace-dashboard"] .makerspace-dashboard-tabs > li {
+  margin: 0;
+}
+
+body[class*="path-makerspace-dashboard"] .makerspace-dashboard-tabs > li > a {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d9dee5;
+  border-radius: 0.5rem;
+  line-height: 1.25;
+  text-decoration: none;
+}
+
+body[class*="path-makerspace-dashboard"] .kpi-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+}
+
+body[class*="path-makerspace-dashboard"] .kpi-legend-item {
+  display: inline-flex;
+  align-items: center;
+}
+
+body[class*="path-makerspace-dashboard"] .table-responsive {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 991.98px) {
+  body[class*="path-makerspace-dashboard"] .overview-kpi-section-link {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  body[class*="path-makerspace-dashboard"] .overview-kpi-section-link a {
+    white-space: nowrap;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table thead {
+    display: none;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table,
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table tbody,
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table tr,
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table td {
+    display: block;
+    width: 100%;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table tr {
+    border: 1px solid #dde3ea;
+    border-radius: 0.5rem;
+    background: #fff;
+    margin: 0 0 0.85rem;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-areas:
+      "title title title"
+      "current goal26 goal30"
+      "trend trend trend";
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table td {
+    border: 0;
+    border-top: 1px solid #eef2f6;
+    padding: 0.625rem 0.75rem;
+    text-align: left;
+    vertical-align: middle;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    float: none !important;
+    clear: both;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table td:first-child {
+    border-top: 0;
+    background: #f7f9fc;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table td:nth-child(1) {
+    grid-area: title;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table td:nth-child(2) {
+    grid-area: current;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table td:nth-child(3) {
+    grid-area: goal26;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table td:nth-child(4) {
+    grid-area: goal30;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table td:nth-child(5) {
+    grid-area: trend;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table td:not(:first-child)::before {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #5f6f82;
+    margin-bottom: 0.2rem;
+    font-weight: 600;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table td:nth-child(2)::before {
+    content: "Current";
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table td:nth-child(3)::before {
+    content: "Goal 2026";
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table td:nth-child(4)::before {
+    content: "Goal 2030";
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table td:nth-child(5)::before {
+    content: "Trend";
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-overview-label-cell,
+  body[class*="path-makerspace-dashboard"] .kpi-value-cell,
+  body[class*="path-makerspace-dashboard"] .kpi-value-big,
+  body[class*="path-makerspace-dashboard"] .kpi-sparkline-wrapper {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-overview-label-cell {
+    display: flex !important;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-current-cell .kpi-value-cell {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-goal-cell .kpi-value-big,
+  body[class*="path-makerspace-dashboard"] .kpi-current-cell .kpi-value-big {
+    display: inline-block !important;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table td:nth-child(2),
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table td:nth-child(3),
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table td:nth-child(4) {
+    text-align: center;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table td:nth-child(2)::before,
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table td:nth-child(3)::before,
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table td:nth-child(4)::before {
+    text-align: center;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table td[attributes="kpi-sparkline-cell"] {
+    display: block !important;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-sparkline-wrapper {
+    display: flex !important;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-sparkline-wrapper svg {
+    display: block;
+    width: 100% !important;
+    max-width: none !important;
+    height: 58px;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-title {
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-description {
+    font-size: 0.875rem;
+    line-height: 1.35;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-value-big {
+    font-size: 1.35rem;
+    line-height: 1.1;
+  }
+}
+
+@media (max-width: 575.98px) {
+  body[class*="path-makerspace-dashboard"] .makerspace-dashboard-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  body[class*="path-makerspace-dashboard"] .makerspace-dashboard-tabs > li > a {
+    min-height: 100%;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-legend-item {
+    width: 100%;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table td {
+    padding: 0.6rem 0.65rem;
+  }
+}
