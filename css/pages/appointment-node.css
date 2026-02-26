@@ -1,0 +1,198 @@
+/* Appointment node page */
+
+body.page-node-type-appointment,
+body.path-appointment {
+  background:
+    radial-gradient(circle at 10% 0%, rgb(139 25 25 / 0.08), transparent 42%),
+    linear-gradient(180deg, #fff 0%, #f7f8fa 100%);
+}
+
+body.page-node-type-appointment #main-wrapper,
+body.path-appointment #main-wrapper {
+  max-width: min(1050px, 96vw);
+  margin: 0 auto;
+}
+
+body.page-node-type-appointment article.node--type-appointment,
+body.path-appointment article.node--type-appointment {
+  max-width: min(920px, 100%);
+  margin: 0 auto var(--mh-space-2xl);
+  padding: clamp(1rem, 2.5vw, 2rem);
+  border: 1px solid var(--mh-color-border);
+  border-radius: var(--mh-radius-lg);
+  background: var(--mh-color-surface);
+  box-shadow: var(--mh-shadow-sm);
+}
+
+body.page-node-type-appointment article.node--type-appointment .node__content,
+body.path-appointment article.node--type-appointment .node__content {
+  display: grid;
+  gap: var(--mh-space-sm);
+}
+
+body.page-node-type-appointment article.node--type-appointment .field,
+body.path-appointment article.node--type-appointment .field {
+  margin: 0;
+}
+
+body.page-node-type-appointment article.node--type-appointment .field--label-inline,
+body.path-appointment article.node--type-appointment .field--label-inline {
+  display: grid;
+  grid-template-columns: minmax(9rem, 14rem) minmax(0, 1fr);
+  align-items: start;
+  gap: var(--mh-space-xs) var(--mh-space-md);
+  padding: var(--mh-space-sm) var(--mh-space-md);
+  border: 1px solid var(--mh-color-neutral-150);
+  border-radius: var(--mh-radius-md);
+  background: linear-gradient(180deg, #ffffff 0%, #fbfbfb 100%);
+}
+
+body.page-node-type-appointment article.node--type-appointment .field--label-above,
+body.path-appointment article.node--type-appointment .field--label-above {
+  padding: var(--mh-space-sm) var(--mh-space-md);
+  border: 1px solid var(--mh-color-neutral-150);
+  border-radius: var(--mh-radius-md);
+  background: linear-gradient(180deg, #ffffff 0%, #fbfbfb 100%);
+}
+
+body.page-node-type-appointment article.node--type-appointment .field__label,
+body.path-appointment article.node--type-appointment .field__label {
+  margin: 0;
+  color: var(--mh-color-neutral-700);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.045em;
+  font-weight: 700;
+}
+
+body.page-node-type-appointment article.node--type-appointment .field__item,
+body.path-appointment article.node--type-appointment .field__item {
+  margin: 0;
+  color: var(--mh-color-neutral-900);
+  line-height: 1.45;
+}
+
+body.page-node-type-appointment article.node--type-appointment
+.field--name-field-appointment-status
+.field__item,
+body.page-node-type-appointment article.node--type-appointment
+.field--name-field-appointment-slot
+.field__item,
+body.path-appointment article.node--type-appointment
+.field--name-field-appointment-status
+.field__item,
+body.path-appointment article.node--type-appointment
+.field--name-field-appointment-slot
+.field__item {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  border-radius: var(--mh-radius-pill);
+  padding: 0.2rem 0.65rem;
+  background: #f5ecec;
+  border: 1px solid #e2cbcb;
+  color: var(--mh-color-brand-primary-strong);
+  font-weight: 700;
+}
+
+body.page-node-type-appointment article.node--type-appointment
+.field--name-field-appointment-date
+.field__item,
+body.page-node-type-appointment article.node--type-appointment
+.field--name-field-appointment-timerange
+.field__item,
+body.path-appointment article.node--type-appointment
+.field--name-field-appointment-date
+.field__item,
+body.path-appointment article.node--type-appointment
+.field--name-field-appointment-timerange
+.field__item {
+  font-weight: 600;
+}
+
+body.page-node-type-appointment article.node--type-appointment
+.field--name-field-appointment-attendees
+.field__items,
+body.page-node-type-appointment article.node--type-appointment
+.field--name-field-appointment-badges
+.field__items,
+body.page-node-type-appointment article.node--type-appointment
+.field--name-field-appointment-host
+.field__items,
+body.path-appointment article.node--type-appointment
+.field--name-field-appointment-attendees
+.field__items,
+body.path-appointment article.node--type-appointment
+.field--name-field-appointment-badges
+.field__items,
+body.path-appointment article.node--type-appointment
+.field--name-field-appointment-host
+.field__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mh-space-xs);
+}
+
+body.page-node-type-appointment article.node--type-appointment
+.field--name-field-appointment-attendees
+.field__item,
+body.page-node-type-appointment article.node--type-appointment
+.field--name-field-appointment-badges
+.field__item,
+body.page-node-type-appointment article.node--type-appointment
+.field--name-field-appointment-host
+.field__item,
+body.path-appointment article.node--type-appointment
+.field--name-field-appointment-attendees
+.field__item,
+body.path-appointment article.node--type-appointment
+.field--name-field-appointment-badges
+.field__item,
+body.path-appointment article.node--type-appointment
+.field--name-field-appointment-host
+.field__item {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.65rem;
+  border: 1px solid var(--mh-color-neutral-200);
+  border-radius: var(--mh-radius-pill);
+  background: var(--mh-color-neutral-100);
+}
+
+body.page-node-type-appointment article.node--type-appointment
+.field--name-field-appointment-note
+.field__item,
+body.page-node-type-appointment article.node--type-appointment
+.field--name-field-appointment-feedback
+.field__item,
+body.path-appointment article.node--type-appointment
+.field--name-field-appointment-note
+.field__item,
+body.path-appointment article.node--type-appointment
+.field--name-field-appointment-feedback
+.field__item {
+  padding: var(--mh-space-sm) var(--mh-space-md);
+  border: 1px solid var(--mh-color-neutral-150);
+  border-radius: var(--mh-radius-md);
+  background: var(--mh-color-surface-muted);
+}
+
+@media (max-width: 900px) {
+  body.page-node-type-appointment article.node--type-appointment,
+  body.path-appointment article.node--type-appointment {
+    margin-bottom: var(--mh-space-xl);
+  }
+}
+
+@media (max-width: 768px) {
+  body.page-node-type-appointment article.node--type-appointment .field--label-inline,
+  body.path-appointment article.node--type-appointment .field--label-inline {
+    grid-template-columns: 1fr;
+    gap: var(--mh-space-2xs);
+  }
+
+  body.page-node-type-appointment article.node--type-appointment .field--label-inline .field__label,
+  body.path-appointment article.node--type-appointment .field--label-inline .field__label {
+    margin-bottom: 0.15rem;
+  }
+}

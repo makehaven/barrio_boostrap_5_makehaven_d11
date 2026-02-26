@@ -167,6 +167,26 @@ body.path-badges-complete {
   text-decoration: underline;
 }
 
+/* Pending-since notice */
+.badge-pending-notice {
+  display: flex;
+  align-items: center;
+  gap: var(--mh-space-xs);
+  background: #fff8e1;
+  border: 1px solid #ffe082;
+  border-radius: var(--mh-radius-md);
+  padding: var(--mh-space-xs) var(--mh-space-md);
+  font-size: 0.88rem;
+  color: #5a3e00;
+  margin: 0 0 var(--mh-space-md);
+}
+
+.badge-pending-notice::before {
+  content: '⏳';
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+
 /* Option blocks within a card */
 .badge-options {
   display: flex;
@@ -188,6 +208,17 @@ body.path-badges-complete {
   color: var(--mh-color-neutral-700);
   text-transform: uppercase;
   letter-spacing: 0.04em;
+}
+
+.badge-option--scheduled {
+  border-left-color: var(--mh-color-success);
+  background: #f0fdf4;
+}
+
+.badge-scheduled-notice {
+  font-size: 0.95rem;
+  color: var(--mh-color-neutral-800);
+  margin: 0 0 var(--mh-space-xs);
 }
 
 .badge-option--join    { border-left-color: var(--mh-color-success); }
@@ -310,6 +341,65 @@ body.path-badges-complete {
 .badge-private-link:hover {
   color: var(--mh-color-brand-primary);
   text-decoration: underline;
+}
+
+/* ─── /appointment/{node}/join page ─────────────────────────────────────────── */
+
+.join-session-meta {
+  font-size: 1rem;
+  color: var(--mh-color-neutral-700);
+  margin-bottom: var(--mh-space-lg);
+}
+
+.join-section {
+  margin-bottom: var(--mh-space-lg);
+}
+
+.join-section-heading {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--mh-color-neutral-500);
+  margin: 0 0 var(--mh-space-xs);
+}
+
+.join-badge-item {
+  display: flex;
+  align-items: baseline;
+  gap: var(--mh-space-xs);
+  padding: var(--mh-space-2xs) 0;
+  font-size: 0.95rem;
+}
+
+.join-badge-status {
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: var(--mh-radius-pill);
+  padding: 0.1em 0.55em;
+}
+
+.join-badge-status--pending {
+  background: #d1fadf;
+  color: #165c35;
+}
+
+.join-badge-status--not-pending {
+  background: var(--mh-color-neutral-100);
+  color: var(--mh-color-neutral-500);
+}
+
+.join-badge-hint {
+  font-size: 0.82rem;
+  color: var(--mh-color-neutral-500);
+  margin: var(--mh-space-xs) 0 0;
+  font-style: italic;
+}
+
+.join-attendee-names {
+  font-size: 0.95rem;
+  color: var(--mh-color-neutral-700);
+  margin: 0;
 }
 
 /* Badge pending summary hint on the appointment form */

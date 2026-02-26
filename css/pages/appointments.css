@@ -1,0 +1,146 @@
+/* Appointments listing pages (/appointments and /appointments/*). */
+
+body.path-appointments,
+body[class*="path-appointments-"] {
+  background:
+    radial-gradient(circle at 12% 0%, rgb(120 192 243 / 0.2), transparent 36%),
+    radial-gradient(circle at 88% 8%, rgb(139 25 25 / 0.08), transparent 32%),
+    linear-gradient(180deg, #fff 0%, #f5f7fa 100%);
+}
+
+body.path-appointments #main-wrapper,
+body[class*="path-appointments-"] #main-wrapper {
+  max-width: min(1320px, 98vw);
+}
+
+/* Primary wrapper for all appointment views. */
+body .view.view-id-appointments {
+  background: var(--mh-color-surface);
+  border: 1px solid var(--mh-color-border);
+  border-radius: var(--mh-radius-lg);
+  box-shadow: var(--mh-shadow-sm);
+  padding: clamp(0.85rem, 2vw, 1.4rem);
+}
+
+/* Header + exposed filters. */
+body .view.view-id-appointments .view-header,
+body .view.view-id-appointments .view-filters {
+  background: var(--mh-color-surface-muted);
+  border: 1px solid var(--mh-color-neutral-200);
+  border-radius: var(--mh-radius-md);
+  padding: var(--mh-space-md);
+  margin-bottom: var(--mh-space-md);
+}
+
+body .view.view-id-appointments .views-exposed-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mh-space-sm) var(--mh-space-md);
+  align-items: end;
+}
+
+body .view.view-id-appointments .views-exposed-form .form-item,
+body .view.view-id-appointments .views-exposed-form .form-actions {
+  margin: 0;
+}
+
+body .view.view-id-appointments .views-exposed-form .form-actions .button,
+body .view.view-id-appointments .views-exposed-form .form-actions .btn {
+  min-height: 2.5rem;
+}
+
+/* Appointment table modernized for readability. */
+body .view.view-id-appointments .view-content table {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--mh-shadow-xs);
+}
+
+body .view.view-id-appointments .view-content table thead th {
+  background: #eef2f7;
+  color: var(--mh-color-neutral-900) !important;
+  border-bottom-color: #d3dce8;
+  white-space: nowrap;
+}
+
+body .view.view-id-appointments .view-content table tbody tr:hover {
+  background-color: #f8fbff;
+}
+
+body .view.view-id-appointments .view-content table td {
+  vertical-align: top;
+}
+
+/* Keep date/time and action columns compact. */
+body .view.view-id-appointments .view-content table .views-field-field-appointment-date,
+body .view.view-id-appointments .view-content table .views-field-field-appointment-timerange,
+body .view.view-id-appointments .view-content table .views-field-nothing {
+  white-space: nowrap;
+}
+
+/* Action buttons in table rows should look intentional and legible. */
+body .view.view-id-appointments .view-content table .btn,
+body .view.view-id-appointments .view-content table a.btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-width: 5.8rem;
+  border-radius: var(--mh-radius-pill) !important;
+  padding: 0.28rem 0.72rem !important;
+  font-weight: 600;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+
+body .view.view-id-appointments .view-content table .btn-outline-primary,
+body .view.view-id-appointments .view-content table a.btn-outline-primary {
+  background: #fff !important;
+  border: 1px solid #8fb6db !important;
+  color: #205683 !important;
+}
+
+body .view.view-id-appointments .view-content table .btn-outline-primary:hover,
+body .view.view-id-appointments .view-content table a.btn-outline-primary:hover {
+  background: #205683 !important;
+  border-color: #205683 !important;
+  color: #fff !important;
+}
+
+body .view.view-id-appointments .view-content table .btn-outline-secondary,
+body .view.view-id-appointments .view-content table a.btn-outline-secondary {
+  background: #fff !important;
+  border: 1px solid #cab7b7 !important;
+  color: #6f3a3a !important;
+}
+
+body .view.view-id-appointments .view-content table .btn-outline-secondary:hover,
+body .view.view-id-appointments .view-content table a.btn-outline-secondary:hover {
+  background: #6f3a3a !important;
+  border-color: #6f3a3a !important;
+  color: #fff !important;
+}
+
+/* Mobile: keep table usable with horizontal scroll and tighter spacing. */
+@media (max-width: 900px) {
+  body .view.view-id-appointments {
+    padding: var(--mh-space-sm);
+  }
+
+  body .view.view-id-appointments .view-content {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body .view.view-id-appointments .view-content table {
+    min-width: 860px;
+    margin-bottom: var(--mh-space-sm);
+  }
+
+  body .view.view-id-appointments .view-filters {
+    padding: var(--mh-space-sm);
+  }
+
+  body .view.view-id-appointments .views-exposed-form {
+    gap: var(--mh-space-xs);
+  }
+}

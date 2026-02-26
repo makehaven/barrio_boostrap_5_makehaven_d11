@@ -50,6 +50,8 @@ global-styling:
       css/pages/tools.css: {}
       css/pages/events-calendar.css: {}
       css/pages/reservation-node.css: {}
+      css/pages/appointment-node.css: {}
+      css/pages/appointments.css: {}
       css/pages/makerspace-dashboard.css: {}
       css/colors.css: {}
       css/pages/events-modern.css: {}
