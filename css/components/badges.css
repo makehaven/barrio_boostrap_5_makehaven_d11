@@ -241,22 +241,64 @@ body.path-badges-complete {
   font-size: 0.82rem;
 }
 
-/* Facilitator items */
-.facilitator-item {
-  display: flex;
-  align-items: center;
-  gap: var(--mh-space-sm);
-  padding: var(--mh-space-xs) 0;
-  border-bottom: 1px solid var(--mh-color-neutral-150);
-  flex-wrap: wrap;
+/* Facilitator card grid */
+.badge-option--book .badge-options-inner,
+.badge-option--book > .facilitator-card ~ .facilitator-card,
+.badge-option--book {
+  /* cards are direct children; use CSS grid on the parent option block */
 }
 
-.facilitator-item:last-child { border-bottom: none; }
+.badge-option--book {
+  display: block; /* override any flex */
+}
+
+.badge-option--book .facilitator-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: var(--mh-space-sm);
+  margin-top: var(--mh-space-sm);
+}
+
+.facilitator-card {
+  background: var(--mh-color-surface);
+  border: 1px solid var(--mh-color-neutral-200);
+  border-radius: var(--mh-radius-md);
+  padding: var(--mh-space-sm) var(--mh-space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--mh-space-2xs);
+}
 
 .facilitator-name {
+  display: block;
   font-weight: 600;
   font-size: 0.9rem;
   color: var(--mh-color-neutral-800);
+}
+
+.facilitator-hours {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--mh-color-neutral-500);
+  margin-bottom: var(--mh-space-xs);
+}
+
+.facilitator-schedule-btn {
+  align-self: flex-start;
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: var(--mh-radius-pill);
+  border: 1.5px solid var(--mh-color-brand-primary);
+  color: var(--mh-color-brand-primary);
+  text-decoration: none;
+  transition: background var(--mh-transition-fast), color var(--mh-transition-fast);
+}
+
+.facilitator-schedule-btn:hover {
+  background: var(--mh-color-brand-primary);
+  color: #fff;
 }
 
 .badge-private-link {
