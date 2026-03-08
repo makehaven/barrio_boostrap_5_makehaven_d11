@@ -128,3 +128,11 @@ body.path-i .field--name-field-item-requirements .field__item {
   border-radius: var(--mh-radius-md);
   padding: var(--mh-space-md);
 }
+
+/* Chatbot: prevent the fixed-position widget from growing above the viewport top.
+   The container uses position:fixed; bottom:0 with no max-height, so a long
+   conversation can push it off the top of the screen with no way to scroll. */
+.node--type-item .ai-deepchat.chat-container {
+  max-height: calc(100vh - 60px);
+  overflow: hidden;
+}
