@@ -4,6 +4,7 @@ global-styling:
     js/global.js: {}
     js/sidebar-menu-fix.js: {} # Add the new JS file here
     js/events-info-hero.js: {}
+    js/interest-hierarchy.js: {}
   css:
     base:
       css/base/tokens.css: {}
@@ -37,6 +38,7 @@ global-styling:
       css/components/images.css: {}
       css/components/navigation.css: {}
       css/components/member-icons.css: {}
+      css/components/interest-hierarchy.css: {}
     theme:
       css/pages/frontpage.css: {}
       css/pages/taxonomy.css: {}

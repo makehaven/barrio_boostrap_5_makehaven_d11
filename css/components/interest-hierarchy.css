@@ -1,0 +1,22 @@
+.interest-parent-category label,
+.interest-parent-category .chosen-results,
+.chosen-container .chosen-results li.interest-parent-category {
+  font-weight: 700;
+}
+
+.interest-subcategory,
+.chosen-container .chosen-results li.interest-subcategory {
+  padding-left: 1.25rem;
+}
+
+.interest-subcategory label {
+  padding-left: 1.25rem;
+}
+
+.interest-parent-only label {
+  cursor: default;
+}
+
+.interest-parent-only input.form-checkbox {
+  pointer-events: none;
+}
