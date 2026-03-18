@@ -2,9 +2,10 @@ global-styling:
   version: VERSION
   js:
     js/global.js: {}
-    js/sidebar-menu-fix.js: {} # Add the new JS file here
+    js/sidebar-menu-fix.js: {}
     js/events-info-hero.js: {}
     js/interest-hierarchy.js: {}
+    js/badges.js: {}
   css:
     base:
       css/base/tokens.css: {}

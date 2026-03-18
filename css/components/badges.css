@@ -1,432 +1,471 @@
-/* ─── Legacy: badges-earned-block view table rows ─────────────────────────── */
+/* ============================================================
+   Badges — barrio_boostrap_5_makehaven_d11 (public / anonymous)
+   ============================================================ */
 
-.view-badges-earned-block tr.Pending {
-  background: #ffa50087;
+/* ── Layout ──────────────────────────────────────────────── */
+.path-badges .region-content,
+.path-taxonomy-term-badges .region-content {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.view-badges-earned-block tr.Duplicate,
-.view-badges-earned-block tr.Suspended,
-.view-badges-earned-block tr.Expired,
-.view-badges-earned-block tr.Rejected {
-  background: #ff000061;
-  border: 3px solid #c00101;
+/* ── Page title ──────────────────────────────────────────── */
+.path-badges h1.page-title {
+  font-weight: 900;
+  color: #222;
+  border-bottom: 4px solid #b22222;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
 }
 
-.view-badges-earned-block tr.Active {
-  background: #ffffff;
-  border-bottom: 3px solid #7d7d7d;
-}
+/* ============================================================
+   BADGE DIRECTORY (grid listing at /badges)
+   ============================================================ */
 
-/* ─── /badges/my — member badge history ────────────────────────────────────── */
-
-body.path-badges-my {
-  background:
-    radial-gradient(circle at 10% 0%, rgb(139 25 25 / 0.06), transparent 40%),
-    radial-gradient(circle at 90% 5%, rgb(120 192 243 / 0.12), transparent 38%),
-    linear-gradient(180deg, #fff 0%, #f5f7fa 100%);
-}
-
-/* Area-of-interest section */
-.badge-area-section {
-  margin-bottom: var(--mh-space-2xl);
-}
-
-.badge-area-heading {
-  font-family: var(--mh-font-display);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--mh-color-neutral-800);
-  border-bottom: 2px solid var(--mh-color-brand-primary);
-  padding-bottom: var(--mh-space-xs);
-  margin-bottom: var(--mh-space-lg);
-}
-
-/* Card grid */
-.badge-cards {
+.view-badges .view-content {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: var(--mh-space-md);
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 2.5rem;
+  margin-top: 2rem;
 }
 
-/* Individual badge card */
-.badge-card {
-  background: var(--mh-color-surface);
-  border: 1px solid var(--mh-color-border);
-  border-radius: var(--mh-radius-lg);
-  box-shadow: var(--mh-shadow-xs);
-  padding: var(--mh-space-md);
+.view-badges .views-row {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: var(--mh-space-xs);
+  overflow: hidden;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.04);
+  transition: all 0.25s ease;
+  height: 100%;
+}
+.view-badges .views-row:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+  border-color: #b22222;
+}
+
+.view-badges .views-row .barrio_col2-equal {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.view-badges .views-row .region-first {
+  padding: 2rem 1.5rem 1rem;
   text-align: center;
-  transition: box-shadow var(--mh-transition-base), transform var(--mh-transition-base);
+  flex-grow: 1;
 }
-
-.badge-card:hover {
-  box-shadow: var(--mh-shadow-md);
-  transform: translateY(-2px);
+.view-badges .views-row h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #222;
+  border: none;
 }
-
-.badge-card--active  { border-top: 3px solid var(--mh-color-success); }
-.badge-card--pending { border-top: 3px solid var(--mh-color-warning); }
-.badge-card--suspended,
-.badge-card--expired { border-top: 3px solid var(--mh-color-neutral-400); }
-.badge-card--rejected { border-top: 3px solid var(--mh-color-danger); }
-
-.badge-card__image img {
-  width: 72px;
-  height: 72px;
-  object-fit: contain;
-  border-radius: var(--mh-radius-md);
-}
-
-.badge-card__name {
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--mh-color-neutral-800);
-  text-decoration: none;
-  line-height: 1.3;
-}
-
-.badge-card__name:hover {
-  color: var(--mh-color-brand-primary);
-  text-decoration: underline;
-}
-
-.badge-card__date {
-  font-size: 0.78rem;
-  color: var(--mh-color-neutral-500);
-}
-
-.badge-card__action {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--mh-color-brand-primary);
-  text-decoration: none;
-  margin-top: auto;
-  padding-top: var(--mh-space-2xs);
-}
-
-.badge-card__action:hover {
-  color: var(--mh-color-brand-primary-strong);
-  text-decoration: underline;
-}
-
-/* Status chip */
-.badge-status {
-  display: inline-block;
-  padding: 0.15em 0.6em;
-  border-radius: var(--mh-radius-pill);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.badge-status--active    { background: #d1fadf; color: #165c35; }
-.badge-status--pending   { background: #fff3cd; color: #7a4f00; }
-.badge-status--suspended { background: #fff0e0; color: #7a3b00; }
-.badge-status--expired   { background: var(--mh-color-neutral-100); color: var(--mh-color-neutral-600); }
-.badge-status--rejected  { background: #fde8e8; color: #7a0000; }
-
-/* ─── /badges/complete — complete your pending badges ───────────────────────── */
-
-body.path-badges-complete {
-  background:
-    radial-gradient(circle at 12% 0%, rgb(120 192 243 / 0.18), transparent 36%),
-    radial-gradient(circle at 88% 8%, rgb(139 25 25 / 0.06), transparent 32%),
-    linear-gradient(180deg, #fff 0%, #f5f7fa 100%);
-}
-
-/* Per-badge card */
-.badge-next-step-card {
-  background: var(--mh-color-surface);
-  border: 1px solid var(--mh-color-border);
-  border-radius: var(--mh-radius-lg);
-  box-shadow: var(--mh-shadow-sm);
-  padding: var(--mh-space-lg);
-  margin-bottom: var(--mh-space-xl);
-}
-
-.badge-card-title {
-  font-family: var(--mh-font-display);
-  font-size: 1.15rem;
-  font-weight: 700;
-  margin: 0 0 var(--mh-space-md);
-  color: var(--mh-color-neutral-900);
-}
-
-.badge-card-title a {
+.view-badges .views-row h2 a {
   color: inherit;
   text-decoration: none;
 }
-
-.badge-card-title a:hover {
-  color: var(--mh-color-brand-primary);
-  text-decoration: underline;
+.view-badges .views-row .field--name-field-member-badge-image {
+  margin-bottom: 1.25rem;
 }
-
-/* Pending-since notice */
-.badge-pending-notice {
-  display: flex;
-  align-items: center;
-  gap: var(--mh-space-xs);
-  background: #fff8e1;
-  border: 1px solid #ffe082;
-  border-radius: var(--mh-radius-md);
-  padding: var(--mh-space-xs) var(--mh-space-md);
-  font-size: 0.88rem;
-  color: #5a3e00;
-  margin: 0 0 var(--mh-space-md);
+.view-badges .views-row .field--name-field-member-badge-image img {
+  max-width: 130px;
+  height: auto;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.1));
 }
-
-.badge-pending-notice::before {
-  content: '⏳';
-  flex-shrink: 0;
-  font-size: 1rem;
-}
-
-/* Option blocks within a card */
-.badge-options {
-  display: flex;
-  flex-direction: column;
-  gap: var(--mh-space-sm);
-}
-
-.badge-option {
-  padding: var(--mh-space-sm) var(--mh-space-md);
-  border-radius: var(--mh-radius-md);
-  background: var(--mh-color-surface-muted);
-  border-left: 4px solid var(--mh-color-neutral-300);
-}
-
-.badge-option h4 {
-  font-size: 0.9rem;
-  font-weight: 700;
-  margin: 0 0 var(--mh-space-xs);
-  color: var(--mh-color-neutral-700);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.badge-option--scheduled {
-  border-left-color: var(--mh-color-success);
-  background: #f0fdf4;
-}
-
-.badge-scheduled-notice {
+.view-badges .views-row .description {
   font-size: 0.95rem;
-  color: var(--mh-color-neutral-800);
-  margin: 0 0 var(--mh-space-xs);
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.view-badges .views-row .region-second {
+  background: #fdfdfd;
+  border-top: 1px solid #f0f0f0;
+  padding: 1.25rem 1.5rem;
+}
+.view-badges .views-row .region-second .field {
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  color: #444;
+}
+.view-badges .views-row .region-second .field__label {
+  font-weight: 800;
+  color: #888;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  margin-right: 5px;
+}
+.view-badges .views-row .field--name-field-badge-quiz-reference a {
+  display: block;
+  background: #b22222;
+  color: #fff !important;
+  text-align: center;
+  padding: 8px;
+  border-radius: 8px;
+  font-weight: 800;
+  text-decoration: none;
+  margin-top: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.8rem;
+  box-shadow: 0 3px 0 #8b0000;
 }
 
-.badge-option--join    { border-left-color: var(--mh-color-success); }
-.badge-option--event   { border-left-color: var(--mh-color-brand-secondary); }
-.badge-option--book    { border-left-color: var(--mh-color-brand-primary); }
-.badge-option--none    { border-left-color: var(--mh-color-neutral-300); }
-.badge-option--private {
-  background: transparent;
-  border-left-color: transparent;
-  padding-left: var(--mh-space-md);
+/* ============================================================
+   BADGE DETAIL PAGE (individual badge at /badges/waterjet)
+   ============================================================ */
+
+/* ── Badge image ─────────────────────────────────────────── */
+.path-badges .field--name-field-member-badge-image {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.path-badges .field--name-field-member-badge-image img {
+  max-width: 120px;
+  height: auto;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15));
 }
 
-.badge-option-note {
-  font-size: 0.82rem;
-  color: var(--mh-color-neutral-500);
-  margin: 0 0 var(--mh-space-xs);
-}
-
-/* Appointment slot rows */
-.appointment-slot-row {
+/* ── Checkout requirement notice ─────────────────────────── */
+.field--name-field-badge-checkout-requirement {
   display: flex;
   align-items: center;
-  gap: var(--mh-space-sm);
-  padding: var(--mh-space-xs) 0;
-  border-bottom: 1px solid var(--mh-color-neutral-150);
-  flex-wrap: wrap;
+  gap: 0.75rem;
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 10px;
+  padding: 0.9rem 1.25rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #664d03;
+}
+.field--name-field-badge-checkout-requirement::before {
+  content: "🎓";
+  font-size: 1.4rem;
+  flex-shrink: 0;
 }
 
-.appointment-slot-row:last-child {
-  border-bottom: none;
+/* ── Step counter reset ──────────────────────────────────── */
+.layout--onecol {
+  counter-reset: badge-step;
 }
 
-.slot-info {
-  flex: 1;
-  font-size: 0.9rem;
-  color: var(--mh-color-neutral-700);
+/* ── Section cards ───────────────────────────────────────── */
+.group-videos,
+.group-quiz,
+.group-contact-badger,
+.group-prerequisite,
+.group-timestamps {
+  background: #fff;
+  border: 1px solid #dcdcdc;
+  border-radius: 14px;
+  padding: 1.75rem 2rem;
+  margin-bottom: 1.75rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
 }
 
-/* Event items */
-.event-item {
-  padding: var(--mh-space-xs) 0;
-  font-size: 0.9rem;
-  border-bottom: 1px solid var(--mh-color-neutral-150);
+/* Numbered step sections */
+.group-videos,
+.group-quiz,
+.group-contact-badger {
+  counter-increment: badge-step;
+  border-left: 4px solid #b22222;
 }
 
-.event-item:last-child { border-bottom: none; }
-
-.event-date {
-  color: var(--mh-color-neutral-500);
-  margin-right: var(--mh-space-xs);
-  font-size: 0.82rem;
-}
-
-/* Facilitator card grid */
-.badge-option--book .badge-options-inner,
-.badge-option--book > .facilitator-card ~ .facilitator-card,
-.badge-option--book {
-  /* cards are direct children; use CSS grid on the parent option block */
-}
-
-.badge-option--book {
-  display: block; /* override any flex */
-}
-
-.badge-option--book .facilitator-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-  gap: var(--mh-space-sm);
-  margin-top: var(--mh-space-sm);
-}
-
-.facilitator-card {
-  background: var(--mh-color-surface);
-  border: 1px solid var(--mh-color-neutral-200);
-  border-radius: var(--mh-radius-md);
-  padding: var(--mh-space-sm) var(--mh-space-md);
+.group-videos > legend,
+.group-quiz > legend,
+.group-contact-badger > legend {
+  font-weight: 900;
+  font-size: 1.2rem;
+  color: #b22222;
+  padding: 0 0.75rem;
   display: flex;
-  flex-direction: column;
-  gap: var(--mh-space-2xs);
+  align-items: center;
+  gap: 0.6rem;
 }
-
-.facilitator-name {
-  display: block;
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--mh-color-neutral-800);
-}
-
-.facilitator-hours {
-  display: block;
-  font-size: 0.78rem;
-  color: var(--mh-color-neutral-500);
-  margin-bottom: var(--mh-space-xs);
-}
-
-.facilitator-schedule-btn {
-  align-self: flex-start;
-  display: inline-block;
-  padding: 0.25rem 0.75rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  border-radius: var(--mh-radius-pill);
-  border: 1.5px solid var(--mh-color-brand-primary);
-  color: var(--mh-color-brand-primary);
-  text-decoration: none;
-  transition: background var(--mh-transition-fast), color var(--mh-transition-fast);
-}
-
-.facilitator-schedule-btn:hover {
-  background: var(--mh-color-brand-primary);
+.group-videos > legend::before,
+.group-quiz > legend::before,
+.group-contact-badger > legend::before {
+  content: counter(badge-step);
+  background: #b22222;
   color: #fff;
-}
-
-.badge-private-link {
   font-size: 0.85rem;
-  color: var(--mh-color-neutral-500);
-  text-decoration: none;
+  font-weight: 900;
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
-.badge-private-link:hover {
-  color: var(--mh-color-brand-primary);
+.group-prerequisite > legend,
+.group-timestamps > legend {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #555;
+  padding: 0 0.5rem;
+}
+
+/* ── Video embed ─────────────────────────────────────────── */
+.group-videos .field--name-field-badge-video {
+  margin-bottom: 1rem;
+}
+.group-videos iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  background: #000;
+}
+
+/* ── Video transcript details ────────────────────────────── */
+.group-video-transcript {
+  margin-top: 1rem;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.group-video-transcript > summary {
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #555;
+  cursor: pointer;
+  background: #f8f9fa;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  user-select: none;
+}
+.group-video-transcript > summary::marker,
+.group-video-transcript > summary::-webkit-details-marker {
+  display: none;
+}
+.group-video-transcript > summary::before {
+  content: "▶";
+  font-size: 0.7rem;
+  transition: transform 0.2s;
+  color: #888;
+}
+.group-video-transcript[open] > summary::before {
+  transform: rotate(90deg);
+}
+.group-video-transcript .details-wrapper {
+  padding: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: #444;
+}
+
+/* ── Quiz button ─────────────────────────────────────────── */
+.group-quiz .field--name-field-badge-quiz-reference a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #b22222;
+  color: #fff !important;
+  padding: 0.75rem 1.75rem;
+  border-radius: 8px;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 4px 0 #8b0000;
+  transition: all 0.15s;
+  font-size: 1rem;
+}
+.group-quiz .field--name-field-badge-quiz-reference a:hover {
+  background: #8b0000;
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #6b0000;
+}
+
+/* ── Training docs button ────────────────────────────────── */
+.group-prerequisite .field--name-field-training-documentation a,
+.field--name-field-training-documentation a {
+  display: inline-flex;
+  align-items: center;
+  background: #0d6efd;
+  color: #fff !important;
+  padding: 0.65rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.15s;
+  margin-top: 0.5rem;
+}
+.group-prerequisite .field--name-field-training-documentation a:hover {
+  background: #0b5ed7;
+}
+
+/* ── Complete Checkout section details ───────────────────── */
+.group-contact-badger .field--name-field-badge-checkout-minutes {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.75rem;
+}
+.group-contact-badger .field--name-field-badge-issuer,
+.group-contact-badger .field--name-field-badge-issuer-on-request {
+  margin-bottom: 0.75rem;
+}
+.group-contact-badger .field__label {
+  font-weight: 700;
+  color: #444;
+}
+.group-contact-badger .field--name-field-badge-checklist a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #6c757d;
+  color: #fff !important;
+  padding: 0.65rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  margin-top: 0.5rem;
+}
+
+/* ── Prerequisite badge images ───────────────────────────── */
+.group-prerequisite .field__item {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 120px;
+  margin: 0.5rem;
+  vertical-align: top;
+}
+.group-prerequisite .field__item img {
+  max-width: 80px;
+  height: auto;
+  border-radius: 6px;
+}
+
+/* ── Badge status widget: hide the floating individual member card ── */
+.view-taxonomy-badges.view-display-id-badges_earned_by_badge {
+  display: none !important;
+}
+
+/* ── "View all badge holders" injected link ──────────────── */
+.badge-holders-link {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+.badge-holders-link a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #b22222;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+.badge-holders-link a:hover {
   text-decoration: underline;
 }
 
-/* ─── /appointment/{node}/join page ─────────────────────────────────────────── */
-
-.join-session-meta {
-  font-size: 1rem;
-  color: var(--mh-color-neutral-700);
-  margin-bottom: var(--mh-space-lg);
+/* ── Associated tools at bottom ─────────────────────────── */
+.field--name-field-associated-tools {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #eee;
 }
-
-.join-section {
-  margin-bottom: var(--mh-space-lg);
-}
-
-.join-section-heading {
-  font-size: 0.8rem;
-  font-weight: 700;
+.field--name-field-associated-tools .field__label {
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: #888;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--mh-color-neutral-500);
-  margin: 0 0 var(--mh-space-xs);
+  margin-bottom: 1rem;
 }
-
-.join-badge-item {
+.field--name-field-associated-tools .field__items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+.field--name-field-associated-tools .field__item {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 0.75rem;
   display: flex;
-  align-items: baseline;
-  gap: var(--mh-space-xs);
-  padding: var(--mh-space-2xs) 0;
-  font-size: 0.95rem;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+.field--name-field-associated-tools img {
+  width: 48px !important;
+  height: 48px !important;
+  object-fit: cover;
+  border-radius: 6px;
 }
 
-.join-badge-status {
-  font-size: 0.78rem;
-  font-weight: 600;
-  border-radius: var(--mh-radius-pill);
-  padding: 0.1em 0.55em;
+/* ── Badging appointment card ────────────────────────────── */
+.path-badges .view-display-id-page_1 .views-row {
+  background: #fff;
+  border: 2px solid #28a745;
+  border-radius: 14px;
+  padding: 1.75rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
 }
 
-.join-badge-status--pending {
-  background: #d1fadf;
-  color: #165c35;
+/* ── Earned/pending badge status row colours ─────────────── */
+.view-badges-earned-block tr.Pending {
+  background: #ffa50030;
 }
 
-.join-badge-status--not-pending {
-  background: var(--mh-color-neutral-100);
-  color: var(--mh-color-neutral-500);
-}
-
-.join-badge-hint {
-  font-size: 0.82rem;
-  color: var(--mh-color-neutral-500);
-  margin: var(--mh-space-xs) 0 0;
-  font-style: italic;
-}
-
-.join-attendee-names {
-  font-size: 0.95rem;
-  color: var(--mh-color-neutral-700);
-  margin: 0;
-}
-
-/* Badge pending summary hint on the appointment form */
-#badge-pending-summary p {
-  font-size: 0.9rem;
-}
-
-/* ─── Appointment form: badge pending hints ─────────────────────────────────── */
-
-.badge-status-hint {
-  display: inline;
-}
-
-/* ─── Responsive ────────────────────────────────────────────────────────────── */
-
-@media (max-width: 600px) {
-  .badge-cards {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+/* ── Mobile ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .view-badges .view-content {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
   }
-
-  .badge-next-step-card {
-    padding: var(--mh-space-md);
+  .group-videos,
+  .group-quiz,
+  .group-contact-badger,
+  .group-prerequisite {
+    padding: 1.25rem;
+    border-radius: 10px;
   }
-
-  .appointment-slot-row,
-  .facilitator-item {
+  .view-taxonomy-badges.view-display-id-badges_earned_by_badge .views-row {
     flex-direction: column;
-    align-items: flex-start;
+  }
+  .path-badges .view-display-id-page_1 .views-row {
+    grid-template-columns: 1fr;
+    padding: 1.25rem;
+  }
+}
+
+/* ── Print ────────────────────────────────────────────────── */
+@media print {
+  header, footer, nav, .breadcrumb, .featured-top, .sidebar,
+  .group-quiz, .group-videos, .group-prerequisite, .messages,
+  .view-taxonomy-badges.view-display-id-badges_earned_by_badge {
+    display: none !important;
+  }
+  #main-wrapper, .main-content, .container, #main, main {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: white !important;
+  }
+  .field--name-field-badge-checklist a::after {
+    content: " (" attr(href) ")";
+    font-size: 10pt;
   }
 }
