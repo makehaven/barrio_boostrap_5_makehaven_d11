@@ -1,0 +1,107 @@
+/* Workshop / Course Catalog */
+
+/* Grid layout for workshop cards */
+body.path-courses-workshops .view-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 0;
+}
+
+/* Each workshop teaser fills its grid cell */
+body.path-courses-workshops .view-content .views-row {
+  margin: 0;
+}
+
+body.path-courses-workshops .node--view-mode-teaser {
+  height: 100%;
+  margin-bottom: 0;
+}
+
+/* Featured image: full-width, fixed height, cover-cropped */
+body.path-courses-workshops .node--view-mode-teaser .field--name-field-course-image img,
+body.path-courses-workshops .node--view-mode-teaser .field--name-field-course-image .image-style-medium {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+  display: block;
+  margin: -25px -25px 1rem -25px;
+  width: calc(100% + 50px);
+}
+
+/* Upcoming sessions badge */
+body.path-courses-workshops .field--name-field-stat-upcoming {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: var(--mh-color-brand-primary, #0d6efd);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--mh-radius-pill, 999px);
+  margin-bottom: 0.5rem;
+}
+
+body.path-courses-workshops .field--name-field-stat-upcoming::before {
+  content: "\F4C5"; /* bootstrap-icons calendar-event */
+  font-family: "bootstrap-icons";
+}
+
+body.path-courses-workshops .field--name-field-stat-upcoming .field__item::after {
+  content: " upcoming";
+}
+
+/* Hide upcoming badge when value is 0 */
+body.path-courses-workshops .field--name-field-stat-upcoming:has(.field__item:empty),
+body.path-courses-workshops .field--name-field-stat-upcoming[data-value="0"] {
+  display: none;
+}
+
+/* Expertise / category tags */
+body.path-courses-workshops .field--name-field-instructor-expertise {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-bottom: 0.75rem;
+}
+
+body.path-courses-workshops .field--name-field-instructor-expertise .field__item {
+  background: var(--mh-color-neutral-100, #f1f3f5);
+  color: var(--mh-color-neutral-700, #495057);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--mh-radius-pill, 999px);
+  border: 1px solid var(--mh-color-border, #dee2e6);
+}
+
+/* Body summary: clamp to 3 lines */
+body.path-courses-workshops .node--view-mode-teaser .field--name-body {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  flex-grow: 1;
+  font-size: 0.9rem;
+  color: var(--mh-color-neutral-600, #6c757d);
+}
+
+/* Flag / voting area */
+body.path-courses-workshops .node--view-mode-teaser .flag-wrapper {
+  margin-top: auto;
+  padding-top: 0.75rem;
+}
+
+/* Exposed filter bar */
+body.path-courses-workshops .views-exposed-form {
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive: single column on mobile */
+@media (max-width: 576px) {
+  body.path-courses-workshops .view-content {
+    grid-template-columns: 1fr;
+  }
+}
