@@ -103,6 +103,29 @@ body.path-rooms-zones-equipment .views-exposed-form {
   margin: 0 auto var(--mh-space-xl);
 }
 
+/* Lending-library utility buttons need visible text before hover. */
+body.path-library .tool-library-header .btn-outline-secondary,
+body.page-view-library-tool-directory .tool-library-header .btn-outline-secondary,
+body.path-library .view-library-tool-directory .btn-outline-secondary,
+body.page-view-library-tool-directory .view-library-tool-directory .btn-outline-secondary {
+  background: #fff !important;
+  border-color: #cab7b7 !important;
+  color: #6f3a3a !important;
+}
+
+body.path-library .tool-library-header .btn-outline-secondary:hover,
+body.path-library .tool-library-header .btn-outline-secondary:focus,
+body.page-view-library-tool-directory .tool-library-header .btn-outline-secondary:hover,
+body.page-view-library-tool-directory .tool-library-header .btn-outline-secondary:focus,
+body.path-library .view-library-tool-directory .btn-outline-secondary:hover,
+body.path-library .view-library-tool-directory .btn-outline-secondary:focus,
+body.page-view-library-tool-directory .view-library-tool-directory .btn-outline-secondary:hover,
+body.page-view-library-tool-directory .view-library-tool-directory .btn-outline-secondary:focus {
+  background: #6f3a3a !important;
+  border-color: #6f3a3a !important;
+  color: #fff !important;
+}
+
 /* Field styling within cards */
 .node--view-mode-teaser .field--label-above,
 .node--view-mode-teaser .field--label-inline {

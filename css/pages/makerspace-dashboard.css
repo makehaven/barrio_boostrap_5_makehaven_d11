@@ -232,3 +232,166 @@ body[class*="path-makerspace-dashboard"] .table-responsive {
     padding: 0.6rem 0.65rem;
   }
 }
+
+@media print {
+  @page {
+    margin: 0.35in 0.45in;
+  }
+
+  body[class*="path-makerspace-dashboard"] {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 10px;
+    line-height: 1.25;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body[class*="path-makerspace-dashboard"] #toolbar-administration,
+  body[class*="path-makerspace-dashboard"] #toolbar-bar,
+  body[class*="path-makerspace-dashboard"] .toolbar-tray,
+  body[class*="path-makerspace-dashboard"] .toolbar-oriented,
+  body[class*="path-makerspace-dashboard"] .makerspace-dashboard-tabs,
+  body[class*="path-makerspace-dashboard"] .overview-kpi-section-link,
+  body[class*="path-makerspace-dashboard"] .breadcrumb,
+  body[class*="path-makerspace-dashboard"] .region-breadcrumb,
+  body[class*="path-makerspace-dashboard"] .region-header,
+  body[class*="path-makerspace-dashboard"] .region-secondary-menu,
+  body[class*="path-makerspace-dashboard"] .region-sidebar-first,
+  body[class*="path-makerspace-dashboard"] .region-sidebar-second,
+  body[class*="path-makerspace-dashboard"] .region-footer,
+  body[class*="path-makerspace-dashboard"] .footer,
+  body[class*="path-makerspace-dashboard"] .tabs,
+  body[class*="path-makerspace-dashboard"] .local-tasks,
+  body[class*="path-makerspace-dashboard"] .messages,
+  body[class*="path-makerspace-dashboard"] .status-messages,
+  body[class*="path-makerspace-dashboard"] .kpi-overview-more-link,
+  body[class*="path-makerspace-dashboard"] .source_details {
+    display: none !important;
+  }
+
+  body[class*="path-makerspace-dashboard"] .dialog-off-canvas-main-canvas,
+  body[class*="path-makerspace-dashboard"] main,
+  body[class*="path-makerspace-dashboard"] .layout-main-wrapper,
+  body[class*="path-makerspace-dashboard"] .makerspace-dashboard-wrapper,
+  body[class*="path-makerspace-dashboard"] .makerspace-dashboard-section {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+    width: 100% !important;
+  }
+
+  body[class*="path-makerspace-dashboard"] .overview-stoplight > .heading {
+    margin: 0 0 0.2in !important;
+  }
+
+  body[class*="path-makerspace-dashboard"] .overview-stoplight > .heading h2 {
+    margin: 0 0 0.08in !important;
+    font-size: 16px !important;
+    line-height: 1.1 !important;
+  }
+
+  body[class*="path-makerspace-dashboard"] .overview-stoplight > .heading p {
+    margin: 0 !important;
+    font-size: 9px !important;
+    color: #333 !important;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-legend {
+    gap: 0.08in 0.15in !important;
+    margin: 0 0 0.12in !important;
+    font-size: 8px !important;
+  }
+
+  body[class*="path-makerspace-dashboard"] .overview-kpi-section-table {
+    margin: 0.12in 0 0 !important;
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
+
+  body[class*="path-makerspace-dashboard"] .overview-kpi-section-table + .overview-kpi-section-table {
+    break-before: page;
+    page-break-before: always;
+    padding-top: 0.05in;
+  }
+
+  body[class*="path-makerspace-dashboard"] .overview-kpi-section-table h3 {
+    margin: 0 0 0.08in !important;
+    font-size: 13px !important;
+    line-height: 1.1 !important;
+  }
+
+  body[class*="path-makerspace-dashboard"] .overview-kpi-table-wrap {
+    overflow: visible !important;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table {
+    width: 100% !important;
+    table-layout: fixed !important;
+    border-collapse: collapse !important;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table thead th {
+    padding: 0.07in 0.08in !important;
+    font-size: 8px !important;
+    line-height: 1.1 !important;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table th,
+  body[class*="path-makerspace-dashboard"] .kpi-stoplight-table td {
+    padding: 0.07in 0.08in !important;
+    vertical-align: top !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-overview-label-cell {
+    gap: 0.04in !important;
+    padding: 0 !important;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-title {
+    font-size: 9px !important;
+    line-height: 1.15 !important;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-description {
+    font-size: 7.5px !important;
+    line-height: 1.15 !important;
+    color: #444 !important;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-overview-state {
+    font-size: 7px !important;
+    padding: 0.02in 0.05in !important;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-value-cell,
+  body[class*="path-makerspace-dashboard"] .kpi-value-big {
+    font-size: 10px !important;
+    line-height: 1.05 !important;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-period-label,
+  body[class*="path-makerspace-dashboard"] .kpi-sparkline-label,
+  body[class*="path-makerspace-dashboard"] .kpi-goal-progress__label,
+  body[class*="path-makerspace-dashboard"] .kpi-segment-chip {
+    font-size: 7px !important;
+    line-height: 1.1 !important;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-sparkline-wrapper {
+    gap: 0.03in !important;
+  }
+
+  body[class*="path-makerspace-dashboard"] .kpi-sparkline-wrapper svg {
+    height: 0.45in !important;
+    width: 100% !important;
+  }
+
+  body[class*="path-makerspace-dashboard"] a,
+  body[class*="path-makerspace-dashboard"] a:visited {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+}
