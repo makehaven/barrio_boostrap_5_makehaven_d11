@@ -52,6 +52,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px; /* Space between form items */
+    align-items: flex-end; /* Align button to bottom of label+input pairs */
 }
 
 /* Small descriptions */
