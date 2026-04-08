@@ -152,19 +152,24 @@
   Drupal.behaviors.makehavenInterestHierarchy = {
     attach(context) {
       once('makehaven-interest-hierarchy', wrapperSelectors.join(','), context).forEach((wrapper) => {
+        // Classify options synchronously so Chosen can inherit them if it runs after us.
         classifySelect(wrapper);
-
-        wrapper.querySelectorAll('select').forEach((select) => {
-          syncChosenClasses(select);
-          const chosen = select.nextElementSibling;
-          if (chosen?.classList.contains('chosen-container')) {
-            ['mousedown', 'focusin', 'mouseenter'].forEach((eventName) => {
-              chosen.addEventListener(eventName, () => syncChosenClasses(select));
-            });
-          }
-        });
-
         wireCheckboxHierarchy(wrapper);
+
+        // Defer Chosen sync: our bundle (delta 3) loads before Chosen (delta 5), so
+        // the chosen-container does not exist yet during attach. setTimeout(fn, 0)
+        // runs after all behaviors in the current attachBehaviors() call have finished.
+        setTimeout(() => {
+          wrapper.querySelectorAll('select').forEach((select) => {
+            syncChosenClasses(select);
+            const chosen = select.nextElementSibling;
+            if (chosen?.classList.contains('chosen-container')) {
+              ['mousedown', 'focusin', 'mouseenter'].forEach((eventName) => {
+                chosen.addEventListener(eventName, () => syncChosenClasses(select));
+              });
+            }
+          });
+        }, 0);
       });
     }
   };
