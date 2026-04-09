@@ -36,6 +36,190 @@ function barrio_boostrap_5_makehaven_d11_form_system_theme_settings_alter(&$form
 }
 
 /**
+ * Implements hook_preprocess_node__course().
+ *
+ * Provides data for the course node full view:
+ *  - workshop_upcoming_events: upcoming CiviCRM sessions.
+ *  - workshop_instructors: past instructors.
+ *  - workshop_flag_link: Flag / login-to-notify link.
+ *  - workshop_interest_count: number of interested users.
+ *  - workshop_feedback: ['avg' => float, 'count' => int] from webform ratings.
+ *  - workshop_runs_count: total historical runs.
+ */
+function barrio_boostrap_5_makehaven_d11_preprocess_node__course(array &$variables): void {
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $variables['node'];
+  $nid = $node->id();
+  $database = \Drupal::database();
+  $current_user = \Drupal::currentUser();
+  $now = date('Y-m-d H:i:s');
+
+  $variables['#cache']['contexts'][] = 'user.roles:authenticated';
+
+  // 1. Notification / Interest Flag.
+  try {
+    if ($current_user->isAuthenticated()) {
+      $variables['workshop_flag_link'] = \Drupal::service('flag.link_builder')
+        ->build('node', $nid, 'course_interest', 'workshop_catalog');
+    }
+    else {
+      $dest = $node->toUrl()->toString();
+      $login_url = Url::fromRoute('user.login', [], ['query' => ['destination' => $dest]])->toString();
+      $reg_url   = Url::fromRoute('user.register', [], ['query' => ['destination' => $dest]])->toString();
+      $variables['workshop_flag_link'] = [
+        '#markup' => '<div class="workshop-auth-prompt">' .
+          '<a href="' . $login_url . '" class="login-to-notify">' . t('Login') . '</a> ' .
+          t('or') . ' ' .
+          '<a href="' . $reg_url . '" class="register-to-notify">' . t('Register') . '</a> ' .
+          t('to get notified when this workshop is scheduled.') .
+          '</div>',
+      ];
+    }
+
+    $interest_count = $database->select('flag_counts', 'fc')
+      ->fields('fc', ['count'])
+      ->condition('fc.flag_id', 'course_interest')
+      ->condition('fc.entity_id', (int) $nid)
+      ->execute()
+      ->fetchField();
+    $variables['workshop_interest_count'] = (int) ($interest_count ?: 0);
+  }
+  catch (\Throwable $e) {}
+
+  // 2. Upcoming Sessions & Instructors.
+  try {
+    if ($database->schema()->tableExists('civicrm_event__field_parent_course')) {
+      $linked_event_ids = $database->select('civicrm_event__field_parent_course', 'pc')
+        ->fields('pc', ['entity_id'])
+        ->condition('pc.field_parent_course_target_id', (int) $nid)
+        ->execute()
+        ->fetchCol();
+
+      if (!empty($linked_event_ids)) {
+        // Upcoming events.
+        $upcoming_rows = $database->select('civicrm_event', 'e')
+          ->fields('e', ['id', 'start_date', 'title'])
+          ->condition('e.id', $linked_event_ids, 'IN')
+          ->condition('e.is_template', 0)
+          ->condition('e.is_active', 1)
+          ->condition('e.start_date', $now, '>=')
+          ->orderBy('e.start_date', 'ASC')
+          ->range(0, 5)
+          ->execute()
+          ->fetchAll();
+
+        $upcoming_events = [];
+        foreach ($upcoming_rows as $ev_row) {
+          $ts = strtotime($ev_row->start_date);
+          $upcoming_events[] = [
+            'url'  => '/civicrm-event/' . $ev_row->id,
+            'date' => date('D, M j, Y', $ts),
+            'time' => date('g:ia', $ts),
+          ];
+        }
+        $variables['workshop_upcoming_events'] = $upcoming_events;
+
+        // Instructors.
+        $instructor_uids = $database->select('civicrm_event__field_civi_event_instructor', 'i')
+          ->fields('i', ['field_civi_event_instructor_target_id'])
+          ->condition('i.entity_id', $linked_event_ids, 'IN')
+          ->distinct()
+          ->execute()
+          ->fetchCol();
+
+        if (!empty($instructor_uids)) {
+          $instructors = \Drupal::entityTypeManager()->getStorage('user')->loadMultiple($instructor_uids);
+          $instructor_list = [];
+          /** @var \Drupal\profile\ProfileStorageInterface $profile_storage */
+          $profile_storage = \Drupal::entityTypeManager()->getStorage('profile');
+
+          foreach ($instructors as $u) {
+            $url = $u->toUrl()->toString();
+            $profile = $profile_storage->loadByUser($u, 'instructor');
+            if ($profile) {
+              $url = $profile->toUrl()->toString();
+            }
+            $instructor_list[] = [
+              'name' => $u->getDisplayName(),
+              'url'  => $url,
+            ];
+          }
+          $variables['workshop_instructors'] = $instructor_list;
+        }
+
+        // 3. Feedback rating — webform_1181 (event_id-linked) + legacy (title-matched).
+        $fb_total = 0;
+        $fb_count = 0;
+
+        // Source A: webform_1181, matched by event_id (accurate).
+        $sids_1181 = $database->select('webform_submission_data', 'eid')
+          ->fields('eid', ['sid'])
+          ->condition('eid.webform_id', 'webform_1181')
+          ->condition('eid.name', 'event_id')
+          ->condition('eid.value', $linked_event_ids, 'IN')
+          ->execute()
+          ->fetchCol();
+
+        if (!empty($sids_1181)) {
+          $ratings = $database->select('webform_submission_data', 'r')
+            ->fields('r', ['value'])
+            ->condition('r.webform_id', 'webform_1181')
+            ->condition('r.name', 'overall_how_satisfied_were_you_with_the_event')
+            ->condition('r.sid', $sids_1181, 'IN')
+            ->execute()
+            ->fetchCol();
+          foreach ($ratings as $val) {
+            $v = (int) $val;
+            if ($v >= 1 && $v <= 5) { $fb_total += $v; $fb_count++; }
+          }
+        }
+
+        // Source B: legacy webforms matched by event title.
+        $titles = $database->select('civicrm_event', 'e')
+          ->fields('e', ['title'])
+          ->condition('e.id', $linked_event_ids, 'IN')
+          ->execute()
+          ->fetchCol();
+
+        if (!empty($titles)) {
+          foreach ([['webform_26478', 'workshop'], ['evaluation', 'name']] as [$wid, $title_key]) {
+            $legacy_sids = $database->select('webform_submission_data', 'lt')
+              ->fields('lt', ['sid'])
+              ->condition('lt.webform_id', $wid)
+              ->condition('lt.name', $title_key)
+              ->condition('lt.value', $titles, 'IN')
+              ->execute()
+              ->fetchCol();
+            if (empty($legacy_sids)) {
+              continue;
+            }
+            $ratings = $database->select('webform_submission_data', 'lr')
+              ->fields('lr', ['value'])
+              ->condition('lr.webform_id', $wid)
+              ->condition('lr.name', 'overall')
+              ->condition('lr.sid', $legacy_sids, 'IN')
+              ->execute()
+              ->fetchCol();
+            foreach ($ratings as $val) {
+              $v = (int) $val;
+              if ($v >= 1 && $v <= 5) { $fb_total += $v; $fb_count++; }
+            }
+          }
+        }
+
+        $variables['workshop_feedback'] = $fb_count > 0
+          ? ['avg' => round($fb_total / $fb_count, 1), 'count' => $fb_count]
+          : ['avg' => 0.0, 'count' => 0];
+      }
+    }
+  }
+  catch (\Throwable $e) {}
+
+  // 4. Stats.
+  $variables['workshop_runs_count'] = (int) ($node->get('field_stat_runs')->value ?? 0);
+}
+
+/**
  * Implements hook_preprocess_node().
  */
 function barrio_boostrap_5_makehaven_d11_preprocess_node(&$variables) {

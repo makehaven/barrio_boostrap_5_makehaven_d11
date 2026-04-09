@@ -4,8 +4,7 @@
  * Migrated from Asset Injector: member_menu_icons
  */
 
-/* Base icon styling for member menu grids and sidebar blocks */
-.menu-item a::before,
+/* Base icon styling for member menu grids and sidebar blocks — scoped to member menu blocks only */
 [id^="block-barrio-boostrap-5-makehaven-membermenu"] a.nav-link::before,
 [id^="block-barrio-boostrap-5-makerspace-membermenu"] a.nav-link::before,
 [id^="block-barrio-boostrap-5-makehaven-d11-membermenu"] a.nav-link::before,

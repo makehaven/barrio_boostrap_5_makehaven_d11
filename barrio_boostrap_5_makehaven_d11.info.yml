@@ -10,6 +10,7 @@ dependencies:
 libraries:
   - barrio_boostrap_5_makehaven_d11/bootstrap_cdn
   - barrio_boostrap_5_makehaven_d11/global-styling
+  - barrio_boostrap_5_makehaven_d11/page-feedback
 
 regions:
   top_header: 'Top header'

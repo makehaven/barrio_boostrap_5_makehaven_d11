@@ -1,5 +1,22 @@
 /* bottom main menu */
 
+/* Remove white gap between last content block and footer */
+footer.site-footer {
+  margin-top: 0 !important;
+}
+
+/* Remove all borders/lines inside the dark footer */
+.site-footer *,
+.site-footer .row,
+.site-footer .region,
+.site-footer .block,
+.site-footer .navbar-nav,
+.site-footer .nav-item,
+.site-footer .site-footer__top {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
 .site-footer ul.dropdown-menu {
     display: block;
     border: 0px;
@@ -45,7 +62,7 @@ content: none;
 }
 
 .region-footer-third {
-    background: white;
+    background: transparent;
 }
 
 .region-footer-fourth {

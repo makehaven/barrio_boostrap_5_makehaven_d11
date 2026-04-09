@@ -1,0 +1,155 @@
+{#
+/**
+ * @file
+ * Template for the Course node in 'full' view mode.
+ *
+ * Variables provided by barrio_boostrap_5_makehaven_d11_preprocess_node__course():
+ *  - workshop_upcoming_events: List of upcoming sessions.
+ *  - workshop_instructors: List of past instructors.
+ *  - workshop_flag_link: Notification link (Flag or Login/Register).
+ *  - workshop_interest_count: Number of people interested.
+ *  - workshop_runs_count: Total historical runs.
+ */
+#}
+<article{{ attributes.addClass('node', 'node--type-course', 'node--view-mode-full', 'container') }}>
+
+  <header class="course-header">
+    <div class="row">
+      <div class="col-md-8">
+        {{ title_prefix }}
+        <h1{{ title_attributes.addClass('course-title') }}>{{ label }}</h1>
+        {{ title_suffix }}
+        
+        {% if content.field_course_tags %}
+          <div class="course-tags">
+            {{ content.field_course_tags }}
+          </div>
+        {% endif %}
+      </div>
+      <div class="col-md-4 text-md-end">
+        {% if workshop_runs_count > 0 %}
+          <a href="{{ path('view.course_instances.page_1', {'node': node.id}) }}" class="course-frequency-badge-link">
+            <div class="course-frequency-badge">
+              ↺ Offered {{ workshop_runs_count }} {{ workshop_runs_count == 1 ? 'time' : 'times' }}
+            </div>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  <div class="row course-content-wrapper">
+    
+    {# ── Main Column (Left) ──────────────────────────────────────────────── #}
+    <div class="col-md-8 course-main">
+      
+      {% if content.field_course_image %}
+        <div class="course-image mb-4">
+          {{ content.field_course_image }}
+        </div>
+      {% endif %}
+
+      <div class="course-body mb-5">
+        {{ content.body }}
+      </div>
+
+      {% if workshop_instructors %}
+        <div class="course-instructors mb-5">
+          <h3>{{ 'Taught by'|t }}</h3>
+          <ul class="instructor-list">
+            {% for instr in workshop_instructors %}
+              <li><a href="{{ instr.url }}">{{ instr.name }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      {% if content.field_instructor_expertise %}
+        <div class="course-expertise mb-4">
+          <h4>{{ 'Instructor Expertise Areas'|t }}</h4>
+          {{ content.field_instructor_expertise }}
+        </div>
+      {% endif %}
+
+    </div>
+
+    {# ── Sidebar Column (Right) ─────────────────────────────────────────── #}
+    <div class="col-md-4 course-sidebar">
+      
+      {% if workshop_feedback and workshop_feedback.count > 0 %}
+        <div class="card mb-4 course-rating-card">
+          <div class="card-body">
+            <h5 class="card-title">{{ 'Member Ratings'|t }}</h5>
+            {% set avg = workshop_feedback.avg %}
+            {% set full_stars = avg|round(0, 'floor') %}
+            {% set has_half = (avg - full_stars) >= 0.4 %}
+            <div class="course-star-rating" aria-label="{{ avg }} out of 5 stars">
+              {%- for i in 1..5 -%}
+                {%- if i <= full_stars -%}
+                  <span class="star star-full" aria-hidden="true">★</span>
+                {%- elseif has_half and i == full_stars + 1 -%}
+                  <span class="star star-half" aria-hidden="true">★</span>
+                {%- else -%}
+                  <span class="star star-empty" aria-hidden="true">☆</span>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+            <p class="course-rating-summary">
+              <strong>{{ avg }}/5</strong>
+              <span class="text-muted small">({{ workshop_feedback.count }} {{ workshop_feedback.count == 1 ? 'rating'|t : 'ratings'|t }})</span>
+            </p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="card mb-4 course-action-card">
+        <div class="card-body">
+          <h5 class="card-title">{{ 'Stay Informed'|t }}</h5>
+          <div class="course-notify-area">
+            {{ workshop_flag_link }}
+            {% if workshop_interest_count > 0 %}
+              <p class="mt-2 small text-muted">
+                {{ '★ @count people are currently interested in this workshop.'|t({'@count': workshop_interest_count}) }}
+              </p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4 course-sessions-card">
+        <div class="card-body">
+          <h5 class="card-title">{{ 'Scheduled Sessions'|t }}</h5>
+          {% if workshop_upcoming_events %}
+            <ul class="list-group list-group-flush upcoming-sessions-list">
+              {% for ev in workshop_upcoming_events %}
+                <a href="{{ ev.url }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                  <div>
+                    <div class="fw-bold">{{ ev.date }}</div>
+                    <div class="small text-muted">{{ ev.time }}</div>
+                  </div>
+                  <span class="badge bg-primary rounded-pill">Register &rarr;</span>
+                </a>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="card-text text-muted italic">
+              {{ 'No sessions currently scheduled. Join the notification list to be alerted when new dates are added!'|t }}
+            </p>
+          {% endif %}
+        </div>
+      </div>
+
+      {% if content.field_required_assets %}
+        <div class="card mb-4 course-assets-card">
+          <div class="card-body">
+            <h5 class="card-title">{{ 'Required Tools'|t }}</h5>
+            {{ content.field_required_assets }}
+          </div>
+        </div>
+      {% endif %}
+
+    </div>
+
+  </div>
+
+</article>

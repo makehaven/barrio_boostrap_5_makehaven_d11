@@ -40,8 +40,15 @@ html, body { overflow-x: hidden; }
 /* === HERO SLIDESHOW (FINAL, CLEANED VERSION) ======================= */
 /* =================================================================== */
 
-/* 1. The main hero wrapper - Break out of container to be full width */
-:is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow) {
+/* Shorthand for all known slideshow block IDs across theme variants */
+/* D11 block ID: block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow */
+/* Legacy/makerspace IDs kept for backwards-compat with any cached pages      */
+:is(
+  #block-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow
+) {
+  /* 1. Break out of container to be full width */
   position: relative;
   width: 100vw;
   left: 50%;
@@ -56,10 +63,26 @@ html, body { overflow-x: hidden; }
 }
 
 /* 2. All inner containers of the slideshow must fill the wrapper */
-:is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow) .view-content,
-:is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow) .skin-default,
-:is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow) .views_slideshow_cycle_main,
-:is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow) .views_slideshow_cycle_teaser_section {
+:is(
+  #block-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow
+) .view-content,
+:is(
+  #block-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow
+) .skin-default,
+:is(
+  #block-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow
+) .views_slideshow_cycle_main,
+:is(
+  #block-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow
+) .views_slideshow_cycle_teaser_section {
   position: relative;
   width: 100% !important;
   height: 100% !important;
@@ -68,53 +91,81 @@ html, body { overflow-x: hidden; }
 }
 
 /* 3. Each individual slide stacks on top of each other */
-:is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow) .views_slideshow_cycle_slide {
+:is(
+  #block-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow
+) .views_slideshow_cycle_slide {
   position: absolute !important;
   top: 0; left: 0; right: 0; bottom: 0;
   width: 100% !important;
 }
 
 /* 4. The image itself must cover the entire slide */
-:is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow) .views_slideshow_cycle_slide img {
+:is(
+  #block-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow
+) .views_slideshow_cycle_slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  border-radius: 0; /* Full screen means no corners */
+  border-radius: 0; /* Full screen — no rounded corners */
 }
 
 /* 5. The text overlay container */
-:is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow) .view-header {
+:is(
+  #block-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow
+) .view-header {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   z-index: 10;
-  pointer-events: none; /* Allows clicks to pass through empty space */
+  pointer-events: none;
 }
 
-/* 6. Position and style the text and buttons */
-:is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow) .vcenter-container.front-text,
-:is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow) .big-block {
+/* 6. Center the text + buttons over the image */
+:is(
+  #block-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow
+) .vcenter-container.front-text,
+:is(
+  #block-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow
+) .big-block {
   position: absolute;
-  top: 50%; /* Center vertically */
-  left: 50%; /* Center horizontally */
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
-  max-width: 900px; /* Constrain text width */
+  max-width: 900px;
   padding: 0 var(--mh-gutter);
   text-align: center;
-  pointer-events: auto; /* Re-enables clicks on this specific element */
+  pointer-events: auto;
 }
 
-:is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow) h1.text-white {
+:is(
+  #block-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow
+) h1.text-white {
   color: #fff;
   margin: 0 0 18px;
   font: 700 clamp(38px, 6vw, 68px)/1.15 Montserrat, Verdana, sans-serif;
   text-shadow: 0 0 8px rgba(0,0,0,.95), 0 0 14px rgba(0,0,0,.85);
 }
 
-:is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow) .block-action .btn {
+:is(
+  #block-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow
+) .block-action .btn {
   color: #fff !important;
-  background: #8b1919  !important;
+  background: #8b1919 !important;
   border: 2px solid #fff !important;
   font-weight: 700;
   padding: 12px 22px;
@@ -124,7 +175,11 @@ html, body { overflow-x: hidden; }
   transition: all .2s ease;
 }
 
-:is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow) .block-action .btn:hover {
+:is(
+  #block-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow,
+  #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow
+) .block-action .btn:hover {
   background: #fff !important;
   color: #8b1919 !important;
   transform: translateY(-2px);
@@ -170,8 +225,20 @@ div[id$="frontthreethingsfront"] .content {
 .callout.bordered.no-margin, .path-frontpage .node__content { display: none; }
 
 /* Desktop styles for other blocks */
-div[id$="frontthreethingsfront"] { min-height: 630px; }
-div[id$="fronttoolstomakeanything"] { min-height: 1400px; }
+div[id$="frontthreethingsfront"] { min-height: 0; }
+div[id$="fronttoolstomakeanything"] { min-height: 0; }
+
+/* Restore section padding for tools block (overridden by .path-frontpage main#content .section { padding: 0 }) */
+div[id$="fronttoolstomakeanything"] .section {
+  padding: 60px 0 !important;
+}
+div[id$="fronttoolstomakeanything"] .row {
+  row-gap: 3rem;
+}
+div[id$="fronttoolstomakeanything"] .service,
+div[id$="fronttoolstomakeanything"] .service-content {
+  height: 100%;
+}
 div[id$="fronttoolstomakeanything"] h2 { color: darkslategrey; }
 [id$="frontthreethingsfront"] .service-content { background: transparent; border: 0; }
 [id$="frontthreethingsfront"] .service-title.title-underblock.dark,
@@ -192,14 +259,15 @@ div[id$="frontemailsignup"] p { color: white; }
 
 .service-content {
   text-align: center;
-  padding: 20px;
-  background: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  height: 100%; /* Fill the service container */
+  padding: 28px 24px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center content vertically if needed, or flex-start */
+  justify-content: flex-start;
 }
 
 /* Mailchimp form styles */
@@ -233,30 +301,40 @@ div[id$="frontemailsignup"] {
 
 /* Mobile styles */
 @media (max-width: 767px) {
-  :is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow) h1.text-white { font-size: 40px; }
-  div[id$="frontthreethingsfront"] { min-height: 1600px; z-index: 10; }
-  div[id$="fronttoolstomakeanything"] { min-height: 3200px; }
-div[id$="frontemailsignup"] { min-height: 250px; }
+  :is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow, #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow) h1.text-white { font-size: 40px; }
+  div[id$="frontthreethingsfront"] { min-height: 0; z-index: 10; }
+  div[id$="fronttoolstomakeanything"] { min-height: 0; }
+  div[id$="frontemailsignup"] { min-height: 250px; }
 }
 
 .path-frontpage .service {
     padding: 0;
 }
 
-.path-frontpage :is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow) .vcenter-container.front-text {
+.path-frontpage :is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow, #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow) .vcenter-container.front-text {
     width: 100%;
+}
+
+/* Suppress unscoped ::before icon injection from member-icons.css on hero CTA buttons */
+.path-frontpage .block-action a::before,
+.path-frontpage .vcenter-container a::before,
+.path-frontpage .big-block a::before {
+  content: none !important;
+  display: none !important;
 }
 
 /* Full-width slideshow adjustments */
 
-.path-frontpage :is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow) {
+.path-frontpage :is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow, #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow) {
   margin: 0;
   padding: 0;
   border: 0;
   background: transparent;
 }
 
+/* Fallback view-level styles (for when block ID approach is insufficient) */
 body.path-frontpage .view-homepage-slideshow {
+  position: relative; /* Required for absolute overlay children */
   width: 100%;
 }
 
@@ -278,7 +356,7 @@ body.path-frontpage .view-homepage-slideshow img.image-style-full-screen {
   width: 100%;
   height: 80vh;
   object-fit: cover;
-  border-radius: 24px;
+  border-radius: 0; /* No rounded corners on full-screen hero */
 }
 
 body.path-frontpage .view-homepage-slideshow .view-header {
@@ -286,12 +364,44 @@ body.path-frontpage .view-homepage-slideshow .view-header {
   top: 0;
   left: 0;
   width: 100%;
+  height: 100%;
   z-index: 10;
   pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-body.path-frontpage .view-homepage-slideshow .view-header .front-text {
-  padding-top: var(--mh-space-2xl);
-  padding-bottom: var(--mh-space-2xl);
+body.path-frontpage .view-homepage-slideshow .view-header .front-text,
+body.path-frontpage .view-homepage-slideshow .view-header .vcenter-container {
+  pointer-events: auto;
   width: 100%;
+  max-width: 900px;
+  text-align: center;
+  padding: 0 var(--mh-gutter);
+}
+
+body.path-frontpage .view-homepage-slideshow .view-header h1.text-white {
+  color: #fff;
+  margin: 0 0 18px;
+  font: 700 clamp(38px, 6vw, 68px)/1.15 Montserrat, Verdana, sans-serif;
+  text-shadow: 0 0 8px rgba(0,0,0,.95), 0 0 14px rgba(0,0,0,.85);
+}
+
+body.path-frontpage .view-homepage-slideshow .view-header .block-action .btn {
+  color: #fff !important;
+  background: #8b1919 !important;
+  border: 2px solid #fff !important;
+  font-weight: 700;
+  padding: 12px 22px;
+  margin: 10px 8px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  transition: all .2s ease;
+}
+
+body.path-frontpage .view-homepage-slideshow .view-header .block-action .btn:hover {
+  background: #fff !important;
+  color: #8b1919 !important;
+  transform: translateY(-2px);
 }

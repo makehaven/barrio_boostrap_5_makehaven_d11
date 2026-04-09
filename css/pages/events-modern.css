@@ -1274,6 +1274,29 @@ body.page-civicrm-event-register #Register .crm-submit-buttons .btn {
   }
 }
 
+/* ── Event Evaluation page (/event/evaluate) ──────────────────────────────
+   The view uses <a class="btn"> (no color modifier) with an inline style
+   that sets color:white but no background. Lock both here so the button
+   is always visible regardless of cascade order or CDN availability.      */
+body.page-view-event-evaluation .card a.btn {
+  background-color: var(--mh-color-brand-primary);
+  border: 1px solid var(--mh-color-brand-primary);
+  color: var(--mh-color-surface) !important;
+  width: 100%;
+  margin-top: var(--mh-space-md);
+  display: block;
+  text-align: center;
+  border-radius: var(--mh-radius-md);
+}
+
+body.page-view-event-evaluation .card a.btn:hover,
+body.page-view-event-evaluation .card a.btn:focus {
+  background-color: var(--mh-color-brand-primary-strong);
+  border-color: var(--mh-color-brand-primary-strong);
+  color: var(--mh-color-surface) !important;
+  text-decoration: none;
+}
+
 @media (max-width: 767px) {
   body.page-view-event-set .view-event-set .view-content > .row {
     grid-template-columns: 1fr;

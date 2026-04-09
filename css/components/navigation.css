@@ -37,8 +37,12 @@
 /* Only for non-mobile */
 @media (min-width: 768px) {
 
-  /* Enables first level dropdown from main nav links */
-  .dropdown:hover>.dropdown-menu {
+  /* Desktop: pure CSS hover — override Bootstrap's click-toggled .show class
+     so only the currently-hovered item is ever open. */
+  #navbar-main .navbar-nav .dropdown-menu.show {
+    display: none;
+  }
+  #navbar-main .navbar-nav .dropdown:hover > .dropdown-menu {
     display: block;
   }
 

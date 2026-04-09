@@ -93,3 +93,13 @@ landing_page:
   css:
     theme:
       css/pages/landing.css: {}
+
+page-feedback:
+  js:
+    js/page-feedback-widget.js: {}
+  css:
+    theme:
+      css/page-feedback-widget.css: {}
+  dependencies:
+    - core/drupal
+    - core/once

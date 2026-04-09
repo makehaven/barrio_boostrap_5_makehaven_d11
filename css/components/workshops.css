@@ -105,3 +105,38 @@ body.path-courses-workshops .views-exposed-form {
     grid-template-columns: 1fr;
   }
 }
+
+/* ── Course node — star rating card ─────────────────────────────────────── */
+.course-rating-card .course-star-rating {
+  font-size: 1.6rem;
+  line-height: 1;
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.05em;
+}
+
+.course-rating-card .star-full,
+.course-rating-card .star-half {
+  color: #e8a020;
+}
+
+.course-rating-card .star-empty {
+  color: #ccc;
+}
+
+.course-rating-card .star-half {
+  position: relative;
+  display: inline-block;
+}
+.course-rating-card .star-half::after {
+  content: '☆';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #ccc;
+  clip-path: inset(0 0 0 50%);
+}
+
+.course-rating-card .course-rating-summary {
+  margin: 0;
+  font-size: 0.95rem;
+}

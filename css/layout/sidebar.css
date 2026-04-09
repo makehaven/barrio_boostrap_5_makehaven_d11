@@ -4,6 +4,250 @@
   font-size: 1.75rem;
 }
 
+/* ================================================================= */
+/* === SIDEBAR NAVIGATION — clean flat list, no dropdown           === */
+/* ================================================================= */
+
+/* Remove card box from the menu block — clean borderless look */
+#sidebar_first .block-menu,
+.sidebar aside.section .block-menu {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+}
+
+/* Hide Bootstrap dropdown chevron */
+#sidebar_first .block-menu .dropdown-toggle::after {
+  display: none !important;
+}
+
+/* Top-level section label — small uppercase divider */
+#sidebar_first .block-menu .nav-item.dropdown > a.dropdown-toggle {
+  pointer-events: none;
+  cursor: default;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mh-color-neutral-400);
+  padding: 0 0 0.5rem;
+  display: block;
+  border-bottom: 1px solid var(--mh-color-border);
+  margin-bottom: 0.4rem;
+  text-decoration: none !important;
+}
+
+/* Always-visible flat vertical list */
+#sidebar_first .block-menu .dropdown-menu {
+  position: static !important;
+  display: flex !important;
+  flex-direction: column !important;
+  float: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  min-width: 0 !important;
+  background: transparent !important;
+}
+
+/* li rows */
+#sidebar_first .block-menu .dropdown-menu .dropdown-item {
+  display: block !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+/* Links — left accent bar pattern */
+#sidebar_first .block-menu .dropdown-menu .dropdown-item a {
+  display: block;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--mh-color-neutral-700);
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  line-height: 1.4;
+  border-radius: 0 var(--mh-radius-sm) var(--mh-radius-sm) 0;
+}
+
+#sidebar_first .block-menu .dropdown-menu .dropdown-item a:hover {
+  background-color: var(--mh-color-neutral-100);
+  color: var(--mh-color-neutral-900);
+  border-left-color: var(--mh-color-neutral-300);
+}
+
+#sidebar_first .block-menu .dropdown-menu .dropdown-item a.is-active {
+  border-left-color: var(--mh-color-brand-primary);
+  color: var(--mh-color-brand-primary);
+  font-weight: 600;
+  background-color: rgba(139, 25, 25, 0.06);
+}
+
+/* Sub-sub-menu arrows — hide */
+#sidebar_first .block-menu .dropdown-menu .menu-item--expanded > a::after {
+  display: none !important;
+}
+
+/* Sub-sub-menus: also always visible, indented */
+#sidebar_first .block-menu .dropdown-menu .dropdown-item .dropdown-menu {
+  padding-left: 0.75rem !important;
+}
+
+/* Fix Bootstrap navbar collapsing the block */
+#sidebar_first .block-menu .navbar,
+#sidebar_first .block-menu .navbar-expand-lg {
+  padding: 0;
+  display: block;
+}
+#sidebar_first .block-menu .navbar-collapse {
+  display: block !important;
+}
+#sidebar_first .block-menu .navbar-nav {
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+#sidebar_first .block-menu .nav-item {
+  width: 100%;
+}
+
+/* ================================================================= */
+/* === FULL-WIDTH PAGES — horizontal pill nav strip at top         === */
+/* ================================================================= */
+
+body.path-blog #sidebar_first {
+  flex: 0 0 100% !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  order: -1;
+  padding: 0 !important;
+  margin-bottom: 1.25rem;
+}
+
+/* Content column also goes 100% */
+body.path-blog #sidebar_first ~ * {
+  flex: 0 0 100% !important;
+  max-width: 100% !important;
+}
+
+/* Pill strip wrapper bar */
+body.path-blog #sidebar_first .block-menu {
+  background: #f5f5f5 !important;
+  border-bottom: 1px solid var(--mh-color-border) !important;
+  border-radius: 0 !important;
+  padding: 0.5rem 1rem !important;
+  /* The scroll container */
+  overflow-x: auto !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+body.path-blog #sidebar_first .block-menu::-webkit-scrollbar { display: none; }
+
+/* Reset Bootstrap navbar structure to a simple flex row */
+body.path-blog #sidebar_first .block-menu .navbar,
+body.path-blog #sidebar_first .block-menu .navbar-expand-lg {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  flex-wrap: nowrap !important;
+  padding: 0 !important;
+  width: max-content; /* allow it to be as wide as pills need */
+  min-width: 100%;
+}
+
+body.path-blog #sidebar_first .block-menu .navbar-collapse {
+  display: flex !important;
+  flex-wrap: nowrap;
+  width: auto;
+}
+
+body.path-blog #sidebar_first .block-menu .navbar-nav {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  flex-wrap: nowrap !important;
+  gap: 0;
+  width: auto !important;
+}
+
+/* The single nav-item that wraps everything */
+body.path-blog #sidebar_first .block-menu .nav-item.dropdown {
+  display: contents; /* flatten — let children participate directly in flex */
+}
+
+/* Section label */
+body.path-blog #sidebar_first .block-menu .nav-item.dropdown > a.dropdown-toggle {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  border-bottom: none;
+  margin-bottom: 0;
+  margin-right: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  color: var(--mh-color-neutral-400);
+  font-size: 0.65rem;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Pills row */
+body.path-blog #sidebar_first .block-menu .dropdown-menu {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  position: static !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  min-width: 0 !important;
+  gap: 0.375rem;
+  align-items: center;
+}
+
+/* Each pill wrapper */
+body.path-blog #sidebar_first .block-menu .dropdown-menu .dropdown-item {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+/* Pill links */
+body.path-blog #sidebar_first .block-menu .dropdown-menu .dropdown-item a {
+  display: inline-block;
+  padding: 0.28rem 0.85rem;
+  font-size: 0.83rem;
+  font-weight: 500;
+  color: var(--mh-color-neutral-700);
+  background: #fff;
+  border: 1px solid #ddd !important;
+  border-left: 1px solid #ddd !important;
+  border-radius: 2rem;
+  white-space: nowrap;
+  line-height: 1.5;
+  transition: all 0.15s ease;
+  text-decoration: none;
+}
+
+body.path-blog #sidebar_first .block-menu .dropdown-menu .dropdown-item a:hover {
+  background: var(--mh-color-neutral-200);
+  color: var(--mh-color-neutral-900);
+  border-color: #bbb !important;
+}
+
+body.path-blog #sidebar_first .block-menu .dropdown-menu .dropdown-item a.is-active {
+  background: var(--mh-color-brand-primary) !important;
+  color: #fff !important;
+  border-color: var(--mh-color-brand-primary) !important;
+  font-weight: 600;
+}
+
 .sidebar aside.section .block {
   min-height: 20px;
   padding: var(--mh-space-md);
