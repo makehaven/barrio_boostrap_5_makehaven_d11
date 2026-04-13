@@ -61,3 +61,82 @@
     font-weight: bold;
     color: #861216;
 }
+
+/* Webform Likert: Bootstrap 5 resets thead to display:block, collapsing column
+   headers into the first data row. Force proper table-* display values. */
+.webform-likert-table-wrapper .webform-likert-table {
+    display: table;
+    width: 100%;
+}
+.webform-likert-table-wrapper .webform-likert-table thead {
+    display: table-header-group;
+}
+.webform-likert-table-wrapper .webform-likert-table thead tr {
+    display: table-row;
+}
+.webform-likert-table-wrapper .webform-likert-table thead th {
+    display: table-cell;
+    vertical-align: bottom;
+    padding: 0.4rem 0.25rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-bottom: 2px solid #dee2e6;
+}
+.webform-likert-table-wrapper .webform-likert-table tbody {
+    display: table-row-group;
+}
+.webform-likert-table-wrapper .webform-likert-table tbody tr {
+    display: table-row;
+}
+.webform-likert-table-wrapper .webform-likert-table tbody td {
+    display: table-cell;
+}
+
+/* Webform Likert: styled radio buttons with larger targets and brand color. */
+
+/* Remove default appearance so we can fully control rendering */
+.webform-likert-table input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 2px solid #adb5bd;
+    border-radius: 50%;
+    background-color: #fff;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+/* Hover state: darken the border */
+.webform-likert-table input[type="radio"]:hover {
+    border-color: #861216;
+    box-shadow: 0 0 0 3px rgba(134, 18, 22, 0.12);
+}
+
+/* Checked state: filled brand-color circle */
+.webform-likert-table input[type="radio"]:checked {
+    border-color: #861216;
+    background-color: #861216;
+    background-image: radial-gradient(circle, #fff 38%, transparent 42%);
+}
+
+/* Focus ring for keyboard navigation */
+.webform-likert-table input[type="radio"]:focus-visible {
+    outline: 2px solid #861216;
+    outline-offset: 2px;
+}
+
+/* Give radio cells a comfortable height and vertically centre content */
+.webform-likert-table-wrapper .webform-likert-table tbody td:not(:first-child) {
+    height: 3.5rem;
+    vertical-align: middle;
+    padding: 0.25rem;
+    cursor: pointer;
+}
+
+/* Subtle hover tint on the whole cell */
+.webform-likert-table-wrapper .webform-likert-table tbody td:not(:first-child):hover {
+    background-color: rgba(134, 18, 22, 0.06);
+}
