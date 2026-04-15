@@ -29,6 +29,21 @@ body.path-i .field__label {
   color: var(--mh-color-neutral-800);
 }
 
+body.path-i .field--label-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mh-space-2xs);
+}
+
+body.path-i .field--label-inline .field__label::after {
+  content: ":";
+}
+
+body.path-i .field--label-inline .field__item,
+body.path-i .field--label-inline .field__items {
+  margin-left: var(--mh-space-2xs);
+}
+
 body.path-i .inline__links {
   margin-top: var(--mh-space-lg);
 }

@@ -8,6 +8,8 @@
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\NodeInterface;
 use Drupal\Core\Url;
+use Drupal\Core\Link;
+use Drupal\profile\Entity\ProfileInterface;
 
 /**
  * Implements hook_form_system_theme_settings_alter() for settings form.
@@ -437,4 +439,73 @@ function barrio_boostrap_5_makehaven_d11_preprocess_views_view_field(array &$var
   }
 
   $variables['output'] = $output;
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for profile templates.
+ *
+ * Adds a "Badges this facilitator can issue" list, pulled from the
+ * taxonomy_term.badges field_badge_issuer reverse reference, to the
+ * coordinator profile view.
+ */
+function barrio_boostrap_5_makehaven_d11_preprocess_profile(array &$variables): void {
+  $profile = $variables['profile'] ?? NULL;
+  if (!$profile instanceof ProfileInterface || $profile->bundle() !== 'coordinator') {
+    return;
+  }
+
+  $uid = (int) $profile->getOwnerId();
+  if (!$uid) {
+    return;
+  }
+
+  try {
+    $storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+    $tids = $storage->getQuery()
+      ->accessCheck(TRUE)
+      ->condition('vid', 'badges')
+      ->condition('field_badge_issuer', $uid)
+      ->sort('name')
+      ->execute();
+  }
+  catch (\Exception $e) {
+    return;
+  }
+
+  if (!$tids) {
+    return;
+  }
+
+  $items = [];
+  foreach ($storage->loadMultiple($tids) as $term) {
+    if (!$term->access('view')) {
+      continue;
+    }
+    $items[] = Link::fromTextAndUrl($term->label(), $term->toUrl())->toRenderable();
+  }
+
+  if (!$items) {
+    return;
+  }
+
+  $variables['content']['badges_can_issue'] = [
+    '#type' => 'container',
+    '#attributes' => ['class' => ['facilitator-badges-can-issue']],
+    'heading' => [
+      '#type' => 'html_tag',
+      '#tag' => 'h3',
+      '#value' => t('Badges this facilitator can issue'),
+    ],
+    'list' => [
+      '#theme' => 'item_list',
+      '#items' => $items,
+    ],
+    '#cache' => [
+      'tags' => [
+        'taxonomy_term_list:badges',
+        'user:' . $uid,
+      ],
+      'contexts' => ['user.permissions'],
+    ],
+  ];
 }

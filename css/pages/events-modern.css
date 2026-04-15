@@ -641,8 +641,8 @@ body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .v
 body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field-field-civi-event-badges:has(.field-content:empty),
 body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field-field-civi-event-tags:has(.field-content:empty),
 body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field-field-civi-event-sessions:has(.field-content:empty),
-body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field-field-civi-event-recording:has(.field-content:empty),
-body.page-civicrm-event-info #crm-main-content-wrapper .event_summary-section .views-field-field-civi-event-documents:has(.field-content:empty) {
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-recording:has(.field-content:empty),
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-documents:has(.field-content:empty) {
   display: none;
 }
 
@@ -1295,6 +1295,116 @@ body.page-view-event-evaluation .card a.btn:focus {
   border-color: var(--mh-color-brand-primary-strong);
   color: var(--mh-color-surface) !important;
   text-decoration: none;
+}
+
+/* ---------- Event artifacts: Documents & Session Recording ---------- */
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-documents,
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-recording {
+  display: block;
+  margin-top: var(--mh-space-md);
+}
+
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-documents .views-label,
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-recording .views-label {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--mh-color-neutral-600, #555);
+}
+
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-documents .field-content,
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-recording .field-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0; /* hides the ", " separator between links */
+}
+
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-documents .field-content a,
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-recording .field-content a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  max-width: 100%;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid #d9d3ea;
+  border-radius: 10px;
+  background: #faf8ff;
+  color: #3b2a6b;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-decoration: none;
+  box-shadow: 0 1px 2px rgba(30, 20, 70, 0.06);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+  word-break: break-word;
+}
+
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-documents .field-content a:hover,
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-documents .field-content a:focus,
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-recording .field-content a:hover,
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-recording .field-content a:focus {
+  transform: translateY(-1px);
+  background: #f1ebff;
+  border-color: #b8a6e8;
+  box-shadow: 0 4px 10px rgba(30, 20, 70, 0.1);
+  color: #2a1d52;
+  text-decoration: none;
+}
+
+/* Icon via ::before — default document icon, then override by link type */
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-documents .field-content a::before,
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-recording .field-content a::before {
+  font-size: 1.05rem;
+  line-height: 1;
+  content: "📄";
+}
+
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-documents .field-content a[href$=".pdf" i]::before,
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-documents .field-content a[href*=".pdf?" i]::before {
+  content: "📕";
+}
+
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-documents .field-content a[href*="youtube.com" i]::before,
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-documents .field-content a[href*="youtu.be" i]::before,
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-documents .field-content a[href*="vimeo.com" i]::before,
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-documents .field-content a[href*="photos.app.goo.gl" i]::before,
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-recording .field-content a::before {
+  content: "▶️";
+}
+
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-documents .field-content a[href*="docs.google.com/document" i]::before {
+  content: "📝";
+}
+
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-documents .field-content a[href*="docs.google.com/presentation" i]::before,
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-documents .field-content a[href*="slides.google.com" i]::before {
+  content: "📊";
+}
+
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-documents .field-content a[href*="docs.google.com/spreadsheets" i]::before {
+  content: "📈";
+}
+
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-documents .field-content a[href*="drive.google.com/file" i]::before {
+  content: "📁";
+}
+
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-documents .field-content a[href$=".zip" i]::before,
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-documents .field-content a[href$=".stl" i]::before,
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-documents .field-content a[href$=".dxf" i]::before {
+  content: "🗜️";
+}
+
+@media (max-width: 767px) {
+  body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-documents .field-content,
+  body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-recording .field-content {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
 
 @media (max-width: 767px) {
