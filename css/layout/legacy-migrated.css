@@ -54,14 +54,19 @@ nav#navbar-top {
     z-index: 2; 
 }
 
-/* Prevent the main menu from wrapping */
-#navbar-main .navbar-collapse {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width: auto; 
-    flex-grow: 0;
-    flex-basis: auto;
+/* Prevent the main menu from wrapping — desktop only.
+   This used to apply at all widths, which beat Bootstrap's
+   `.collapse:not(.show) { display: none }` (lower specificity) and left
+   the mobile menu always expanded regardless of the hamburger state. */
+@media (min-width: 992px) {
+    #navbar-main .navbar-collapse {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: auto;
+        flex-grow: 0;
+        flex-basis: auto;
+    }
 }
 
 /* Featured Top Section Styles */
