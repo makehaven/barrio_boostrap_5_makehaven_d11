@@ -1,0 +1,174 @@
+/*
+ * Store listing page (/store — view-id: store).
+ *
+ * Grid of product cards with square images, emphatic titles, and a
+ * brand-red "Add to cart" button. Migrated from asset_injector.css.store
+ * (negated for this theme). The old CSS assumed a table layout; D11 uses
+ * `.row > .col > .card`, so the grid/pill/button styling here is adapted
+ * to that structure.
+ */
+
+/* Grid layout — 3 cards per row on wide viewports */
+body.page-view-store .view-id-store .view-content.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin: 0;
+}
+
+body.page-view-store .view-id-store .view-content.row > .col {
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  flex: unset;
+}
+
+/* Card container */
+body.page-view-store .view-id-store .card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+body.page-view-store .view-id-store .card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+/* Product image — square, cover-fit, no stretching */
+body.page-view-store .view-id-store .card-img-top {
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+body.page-view-store .view-id-store .card-img-top img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  display: block;
+}
+
+/* Card body fills remaining space so Add-to-cart can pin to bottom */
+body.page-view-store .view-id-store .card-body {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  flex-grow: 1;
+}
+
+/* Title */
+body.page-view-store .view-id-store .card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+}
+
+body.page-view-store .view-id-store .card-title a {
+  color: #222;
+  text-decoration: none;
+}
+
+body.page-view-store .view-id-store .card-title a:hover {
+  color: #8b1919;
+  text-decoration: underline;
+}
+
+/* Body text (description, stock count) */
+body.page-view-store .view-id-store .card-text {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  margin-bottom: 0.75rem;
+  flex-grow: 1;
+}
+
+/* Add-to-cart / buy link.
+   The store view renders buy links in TWO opposite shapes depending on the item:
+     • <a class="ext"><div class="btn btn-info">Add to cart</div></a>
+     • <div class="btn btn-info"><a class="ext">Add to cart</a></div>
+     • empty: <a class="ext"></a>
+   Style the OUTERMOST `.card-text > *` as the button and reset anything inside
+   (Bootstrap's .btn-info cyan and the default link color) so there's no
+   stacked red-over-cyan look. Empty anchors collapse to nothing. */
+
+/* Hide empty anchors */
+body.page-view-store .view-id-store .card-text > a:empty,
+body.page-view-store .view-id-store .card-text > .btn:empty {
+  display: none;
+}
+
+/* The outer element in .card-text is the button */
+body.page-view-store .view-id-store .card-text > a,
+body.page-view-store .view-id-store .card-text > .btn,
+body.page-view-store .view-id-store .card-text > .btn.btn-info {
+  display: inline-block;
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 8px 18px;
+  min-height: 39px;
+  background-color: #8b1919;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+body.page-view-store .view-id-store .card-text > a:hover,
+body.page-view-store .view-id-store .card-text > .btn:hover,
+body.page-view-store .view-id-store .card-text > .btn.btn-info:hover {
+  background-color: #a32222;
+  color: #fff;
+  text-decoration: none;
+}
+
+body.page-view-store .view-id-store .card-text > a:focus-visible,
+body.page-view-store .view-id-store .card-text > .btn:focus-visible {
+  outline: 2px solid #8b1919;
+  outline-offset: 2px;
+}
+
+/* Reset any children (inner .btn, inner <a>) so they don't paint their own
+   frame on top of the outer button. */
+body.page-view-store .view-id-store .card-text > a .btn,
+body.page-view-store .view-id-store .card-text > a .btn.btn-info,
+body.page-view-store .view-id-store .card-text > .btn a,
+body.page-view-store .view-id-store .card-text > .btn a.ext {
+  display: inline;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+  min-height: 0;
+  line-height: inherit;
+  text-decoration: none;
+}
+
+/* Mobile: single column */
+@media (max-width: 576px) {
+  body.page-view-store .view-id-store .view-content.row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+/* Legacy material node pages (if any still render inline images) */
+.field--name-field-material-image img {
+  max-width: 100%;
+  height: auto;
+}

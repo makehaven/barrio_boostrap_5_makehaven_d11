@@ -40,9 +40,9 @@
   --mh-color-info: #4ea1d3;
 
   /* Layout */
-  --mh-container-max: 1200px;
+  --mh-container-max: 1320px;
   --mh-content-max: 900px;
-  --mh-sidebar-max: 275px;
+  --mh-sidebar-max: 240px;
   --mh-header-height: 4.5rem;
   --mh-gutter: 1.5rem;
 

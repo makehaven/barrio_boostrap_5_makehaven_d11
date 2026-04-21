@@ -52,6 +52,8 @@ global-styling:
       css/pages/equipment.css: {}
       css/pages/civicrm.css: {}
       css/pages/tools.css: {}
+      css/pages/library.css: {}
+      css/pages/store.css: {}
       css/pages/events-calendar.css: {}
       css/pages/reservation-node.css: {}
       css/pages/appointment-node.css: {}

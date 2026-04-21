@@ -1,0 +1,289 @@
+/*
+ * Tool Lending Library pages.
+ *
+ * Scoped to library_item nodes (borrow/return log, comment form, field groups)
+ * and /library/* listing pages.
+ *
+ * Migrated from asset_injector.css.tool_library_pages and
+ * asset_injector.css.lending_library (both negated for this theme).
+ */
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Library item node — comment wrapper & form chrome
+   ────────────────────────────────────────────────────────────────────────── */
+
+.node--type-library-item .field--name-comment-node-library-item h3.card-title {
+  display: none;
+}
+
+.node--type-library-item .comment-form__title {
+  display: none;
+}
+
+.node--type-library-item .comment-form__title::after {
+  content: "Lend or Return";
+  display: block;
+}
+
+.node--type-library-item .field.field--name-comment-node-library-item.field--type-comment {
+  padding: 5px;
+}
+
+.node--type-library-item #comment-form {
+  min-width: 100%;
+}
+
+.node--type-library-item fieldset#group-requirement {
+  min-width: 100%;
+}
+
+.node--type-library-item img.image-style-content-width {
+  width: 100%;
+  height: auto;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Lend/return log — individual comment cards
+   ────────────────────────────────────────────────────────────────────────── */
+
+.node--type-library-item .comment-wrapper {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.node--type-library-item .comment {
+  margin-bottom: 19px;
+  vertical-align: top;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.node--type-library-item .comment__meta {
+  flex: 1 1 25%;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-right: 1px solid #ddd;
+  text-align: center;
+}
+
+.node--type-library-item .comment__meta .comment__author {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.node--type-library-item .comment__meta img {
+  max-width: 80px;
+  border-radius: 50%;
+}
+
+.node--type-library-item .comment__content {
+  flex: 3 1 75%;
+  padding: 1rem;
+}
+
+.node--type-library-item .comment__content h3.card-title {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.node--type-library-item .comment__content img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.node--type-library-item .comment__content nav .nav-link {
+  margin-right: 0.5rem;
+  display: inline-block;
+  font-size: 0.9rem;
+}
+
+.node--type-library-item .comment__time,
+.node--type-library-item .comment__permalink {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.node--type-library-item .field--name-comment-node-library-item a.username {
+  color: black;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Responsive: stack meta above content on narrow viewports
+   ────────────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .node--type-library-item .comment {
+    display: block;
+    margin-bottom: 19px;
+  }
+
+  .node--type-library-item .comment__meta {
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    padding: 0.75rem;
+  }
+
+  .node--type-library-item .comment__meta img {
+    max-width: 60px;
+  }
+
+  .node--type-library-item .comment__content {
+    padding: 0.75rem;
+  }
+
+  .node--type-library-item .comment__content h3.card-title {
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 560px) {
+  .node--type-library-item .field--name-comment-node-library-item .field--type-image {
+    float: none;
+    margin: 0 1em 0 0;
+  }
+
+  .node--type-library-item img.image-style-content-width {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .node--type-library-item .field-group-fieldset,
+  .node--type-library-item #comment-form {
+    min-width: 100%;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   /library/* listing pages — button spacing
+   (from asset_injector.css.lending_library)
+   ────────────────────────────────────────────────────────────────────────── */
+
+a.button.button--primary.lending-library-button {
+  margin: 0 15px 0 0;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Library tool directory (/library) — card grid
+   Render the 130+ library items as a tile grid instead of a single-column
+   stack. Markup is `.view-content.row > .card` (no intermediate .col),
+   similar to the store view.
+   ────────────────────────────────────────────────────────────────────────── */
+
+body.page-view-library-tool-directory .view-library-tool-directory .view-content.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  margin: 0;
+}
+
+body.page-view-library-tool-directory .view-library-tool-directory .view-content.row > .card {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+body.page-view-library-tool-directory .view-library-tool-directory .view-content.row > .card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+/* Image — constrain to square aspect and cover-fit */
+body.page-view-library-tool-directory .view-library-tool-directory .card .card-img-top {
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+body.page-view-library-tool-directory .view-library-tool-directory .card .card-img-top img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+}
+
+/* Card body */
+body.page-view-library-tool-directory .view-library-tool-directory .card .card-body {
+  display: flex;
+  flex-direction: column;
+  padding: 14px;
+  flex-grow: 1;
+}
+
+body.page-view-library-tool-directory .view-library-tool-directory .card .card-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+}
+
+body.page-view-library-tool-directory .view-library-tool-directory .card .card-title a {
+  color: #222;
+  text-decoration: none;
+}
+
+body.page-view-library-tool-directory .view-library-tool-directory .card .card-title a:hover {
+  color: #8b1919;
+  text-decoration: underline;
+}
+
+body.page-view-library-tool-directory .view-library-tool-directory .card .card-text {
+  color: #555;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  flex-grow: 1;
+}
+
+/* Available / unavailable status chips */
+body.page-view-library-tool-directory .view-library-tool-directory .card .available,
+body.page-view-library-tool-directory .view-library-tool-directory .card .unavailable {
+  display: inline-block;
+  padding: 0.2em 0.65em;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-top: 0.35rem;
+}
+
+body.page-view-library-tool-directory .view-library-tool-directory .card .available {
+  background-color: #e7f7ea;
+  color: #1f6b34;
+  border: 1px solid #bfe8c8;
+}
+
+body.page-view-library-tool-directory .view-library-tool-directory .card .unavailable {
+  background-color: #fde8e8;
+  color: #8b1919;
+  border: 1px solid #f5c2c2;
+}
+
+/* Keep the "available" card-wide green tint subtle — don't paint the whole
+   card green when Bootstrap's bg-success is combined with bg-opacity-10 */
+body.page-view-library-tool-directory .view-library-tool-directory .card.border-success {
+  border-color: #bfe8c8;
+}
+
+/* Mobile: single column */
+@media (max-width: 576px) {
+  body.page-view-library-tool-directory .view-library-tool-directory .view-content.row {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}

@@ -1421,3 +1421,106 @@ body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi
     padding: var(--mh-space-md);
   }
 }
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Skill-level, age-requirement, and event-type pills on event LISTINGS
+   (/events, /events/upcoming, CiviCRM event teasers).
+   The detailed rules above are scoped to body.page-civicrm-event-info and
+   use !important — they continue to win there. These broader, lower-
+   specificity rules apply everywhere else an event view renders these
+   fields, restoring the colored-pill look the old asset_injector provided.
+   ────────────────────────────────────────────────────────────────────────── */
+
+.view .views-field-field-event-skill-level .field-content {
+  display: inline-block;
+  padding: 0.35em 0.65em;
+  border-radius: 999px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.view .views-field-field-event-skill-level .introductory {
+  display: inline-block;
+  background-color: #e7f7ea;
+  color: #1f6b34;
+  border: 1px solid #bfe8c8;
+  padding: 0.25em 0.65em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.view .views-field-field-event-skill-level .intermediate {
+  display: inline-block;
+  background-color: #fff3d9;
+  color: #7b5400;
+  border: 1px solid #ecd498;
+  padding: 0.25em 0.65em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.view .views-field-field-event-skill-level :is(.advanced, .expert) {
+  display: inline-block;
+  background-color: #1f1f1f;
+  color: #fff;
+  border: 1px solid #1f1f1f;
+  padding: 0.25em 0.65em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.view .views-field-field-civi-event-age-requirement,
+.view span.views-field.views-field-field-civi-event-age-requirement {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25em 0.65em;
+  background-color: #eff4fa;
+  color: #3a546f;
+  border: 1px solid #d4dfeb;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.view .views-field-event-type-id .field-content,
+.view .views-field-event-type-id .badge {
+  display: inline-block;
+  padding: 0.3em 0.65em;
+  background-color: #f3eefc;
+  color: #4b2c8a;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Stack badges vertically on narrow viewports so they don't cram the row */
+@media (max-width: 768px) {
+  .view .views-field-field-event-skill-level,
+  .view .views-field-event-type-id {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .view .views-field-field-event-skill-level .introductory,
+  .view .views-field-field-event-skill-level .intermediate,
+  .view .views-field-field-event-skill-level .advanced,
+  .view .views-field-field-event-skill-level .expert,
+  .view .views-field-event-type-id .badge,
+  .view .views-field-field-civi-event-age-requirement {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+  }
+}

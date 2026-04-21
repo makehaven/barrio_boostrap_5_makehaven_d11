@@ -18,3 +18,53 @@
         flex: 1 1 calc(33.33% - 20px); /* Three across */
     }
 }
+
+/* Member list cards (migrated from asset_injector.css.member_list) */
+.view-member-list .row {
+    padding-bottom: 30px;
+}
+
+.view-member-list .view-content .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+}
+
+.view-member-list .view-content .card .card-img-top img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+.view-member-list .view-content .card .card-body {
+    padding: 15px;
+    flex-grow: 1;
+}
+
+.view-member-list .view-content .card .card-title {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.view-member-list .view-content .card .card-text {
+    flex-grow: 1;
+    color: #555;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.view-member-list .view-content .card .btn {
+    margin-top: auto;
+}
+
+.view-member-list .area-of-interest {
+    font-size: 10px;
+    padding-top: 10px;
+}
