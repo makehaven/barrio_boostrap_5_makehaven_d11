@@ -156,9 +156,11 @@ body.page-view-library-tool-directory .view-library-tool-directory .btn-outline-
   font-size: 0.85rem;
 }
 
-/* Badges and requirements */
-.field--name-field-member-badges .field__item,
-.field--name-field-item-requirements .field__item {
+/* Badges and requirements — scope to direct children so rules don't cascade
+   into the embedded badge term's nested fields (e.g. field_badge_video), which
+   would collapse the YouTube responsive figure to 0×0. */
+.field--name-field-member-badges > .field__item,
+.field--name-field-item-requirements > .field__item {
   background: #f8f9fa;
   border: 1px solid var(--mh-color-border);
   border-radius: var(--mh-radius-md);
@@ -167,8 +169,8 @@ body.page-view-library-tool-directory .view-library-tool-directory .btn-outline-
   font-size: 0.9rem;
 }
 
-.field--name-field-member-badges .field__items,
-.field--name-field-item-requirements .field__items {
+.field--name-field-member-badges > .field__items,
+.field--name-field-item-requirements > .field__items {
   display: flex;
   flex-wrap: wrap;
   gap: var(--mh-space-xs);
