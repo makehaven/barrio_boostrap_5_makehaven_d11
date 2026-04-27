@@ -7,8 +7,8 @@
 /* === Migrated from header_and_menu_styles === */
 
 nav#navbar-top {
-    padding-bottom: 40px;
-    padding-top: 0px;
+    padding-bottom: 0;
+    padding-top: 0;
 }
 
 /* General layout for the full-width header */
