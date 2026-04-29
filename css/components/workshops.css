@@ -1,142 +1,172 @@
-/* Workshop / Course Catalog */
+/*
+ * Workshop / Course Catalog
+ *
+ * The catalog at /catalog/workshops mirrors the visual style of the /events
+ * card grid (see css/pages/events-modern.css). The teaser template emits the
+ * same Bootstrap card DOM (.card / .card-img-top / .card-body / .card-title /
+ * .card-text / .summary / .btn), so the rules below largely parallel the
+ * event-card rules but are scoped to .view-public-course-catalog.
+ */
 
-/* Grid layout for workshop cards */
-body.path-courses-workshops .view-content {
+.view-public-course-catalog .view-content {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-  padding: 0;
-}
-
-/* Each workshop teaser fills its grid cell */
-body.path-courses-workshops .view-content .views-row {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: clamp(1rem, 1.8vw, 1.35rem);
+  row-gap: 1.35rem;
   margin: 0;
+  padding-bottom: 1.25rem;
 }
 
-body.path-courses-workshops .node--view-mode-teaser {
-  height: 100%;
-  margin-bottom: 0;
-}
-
-/* Featured image: full-width, fixed height, cover-cropped */
-body.path-courses-workshops .node--view-mode-teaser .field--name-field-course-image img,
-body.path-courses-workshops .node--view-mode-teaser .field--name-field-course-image .image-style-medium {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 12px 12px 0 0;
-  display: block;
-  margin: -25px -25px 1rem -25px;
-  width: calc(100% + 50px);
-}
-
-/* Upcoming sessions badge */
-body.path-courses-workshops .field--name-field-stat-upcoming {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  background: var(--mh-color-brand-primary, #0d6efd);
-  color: #fff;
-  font-size: 0.8rem;
-  font-weight: 600;
-  padding: 0.2rem 0.6rem;
-  border-radius: var(--mh-radius-pill, 999px);
-  margin-bottom: 0.5rem;
-}
-
-body.path-courses-workshops .field--name-field-stat-upcoming::before {
-  content: "\F4C5"; /* bootstrap-icons calendar-event */
-  font-family: "bootstrap-icons";
-}
-
-body.path-courses-workshops .field--name-field-stat-upcoming .field__item::after {
-  content: " upcoming";
-}
-
-/* Hide upcoming badge when value is 0 */
-body.path-courses-workshops .field--name-field-stat-upcoming:has(.field__item:empty),
-body.path-courses-workshops .field--name-field-stat-upcoming[data-value="0"] {
-  display: none;
-}
-
-/* Expertise / category tags */
-body.path-courses-workshops .field--name-field-instructor-expertise {
+.view-public-course-catalog .views-row {
+  margin: 0;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem;
-  margin-bottom: 0.75rem;
+  min-width: 0;
 }
 
-body.path-courses-workshops .field--name-field-instructor-expertise .field__item {
-  background: var(--mh-color-neutral-100, #f1f3f5);
-  color: var(--mh-color-neutral-700, #495057);
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 0.15rem 0.5rem;
-  border-radius: var(--mh-radius-pill, 999px);
-  border: 1px solid var(--mh-color-border, #dee2e6);
-}
-
-/* Body summary: clamp to 3 lines */
-body.path-courses-workshops .node--view-mode-teaser .field--name-body {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+.view-public-course-catalog .card {
+  height: 100%;
+  width: 100%;
+  max-width: none;
+  border: 1px solid var(--mh-color-border);
+  border-radius: 18px;
   overflow: hidden;
-  flex-grow: 1;
-  font-size: 0.9rem;
-  color: var(--mh-color-neutral-600, #6c757d);
+  box-shadow: var(--mh-shadow-sm);
+  background: var(--mh-color-surface);
+  transition: transform var(--mh-transition-base), box-shadow var(--mh-transition-base);
 }
 
-/* Flag / voting area */
-body.path-courses-workshops .node--view-mode-teaser .flag-wrapper {
-  margin-top: auto;
-  padding-top: 0.75rem;
+.view-public-course-catalog .card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--mh-shadow-md);
 }
 
-/* Exposed filter bar */
-body.path-courses-workshops .views-exposed-form {
+.view-public-course-catalog .card-img-top,
+.view-public-course-catalog .card-img-top > .field,
+.view-public-course-catalog .card-img-top a {
+  display: block;
+  width: 100%;
+}
+
+.view-public-course-catalog .card-img-top img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+}
+
+.view-public-course-catalog .card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mh-space-sm);
+  flex: 1 1 auto;
+  padding: var(--mh-space-lg);
+  position: relative;
+  padding-bottom: 2.7rem;
+}
+
+.view-public-course-catalog .card-title {
+  margin: 0;
+  font-family: var(--mh-font-display);
+  font-size: clamp(1.1rem, 1.5vw, 1.45rem);
+  line-height: 1.25;
+  color: var(--mh-color-neutral-900);
+}
+
+.view-public-course-catalog .card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.view-public-course-catalog .card-title a:hover {
+  color: var(--mh-color-brand-primary);
+}
+
+.view-public-course-catalog .card-text {
+  display: block;
+  color: var(--mh-color-neutral-800);
+  line-height: 1.55;
+}
+
+.view-public-course-catalog .card-text time {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--mh-space-sm);
+  padding: var(--mh-space-2xs) var(--mh-space-sm);
+  border-radius: var(--mh-radius-pill);
+  background: #f0f2f5;
+  color: var(--mh-color-neutral-700);
+  font-weight: 600;
+  width: fit-content;
+}
+
+.view-public-course-catalog .card-text .summary {
+  margin-top: var(--mh-space-sm);
+  margin-bottom: 0;
+  color: var(--mh-color-neutral-700);
+  font-size: 0.95rem;
+  min-height: 9.6rem;
+  max-height: 9.6rem;
+  overflow: hidden;
+  position: relative;
+  display: -webkit-box;
+  line-clamp: 5;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+.view-public-course-catalog .card-text .summary::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3.5rem;
+  background: linear-gradient(
+    180deg,
+    rgb(255 255 255 / 0%) 0%,
+    rgb(255 255 255 / 76%) 45%,
+    #fff 100%
+  );
+  pointer-events: none;
+}
+
+.view-public-course-catalog .card-text .btn {
+  margin-top: 0;
+  width: auto;
+  position: absolute;
+  left: var(--mh-space-lg);
+  right: var(--mh-space-lg);
+  bottom: 0.5rem;
+  border-radius: var(--mh-radius-pill);
+  padding-inline: 1.05rem;
+  border: 1px solid var(--mh-color-brand-primary);
+  background: var(--mh-color-brand-primary);
+  color: #fff;
+}
+
+.view-public-course-catalog .card-text .btn:hover,
+.view-public-course-catalog .card-text .btn:focus {
+  border-color: var(--mh-color-brand-primary-strong);
+  background: var(--mh-color-brand-primary-strong);
+  color: #fff;
+}
+
+/* Exposed filter bar — neutralize default Bootstrap form spacing */
+.view-public-course-catalog .views-exposed-form {
   margin-bottom: 1.5rem;
 }
 
-/* Responsive: single column on mobile */
-@media (max-width: 576px) {
-  body.path-courses-workshops .view-content {
-    grid-template-columns: 1fr;
+/* Responsive collapse: 2-up on tablet, 1-up on mobile */
+@media (max-width: 992px) {
+  .view-public-course-catalog .view-content {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-/* ── Course node — star rating card ─────────────────────────────────────── */
-.course-rating-card .course-star-rating {
-  font-size: 1.6rem;
-  line-height: 1;
-  margin-bottom: 0.35rem;
-  letter-spacing: 0.05em;
-}
-
-.course-rating-card .star-full,
-.course-rating-card .star-half {
-  color: #e8a020;
-}
-
-.course-rating-card .star-empty {
-  color: #ccc;
-}
-
-.course-rating-card .star-half {
-  position: relative;
-  display: inline-block;
-}
-.course-rating-card .star-half::after {
-  content: '☆';
-  position: absolute;
-  left: 0;
-  top: 0;
-  color: #ccc;
-  clip-path: inset(0 0 0 50%);
-}
-
-.course-rating-card .course-rating-summary {
-  margin: 0;
-  font-size: 0.95rem;
+@media (max-width: 576px) {
+  .view-public-course-catalog .view-content {
+    grid-template-columns: 1fr;
+  }
 }

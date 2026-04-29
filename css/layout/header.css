@@ -8,12 +8,81 @@ header#header {
 }
 
 nav#navbar-top {
-  padding: var(--mh-space-xs) 0 var(--mh-space-md);
+  padding: var(--mh-space-xs) var(--mh-space-md) var(--mh-space-md);
   /* border-bottom removed to fix white line */
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--mh-space-md);
+}
+
+/* Constrain the top navbar's content to the same max width as the main
+   navbar below so the Log in + search appear above the right-side menu
+   items rather than floating at the viewport edge. The gray background
+   continues to span full width because it lives on the parent #header. */
+@media (min-width: 768px) {
+  /* Match the constraints applied to #navbar-main in legacy-migrated.css
+     (max-width: 1000px; padding: 0 15px) so the top-nav contents align
+     directly above the primary menu items. The right padding adds the
+     nav-link horizontal padding (.5rem) so the search button's right
+     edge aligns with the rightmost menu item ("Donate") text. */
+  nav#navbar-top {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: var(--mh-space-xs) calc(15px + var(--mh-space-xs)) var(--mh-space-2xs) 15px;
+  }
 }
 
 body.user-logged-in nav#navbar-top {
   padding-bottom: var(--mh-space-2xs);
+}
+
+/* Top-header regions sit inline with the user-account links.
+   Strip Bootstrap row negative margins so blocks align cleanly. */
+nav#navbar-top .region-top-header,
+nav#navbar-top .region-top-header-form {
+  --bs-gutter-x: 0;
+  margin: 0;
+  flex: 0 0 auto;
+  width: auto;
+}
+
+nav#navbar-top .navbar-form {
+  margin: 0 !important;
+  flex: 0 0 auto;
+}
+
+nav#navbar-top .region-top-header > .block,
+nav#navbar-top .region-top-header-form > .block {
+  margin: 0;
+}
+
+nav#navbar-top .menu--account .nav.flex-row {
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+/* Top-header account links: subtle text link rather than a strong button.
+   Brand-color text on the gray bar gives readability without competing
+   with the primary nav and CTA buttons in the hero. */
+nav#navbar-top .menu--account .nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mh-space-2xs);
+  padding: var(--mh-space-2xs) var(--mh-space-xs);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--mh-color-brand-primary);
+  background: transparent;
+  border: 0;
+  text-decoration: none;
+}
+
+nav#navbar-top .menu--account .nav-link:hover,
+nav#navbar-top .menu--account .nav-link:focus {
+  color: var(--mh-color-brand-primary-strong);
+  text-decoration: underline;
+  background: transparent;
 }
 
 .navbar {
@@ -164,5 +233,110 @@ body.user-logged-in nav#navbar-top {
   .navbar-nav .nav-item {
     width: 100%;
     text-align: left;
+  }
+}
+
+/* ----------------------------------------------------------------
+   Compact site search in the top header (top_header_form region).
+   Sits inline with the user-account links. The exposed views form
+   would normally render a full-size label, wide input, and a large
+   submit button, so we collapse it into a small icon-led pill.
+   ---------------------------------------------------------------- */
+#block-barrio-boostrap-5-makehaven-d11-sitesearchform {
+  margin: 0;
+  padding: 0;
+}
+
+#block-barrio-boostrap-5-makehaven-d11-sitesearchform .content {
+  margin: 0;
+  padding: 0;
+}
+
+#views-exposed-form-site-search-page-1,
+#views-exposed-form-site-search-page-1 > .d-flex {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center;
+  gap: var(--mh-space-2xs);
+  margin: 0;
+  padding: 0;
+}
+
+#views-exposed-form-site-search-page-1 .js-form-item,
+#views-exposed-form-site-search-page-1 .form-item,
+#views-exposed-form-site-search-page-1 .form-actions {
+  margin: 0 !important;
+  padding: 0;
+  flex: 0 1 auto;
+}
+
+/* Hide the redundant "Search" label — placeholder + icon are enough.
+   Drupal's wrapper has class .form-item-keys (not plain .form-item), so
+   target everything broadly to be safe across CSS aggregation states. */
+#block-barrio-boostrap-5-makehaven-d11-sitesearchform label,
+#views-exposed-form-site-search-page-1 label {
+  display: none !important;
+}
+
+/* Strip Bootstrap's mb-3 margin from items inside the nav-bar form so it
+   doesn't add vertical space that misaligns with the Log in link. */
+#views-exposed-form-site-search-page-1 .js-form-item-keys,
+#views-exposed-form-site-search-page-1 .form-item-keys,
+#views-exposed-form-site-search-page-1 #edit-actions {
+  margin: 0 !important;
+}
+
+#views-exposed-form-site-search-page-1 input.form-control,
+#views-exposed-form-site-search-page-1 input[type="search"],
+#views-exposed-form-site-search-page-1 input[type="text"] {
+  width: 180px;
+  height: 30px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.2;
+}
+
+#views-exposed-form-site-search-page-1 .form-actions .btn,
+#views-exposed-form-site-search-page-1 .form-actions input[type="submit"],
+#views-exposed-form-site-search-page-1 .form-actions button[type="submit"],
+#views-exposed-form-site-search-page-1 .form-actions .form-submit {
+  width: 30px;
+  height: 30px;
+  padding: 0 !important;
+  font-size: 0 !important;
+  line-height: 1 !important;
+  color: transparent !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Replace bootstrap_barrio's default check icon with a magnifying glass. */
+#views-exposed-form-site-search-page-1 .form-actions .form-submit::before {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'><path fill-rule='evenodd' d='M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z' clip-rule='evenodd'/><path fill-rule='evenodd' d='M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z' clip-rule='evenodd'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 14px 14px;
+}
+
+@media (max-width: 991px) {
+  #views-exposed-form-site-search-page-1 {
+    width: 100%;
+    margin-top: var(--mh-space-xs);
+  }
+
+  #views-exposed-form-site-search-page-1 .form-item {
+    flex: 1 1 auto;
+  }
+
+  #views-exposed-form-site-search-page-1 input.form-control,
+  #views-exposed-form-site-search-page-1 input[type="search"],
+  #views-exposed-form-site-search-page-1 input[type="text"] {
+    width: 100%;
   }
 }

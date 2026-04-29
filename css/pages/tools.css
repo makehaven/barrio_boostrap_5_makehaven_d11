@@ -130,19 +130,11 @@ body.path-i .field--name-field-item-status .field__item a {
   font-weight: 600;
 }
 
-body.path-i .field--name-field-item-requirements .field__items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--mh-space-md);
-}
-
-body.path-i .field--name-field-item-requirements .field__item {
-  flex: 1 1 260px;
-  background: var(--mh-color-neutral-100);
-  border: 1px solid var(--mh-color-border);
-  border-radius: var(--mh-radius-md);
-  padding: var(--mh-space-md);
-}
+/* Special Requirements rendering is handled by the
+   `makerspace_equipment_requirements` module (compact icon cards). The
+   legacy block-style fallback that lived here was removed when the cards
+   shipped — leaving it caused .field__item to width-clamp to 260px and
+   squashed the new flex layout. */
 
 /* Chatbot: prevent the fixed-position widget from growing above the viewport top.
    The container uses position:fixed; bottom:0 with no max-height, so a long
@@ -150,4 +142,74 @@ body.path-i .field--name-field-item-requirements .field__item {
 .node--type-item .ai-deepchat.chat-container {
   max-height: calc(100vh - 60px);
   overflow: hidden;
+}
+
+/* Tool image — full width, no float so adjacent fields don't wrap around it.
+   Ports rules previously delivered via the `assets` asset_injector config,
+   which is disabled for this theme. */
+.node--type-item.node--view-mode-full .field--name-field-item-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.node--type-item.node--view-mode-full .field--name-field-item-image a {
+  display: flex;
+  justify-content: center;
+}
+
+.node--type-item.node--view-mode-full .field--type-image {
+  float: none !important;
+  margin: 0 auto;
+  display: block;
+}
+
+.node--type-item.node--view-mode-full .field--name-field-item-image img {
+  width: 100%;
+  height: auto;
+}
+
+/* Hazard band — color-coded banner. The asset_injector JS assigns
+   `.hazard-class-N` based on field text; styles below were previously in the
+   `assets` asset_injector config which is disabled for this theme. */
+.field.field--name-field-item-hazard-band {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  text-align: center;
+}
+
+.hazard-class-1 {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.hazard-class-2 {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.hazard-class-3 {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.hazard-class-4 {
+  background-color: #f5c6cb;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-weight: bold;
 }

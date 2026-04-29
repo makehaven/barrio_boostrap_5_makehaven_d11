@@ -50,6 +50,171 @@ body.path-rooms-zones-equipment .view-content .views-row {
   height: 100%;
 }
 
+/* views_bootstrap_cards renders each card in `<div class="col">` (flex: 1).
+   When the last row is partial (e.g. 2 of 5 cards), those cols stretch to fill
+   the row, distorting the photos. Pin a fixed flex-basis per breakpoint so the
+   card width stays consistent regardless of how many sit in the final row. */
+.view-facilitator-schedules .row > .col {
+  flex: 0 0 20%;
+  max-width: 20%;
+}
+
+@media (max-width: 1199.98px) {
+  .view-facilitator-schedules .row > .col {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .view-facilitator-schedules .row > .col {
+    flex: 0 0 33.3333%;
+    max-width: 33.3333%;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .view-facilitator-schedules .row > .col {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .view-facilitator-schedules .row > .col {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+/* Facilitator card polish — equal heights, body laid out as a column so the
+   CTA always sits at the bottom regardless of how short/long the body is. */
+.view-facilitator-schedules .card {
+  display: flex;
+  flex-direction: column;
+  min-height: 380px;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.view-facilitator-schedules .card-body,
+.view-facilitator-schedules .card .card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  padding: 12px 14px 14px !important;
+  gap: 6px;
+}
+
+/* Image / placeholder sits at the top of every card and fills consistent
+   space so logged-out cards (no photo) don't collapse to a half-height tile. */
+.view-facilitator-schedules .card-img-top {
+  display: block;
+  aspect-ratio: 1 / 1;
+  background: #f4f4f4;
+  overflow: hidden;
+}
+
+.view-facilitator-schedules .card-img-top img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0 !important;
+}
+
+/* Initials avatar shown when field_member_photo is empty (e.g. anonymous
+   user can't see the field, or the facilitator never uploaded a photo). */
+.facilitator-avatar--placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #b9a4a4, #8a6f6f);
+  color: #fff;
+}
+
+.facilitator-avatar--placeholder span {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Card title (member name) — keep brand color but constrain size. */
+.view-facilitator-schedules .card .card-title,
+.view-facilitator-schedules .card .card-title h4 {
+  font-size: 1.05rem;
+  margin: 0;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+/* Coordinator focus label inside the body — undo any inherited uppercase
+   transform and let long names wrap on grapheme boundaries instead of
+   breaking mid-word ("WOODWORKIN/G"). */
+.view-facilitator-schedules .card .card-body h3,
+.view-facilitator-schedules .card .card-text h3 {
+  text-transform: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--mh-color-neutral-800, #333);
+  margin: 0 0 4px;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Auth-aware single CTA replacing the legacy dual login/button DOM. Sits at
+   the bottom of the card body. */
+.view-facilitator-schedules .appointment-cta {
+  align-self: flex-start;
+  margin-top: auto;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.view-facilitator-schedules .appointment-cta.btn-primary {
+  background-color: var(--mh-color-brand-primary, #6f3a3a);
+  border-color: var(--mh-color-brand-primary, #6f3a3a);
+}
+
+.view-facilitator-schedules .appointment-cta.btn-primary:hover,
+.view-facilitator-schedules .appointment-cta.btn-primary:focus {
+  background-color: #5a2f2f;
+  border-color: #5a2f2f;
+}
+
+.view-facilitator-schedules .appointment-cta.btn-outline-primary {
+  color: var(--mh-color-brand-primary, #6f3a3a);
+  border-color: var(--mh-color-brand-primary, #6f3a3a);
+  background: #fff;
+}
+
+.view-facilitator-schedules .appointment-cta.btn-outline-primary:hover,
+.view-facilitator-schedules .appointment-cta.btn-outline-primary:focus {
+  background: var(--mh-color-brand-primary, #6f3a3a);
+  color: #fff;
+}
+
+/* When-string (date / time range) sits between focus label and CTA. */
+.view-facilitator-schedules .card .card-text strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--mh-color-neutral-900, #111);
+  margin-top: 2px;
+}
+
+/* Slack chip inline at the end of the badge label line. */
+.view-facilitator-schedules .field--name-field-member-slack-id-number {
+  font-size: 0.75rem;
+  margin-bottom: 2px;
+}
+
 /* Fix inner Bootstrap card classes if present */
 :is(.view-equipment, .view-library-tool-directory, .view-facilitator-schedules) .card-body {
     padding: 0;
@@ -103,6 +268,51 @@ body.path-rooms-zones-equipment .views-exposed-form {
   margin: 0 auto var(--mh-space-xl);
 }
 
+/* Equipment toolbar (header links): turn the legacy "Suggest / View status"
+   underlined-text pair into a small button group that matches the rest of
+   the equipment listing UI. Markup is set in views.view.equipment.yml. */
+.view-equipment .equipment-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mh-space-sm);
+  justify-content: center;
+  max-width: 900px;
+  margin: 0 auto var(--mh-space-md);
+}
+.view-equipment .equipment-toolbar__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mh-space-xs) var(--mh-space-lg);
+  background-color: #ffffff;
+  color: var(--mh-color-brand-primary);
+  border: 1px solid var(--mh-color-brand-primary);
+  border-radius: var(--mh-radius-pill);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background-color var(--mh-transition-fast),
+              color var(--mh-transition-fast),
+              border-color var(--mh-transition-fast);
+}
+.view-equipment .equipment-toolbar__btn:hover,
+.view-equipment .equipment-toolbar__btn:focus {
+  background-color: var(--mh-color-brand-primary);
+  color: #ffffff;
+  border-color: var(--mh-color-brand-primary);
+  text-decoration: none;
+}
+.view-equipment .equipment-toolbar__btn--primary {
+  background-color: var(--mh-color-brand-primary);
+  color: #ffffff;
+}
+.view-equipment .equipment-toolbar__btn--primary:hover,
+.view-equipment .equipment-toolbar__btn--primary:focus {
+  background-color: var(--mh-color-brand-primary-strong);
+  border-color: var(--mh-color-brand-primary-strong);
+  color: #ffffff;
+}
+
 /* Lending-library utility buttons need visible text before hover. */
 body.path-library .tool-library-header .btn-outline-secondary,
 body.page-view-library-tool-directory .tool-library-header .btn-outline-secondary,
@@ -142,25 +352,77 @@ body.page-view-library-tool-directory .view-library-tool-directory .btn-outline-
   color: var(--mh-color-neutral-900);
 }
 
-/* Status pills */
-.field--name-field-item-status .field__item a {
+/* Status pills. Per-status palettes painted on the link, which the equipment
+   view footer JS tags with a `status-<Name>` class. The outer .field__item
+   wrapper (which buttons.css would otherwise turn into a wide pink pill via
+   the generic .field--type-entity-reference rule) is reset to a transparent
+   container so only the colored badge shows. */
+.node--view-mode-teaser .field--name-field-item-status .field__item {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+.node--view-mode-teaser .field--name-field-item-status .field__item a,
+.node--type-item .field--name-field-item-status .field__item a {
   display: inline-flex;
   align-items: center;
   padding: var(--mh-space-2xs) var(--mh-space-sm);
   border-radius: var(--mh-radius-pill);
-  background: #d8f5d1;
-  color: #176b2c;
-  border: 1px solid #95d89f;
+  background: #e9ecef;
+  color: #1a1a1a;
+  border: 1px solid #ced4da;
   text-decoration: none;
   font-weight: 600;
   font-size: 0.85rem;
+  line-height: 1.2;
+}
+.node--view-mode-teaser .field--name-field-item-status .field__item a.status-Operational,
+.node--type-item .field--name-field-item-status .field__item a.status-Operational {
+  background: #1f8c5b;
+  color: #ffffff;
+  border-color: #176b3f;
+}
+.node--view-mode-teaser .field--name-field-item-status .field__item a.status-Degraded,
+.node--type-item .field--name-field-item-status .field__item a.status-Degraded {
+  background: #b8860b;
+  color: #ffffff;
+  border-color: #8a6708;
+}
+.node--view-mode-teaser .field--name-field-item-status .field__item a.status-OfflineforMaintenance,
+.node--type-item .field--name-field-item-status .field__item a.status-OfflineforMaintenance {
+  background: #b14545;
+  color: #ffffff;
+  border-color: #8b1919;
+}
+.node--view-mode-teaser .field--name-field-item-status .field__item a.status-Storage,
+.node--type-item .field--name-field-item-status .field__item a.status-Storage {
+  background: #4a6fa5;
+  color: #ffffff;
+  border-color: #345175;
+}
+.node--view-mode-teaser .field--name-field-item-status .field__item a.status-Gone,
+.node--type-item .field--name-field-item-status .field__item a.status-Gone {
+  background: #6c757d;
+  color: #ffffff;
+  border-color: #495057;
+}
+.node--view-mode-teaser .field--name-field-item-status .field__item a.status-OfflineInitialSetup,
+.node--type-item .field--name-field-item-status .field__item a.status-OfflineInitialSetup {
+  background: #6f42c1;
+  color: #ffffff;
+  border-color: #553098;
 }
 
 /* Badges and requirements — scope to direct children so rules don't cascade
    into the embedded badge term's nested fields (e.g. field_badge_video), which
-   would collapse the YouTube responsive figure to 0×0. */
-.field--name-field-member-badges > .field__item,
-.field--name-field-item-requirements > .field__item {
+   would collapse the YouTube responsive figure to 0×0.
+   The .node--view-mode-teaser prefix matches buttons.css's specificity
+   (.node--view-mode-teaser .field--type-entity-reference .field__item) so
+   our rules win on source order rather than losing on specificity, otherwise
+   anonymous viewers see the generic wide pink pill instead of these. */
+.node--view-mode-teaser .field--name-field-member-badges > .field__item,
+.node--view-mode-teaser .field--name-field-item-requirements > .field__item {
   background: #f8f9fa;
   border: 1px solid var(--mh-color-border);
   border-radius: var(--mh-radius-md);
@@ -169,8 +431,8 @@ body.page-view-library-tool-directory .view-library-tool-directory .btn-outline-
   font-size: 0.9rem;
 }
 
-.field--name-field-member-badges > .field__items,
-.field--name-field-item-requirements > .field__items {
+.node--view-mode-teaser .field--name-field-member-badges > .field__items,
+.node--view-mode-teaser .field--name-field-item-requirements > .field__items {
   display: flex;
   flex-wrap: wrap;
   gap: var(--mh-space-xs);

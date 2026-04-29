@@ -1,0 +1,46 @@
+{#
+/**
+ * @file
+ * Teaser template for Course nodes — used by the public catalog at
+ * /catalog/workshops. Mirrors the event-card DOM (.card / .card-img-top /
+ * .card-body / .card-title / .card-text) so the catalog inherits the same
+ * visual treatment as /events.
+ *
+ * Variables provided by barrio_boostrap_5_makehaven_d11_preprocess_node__course():
+ *  - workshop_upcoming_events: List of upcoming sessions.
+ *  - workshop_runs_count: Total historical runs.
+ *  - workshop_interest_count: Number of people interested.
+ */
+#}
+<article{{ attributes.addClass('node', 'node--type-course', 'node--view-mode-teaser', 'card') }}>
+
+  {% if content.field_course_image|render %}
+    <div class="card-img-top">
+      {{ content.field_course_image }}
+    </div>
+  {% endif %}
+
+  <div class="card-body">
+    <h3{{ title_attributes.addClass('card-title') }}>
+      <a href="{{ url }}">{{ label }}</a>
+    </h3>
+
+    <div class="card-text">
+      {% if workshop_upcoming_events|length > 0 %}
+        <time>
+          {{ workshop_upcoming_events|length }}
+          {{ workshop_upcoming_events|length == 1 ? 'upcoming session'|t : 'upcoming sessions'|t }}
+        </time>
+      {% endif %}
+
+      {% if content.body|render %}
+        <div class="summary">
+          {{ content.body }}
+        </div>
+      {% endif %}
+
+      <a href="{{ url }}" class="btn btn-primary">{{ 'View workshop'|t }} →</a>
+    </div>
+  </div>
+
+</article>

@@ -1505,6 +1505,38 @@ body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi
   white-space: nowrap;
 }
 
+/* Staff action pills on event info page (Edit in Drupal / Edit In CiviCRM / Create Reservation). */
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-staff-action {
+  display: inline-flex;
+  margin: 0 0.4rem 0.4rem 0;
+  vertical-align: middle;
+}
+
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-staff-action a {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #c4cad3;
+  border-radius: 999px;
+  padding: 0.28rem 0.78rem;
+  background: #fff;
+  color: #4a5260;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease;
+}
+
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-staff-action a:hover,
+body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_info .views-row .mh-staff-action a:focus {
+  background: #f4f6f9;
+  border-color: #8c95a3;
+  color: #1f2632;
+  text-decoration: none;
+  outline: none;
+}
+
 /* Stack badges vertically on narrow viewports so they don't cram the row */
 @media (max-width: 768px) {
   .view .views-field-field-event-skill-level,

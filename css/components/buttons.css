@@ -110,3 +110,34 @@ a.use-ajax[data-dialog-type=\"modal\"]:hover {
 .button a {
     color: inherit;
 }
+
+/* bootstrap_barrio/css/components/ui-dialog.css applies a Bartik-era gray
+   gradient + light border to .ui-dialog .button that visually masks our red
+   .btn-primary background and leaves white text unreadable on near-white inside
+   editablefields/ajax popups. Restore MakeHaven primary styling in dialogs. */
+.ui-dialog .button,
+.ui-dialog .btn {
+    background-color: var(--mh-color-brand-primary) !important;
+    background-image: none !important;
+    border: 1px solid var(--mh-color-brand-primary) !important;
+    color: var(--mh-color-surface) !important;
+}
+
+.ui-dialog .button:hover,
+.ui-dialog .btn:hover,
+.ui-dialog .button:focus,
+.ui-dialog .btn:focus {
+    background-color: var(--mh-color-brand-primary-strong) !important;
+    border-color: var(--mh-color-brand-primary-strong) !important;
+}
+
+/* Preserve the multiple_fields_remove_button contrib's icon-only "X" appearance
+   in dialogs (otherwise our red fill paints over the SVG icon and clips the
+   text-indented "Remove" label, leaving an ambiguous tiny red square). */
+.ui-dialog .multiple-fields-remove-button.btn,
+.ui-dialog .multiple-fields-remove-button.btn-primary {
+    background-color: transparent !important;
+    background-image: url('/modules/contrib/multiple_fields_remove_button/css/multiple-fields-remove-button-icon.svg') !important;
+    border: 0 !important;
+    color: transparent !important;
+}

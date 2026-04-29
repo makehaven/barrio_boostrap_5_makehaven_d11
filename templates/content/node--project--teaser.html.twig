@@ -1,0 +1,50 @@
+{#
+/**
+ * @file
+ * Project node — teaser view mode.
+ * Compact Bootstrap card: image → title → metadata → trimmed body → button.
+ * Suppresses submitter info, comment links, and extra image deltas.
+ */
+#}
+{{ attach_library('bootstrap_barrio/node') }}
+
+<article{{ attributes.addClass(['card', 'h-100', 'project-card']) }}>
+
+  <div class="project-card__image card-img-top">
+    {% if node.field_project_completed_image.0.entity %}
+      {{ content.field_project_completed_image }}
+    {% else %}
+      <a href="{{ url }}" class="project-card__no-image">🪵</a>
+    {% endif %}
+  </div>
+
+  <div class="card-body d-flex flex-column">
+
+    {{ title_prefix }}
+    <h5 class="card-title">
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h5>
+    {{ title_suffix }}
+
+    <div class="project-card__meta">
+      {{ content.field_project_skill_level }}
+      {{ content.field_project_type }}
+    </div>
+
+    {% if content.field_project_required_badges|render|trim %}
+      <div class="project-card__badges">
+        {{ content.field_project_required_badges }}
+      </div>
+    {% endif %}
+
+    <div class="card-text project-card__body flex-grow-1">
+      {{ content.body }}
+    </div>
+
+  </div>
+
+  <div class="card-footer bg-transparent border-0 pb-3 mt-auto">
+    <a href="{{ url }}" class="btn btn-primary w-100">{{ 'View Project'|t }}</a>
+  </div>
+
+</article>
