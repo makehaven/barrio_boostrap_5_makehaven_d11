@@ -33,6 +33,13 @@
         </time>
       {% endif %}
 
+      {% if content.field_course_badges|render %}
+        <div class="course-badges">
+          <span class="course-badges__label">{{ 'Earn:'|t }}</span>
+          {{ content.field_course_badges }}
+        </div>
+      {% endif %}
+
       {% if content.body|render %}
         <div class="summary">
           {{ content.body }}
