@@ -27,6 +27,11 @@
         {% endif %}
       </div>
       <div class="col-md-4 text-md-end">
+        {% if content.schedule_instance_button|render %}
+          <div class="course-schedule-action mb-2">
+            {{ content.schedule_instance_button }}
+          </div>
+        {% endif %}
         {% if workshop_runs_count > 0 %}
           <a href="{{ path('view.course_instances.page_1', {'node': node.id}) }}" class="course-frequency-badge-link">
             <div class="course-frequency-badge">

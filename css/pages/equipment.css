@@ -383,6 +383,12 @@ body.page-view-library-tool-directory .view-library-tool-directory .btn-outline-
   color: #ffffff;
   border-color: #176b3f;
 }
+.node--view-mode-teaser .field--name-field-item-status .field__item a.status-ReportedConcern,
+.node--type-item .field--name-field-item-status .field__item a.status-ReportedConcern {
+  background: #d97706;
+  color: #ffffff;
+  border-color: #a85f04;
+}
 .node--view-mode-teaser .field--name-field-item-status .field__item a.status-Degraded,
 .node--type-item .field--name-field-item-status .field__item a.status-Degraded {
   background: #b8860b;
