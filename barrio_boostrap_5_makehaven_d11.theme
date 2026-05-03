@@ -468,3 +468,57 @@ function barrio_boostrap_5_makehaven_d11_preprocess_views_view_field(array &$var
   $variables['output'] = $output;
 }
 
+/**
+ * Implements hook_theme().
+ *
+ * Registers the calendar-legend template used on calendar pages (events +
+ * reservations).
+ */
+function barrio_boostrap_5_makehaven_d11_theme($existing, $type, $theme, $path) {
+  return [
+    'calendar_legend' => [
+      'variables' => ['items' => []],
+      'template' => 'calendar-legend',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_page().
+ *
+ * Injects the calendar event-color legend into the featured_top region on
+ * calendar pages. Pure theme code — no asset_injector entity, no block_content,
+ * no DB-side configuration. Color/label list mirrors the fullcalendar_view
+ * color bundle for the events calendar.
+ */
+function barrio_boostrap_5_makehaven_d11_preprocess_page(array &$variables): void {
+  $path = \Drupal::service('path.current')->getPath();
+  if (!preg_match('@^/events/calendar(/|$)|^/reservations/calendar@', $path)) {
+    return;
+  }
+
+  if (!isset($variables['page']['featured_top'])) {
+    return;
+  }
+
+  $variables['page']['featured_top']['calendar_legend'] = [
+    '#theme' => 'calendar_legend',
+    '#items' => [
+      ['color' => '#b8860b', 'label' => t('Workshop')],
+      ['color' => '#5f9ea0', 'label' => t('Program')],
+      ['color' => '#006400', 'label' => t('Public Event (Free)')],
+      ['color' => '#4b0082', 'label' => t('Meetup')],
+      ['color' => '#000000', 'label' => t('Member Event')],
+      ['color' => '#3a87ad', 'label' => t('Meeting')],
+      ['color' => '#ff7f50', 'label' => t('Team Based')],
+      ['color' => '#ed143d', 'label' => t('Fundraiser')],
+      ['color' => '#8a2be2', 'label' => t('Partner Hosted')],
+      ['color' => '#a52a2a', 'label' => t('Co-Hosted')],
+    ],
+    '#weight' => -100,
+    '#cache' => [
+      'contexts' => ['url.path'],
+    ],
+  ];
+}
+

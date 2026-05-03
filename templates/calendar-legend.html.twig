@@ -1,0 +1,19 @@
+{#
+/**
+ * @file
+ * Color legend for calendar pages (events + reservations).
+ *
+ * Available variables:
+ * - items: list of { color, label } pairs to render as swatch chips.
+ *
+ * Rendered by hook_preprocess_page in barrio_boostrap_5_makehaven_d11.theme.
+ */
+#}
+<div class="cal-legend" aria-label="{{ 'Event color legend'|t }}">
+  {% for item in items %}
+    <span class="cal-legend__item">
+      <span class="cal-legend__swatch" style="background:{{ item.color }}"></span>
+      {{ item.label }}
+    </span>
+  {% endfor %}
+</div>
