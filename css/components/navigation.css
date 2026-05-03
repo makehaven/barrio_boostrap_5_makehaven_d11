@@ -154,21 +154,26 @@ ul.dropdown-menu {
 }
 
 /* Subtle active state — replaces Bootstrap's default heavy blue.
-   Light tint + brand-red left border, original text color preserved.
-   Works in both the header dropdown and any sidebar block reusing .dropdown-menu. */
+   Bootstrap's .dropdown-item.active sets color:white on the <li>, so we have
+   to explicitly set the text color (not inherit) on both <li> and the <a>. */
 .dropdown-menu li.dropdown-item.active,
 .dropdown-menu li.dropdown-item:active {
   background-color: #faf0f0;
   border-left: 3px solid #8b0000;
   padding-left: calc(1rem - 3px);
+  color: var(--mh-color-neutral-900, #212529) !important;
 }
 .dropdown-menu li.dropdown-item.active > a,
 .dropdown-menu li.dropdown-item.active > a.active,
-.dropdown-menu li.dropdown-item.active > a.is-active {
-  color: inherit !important;
+.dropdown-menu li.dropdown-item.active > a.is-active,
+.dropdown-menu li.dropdown-item:active > a {
+  color: var(--mh-color-neutral-900, #212529) !important;
   background-color: transparent !important;
   font-weight: 600;
 }
 .dropdown-menu li.dropdown-item:hover {
   background-color: #f5f5f5;
+}
+.dropdown-menu li.dropdown-item:hover > a {
+  color: var(--mh-color-neutral-900, #212529);
 }
