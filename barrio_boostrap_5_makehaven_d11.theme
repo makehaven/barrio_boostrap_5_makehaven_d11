@@ -484,24 +484,14 @@ function barrio_boostrap_5_makehaven_d11_theme($existing, $type, $theme, $path) 
 }
 
 /**
- * Implements hook_preprocess_page().
+ * Returns the calendar event-color legend render array.
  *
- * Injects the calendar event-color legend into the featured_top region on
- * calendar pages. Pure theme code — no asset_injector entity, no block_content,
- * no DB-side configuration. Color/label list mirrors the fullcalendar_view
- * color bundle for the events calendar.
+ * Color/label list mirrors the fullcalendar_view color bundle for the events
+ * calendar. Centralized here so both the events and reservations calendars
+ * render the same legend without duplication.
  */
-function barrio_boostrap_5_makehaven_d11_preprocess_page(array &$variables): void {
-  $path = \Drupal::service('path.current')->getPath();
-  if (!preg_match('@^/events/calendar(/|$)|^/reservations/calendar@', $path)) {
-    return;
-  }
-
-  if (!isset($variables['page']['featured_top'])) {
-    return;
-  }
-
-  $variables['page']['featured_top']['calendar_legend'] = [
+function _barrio_boostrap_5_makehaven_d11_calendar_legend(): array {
+  return [
     '#theme' => 'calendar_legend',
     '#items' => [
       ['color' => '#b8860b', 'label' => t('Workshop')],
@@ -515,10 +505,34 @@ function barrio_boostrap_5_makehaven_d11_preprocess_page(array &$variables): voi
       ['color' => '#8a2be2', 'label' => t('Partner Hosted')],
       ['color' => '#a52a2a', 'label' => t('Co-Hosted')],
     ],
-    '#weight' => -100,
-    '#cache' => [
-      'contexts' => ['url.path'],
-    ],
   ];
+}
+
+/**
+ * Implements hook_preprocess_views_view().
+ *
+ * Injects the calendar event-color legend into the view's header on the
+ * public events calendar and the reservations calendar — placing it directly
+ * under the page title and above the calendar grid (better UX than the
+ * site-region featured_top, which sat above the breadcrumb).
+ *
+ * Pure theme code — no asset_injector entity, no block_content. The view's
+ * `header` slot renders inside the view wrapper, after the page title.
+ */
+function barrio_boostrap_5_makehaven_d11_preprocess_views_view(array &$variables): void {
+  $view = $variables['view'] ?? NULL;
+  if ($view === NULL) {
+    return;
+  }
+  $is_calendar = ($view->id() === 'events_calendar' && $view->current_display === 'page_3')
+    || ($view->id() === 'reservatioubs' && $view->current_display === 'reservation_calendar');
+  if (!$is_calendar) {
+    return;
+  }
+
+  // The view's `header` is rendered as an array of items keyed by area
+  // plugin id. Prepend our legend so it lands above any existing area output.
+  $legend = _barrio_boostrap_5_makehaven_d11_calendar_legend();
+  $variables['header'] = ['calendar_legend' => $legend] + ($variables['header'] ?? []);
 }
 

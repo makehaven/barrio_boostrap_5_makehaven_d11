@@ -220,32 +220,26 @@ body.path-reservations aside.section:not(.featured-top__inner) {
   display: none !important;
 }
 
-body.page-view-events-calendar .featured-top__inner,
-body.path-reservations .featured-top__inner {
-  display: block !important;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
-body.page-view-events-calendar .region-featured-top,
-body.path-reservations .region-featured-top {
-  display: block !important;
-}
-
-/* Full-width: override layout-main-wrapper (1320px cap) and #main.container */
+/* Full-width: override #main-wrapper (1320px cap in base.css) and #main.container.
+   Both selectors below target the same <div id="main-wrapper" class="layout-main-wrapper">;
+   we use the ID form to outrank the same-element ID rule in base.css. */
+body.page-view-events-calendar #main-wrapper,
 body.page-view-events-calendar .layout-main-wrapper,
+body.path-reservations #main-wrapper,
 body.path-reservations .layout-main-wrapper {
-  max-width: 100% !important;
+  max-width: none !important;
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
+body.page-view-events-calendar #main,
 body.page-view-events-calendar #main.container,
 body.page-view-events-calendar .container#main,
+body.path-reservations #main,
 body.path-reservations #main.container,
 body.path-reservations .container#main {
-  max-width: 100% !important;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  max-width: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 /* Multi-line event titles in month view (FullCalendar v3-style classes used here).
