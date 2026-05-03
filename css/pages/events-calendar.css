@@ -37,9 +37,16 @@ body.path-events-calendar-public-starts table {
 }
 
 body.path-events-calendar-public-starts table thead,
-body.path-events-calendar-public-starts table tbody,
-body.path-events-calendar-public-starts table tfoot {
+body.path-events-calendar-public-starts .fc table thead {
   display: table-header-group;
+}
+
+body.path-events-calendar-public-starts .fc table tbody {
+  display: table-row-group;
+}
+
+body.path-events-calendar-public-starts .fc table tfoot {
+  display: table-footer-group;
 }
 
 body.path-events-calendar-public-starts .fc table {
