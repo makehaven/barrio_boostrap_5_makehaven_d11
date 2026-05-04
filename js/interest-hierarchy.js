@@ -12,6 +12,7 @@
     '.field--name-field-resource-area-interest',
     '.field--name-field-material-categories',
     '.field--name-field-bundle-areas-of-interest',
+    '.field--name-field-project-area-of-interest',
     '.js-form-item-interest',
     '.form-item--area',
     '.form-item-field-area-interest-target-id',

@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ * Theme override for the want_to_make flag — appends a count badge.
+ */
+#}
+{{ attach_library('flag/flag.link') }}
+
+{% if action == 'unflag' %}
+  {% set action_class = 'action-unflag' %}
+{% else %}
+  {% set action_class = 'action-flag' %}
+{% endif %}
+
+{%
+  set classes = [
+    'flag',
+    'flag-' ~ flag.id()|clean_class,
+    'js-flag-' ~ flag.id()|clean_class ~ '-' ~ flaggable.id(),
+    action_class
+  ]
+%}
+
+{% set count = flagcount(flag, flaggable) %}
+{% set attributes = attributes.setAttribute('rel', 'nofollow') %}
+
+<div class="{{ classes|join(' ') }}"><a{{ attributes }}>{{ title }}{% if count > 0 %} <span class="flag-count">{{ count }}</span>{% endif %}</a></div>

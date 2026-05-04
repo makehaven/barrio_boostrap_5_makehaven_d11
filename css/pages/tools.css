@@ -20,8 +20,23 @@ body.path-i .node--type-asset {
 
 body.path-i .node--type-library-item .field,
 body.path-i .node--type-equipment .field,
-body.path-i .node--type-asset .field {
+body.path-i .node--type-asset .field,
+body.node--type-item .node__content > .field {
   margin-bottom: var(--mh-space-md);
+}
+
+/* A bit more breathing room above the major top-level sections on item
+ * pages so manuals, videos, location, and the chip rows don't run into
+ * the surrounding prose. */
+body.node--type-item .node__content > .field--name-field-manuals,
+body.node--type-item .node__content > .field--name-field-item-instructional-video,
+body.node--type-item .node__content > .field--name-field-item-area-interest,
+body.node--type-item .node__content > .field--name-field-item-location,
+body.node--type-item .node__content > .field--name-field-item-slack-channel,
+body.node--type-item .node__content > fieldset.group-required-badges,
+body.node--type-item .node__content > fieldset.group-related-assets {
+  margin-top: var(--mh-space-lg);
+  margin-bottom: var(--mh-space-lg);
 }
 
 body.path-i .field__label {

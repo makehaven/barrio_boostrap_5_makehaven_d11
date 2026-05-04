@@ -120,4 +120,10 @@ body.path-rooms-zones-equipment .views-exposed-form .form-item-field-area-intere
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  flex: 2 1 240px;
+  min-width: 220px;
+}
+
+body.path-rooms-zones-equipment .views-exposed-form .form-item-field-area-interest-target-id select {
+  width: 100%;
 }
