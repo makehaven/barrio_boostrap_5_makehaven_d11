@@ -1,0 +1,86 @@
+{#
+/**
+ * @file
+ * Resource node — teaser view mode.
+ * Bootstrap card mirroring node--project--teaser: hero logo (or emoji
+ * fallback by type), title, type chip, area-of-interest chips, trimmed
+ * body, member-benefit highlight, endorsement pill, CTA buttons.
+ */
+#}
+{{ attach_library('bootstrap_barrio/node') }}
+
+{# Pick an emoji fallback when there is no logo, based on resource type term. #}
+{% set type_term = node.field_resource_type.entity ? node.field_resource_type.entity.label|lower : '' %}
+{% set fallback_emoji = '🛒' %}
+{% if 'material' in type_term %}{% set fallback_emoji = '📦' %}
+{% elseif 'equipment' in type_term %}{% set fallback_emoji = '🛠️' %}
+{% elseif 'education' in type_term %}{% set fallback_emoji = '🎓' %}
+{% elseif 'service' in type_term %}{% set fallback_emoji = '🤝' %}
+{% endif %}
+
+{% set has_benefit = content.field_resource_benefit_desc|render|trim is not empty %}
+
+<article{{ attributes.addClass(['card', 'h-100', 'resource-card']) }}>
+
+  <div class="resource-card__image card-img-top">
+    {% if node.field_resource_logo.0.entity %}
+      <a href="{{ url }}" rel="bookmark" aria-label="{{ label }}">
+        {{ content.field_resource_logo }}
+      </a>
+    {% else %}
+      <a href="{{ url }}" class="resource-card__no-image" rel="bookmark" aria-label="{{ label }}">
+        <span aria-hidden="true">{{ fallback_emoji }}</span>
+      </a>
+    {% endif %}
+    {% if has_benefit %}
+      <span class="resource-card__benefit-badge" title="{{ 'Member benefit available'|t }}">★ {{ 'Member benefit'|t }}</span>
+    {% endif %}
+  </div>
+
+  <div class="card-body d-flex flex-column">
+
+    {{ title_prefix }}
+    <h5 class="card-title">
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h5>
+    {{ title_suffix }}
+
+    {% if content.field_resource_type|render|trim %}
+      <div class="resource-card__type">
+        {{ content.field_resource_type }}
+      </div>
+    {% endif %}
+
+    {% if content.field_resource_area_interest|render|trim %}
+      <div class="resource-card__areas">
+        {{ content.field_resource_area_interest }}
+      </div>
+    {% endif %}
+
+    <div class="card-text resource-card__body flex-grow-1">
+      {{ content.body }}
+    </div>
+
+    {% if has_benefit %}
+      <div class="resource-card__benefit">
+        {{ content.field_resource_benefit_desc }}
+      </div>
+    {% endif %}
+
+    {% if content.flag_resource_votes|render|trim %}
+      <div class="resource-card__endorse">
+        {{ content.flag_resource_votes }}
+        {{ content.resource_endorsements_resource_endorsement_count }}
+      </div>
+    {% endif %}
+
+  </div>
+
+  <div class="card-footer bg-transparent border-0 pb-3 mt-auto resource-card__actions">
+    {% if node.field_resource_website.0.uri %}
+      <a href="{{ node.field_resource_website.0.uri }}" class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener">{{ 'Visit website'|t }}</a>
+    {% endif %}
+    <a href="{{ url }}" class="btn btn-primary btn-sm">{{ 'Details'|t }}</a>
+  </div>
+
+</article>
