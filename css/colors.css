@@ -31,14 +31,14 @@ body {
 
 a,
 .link {
-  color: #0071b3;
+  color: #8b1919;
 }
 
 a:hover,
 a:focus,
 .link:hover,
 .link:focus {
-  color: #018fe2;
+  color: #710a0a;
 }
 .nav-item .dropdown-item a.active {
   color: white;
@@ -52,17 +52,17 @@ a:focus,
 }
 a:active,
 .link:active {
-  color: #23aeff;
+  color: #710a0a;
 }
 
 .page-item.active .page-link {
-  background-color: #0071b3;
-  border-color: #0071b3;
+  background-color: #8b1919;
+  border-color: #8b1919;
 }
 
 .page-link,
 .page-link:hover {
-  color: #0071b3;
+  color: #8b1919;
 }
 
 .sidebar .block {

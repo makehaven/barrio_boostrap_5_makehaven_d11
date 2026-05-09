@@ -267,7 +267,7 @@ body .field--type-entity-reference .field--name-instructor-profiles {
   box-shadow: none;
 }
 
-body .crm-container {
+body .crm-container.crm-public {
   background: transparent !important;
 }
 
