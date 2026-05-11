@@ -254,19 +254,31 @@ body.page-view-library-tool-directory .view-library-tool-directory .card:hover {
 }
 
 /* Image — square aspect, cover-fit. Tool photos are mostly portraits of
-   physical objects so square reads well across the grid. */
-body.page-view-library-tool-directory .view-library-tool-directory .card .card-img-top {
+   physical objects so square reads well across the grid.
+   Note: views_bootstrap_cards emits .card-img-top as a <span> (inline), so
+   we must explicitly zero out line-height/margin/padding on every wrapper
+   between .card and <img> to avoid the inline-baseline gap that was leaving
+   visible white space around the image. */
+body.page-view-library-tool-directory .view-library-tool-directory .card .card-img-top,
+body.page-view-library-tool-directory .view-library-tool-directory .card .card-img-top > a,
+body.page-view-library-tool-directory .view-library-tool-directory .card .card-img-top > .field,
+body.page-view-library-tool-directory .view-library-tool-directory .card .card-img-top .field__item {
   display: block;
   width: 100%;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+}
+
+body.page-view-library-tool-directory .view-library-tool-directory .card .card-img-top {
   aspect-ratio: 1;
   overflow: hidden;
   background: #f3f4f6;
 }
 
-body.page-view-library-tool-directory .view-library-tool-directory .card .card-img-top a,
-body.page-view-library-tool-directory .view-library-tool-directory .card .card-img-top > .field {
-  display: block;
-  width: 100%;
+body.page-view-library-tool-directory .view-library-tool-directory .card .card-img-top > a,
+body.page-view-library-tool-directory .view-library-tool-directory .card .card-img-top > .field,
+body.page-view-library-tool-directory .view-library-tool-directory .card .card-img-top .field__item {
   height: 100%;
 }
 
@@ -275,7 +287,9 @@ body.page-view-library-tool-directory .view-library-tool-directory .card .card-i
   height: 100%;
   object-fit: cover;
   display: block;
+  margin: 0;
   border-radius: 0;
+  vertical-align: top;
 }
 
 /* Card body */
