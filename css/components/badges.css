@@ -1304,7 +1304,7 @@
 .field--name-field-member-badges .vocabulary-badges,
 .field--name-field-additional-badges .vocabulary-badges {
   display: grid;
-  grid-template-columns: 104px 1fr;
+  grid-template-columns: 130px 1fr;
   grid-template-areas:
     "image  title"
     "image  meta"
@@ -1359,21 +1359,19 @@
   display: contents;
 }
 
-/* Image becomes a prominent left-column badge chip — soft circle background
-   gives the artwork breathing room and a clear visual frame. */
+/* Image is the badge identity — let it be big, clean, no decorative frame. */
 .field--name-field-member-badges .vocabulary-badges .field--name-field-member-badge-image,
 .field--name-field-additional-badges .vocabulary-badges .field--name-field-member-badge-image {
   grid-area: image;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 104px;
-  height: 104px;
+  width: 130px;
+  height: 130px;
   margin: 0;
-  padding: 0.4rem;
-  background: linear-gradient(135deg, rgba(178, 34, 34, 0.06), rgba(178, 34, 34, 0.02));
-  border: 1px solid rgba(178, 34, 34, 0.12);
-  border-radius: 50%;
+  padding: 0;
+  background: transparent;
+  border: 0;
 }
 .field--name-field-member-badges .vocabulary-badges .field--name-field-member-badge-image a,
 .field--name-field-additional-badges .vocabulary-badges .field--name-field-member-badge-image a {
@@ -1393,10 +1391,10 @@
 .field--name-field-member-badges .vocabulary-badges .field--name-field-member-badge-image img,
 .field--name-field-additional-badges .vocabulary-badges .field--name-field-member-badge-image img {
   display: block;
-  width: 86px;
-  height: 86px;
+  width: 130px;
+  height: 130px;
+  max-width: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 2px 4px rgba(15, 23, 42, 0.1));
 }
 
 /* Meta row: checkout requirement chip + status pill on the right. */
@@ -1470,13 +1468,13 @@
   }
   .field--name-field-member-badges .vocabulary-badges .field--name-field-member-badge-image,
   .field--name-field-additional-badges .vocabulary-badges .field--name-field-member-badge-image {
-    width: 84px;
-    height: 84px;
+    width: 110px;
+    height: 110px;
   }
   .field--name-field-member-badges .vocabulary-badges .field--name-field-member-badge-image img,
   .field--name-field-additional-badges .vocabulary-badges .field--name-field-member-badge-image img {
-    width: 68px;
-    height: 68px;
+    width: 110px;
+    height: 110px;
   }
   .field--name-field-member-badges .vocabulary-badges .mh-badge-status-pill,
   .field--name-field-additional-badges .vocabulary-badges .mh-badge-status-pill {

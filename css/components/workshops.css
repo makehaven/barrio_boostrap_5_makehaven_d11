@@ -42,9 +42,14 @@
 
 .view-public-course-catalog .card-img-top,
 .view-public-course-catalog .card-img-top > .field,
+.view-public-course-catalog .card-img-top > .field > .field__item,
+.view-public-course-catalog .card-img-top .field__item,
 .view-public-course-catalog .card-img-top a {
   display: block;
   width: 100%;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
 }
 
 .view-public-course-catalog .card-img-top img {
@@ -53,7 +58,9 @@
   aspect-ratio: 16 / 9;
   object-fit: cover;
   display: block;
+  margin: 0;
   border-radius: 0;
+  vertical-align: top;
 }
 
 .view-public-course-catalog .card-body {
