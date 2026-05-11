@@ -32,7 +32,7 @@
 
 .view-badges .views-row {
   background: #fff;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #d9d9d9 !important;
   border-radius: 20px;
   padding: 0;
   display: flex;
@@ -41,11 +41,12 @@
   box-shadow: 0 6px 15px rgba(0,0,0,0.04);
   transition: all 0.25s ease;
   height: 100%;
+  outline: none;
 }
 .view-badges .views-row:hover {
   transform: translateY(-6px);
   box-shadow: 0 15px 30px rgba(0,0,0,0.08);
-  border-color: #b22222;
+  border-color: #b22222 !important;
 }
 
 .view-badges .views-row .barrio_col2-equal {
@@ -121,6 +122,165 @@
   box-shadow: 0 3px 0 #8b0000;
 }
 
+/* ── Card view mode (used by /badges directory) ───────────── */
+.view-badges .views-row .vocabulary-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 1.75rem 1.5rem 1.5rem;
+  height: 100%;
+  text-align: center;
+}
+/* The taxonomy-term template wraps fields in <div class="content">.
+   Make it the flex container so margin-top: auto on the bottom CTA works. */
+.view-badges .views-row .vocabulary-badges > .content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.view-badges .views-row .vocabulary-badges h2,
+.view-badges .views-row .vocabulary-badges .term-title {
+  margin: 0 0 0.25rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--mh-color-neutral-900);
+}
+.view-badges .views-row .vocabulary-badges h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+/* Always reserve image space so the layout doesn't shift when a badge has
+   no badge image; the fallback red triangle still drops in here. */
+.view-badges .views-row .vocabulary-badges .field--name-field-member-badge-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 130px;
+  margin-bottom: 0.75rem;
+}
+.view-badges .views-row .vocabulary-badges .field--name-field-member-badge-image img {
+  max-width: 110px;
+  height: auto;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.08));
+}
+.view-badges .views-row .vocabulary-badges .field--name-description {
+  font-size: 0.9rem;
+  color: var(--mh-color-neutral-700);
+  margin: 0 0 0.5rem;
+  line-height: 1.45;
+}
+.view-badges .views-row .vocabulary-badges .field--name-field-badge-checkout-requirement {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  align-self: center;
+  background: var(--mh-color-neutral-100);
+  border: 0;
+  border-radius: var(--mh-radius-pill);
+  padding: 0.2rem 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--mh-color-neutral-700);
+  margin: 0;
+}
+.view-badges .views-row .vocabulary-badges .field--name-field-badge-checkout-requirement::before {
+  content: '';
+}
+.view-badges .views-row .vocabulary-badges .field--name-field-badge-checkout-requirement .field__label {
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--mh-color-neutral-500);
+}
+.view-badges .views-row .vocabulary-badges .mh-badge-status-pill {
+  align-self: center;
+}
+
+/* Eligibility CTA on /badges cards — uniform button regardless of label
+   length, tone, or state. Anchored to the bottom of the card so every
+   row's button sits on the same baseline. Tone is conveyed by the
+   glyph circle, not by border or background. */
+.view-badges .views-row .vocabulary-badges .content .mh-badge-eligibility {
+  align-self: stretch;
+  margin: auto 0 0;
+  padding: 0.6rem 0.85rem;
+  background: var(--mh-color-brand-primary, #b22222);
+  color: #fff;
+  border: 1px solid var(--mh-color-brand-primary, #b22222);
+  border-left-width: 1px;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 2.65rem;
+}
+.view-badges .views-row .vocabulary-badges a.mh-badge-eligibility:hover,
+.view-badges .views-row .vocabulary-badges a.mh-badge-eligibility:focus {
+  background: var(--mh-color-brand-primary-strong, #710a0a);
+  border-color: var(--mh-color-brand-primary-strong, #710a0a);
+  color: #fff;
+  text-decoration: none;
+}
+.view-badges .views-row .vocabulary-badges .content .mh-badge-eligibility__glyph {
+  width: 1.5rem;
+  height: 1.5rem;
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+  font-size: 0.8rem;
+}
+.view-badges .views-row .vocabulary-badges .content .mh-badge-eligibility__label {
+  text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.25;
+}
+
+/* Tone overrides on cards: success/blocked/warning use the muted variant
+   (white pill with colored glyph) so they don't pretend to be the primary
+   "Start this badge" action. */
+.view-badges .views-row .vocabulary-badges .content .mh-badge-eligibility--tone-success,
+.view-badges .views-row .vocabulary-badges .content .mh-badge-eligibility--tone-blocked,
+.view-badges .views-row .vocabulary-badges .content .mh-badge-eligibility--tone-warning,
+.view-badges .views-row .vocabulary-badges .content .mh-badge-eligibility--tone-neutral {
+  background: #f3f4f6;
+  color: var(--mh-color-neutral-800, #1f2937);
+  border-color: #d4d4d8;
+}
+.view-badges .views-row .vocabulary-badges a.mh-badge-eligibility--tone-success:hover,
+.view-badges .views-row .vocabulary-badges a.mh-badge-eligibility--tone-blocked:hover,
+.view-badges .views-row .vocabulary-badges a.mh-badge-eligibility--tone-warning:hover,
+.view-badges .views-row .vocabulary-badges a.mh-badge-eligibility--tone-neutral:hover,
+.view-badges .views-row .vocabulary-badges a.mh-badge-eligibility--tone-success:focus,
+.view-badges .views-row .vocabulary-badges a.mh-badge-eligibility--tone-blocked:focus,
+.view-badges .views-row .vocabulary-badges a.mh-badge-eligibility--tone-warning:focus,
+.view-badges .views-row .vocabulary-badges a.mh-badge-eligibility--tone-neutral:focus {
+  background: #e5e7eb;
+  color: var(--mh-color-neutral-900, #111827);
+  border-color: #b3b8bf;
+}
+.view-badges .views-row .vocabulary-badges .content .mh-badge-eligibility--tone-success .mh-badge-eligibility__glyph {
+  background: var(--mh-color-success, #1f8c5b);
+}
+.view-badges .views-row .vocabulary-badges .content .mh-badge-eligibility--tone-blocked .mh-badge-eligibility__glyph {
+  background: var(--mh-color-danger, #b8382c);
+}
+.view-badges .views-row .vocabulary-badges .content .mh-badge-eligibility--tone-warning .mh-badge-eligibility__glyph {
+  background: var(--mh-color-warning, #d68b00);
+}
+.view-badges .views-row .vocabulary-badges .content .mh-badge-eligibility--tone-neutral .mh-badge-eligibility__glyph {
+  background: #9ca3af;
+}
+
 /* ============================================================
    BADGE DETAIL PAGE (individual badge at /badges/waterjet)
    ============================================================ */
@@ -156,11 +316,6 @@
   flex-shrink: 0;
 }
 
-/* ── Step counter reset ──────────────────────────────────── */
-.layout--onecol {
-  counter-reset: badge-step;
-}
-
 /* ── Section cards ───────────────────────────────────────── */
 .group-videos,
 .group-quiz,
@@ -175,12 +330,10 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.03);
 }
 
-/* Numbered step sections */
 .group-videos,
 .group-quiz,
 .group-contact-badger {
-  counter-increment: badge-step;
-  border-left: 4px solid #b22222;
+  border-left: 4px solid var(--mh-color-brand-primary, #b22222);
 }
 
 .group-videos > legend,
@@ -188,27 +341,8 @@
 .group-contact-badger > legend {
   font-weight: 900;
   font-size: 1.2rem;
-  color: #b22222;
+  color: var(--mh-color-brand-primary, #b22222);
   padding: 0 0.75rem;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-.group-videos > legend::before,
-.group-quiz > legend::before,
-.group-contact-badger > legend::before {
-  content: counter(badge-step);
-  background: #b22222;
-  color: #fff;
-  font-size: 0.85rem;
-  font-weight: 900;
-  width: 1.6em;
-  height: 1.6em;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
 }
 
 .group-prerequisite > legend,
@@ -469,4 +603,815 @@
     content: " (" attr(href) ")";
     font-size: 10pt;
   }
+  .mh-badge-status-banner,
+  .mh-badge-status-pill,
+  .mh-badge-eligibility {
+    display: none !important;
+  }
+}
+
+/* ── /badges/complete page polish ────────────────────────── */
+.badge-next-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 980px;
+  margin: 0 auto;
+}
+.badge-next-steps__intro {
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+}
+/* "Where do I start?" callout above the badges directory filter bar. */
+.badges-directory-callout {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0.85rem 1.1rem;
+  margin: 0 0 1rem;
+  background: linear-gradient(180deg, #fff 0%, #f7faff 100%);
+  border: 1px solid #d6e4f0;
+  border-left: 5px solid var(--mh-color-brand-primary, #b22222);
+  border-radius: 0.65rem;
+  box-shadow: 0 2px 6px rgba(17, 24, 39, 0.04);
+}
+.badges-directory-callout__body {
+  flex: 1 1 18rem;
+  min-width: 0;
+}
+.badges-directory-callout__lead {
+  margin: 0;
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 0.98rem;
+  line-height: 1.35;
+}
+.badges-directory-callout__stats {
+  margin: 0.25rem 0 0;
+  color: #4b5563;
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+.badges-directory-callout__stats strong {
+  color: var(--mh-color-brand-primary-strong, #710a0a);
+  font-weight: 800;
+}
+.badges-directory-callout__cta {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 1rem;
+  border-radius: 0.45rem;
+  background: var(--mh-color-brand-primary, #b22222);
+  color: #fff !important;
+  border: 1px solid var(--mh-color-brand-primary, #b22222);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.badges-directory-callout__cta:hover,
+.badges-directory-callout__cta:focus {
+  background: var(--mh-color-brand-primary-strong, #710a0a);
+  border-color: var(--mh-color-brand-primary-strong, #710a0a);
+  color: #fff !important;
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+.badges-directory-callout--anon {
+  border-left-color: #b6c4d4;
+}
+@media (max-width: 575px) {
+  .badges-directory-callout__cta {
+    align-self: stretch;
+    justify-content: center;
+  }
+}
+
+.badge-personal-stats {
+  background: linear-gradient(180deg, #fff 0%, #f7faff 100%);
+  border: 1px solid #d6e4f0;
+  border-left: 5px solid var(--mh-color-brand-primary, #b22222);
+  border-radius: 0.65rem;
+  padding: 0.9rem 1.15rem;
+  box-shadow: 0 2px 6px rgba(17, 24, 39, 0.04);
+}
+.badge-personal-stats__heading {
+  margin: 0 0 0.45rem;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #1f2937;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.badge-personal-stats__list {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: #4b5563;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.badge-personal-stats__list li { margin-bottom: 0.15rem; }
+.badge-personal-stats__list strong { color: var(--mh-color-brand-primary-strong, #710a0a); }
+.badge-next-steps__heading {
+  margin: 1rem 0 0.25rem;
+  font-size: 1.35rem;
+  border-bottom: 2px solid var(--mh-color-brand-primary);
+  padding-bottom: 0.35rem;
+}
+.badge-next-steps__recommendations {
+  background: var(--mh-color-surface);
+  border: 1px solid var(--mh-color-border);
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+}
+.badge-next-steps__recommendations--starred {
+  border-left: 5px solid var(--mh-color-brand-primary, #b22222);
+  background: linear-gradient(180deg, #fff 0%, #fff5f5 100%);
+}
+.badge-next-steps__recommendations--starred .badge-next-steps__heading::before {
+  content: "★ ";
+  color: var(--mh-color-brand-primary, #b22222);
+}
+.badge-next-steps__recommendations .badge-next-steps__heading {
+  margin-top: 0;
+}
+.badge-next-steps__rec-list {
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.5rem;
+}
+.badge-next-steps__rec-list li {
+  margin: 0;
+}
+.badge-next-steps__rec-link {
+  display: block;
+  padding: 0.55rem 0.85rem;
+  border-radius: 0.5rem;
+  background: var(--mh-color-neutral-100);
+  color: var(--mh-color-brand-primary-strong);
+  text-decoration: none;
+  font-weight: 600;
+}
+.badge-next-steps__rec-link:hover {
+  background: rgba(139, 25, 25, 0.08);
+  color: var(--mh-color-brand-primary-strong);
+  text-decoration: none;
+}
+.badge-next-step-card {
+  background: var(--mh-color-surface);
+  border: 1px solid var(--mh-color-border);
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.badge-next-step-card .badge-card-title {
+  margin: 0;
+  font-size: 1.25rem;
+}
+.badge-next-step-card .badge-card-title a {
+  color: var(--mh-color-brand-primary-strong);
+  text-decoration: none;
+}
+.badge-next-step-card .badge-option {
+  padding: 0.5rem 0.65rem;
+  border-radius: 0.5rem;
+  background: var(--mh-color-neutral-100);
+}
+
+.badge-next-step-cta {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1rem;
+  background: var(--mh-color-brand-primary, #b22222);
+  color: #fff !important;
+  font-weight: 700;
+  border-radius: 0.45rem;
+  text-decoration: none;
+  border: 1px solid var(--mh-color-brand-primary, #b22222);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.badge-next-step-cta:hover,
+.badge-next-step-cta:focus {
+  background: var(--mh-color-brand-primary-strong, #710a0a);
+  border-color: var(--mh-color-brand-primary-strong, #710a0a);
+  color: #fff !important;
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+.badge-next-step-cta::after {
+  content: "→";
+  font-weight: 900;
+}
+
+/* ── Hide default taxonomy term node listing on badge pages ─ */
+.path-taxonomy--badges .view-taxonomy-term.view-display-id-taxonomy_default_page > .view-content,
+.path-taxonomy--badges .view-taxonomy-term.view-display-id-taxonomy_default_page > .pager {
+  display: none !important;
+}
+
+/* ── Badge popularity stats ─────────────────────────────── */
+.badge-popularity-stats {
+  margin-top: 1.5rem;
+  padding: 0.85rem 1rem;
+  border-left: 4px solid var(--mh-color-info);
+  background: rgba(78, 161, 211, 0.06);
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--mh-color-neutral-700);
+}
+.badge-popularity-stats__heading {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+  color: var(--mh-color-neutral-800);
+}
+.badge-popularity-stats__list {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+.badge-popularity-stats__list li {
+  margin-bottom: 0.15rem;
+}
+
+/* Downplay the secondary paid private-session option on badge term pages. */
+.badge-option--secondary,
+.badge-option--private.badge-option--secondary {
+  background: transparent;
+  border: 1px dashed var(--mh-color-neutral-300);
+  color: var(--mh-color-neutral-600);
+  font-size: 0.9rem;
+  margin-top: 1.5rem;
+}
+.badge-option--secondary p {
+  margin: 0 0 0.25rem;
+}
+.badge-option--secondary a {
+  color: var(--mh-color-neutral-700);
+  text-decoration: underline;
+}
+
+/* ── Active-badge banner emphasis ───────────────────────── */
+.mh-badge-status-banner--tone-success {
+  background: rgba(31, 140, 91, 0.08);
+  border-left-width: 8px;
+}
+.mh-badge-status-banner--tone-success .mh-badge-status-banner__heading {
+  font-size: 1.25rem;
+  color: #14633d;
+}
+
+/* ── Upcoming-event card on badge pages ──────────────────── */
+.view-event-upcoming-badging .views-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "date date"
+    "title cta";
+  gap: 0.35rem 1rem;
+  align-items: center;
+  padding: 1rem 1.15rem;
+  margin: 0.65rem 0;
+  background: #fff;
+  border: 1px solid #d8dde3;
+  border-left: 5px solid var(--mh-color-brand-primary, #b22222);
+  border-radius: 0.6rem;
+  box-shadow: 0 2px 6px rgba(17, 24, 39, 0.05);
+}
+.view-event-upcoming-badging .views-row::before {
+  content: "📅 Class event";
+  position: absolute;
+  top: -0.65rem;
+  left: 1rem;
+  padding: 0.1rem 0.55rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--mh-color-brand-primary, #b22222);
+  color: #fff;
+  border-radius: 999px;
+}
+.view-event-upcoming-badging .views-field-start-date {
+  grid-area: date;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #6b7280;
+}
+.view-event-upcoming-badging .views-field-start-date > div {
+  display: inline;
+}
+.view-event-upcoming-badging .views-field-title {
+  grid-area: title;
+}
+.view-event-upcoming-badging .views-field-title h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.view-event-upcoming-badging .views-field-title h3 a {
+  color: var(--mh-color-brand-primary-strong, #710a0a);
+  text-decoration: none;
+}
+.view-event-upcoming-badging .views-field-title h3 a:hover {
+  text-decoration: underline;
+}
+.view-event-upcoming-badging .views-field-nothing {
+  grid-area: cta;
+}
+.view-event-upcoming-badging .event-upcoming-badging__cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.95rem;
+  background: var(--mh-color-brand-primary, #b22222);
+  color: #fff !important;
+  border-radius: 0.4rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid var(--mh-color-brand-primary, #b22222);
+  white-space: nowrap;
+}
+.view-event-upcoming-badging .event-upcoming-badging__cta:hover,
+.view-event-upcoming-badging .event-upcoming-badging__cta:focus {
+  background: var(--mh-color-brand-primary-strong, #710a0a);
+  border-color: var(--mh-color-brand-primary-strong, #710a0a);
+  color: #fff !important;
+  text-decoration: none;
+}
+@media (max-width: 575px) {
+  .view-event-upcoming-badging .views-row {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "date"
+      "title"
+      "cta";
+  }
+  .view-event-upcoming-badging .event-upcoming-badging__cta {
+    justify-self: stretch;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+/* ── Two-paths notice for class-required badges ──────────── */
+.badge-class-required-notice {
+  border-left: 6px solid var(--mh-color-info);
+  padding: 0.85rem 1rem;
+  background: rgba(78, 161, 211, 0.08);
+  border-radius: 0.5rem;
+}
+.badge-class-required-notice p {
+  margin: 0 0 0.5rem;
+}
+.badge-class-required-notice__items {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+.badge-class-required-notice__items li {
+  margin-bottom: 0.35rem;
+}
+
+/* ── Gate warning (no quiz / no checkout yet) ─────────────── */
+.badge-gate-warning {
+  border-left: 6px solid var(--mh-color-warning);
+}
+.badge-gate-warning__items {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+.badge-gate-warning__items li {
+  margin-bottom: 0.35rem;
+}
+
+/* ── Badge video sizing ──────────────────────────────────── */
+.group-video .field--name-field-badge-video,
+.field--name-field-badge-video {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.field--name-field-badge-video iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+/* ── Facilitator schedule cards on badge term page ────────── */
+/* The view uses views_bootstrap_cards, which needs Bootstrap grid CSS to
+   render as a horizontal card row. The Gin admin theme (used by logged-in
+   staff) does NOT load Bootstrap, so we add framework-agnostic layout
+   here scoped to this EVA. */
+.view-id-facilitator_schedules.view-display-id-facilitator_schedule_tool_eva > .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 0;
+}
+.view-id-facilitator_schedules.view-display-id-facilitator_schedule_tool_eva > .row > .col {
+  flex: 1 1 240px;
+  max-width: 320px;
+  padding: 0;
+}
+.view-id-facilitator_schedules.view-display-id-facilitator_schedule_tool_eva .card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--mh-color-border);
+  border-radius: 0.6rem;
+  overflow: hidden;
+  background: var(--mh-color-surface);
+  height: 100%;
+}
+.view-id-facilitator_schedules.view-display-id-facilitator_schedule_tool_eva .card-img-top {
+  display: block;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--mh-color-neutral-100);
+}
+.view-id-facilitator_schedules.view-display-id-facilitator_schedule_tool_eva .card-img-top img,
+.view-id-facilitator_schedules.view-display-id-facilitator_schedule_tool_eva .card-img-top .field--name-field-member-photo,
+.view-id-facilitator_schedules.view-display-id-facilitator_schedule_tool_eva .card-img-top .field--name-field-member-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.view-id-facilitator_schedules.view-display-id-facilitator_schedule_tool_eva .card-body {
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+}
+.view-id-facilitator_schedules.view-display-id-facilitator_schedule_tool_eva .card-title,
+.view-id-facilitator_schedules.view-display-id-facilitator_schedule_tool_eva .card-body h3,
+.view-id-facilitator_schedules.view-display-id-facilitator_schedule_tool_eva .card-body h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--mh-color-brand-primary-strong);
+}
+.view-id-facilitator_schedules.view-display-id-facilitator_schedule_tool_eva .card-body .views-field-uid > .field-content > a,
+.view-id-facilitator_schedules.view-display-id-facilitator_schedule_tool_eva .card-body .views-field-uid > a {
+  font-weight: 700;
+  color: var(--mh-color-brand-primary-strong);
+  text-decoration: none;
+}
+.view-id-facilitator_schedules.view-display-id-facilitator_schedule_tool_eva .card-body .btn,
+.view-id-facilitator_schedules.view-display-id-facilitator_schedule_tool_eva .card-body a.button,
+.view-id-facilitator_schedules.view-display-id-facilitator_schedule_tool_eva .card-body a.btn-primary,
+.view-id-facilitator_schedules.view-display-id-facilitator_schedule_tool_eva .card-body a.appointment-cta {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--mh-radius-pill);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  background: var(--mh-color-brand-primary);
+  color: #fff;
+  border: 0;
+}
+.view-id-facilitator_schedules.view-display-id-facilitator_schedule_tool_eva .card-body .btn:hover,
+.view-id-facilitator_schedules.view-display-id-facilitator_schedule_tool_eva .card-body a.button:hover,
+.view-id-facilitator_schedules.view-display-id-facilitator_schedule_tool_eva .card-body a.btn-primary:hover,
+.view-id-facilitator_schedules.view-display-id-facilitator_schedule_tool_eva .card-body a.appointment-cta:hover {
+  background: var(--mh-color-brand-primary-strong);
+  color: #fff;
+}
+.view-id-facilitator_schedules.view-display-id-facilitator_schedule_tool_eva .card-body a.ext {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+.view-id-facilitator_schedules.view-display-id-facilitator_schedule_tool_eva .card-body a.ext:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* ── Member status banner (badge term page) ───────────────── */
+.mh-badge-status-banner {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 0 1.5rem;
+  padding: 1.1rem 1.25rem 1.1rem 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--mh-color-border, #d9d9d9);
+  border-left-width: 6px;
+  background: #eef6fc;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  color: #1f2937;
+}
+.mh-badge-status-banner__inner {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr auto;
+  grid-template-areas:
+    "icon heading cta"
+    "icon body cta";
+  gap: 0.25rem 1rem;
+  align-items: center;
+}
+.mh-badge-status-banner::before {
+  content: "ℹ";
+  grid-area: icon;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background: var(--mh-color-info, #4ea1d3);
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 900;
+  line-height: 1;
+  align-self: start;
+}
+.mh-badge-status-banner__inner > .mh-badge-status-banner__heading {
+  grid-area: heading;
+}
+.mh-badge-status-banner__inner > .mh-badge-status-banner__body {
+  grid-area: body;
+}
+.mh-badge-status-banner__inner > .mh-badge-status-banner__cta,
+.mh-badge-status-banner__inner > a.mh-badge-status-banner__cta {
+  grid-area: cta;
+  align-self: center;
+}
+.mh-badge-status-banner__heading {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.3;
+  color: inherit;
+}
+.mh-badge-status-banner__body {
+  margin: 0.15rem 0 0;
+  color: var(--mh-color-neutral-700, #4b5563);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+.mh-badge-status-banner__cta {
+  flex: 0 0 auto;
+}
+.mh-badge-status-banner__prereqs {
+  grid-area: body;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.mh-badge-status-banner__prereq-link {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--mh-radius-pill, 999px);
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--mh-color-brand-primary-strong, #710a0a);
+  text-decoration: none;
+  font-size: 0.9rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+.mh-badge-status-banner__prereq-link:hover {
+  background: #fff;
+}
+
+/* Tone variants — tinted background + icon swatch. */
+.mh-badge-status-banner--tone-progress {
+  background: #eef6fc;
+  border-color: #bcdcef;
+  border-left-color: var(--mh-color-info, #4ea1d3);
+}
+.mh-badge-status-banner--tone-progress::before {
+  content: "ℹ";
+  background: var(--mh-color-info, #4ea1d3);
+}
+
+.mh-badge-status-banner--tone-success {
+  background: #e6f4ec;
+  border-color: #b6e0c5;
+  border-left-color: var(--mh-color-success, #1f8c5b);
+}
+.mh-badge-status-banner--tone-success::before {
+  content: "✓";
+  background: var(--mh-color-success, #1f8c5b);
+}
+
+.mh-badge-status-banner--tone-warning {
+  background: #fff4e0;
+  border-color: #f3d390;
+  border-left-color: var(--mh-color-warning, #d68b00);
+}
+.mh-badge-status-banner--tone-warning::before {
+  content: "⚠";
+  background: var(--mh-color-warning, #d68b00);
+}
+
+.mh-badge-status-banner--tone-blocked {
+  background: #f1f1f3;
+  border-color: #d4d4d8;
+  border-left-color: var(--mh-color-neutral-600, #525252);
+}
+.mh-badge-status-banner--tone-blocked::before {
+  content: "🔒";
+  background: var(--mh-color-neutral-600, #525252);
+  font-size: 1.05rem;
+}
+
+.mh-badge-status-banner--tone-neutral {
+  background: #f3f4f6;
+  border-color: #d4d4d8;
+  border-left-color: var(--mh-color-neutral-300, #b3b3b3);
+}
+.mh-badge-status-banner--tone-neutral::before {
+  content: "👋";
+  background: var(--mh-color-neutral-500, #6b6b6b);
+  font-size: 1.05rem;
+}
+
+@media (max-width: 768px) {
+  .mh-badge-status-banner {
+    position: static;
+    padding: 0.9rem 1rem;
+  }
+  .mh-badge-status-banner__inner {
+    grid-template-columns: 2rem 1fr;
+    grid-template-areas:
+      "icon heading"
+      "icon body"
+      "cta cta";
+    gap: 0.15rem 0.75rem;
+  }
+  .mh-badge-status-banner::before {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.05rem;
+  }
+  .mh-badge-status-banner__inner > .mh-badge-status-banner__cta {
+    margin-top: 0.5rem;
+    justify-self: stretch;
+    text-align: center;
+  }
+}
+
+/* ── Inline status pill (embedded view mode + cards) ──────── */
+.mh-badge-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: var(--mh-radius-pill);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.4;
+  background: var(--mh-color-neutral-100);
+  color: var(--mh-color-neutral-800);
+}
+.mh-badge-status-pill__label { white-space: nowrap; }
+.mh-badge-status-pill--tone-success { background: rgba(31, 140, 91, 0.12); color: #14633d; }
+.mh-badge-status-pill--tone-progress { background: rgba(78, 161, 211, 0.18); color: #1f6c93; }
+.mh-badge-status-pill--tone-warning { background: rgba(255, 179, 71, 0.2); color: #8a4d00; }
+.mh-badge-status-pill--tone-blocked { background: var(--mh-color-neutral-150); color: var(--mh-color-neutral-700); }
+.mh-badge-status-pill--tone-neutral { background: var(--mh-color-neutral-100); color: var(--mh-color-neutral-700); }
+
+/* ── Required-badge embed on a tool page ─────────────────── */
+/* Scoped to the field that hosts the embedded badge on a tool node so it
+   doesn't bleed into /badges or the badge term page. Both field_member_badges
+   and field_additional_badges render badges via view_mode=embedded. */
+.field--name-field-member-badges .vocabulary-badges,
+.field--name-field-additional-badges .vocabulary-badges {
+  display: grid;
+  grid-template-columns: 76px 1fr;
+  grid-template-areas:
+    "image  body"
+    "cta    cta";
+  gap: 0.85rem 1rem;
+  align-items: start;
+  margin-bottom: 1rem;
+}
+.field--name-field-member-badges .vocabulary-badges .field--name-field-member-badge-image,
+.field--name-field-additional-badges .vocabulary-badges .field--name-field-member-badge-image {
+  grid-area: image;
+  margin: 0;
+}
+.field--name-field-member-badges .vocabulary-badges .field--name-field-member-badge-image img,
+.field--name-field-additional-badges .vocabulary-badges .field--name-field-member-badge-image img {
+  width: 100%;
+  max-width: 76px;
+  height: auto;
+}
+.field--name-field-member-badges .vocabulary-badges .field--name-field-badge-checkout-requirement,
+.field--name-field-additional-badges .vocabulary-badges .field--name-field-badge-checkout-requirement {
+  grid-area: body;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--mh-color-neutral-700);
+}
+.field--name-field-member-badges .vocabulary-badges .field--name-field-badge-checkout-requirement::before,
+.field--name-field-additional-badges .vocabulary-badges .field--name-field-badge-checkout-requirement::before {
+  content: '';
+}
+.field--name-field-member-badges .vocabulary-badges .field--name-field-badge-checkout-requirement .field__label,
+.field--name-field-additional-badges .vocabulary-badges .field--name-field-badge-checkout-requirement .field__label {
+  display: none;
+}
+.field--name-field-member-badges .vocabulary-badges .mh-badge-status-pill,
+.field--name-field-additional-badges .vocabulary-badges .mh-badge-status-pill {
+  grid-area: body;
+  justify-self: end;
+  align-self: start;
+  margin: 0;
+}
+.field--name-field-member-badges .vocabulary-badges .mh-badge-eligibility,
+.field--name-field-additional-badges .vocabulary-badges .mh-badge-eligibility {
+  grid-area: cta;
+  margin: 0;
+}
+
+/* ── Eligibility "next step" banner (embedded view mode) ──── */
+/* Renders inside the badge embed on tool pages as a clickable banner —
+   the obvious next action. Always links to the badge term page. */
+.mh-badge-eligibility {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 0.6rem 0 0;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--mh-color-border);
+  border-left: 5px solid var(--mh-color-neutral-400);
+  border-radius: 0.6rem;
+  background: var(--mh-color-surface);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--mh-color-neutral-800);
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+a.mh-badge-eligibility:hover,
+a.mh-badge-eligibility:focus {
+  text-decoration: none;
+  background: var(--mh-color-neutral-100);
+}
+.mh-badge-eligibility__glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 0.95rem;
+  background: var(--mh-color-neutral-100);
+  color: var(--mh-color-neutral-700);
+}
+.mh-badge-eligibility__label {
+  flex: 1 1 auto;
+  line-height: 1.3;
+}
+.mh-badge-eligibility--tone-success { border-left-color: var(--mh-color-success); background: rgba(31, 140, 91, 0.05); }
+.mh-badge-eligibility--tone-success .mh-badge-eligibility__glyph { background: var(--mh-color-success); color: #fff; }
+.mh-badge-eligibility--tone-progress { border-left-color: var(--mh-color-info); background: rgba(78, 161, 211, 0.06); }
+.mh-badge-eligibility--tone-progress .mh-badge-eligibility__glyph { background: var(--mh-color-info); color: #fff; }
+.mh-badge-eligibility--tone-warning { border-left-color: var(--mh-color-warning); background: rgba(255, 179, 71, 0.08); }
+.mh-badge-eligibility--tone-warning .mh-badge-eligibility__glyph { background: var(--mh-color-warning); color: #fff; }
+.mh-badge-eligibility--tone-blocked { border-left-color: var(--mh-color-danger); background: rgba(220, 53, 69, 0.05); }
+.mh-badge-eligibility--tone-blocked .mh-badge-eligibility__glyph { background: var(--mh-color-danger); color: #fff; }
+.mh-badge-eligibility--tone-neutral .mh-badge-eligibility__glyph { background: var(--mh-color-neutral-200); color: var(--mh-color-neutral-700); }
+
+/* For the not-started state we treat the banner as the *primary* CTA on
+   the embed — brand-red so the user clearly sees what to do next. */
+.mh-badge-eligibility--start {
+  background: var(--mh-color-brand-primary);
+  border-color: var(--mh-color-brand-primary);
+  border-left-color: var(--mh-color-brand-primary-strong);
+  color: #fff;
+}
+a.mh-badge-eligibility--start:hover,
+a.mh-badge-eligibility--start:focus {
+  background: var(--mh-color-brand-primary-strong);
+  color: #fff;
+}
+.mh-badge-eligibility--start .mh-badge-eligibility__glyph {
+  background: #fff;
+  color: var(--mh-color-brand-primary-strong);
 }

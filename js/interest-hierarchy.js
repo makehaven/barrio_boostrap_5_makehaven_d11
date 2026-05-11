@@ -74,7 +74,11 @@
   }
 
   function wireCheckboxHierarchy(wrapper) {
-    const items = Array.from(wrapper.querySelectorAll('.js-form-item'));
+    // Tight selector: '.js-form-item' alone matches the outer fieldset wrapper,
+    // which causes the entire field to be classified as a parent-only category
+    // (all labels bold, every checkbox click preventDefault'd). See memory:
+    // project_interest_hierarchy_widget.md.
+    const items = Array.from(wrapper.querySelectorAll('.js-form-type-checkbox, .form-type--checkbox'));
     let currentParentCheckbox = null;
     const parentChildren = new Map();
 

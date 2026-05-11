@@ -450,3 +450,43 @@ body.page-view-library-tool-directory .view-library-tool-directory .btn-outline-
     flex-direction: column;
   }
 }
+
+/* ── "Star this tool" flag (tool_favorite) ────────────────
+   Brand-red star button rendered on the full item view at /i/NID.
+   Flagged state shows a filled star + "Starred" label; unflagged
+   shows an outline star + "Star tool" prompt. */
+.flag-tool-favorite {
+  display: inline-block;
+  margin: 0 0 1rem;
+}
+.flag-tool-favorite a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--mh-color-brand-primary, #b22222);
+  border: 1px solid var(--mh-color-brand-primary, #b22222);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+.flag-tool-favorite a:hover,
+.flag-tool-favorite a:focus {
+  background: var(--mh-color-brand-primary, #b22222);
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+/* Flagged state — solid filled background, white star + label. */
+.flag-tool-favorite.action-unflag a {
+  background: var(--mh-color-brand-primary, #b22222);
+  color: #fff;
+}
+.flag-tool-favorite.action-unflag a:hover,
+.flag-tool-favorite.action-unflag a:focus {
+  background: var(--mh-color-brand-primary-strong, #710a0a);
+  border-color: var(--mh-color-brand-primary-strong, #710a0a);
+}
