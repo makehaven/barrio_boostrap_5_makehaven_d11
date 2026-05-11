@@ -3,3 +3,19 @@
 th.fc-widget-header.fc-future a {
     color: white;
 }
+
+/* Public events calendar wants the full row — the page-view layout
+   inherits sidebar_first from the events section but the calendar grid
+   is wide enough that the sidebar shows as an empty white column. Drop
+   the sidebar and let the main content span the row. Scoped to the
+   calendar view so other event pages keep their sidebar. */
+body.page-view-events-calendar .sidebar_first {
+  display: none;
+}
+body.page-view-events-calendar .layout-content,
+body.page-view-events-calendar main .row > [role="main"],
+body.page-view-events-calendar main .row > .col-md-8,
+body.page-view-events-calendar main .row > .col-lg-9 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}

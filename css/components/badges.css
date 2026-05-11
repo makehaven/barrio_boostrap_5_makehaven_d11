@@ -1292,36 +1292,123 @@
 /* ── Required-badge embed on a tool page ─────────────────── */
 /* Scoped to the field that hosts the embedded badge on a tool node so it
    doesn't bleed into /badges or the badge term page. Both field_member_badges
-   and field_additional_badges render badges via view_mode=embedded. */
+   and field_additional_badges render badges via view_mode=embedded. The DOM
+   the term template emits is:
+     .vocabulary-badges
+       h2 > a (term title)
+       .content
+         field_member_badge_image, field_badge_checkout_requirement,
+         mh_badge_user_status, mh_badge_user_eligibility
+   so the grid lives on .content (not on .vocabulary-badges) — only direct
+   children of the grid container can use grid-area. */
 .field--name-field-member-badges .vocabulary-badges,
 .field--name-field-additional-badges .vocabulary-badges {
   display: grid;
-  grid-template-columns: 76px 1fr;
+  grid-template-columns: 104px 1fr;
   grid-template-areas:
-    "image  body"
-    "cta    cta";
-  gap: 0.85rem 1rem;
+    "image  title"
+    "image  meta"
+    "image  cta";
+  column-gap: 1.1rem;
+  row-gap: 0.35rem;
   align-items: start;
-  margin-bottom: 1rem;
+  margin: 0 0 1rem;
+  padding: 1rem 1.1rem;
+  background: var(--mh-color-surface);
+  border: 1px solid var(--mh-color-border);
+  border-radius: 0.7rem;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
+.field--name-field-member-badges .vocabulary-badges + .vocabulary-badges,
+.field--name-field-additional-badges .vocabulary-badges + .vocabulary-badges {
+  margin-top: 0.6rem;
+}
+
+/* Title sits in the right column, top row. Larger and no longer clipped. */
+.field--name-field-member-badges .vocabulary-badges > h2,
+.field--name-field-additional-badges .vocabulary-badges > h2 {
+  grid-area: title;
+  align-self: end;
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--mh-color-neutral-900, #111827);
+}
+.field--name-field-member-badges .vocabulary-badges > h2 a,
+.field--name-field-additional-badges .vocabulary-badges > h2 a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.field--name-field-member-badges .vocabulary-badges > h2 a:hover,
+.field--name-field-additional-badges .vocabulary-badges > h2 a:hover,
+.field--name-field-member-badges .vocabulary-badges > h2 a:focus,
+.field--name-field-additional-badges .vocabulary-badges > h2 a:focus {
+  color: var(--mh-color-brand-primary);
+  border-bottom-color: var(--mh-color-brand-primary);
+}
+
+/* The .content div is just a passthrough — it holds the actual fields but
+   our grid placements happen via the descendant rules below. Leave .content
+   as a contents box so its children inherit the grid placement from the
+   outer .vocabulary-badges grid. */
+.field--name-field-member-badges .vocabulary-badges > .content,
+.field--name-field-additional-badges .vocabulary-badges > .content {
+  display: contents;
+}
+
+/* Image becomes a prominent left-column badge chip — soft circle background
+   gives the artwork breathing room and a clear visual frame. */
 .field--name-field-member-badges .vocabulary-badges .field--name-field-member-badge-image,
 .field--name-field-additional-badges .vocabulary-badges .field--name-field-member-badge-image {
   grid-area: image;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 104px;
+  height: 104px;
   margin: 0;
+  padding: 0.4rem;
+  background: linear-gradient(135deg, rgba(178, 34, 34, 0.06), rgba(178, 34, 34, 0.02));
+  border: 1px solid rgba(178, 34, 34, 0.12);
+  border-radius: 50%;
+}
+.field--name-field-member-badges .vocabulary-badges .field--name-field-member-badge-image a,
+.field--name-field-additional-badges .vocabulary-badges .field--name-field-member-badge-image a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.15s ease;
+}
+.field--name-field-member-badges .vocabulary-badges .field--name-field-member-badge-image a:hover,
+.field--name-field-additional-badges .vocabulary-badges .field--name-field-member-badge-image a:hover,
+.field--name-field-member-badges .vocabulary-badges .field--name-field-member-badge-image a:focus,
+.field--name-field-additional-badges .vocabulary-badges .field--name-field-member-badge-image a:focus {
+  transform: scale(1.04);
 }
 .field--name-field-member-badges .vocabulary-badges .field--name-field-member-badge-image img,
 .field--name-field-additional-badges .vocabulary-badges .field--name-field-member-badge-image img {
-  width: 100%;
-  max-width: 76px;
-  height: auto;
+  display: block;
+  width: 86px;
+  height: 86px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(15, 23, 42, 0.1));
 }
+
+/* Meta row: checkout requirement chip + status pill on the right. */
 .field--name-field-member-badges .vocabulary-badges .field--name-field-badge-checkout-requirement,
 .field--name-field-additional-badges .vocabulary-badges .field--name-field-badge-checkout-requirement {
-  grid-area: body;
+  grid-area: meta;
+  justify-self: start;
+  align-self: start;
   background: transparent;
   border: 0;
   padding: 0;
-  margin: 0.25rem 0 0;
+  margin: 0;
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--mh-color-neutral-700);
@@ -1336,15 +1423,65 @@
 }
 .field--name-field-member-badges .vocabulary-badges .mh-badge-status-pill,
 .field--name-field-additional-badges .vocabulary-badges .mh-badge-status-pill {
-  grid-area: body;
+  grid-area: meta;
   justify-self: end;
   align-self: start;
   margin: 0;
 }
+
+/* Eligibility CTA: inline-sized, anchored bottom-left of the right column.
+   Override the global .mh-badge-eligibility { display: flex } so it doesn't
+   stretch the full row width on tool-page embeds. */
 .field--name-field-member-badges .vocabulary-badges .mh-badge-eligibility,
 .field--name-field-additional-badges .vocabulary-badges .mh-badge-eligibility {
   grid-area: cta;
-  margin: 0;
+  display: inline-flex;
+  justify-self: start;
+  margin: 0.3rem 0 0;
+  padding: 0.5rem 0.95rem 0.5rem 0.55rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 0.55rem;
+  max-width: 100%;
+}
+.field--name-field-member-badges .vocabulary-badges .mh-badge-eligibility__glyph,
+.field--name-field-additional-badges .vocabulary-badges .mh-badge-eligibility__glyph {
+  width: 1.45rem;
+  height: 1.45rem;
+  font-size: 0.9rem;
+}
+.field--name-field-member-badges .vocabulary-badges .mh-badge-eligibility__label,
+.field--name-field-additional-badges .vocabulary-badges .mh-badge-eligibility__label {
+  flex: 0 1 auto;
+}
+
+/* Narrow viewports: stack image above the right column. */
+@media (max-width: 480px) {
+  .field--name-field-member-badges .vocabulary-badges,
+  .field--name-field-additional-badges .vocabulary-badges {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "image"
+      "title"
+      "meta"
+      "cta";
+    justify-items: start;
+    row-gap: 0.5rem;
+  }
+  .field--name-field-member-badges .vocabulary-badges .field--name-field-member-badge-image,
+  .field--name-field-additional-badges .vocabulary-badges .field--name-field-member-badge-image {
+    width: 84px;
+    height: 84px;
+  }
+  .field--name-field-member-badges .vocabulary-badges .field--name-field-member-badge-image img,
+  .field--name-field-additional-badges .vocabulary-badges .field--name-field-member-badge-image img {
+    width: 68px;
+    height: 68px;
+  }
+  .field--name-field-member-badges .vocabulary-badges .mh-badge-status-pill,
+  .field--name-field-additional-badges .vocabulary-badges .mh-badge-status-pill {
+    justify-self: start;
+  }
 }
 
 /* ── Eligibility "next step" banner (embedded view mode) ──── */

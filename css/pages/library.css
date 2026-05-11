@@ -173,42 +173,102 @@ a.button.button--primary.lending-library-button {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Library tool directory (/library) — card grid
-   Render the 130+ library items as a tile grid instead of a single-column
-   stack. Markup is `.view-content.row > .card` (no intermediate .col),
-   similar to the store view.
+   Library tool directory (/library) — modern card grid
+   Mirrors the visual treatment of /events (see events-modern.css) and
+   /workshops (see components/workshops.css). views_bootstrap_cards emits
+   .view-content > .row > .col > .card, with card-img-top + card-body inside.
    ────────────────────────────────────────────────────────────────────────── */
 
-body.page-view-library-tool-directory .view-library-tool-directory .view-content.row {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 20px;
+body.page-view-library-tool-directory {
+  background:
+    radial-gradient(circle at 5% 0%, rgb(139 25 25 / 0.06), transparent 40%),
+    linear-gradient(180deg, #fff 0%, #f6f7f8 100%);
+}
+
+body.page-view-library-tool-directory #main-wrapper {
+  max-width: min(1400px, 96vw);
+  margin-inline: auto;
+}
+
+body.page-view-library-tool-directory .view-library-tool-directory .view-header,
+body.page-view-library-tool-directory .view-library-tool-directory .view-filters {
+  background: var(--mh-color-surface);
+  border: 1px solid var(--mh-color-border);
+  border-radius: var(--mh-radius-lg);
+  box-shadow: var(--mh-shadow-xs);
+  padding: var(--mh-space-lg);
+  margin-bottom: var(--mh-space-lg);
+}
+
+body.page-view-library-tool-directory .view-library-tool-directory .view-filters form.views-exposed-form {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
   margin: 0;
 }
 
-body.page-view-library-tool-directory .view-library-tool-directory .view-content.row > .card {
-  width: 100%;
-  max-width: 100%;
+/* Card grid — 4-up on wide viewports (tools are smaller-detail items than
+   workshops, so denser packing reads better). Uses the same gutter scale as
+   events for visual consistency. */
+body.page-view-library-tool-directory .view-library-tool-directory .view-content {
+  --bs-gutter-x: 0;
+  --bs-gutter-y: 0;
+}
+
+body.page-view-library-tool-directory .view-library-tool-directory .view-content > .row {
+  --bs-gutter-x: 0;
+  --bs-gutter-y: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: clamp(1rem, 1.6vw, 1.25rem);
+  row-gap: 1.25rem;
   margin: 0;
-  height: auto;
+  padding-bottom: 1.25rem;
+}
+
+body.page-view-library-tool-directory .view-library-tool-directory .view-content > .row > .col {
+  display: flex;
+  min-width: 0;
+  padding: 0;
+}
+
+/* Card */
+body.page-view-library-tool-directory .view-library-tool-directory .card {
   display: flex;
   flex-direction: column;
-  border-radius: 8px;
+  height: 100%;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  border: 1px solid var(--mh-color-border);
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  background: var(--mh-color-surface);
+  box-shadow: var(--mh-shadow-sm);
+  transition: transform var(--mh-transition-base), box-shadow var(--mh-transition-base);
 }
 
-body.page-view-library-tool-directory .view-library-tool-directory .view-content.row > .card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-  transform: translateY(-2px);
+body.page-view-library-tool-directory .view-library-tool-directory .card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--mh-shadow-md);
 }
 
-/* Image — constrain to square aspect and cover-fit */
+/* Image — square aspect, cover-fit. Tool photos are mostly portraits of
+   physical objects so square reads well across the grid. */
 body.page-view-library-tool-directory .view-library-tool-directory .card .card-img-top {
   display: block;
+  width: 100%;
   aspect-ratio: 1;
   overflow: hidden;
+  background: #f3f4f6;
+}
+
+body.page-view-library-tool-directory .view-library-tool-directory .card .card-img-top a,
+body.page-view-library-tool-directory .view-library-tool-directory .card .card-img-top > .field {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 body.page-view-library-tool-directory .view-library-tool-directory .card .card-img-top img {
@@ -223,66 +283,90 @@ body.page-view-library-tool-directory .view-library-tool-directory .card .card-i
 body.page-view-library-tool-directory .view-library-tool-directory .card .card-body {
   display: flex;
   flex-direction: column;
-  padding: 14px;
-  flex-grow: 1;
+  gap: var(--mh-space-sm);
+  flex: 1 1 auto;
+  padding: var(--mh-space-md) var(--mh-space-lg);
 }
 
 body.page-view-library-tool-directory .view-library-tool-directory .card .card-title {
+  margin: 0;
+  font-family: var(--mh-font-display, inherit);
   font-size: 1.05rem;
-  font-weight: 600;
-  line-height: 1.3;
-  margin-bottom: 0.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--mh-color-neutral-900, #111827);
 }
 
 body.page-view-library-tool-directory .view-library-tool-directory .card .card-title a {
-  color: #222;
+  color: inherit;
   text-decoration: none;
 }
 
-body.page-view-library-tool-directory .view-library-tool-directory .card .card-title a:hover {
-  color: #8b1919;
-  text-decoration: underline;
+body.page-view-library-tool-directory .view-library-tool-directory .card .card-title a:hover,
+body.page-view-library-tool-directory .view-library-tool-directory .card .card-title a:focus {
+  color: var(--mh-color-brand-primary);
 }
 
 body.page-view-library-tool-directory .view-library-tool-directory .card .card-text {
-  color: #555;
+  color: var(--mh-color-neutral-700);
   font-size: 0.9rem;
   line-height: 1.4;
-  flex-grow: 1;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
 }
 
-/* Available / unavailable status chips */
+body.page-view-library-tool-directory .view-library-tool-directory .card .card-text br {
+  display: none;
+}
+
+/* Status chips */
 body.page-view-library-tool-directory .view-library-tool-directory .card .available,
 body.page-view-library-tool-directory .view-library-tool-directory .card .unavailable {
-  display: inline-block;
-  padding: 0.2em 0.65em;
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  padding: 0.22em 0.7em;
   border-radius: 999px;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  margin-top: 0.35rem;
+  margin: 0;
+  letter-spacing: 0.01em;
 }
 
 body.page-view-library-tool-directory .view-library-tool-directory .card .available {
-  background-color: #e7f7ea;
-  color: #1f6b34;
-  border: 1px solid #bfe8c8;
+  background-color: rgba(31, 140, 91, 0.12);
+  color: #14633d;
+  border: 1px solid rgba(31, 140, 91, 0.25);
 }
 
 body.page-view-library-tool-directory .view-library-tool-directory .card .unavailable {
-  background-color: #fde8e8;
-  color: #8b1919;
-  border: 1px solid #f5c2c2;
+  background-color: rgba(178, 34, 34, 0.1);
+  color: var(--mh-color-brand-primary-strong, #710a0a);
+  border: 1px solid rgba(178, 34, 34, 0.25);
 }
 
-/* Keep the "available" card-wide green tint subtle — don't paint the whole
-   card green when Bootstrap's bg-success is combined with bg-opacity-10 */
+/* Keep Bootstrap's border-success card tint subtle */
 body.page-view-library-tool-directory .view-library-tool-directory .card.border-success {
-  border-color: #bfe8c8;
+  border-color: rgba(31, 140, 91, 0.25);
 }
 
-/* Mobile: single column */
-@media (max-width: 576px) {
-  body.page-view-library-tool-directory .view-library-tool-directory .view-content.row {
+/* Responsive — 3-up on tablets, 2-up on small tablets, 1-up on mobile */
+@media (max-width: 1100px) {
+  body.page-view-library-tool-directory .view-library-tool-directory .view-content > .row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  body.page-view-library-tool-directory .view-library-tool-directory .view-content > .row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  body.page-view-library-tool-directory .view-library-tool-directory .view-content > .row {
     grid-template-columns: 1fr;
     gap: 14px;
   }
