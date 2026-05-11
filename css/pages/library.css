@@ -210,13 +210,13 @@ body.page-view-library-tool-directory .view-library-tool-directory .view-filters
 
 /* Card grid — 4-up on wide viewports (tools are smaller-detail items than
    workshops, so denser packing reads better). Uses the same gutter scale as
-   events for visual consistency. */
-body.page-view-library-tool-directory .view-library-tool-directory .view-content {
-  --bs-gutter-x: 0;
-  --bs-gutter-y: 0;
-}
-
-body.page-view-library-tool-directory .view-library-tool-directory .view-content > .row {
+   events for visual consistency.
+   DOM note: views_bootstrap_cards emits one .row per card (not one row with
+   many cols). The outer wrapper has BOTH "view-content" and "row" classes on
+   the SAME element. We make the outer wrapper the grid container and flatten
+   the inner .row/.col wrappers with display:contents so each card becomes a
+   direct grid item. */
+body.page-view-library-tool-directory .view-library-tool-directory .view-content.row {
   --bs-gutter-x: 0;
   --bs-gutter-y: 0;
   display: grid;
@@ -227,10 +227,9 @@ body.page-view-library-tool-directory .view-library-tool-directory .view-content
   padding-bottom: 1.25rem;
 }
 
-body.page-view-library-tool-directory .view-library-tool-directory .view-content > .row > .col {
-  display: flex;
-  min-width: 0;
-  padding: 0;
+body.page-view-library-tool-directory .view-library-tool-directory .view-content.row > .row,
+body.page-view-library-tool-directory .view-library-tool-directory .view-content.row > .row > .col {
+  display: contents;
 }
 
 /* Card */
@@ -354,19 +353,19 @@ body.page-view-library-tool-directory .view-library-tool-directory .card.border-
 
 /* Responsive — 3-up on tablets, 2-up on small tablets, 1-up on mobile */
 @media (max-width: 1100px) {
-  body.page-view-library-tool-directory .view-library-tool-directory .view-content > .row {
+  body.page-view-library-tool-directory .view-library-tool-directory .view-content.row {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 768px) {
-  body.page-view-library-tool-directory .view-library-tool-directory .view-content > .row {
+  body.page-view-library-tool-directory .view-library-tool-directory .view-content.row {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 480px) {
-  body.page-view-library-tool-directory .view-library-tool-directory .view-content > .row {
+  body.page-view-library-tool-directory .view-library-tool-directory .view-content.row {
     grid-template-columns: 1fr;
     gap: 14px;
   }
