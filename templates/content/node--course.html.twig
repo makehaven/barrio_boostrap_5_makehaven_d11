@@ -54,6 +54,12 @@
         </div>
       {% endif %}
 
+      {% if content.field_course_badges|render %}
+        <div class="course-badges-earned mb-4">
+          {{ content.field_course_badges }}
+        </div>
+      {% endif %}
+
       <div class="course-body mb-5">
         {{ content.body }}
       </div>
