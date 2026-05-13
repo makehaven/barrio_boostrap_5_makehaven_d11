@@ -9,6 +9,15 @@
   margin: 0 auto;
 }
 
+/* Detail page (single badge term, not the /badges directory) reads better
+   at a narrower column — the badge image is small and the action steps
+   are vertical, so 1200px leaves big empty gutters on desktop. */
+.path-taxonomy--badges main,
+.path-taxonomy--badges .region-content {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
 /* ── Page title ──────────────────────────────────────────── */
 .path-badges h1.page-title {
   font-weight: 900;
@@ -1266,6 +1275,124 @@
     margin-top: 0.5rem;
     justify-self: stretch;
     text-align: center;
+  }
+}
+
+/* ── Progress stepper (inside the status banner) ──────────── */
+.mh-badge-steps {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  counter-reset: badge-step;
+}
+.mh-badge-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  grid-template-areas:
+    "num label"
+    "num hint";
+  column-gap: 0.6rem;
+  row-gap: 0.1rem;
+  align-items: center;
+  padding: 0.55rem 0.7rem;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 0.55rem;
+  font-size: 0.9rem;
+  line-height: 1.25;
+  color: var(--mh-color-neutral-700, #4b5563);
+}
+.mh-badge-step__num {
+  grid-area: num;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 50%;
+  background: var(--mh-color-neutral-200, #e5e7eb);
+  color: var(--mh-color-neutral-700, #4b5563);
+  font-weight: 700;
+  font-size: 0.9rem;
+  line-height: 1;
+}
+.mh-badge-step__label {
+  grid-area: label;
+  font-weight: 600;
+  color: var(--mh-color-neutral-800, #1f2937);
+}
+.mh-badge-step__hint {
+  grid-area: hint;
+  font-size: 0.8rem;
+  color: var(--mh-color-neutral-600, #6b7280);
+}
+.mh-badge-step--done {
+  background: rgba(31, 140, 91, 0.08);
+  border-color: rgba(31, 140, 91, 0.25);
+}
+.mh-badge-step--done .mh-badge-step__num {
+  background: var(--mh-color-success, #1f8c5b);
+  color: #fff;
+}
+.mh-badge-step--current {
+  background: #fff;
+  border-color: var(--mh-color-brand-primary, #8b1919);
+  box-shadow: 0 0 0 1px var(--mh-color-brand-primary, #8b1919);
+}
+.mh-badge-step--current .mh-badge-step__num {
+  background: var(--mh-color-brand-primary, #8b1919);
+  color: #fff;
+}
+.mh-badge-step--locked {
+  opacity: 0.7;
+}
+.mh-badge-step--locked .mh-badge-step__num::before {
+  content: "🔒";
+  font-size: 0.85rem;
+}
+.mh-badge-step--locked .mh-badge-step__num {
+  background: transparent;
+  color: var(--mh-color-neutral-500, #6b7280);
+  font-size: 0;
+}
+.mh-badge-step--skipped {
+  background: rgba(0, 0, 0, 0.03);
+  border-style: dashed;
+}
+.mh-badge-step--skipped .mh-badge-step__num {
+  background: var(--mh-color-neutral-300, #d1d5db);
+  color: var(--mh-color-neutral-600, #6b7280);
+}
+
+/* Connector line between steps on desktop. */
+@media (min-width: 769px) {
+  .mh-badge-step + .mh-badge-step::before {
+    content: "";
+    position: absolute;
+    left: -0.42rem;
+    top: 50%;
+    width: 0.5rem;
+    border-top: 2px solid var(--mh-color-neutral-300, #d1d5db);
+    pointer-events: none;
+  }
+  .mh-badge-step--done + .mh-badge-step::before,
+  .mh-badge-step + .mh-badge-step--done::before {
+    border-top-color: var(--mh-color-success, #1f8c5b);
+  }
+}
+
+/* On narrow screens stack vertically with a left rail. */
+@media (max-width: 768px) {
+  .mh-badge-steps {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+  .mh-badge-step {
+    padding: 0.5rem 0.7rem;
   }
 }
 
