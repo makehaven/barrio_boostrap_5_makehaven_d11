@@ -2,14 +2,14 @@
 /**
  * @file
  * Teaser template for Course nodes — used by the public catalog at
- * /catalog/workshops. Mirrors the event-card DOM (.card / .card-img-top /
+ * /workshops. Mirrors the event-card DOM (.card / .card-img-top /
  * .card-body / .card-title / .card-text) so the catalog inherits the same
  * visual treatment as /events.
  *
- * Variables provided by barrio_boostrap_5_makehaven_d11_preprocess_node__course():
- *  - workshop_upcoming_events: List of upcoming sessions.
+ * Variables provided by barrio_boostrap_5_makehaven_d11_preprocess_node__course__teaser():
+ *  - workshop_upcoming_count: Number of scheduled future instances.
  *  - workshop_runs_count: Total historical runs.
- *  - workshop_interest_count: Number of people interested.
+ *  - attributes adds 'course-teaser--member-only' on badge_class courses.
  */
 #}
 <article{{ attributes.addClass('node', 'node--type-course', 'node--view-mode-teaser', 'card') }}>
@@ -26,12 +26,20 @@
     </h3>
 
     <div class="card-text">
-      {% if workshop_upcoming_events|length > 0 %}
-        <time>
-          {{ workshop_upcoming_events|length }}
-          {{ workshop_upcoming_events|length == 1 ? 'upcoming session'|t : 'upcoming sessions'|t }}
-        </time>
-      {% endif %}
+      <div class="course-stat-chips">
+        {% if workshop_upcoming_count > 0 %}
+          <time class="course-stat-chip course-stat-chip--upcoming">
+            {{ workshop_upcoming_count }}
+            {{ workshop_upcoming_count == 1 ? 'upcoming session'|t : 'upcoming sessions'|t }}
+          </time>
+        {% endif %}
+
+        {% if workshop_runs_count > 0 %}
+          <span class="course-stat-chip course-stat-chip--runs">
+            {{ workshop_runs_count == 1 ? 'Run 1 time'|t : 'Run @count times'|t({'@count': workshop_runs_count}) }}
+          </span>
+        {% endif %}
+      </div>
 
       {% if content.field_course_badges|render %}
         <div class="course-badges">

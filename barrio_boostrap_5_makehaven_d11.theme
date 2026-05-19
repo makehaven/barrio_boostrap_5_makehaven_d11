@@ -249,6 +249,39 @@ function barrio_boostrap_5_makehaven_d11_preprocess_node__course(array &$variabl
 }
 
 /**
+ * Implements hook_preprocess_node__course__teaser().
+ *
+ * The catalog view at /workshops renders course nodes in teaser view mode.
+ * The full-view hook (above) does heavy CiviCRM queries; for the catalog
+ * card we only need the denormalized stat fields maintained by
+ * instructor_companion's CourseStatsSync — fast, no joins.
+ *
+ * Sets:
+ *  - workshop_runs_count: lifetime instance count (field_stat_runs).
+ *  - workshop_upcoming_count: scheduled future instances (field_stat_upcoming).
+ *  - attributes.class += 'course-teaser--member-only' on badge_class courses
+ *    so workshops.css renders a "Member Only" chip on the card.
+ */
+function barrio_boostrap_5_makehaven_d11_preprocess_node__course__teaser(array &$variables): void {
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $variables['node'];
+
+  // Denormalized stats — set by instructor_companion.stats_sync on save.
+  $variables['workshop_runs_count'] = $node->hasField('field_stat_runs')
+    ? (int) ($node->get('field_stat_runs')->value ?? 0)
+    : 0;
+  $variables['workshop_upcoming_count'] = $node->hasField('field_stat_upcoming')
+    ? (int) ($node->get('field_stat_upcoming')->value ?? 0)
+    : 0;
+
+  // Member-only registration marker.
+  if ($node->hasField('field_course_type')
+      && $node->get('field_course_type')->value === 'badge_class') {
+    $variables['attributes']['class'][] = 'course-teaser--member-only';
+  }
+}
+
+/**
  * Implements hook_preprocess_node().
  */
 function barrio_boostrap_5_makehaven_d11_preprocess_node(&$variables) {
@@ -441,6 +474,24 @@ function barrio_boostrap_5_makehaven_d11_preprocess_paragraph(&$variables) {
  * Implements hook_preprocess_views_view_field().
  */
 function barrio_boostrap_5_makehaven_d11_preprocess_views_view_field(array &$variables) {
+  // Member-only chip on /events: prepend a chip to the title field for any
+  // civicrm_event row whose event_type_id is a member-only type (10 = Member
+  // Event, 16 = Ticketed Member Only). The listing stays mixed (public and
+  // member-only together) so the chip serves to promote / inform.
+  if (!empty($variables['view'])
+      && $variables['view']->id() === 'event_set'
+      && !empty($variables['field']) && $variables['field']->field === 'title'
+      && !empty($variables['row']->_entity)
+      && $variables['row']->_entity->getEntityTypeId() === 'civicrm_event') {
+    $entity = $variables['row']->_entity;
+    $type_id = (int) ($entity->get('event_type_id')->value ?? 0);
+    if (in_array($type_id, [10, 16], TRUE)) {
+      $chip = '<span class="event-card-chip event-card-chip--member-only">' . t('Member Only') . '</span> ';
+      // Output may be a string or a Markup object — coerce safely.
+      $variables['output'] = \Drupal\Core\Render\Markup::create($chip . (string) $variables['output']);
+    }
+  }
+
   if (empty($variables['output']) || !is_string($variables['output'])) {
     return;
   }

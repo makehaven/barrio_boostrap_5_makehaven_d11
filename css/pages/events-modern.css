@@ -1556,3 +1556,27 @@ body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_i
     text-align: center;
   }
 }
+
+/*
+ * "Member Only" chip on /events cards.
+ *
+ * Prepended to the title field by _preprocess_views_view_field() for rows
+ * whose civicrm_event.event_type_id is 10 (Member Event) or 16 (Ticketed
+ * Member Only). The /events listing intentionally mixes public and member-
+ * only events; this chip surfaces the distinction to encourage join.
+ */
+.event-card-chip--member-only {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.4rem;
+  padding: 0.18rem 0.55rem;
+  border-radius: 0.25rem;
+  background: var(--mh-color-brand-primary, #8b1919);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}

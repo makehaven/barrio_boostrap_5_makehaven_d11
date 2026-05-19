@@ -27,6 +27,10 @@
   height: 100%;
   width: 100%;
   max-width: none;
+  /* Override the generic .node--view-mode-teaser rule in teasers.css which
+   * applies a 25px padding to all node teasers and was insetting the image
+   * inside the card. The card-body keeps its own internal padding below. */
+  padding: 0;
   border: 1px solid var(--mh-color-border);
   border-radius: 18px;
   overflow: hidden;
@@ -40,13 +44,29 @@
   box-shadow: var(--mh-shadow-md);
 }
 
-.view-public-course-catalog .card-img-top,
+/* Image — full-bleed, edge-to-edge inside the card.
+ * Mirrors the library tool cards' approach (css/pages/library.css): pin the
+ * aspect ratio on .card-img-top itself, force every intermediate wrapper
+ * (a, .field, .field__item) to 100% width AND height, then let <img>
+ * cover-fit. Putting aspect-ratio on the <img> alone (as before) left the
+ * nested .field / <a> wrappers free to inherit baseline gaps, producing the
+ * inset / padded look on /workshops cards. */
+.view-public-course-catalog .card-img-top {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+}
+
 .view-public-course-catalog .card-img-top > .field,
-.view-public-course-catalog .card-img-top > .field > .field__item,
 .view-public-course-catalog .card-img-top .field__item,
 .view-public-course-catalog .card-img-top a {
   display: block;
   width: 100%;
+  height: 100%;
   margin: 0;
   padding: 0;
   line-height: 0;
@@ -54,8 +74,7 @@
 
 .view-public-course-catalog .card-img-top img {
   width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
+  height: 100%;
   object-fit: cover;
   display: block;
   margin: 0;
@@ -176,4 +195,69 @@
   .view-public-course-catalog .view-content {
     grid-template-columns: 1fr;
   }
+}
+
+/*
+ * "Member Only" chip on Build & Badge course teasers.
+ *
+ * Added by the _preprocess_node__course hook when field_course_type =
+ * badge_class. The listing is public for recruiting; only registration is
+ * gated, which is enforced on the CiviCRM event (event type 16, "Ticketed
+ * Member Only").
+ */
+.view-public-course-catalog .course-teaser--member-only {
+  position: relative;
+}
+.view-public-course-catalog .course-teaser--member-only::before {
+  content: "Member Only";
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+  z-index: 3;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--mh-color-brand-primary, #8b1919);
+  color: #fff;
+  border-radius: 0.25rem;
+  pointer-events: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+/*
+ * Stat chips on /workshops cards: "X upcoming sessions" + "Run X times".
+ * Populated by _preprocess_node__course__teaser() from the denormalized
+ * field_stat_upcoming / field_stat_runs fields (maintained by
+ * instructor_companion.stats_sync).
+ */
+.view-public-course-catalog .card-text .course-stat-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mh-space-2xs);
+  margin-bottom: var(--mh-space-sm);
+}
+
+.view-public-course-catalog .card-text .course-stat-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--mh-space-2xs) var(--mh-space-sm);
+  border-radius: var(--mh-radius-pill);
+  background: #f0f2f5;
+  color: var(--mh-color-neutral-700);
+  font-weight: 600;
+  font-size: 0.85rem;
+  line-height: 1.2;
+}
+
+/* Cancel the legacy time-only spacing now that the container owns gap. */
+.view-public-course-catalog .card-text .course-stat-chips time {
+  margin-bottom: 0;
+  width: auto;
+}
+
+.view-public-course-catalog .card-text .course-stat-chip--runs {
+  background: #eef0f4;
+  color: var(--mh-color-neutral-600);
 }
