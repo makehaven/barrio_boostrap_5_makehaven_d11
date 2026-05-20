@@ -1099,7 +1099,11 @@ body.page-civicrm-event-register fieldset.crm-profile-name-event_registration
 body.page-civicrm-event-register fieldset.crm-profile-name-event_registration
   .editrow_phone-Primary-1-section,
 body.page-civicrm-event-register fieldset.crm-profile-name-event_registration
-  .editrow_custom_69-section {
+  .editrow_custom_69-section,
+body.page-civicrm-event-register fieldset.crm-profile-name-event_registration
+  .helprow-custom_63-section,
+body.page-civicrm-event-register fieldset.crm-profile-name-event_registration
+  .editrow_custom_63-section {
   grid-column: 1 / -1;
 }
 
