@@ -1446,6 +1446,18 @@
   border-radius: 0.7rem;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
+/* When the badge has a training video, add a right-hand column for it so the
+   thumbnail sits beside the title/CTA stack rather than below. Scoped via
+   :has() so video-less badges keep the original two-column layout (no empty
+   third track / trailing gap). */
+.field--name-field-member-badges .vocabulary-badges:has(.field--name-field-badge-video),
+.field--name-field-additional-badges .vocabulary-badges:has(.field--name-field-badge-video) {
+  grid-template-columns: 130px 1fr auto;
+  grid-template-areas:
+    "image  title  video"
+    "image  meta   video"
+    "image  cta    video";
+}
 .field--name-field-member-badges .vocabulary-badges + .vocabulary-badges,
 .field--name-field-additional-badges .vocabulary-badges + .vocabulary-badges {
   margin-top: 0.6rem;
@@ -1580,6 +1592,88 @@
   flex: 0 1 auto;
 }
 
+/* Reference video: a small clickable thumbnail under the CTA. Reassures
+   members the training video is still available even after they're badged —
+   handy as a refresher while using the tool. The youtube_thumbnail formatter
+   renders an <a> (linked to YouTube) wrapping the thumbnail <img>; we add a
+   caption above it and a play-button overlay on the image. Only rendered when
+   the badge has a video, so it places itself on a new full-width row via
+   grid-column rather than a named area (no phantom gap on video-less badges). */
+.field--name-field-member-badges .vocabulary-badges .field--name-field-badge-video,
+.field--name-field-additional-badges .vocabulary-badges .field--name-field-badge-video {
+  grid-area: video;
+  justify-self: end;
+  align-self: center;
+  margin: 0;
+  padding: 0;
+}
+.field--name-field-member-badges .vocabulary-badges .field--name-field-badge-video::before,
+.field--name-field-additional-badges .vocabulary-badges .field--name-field-badge-video::before {
+  content: 'Watch the badging video anytime';
+  display: block;
+  margin: 0 0 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--mh-color-neutral-700);
+}
+.field--name-field-member-badges .vocabulary-badges .field--name-field-badge-video .field__item,
+.field--name-field-additional-badges .vocabulary-badges .field--name-field-badge-video .field__item {
+  margin: 0;
+}
+.field--name-field-member-badges .vocabulary-badges .field--name-field-badge-video a,
+.field--name-field-additional-badges .vocabulary-badges .field--name-field-badge-video a {
+  position: relative;
+  display: block;
+  width: 200px;
+  max-width: 100%;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid var(--mh-color-border);
+  background: var(--mh-color-neutral-900, #111827);
+  line-height: 0;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.field--name-field-member-badges .vocabulary-badges .field--name-field-badge-video a:hover,
+.field--name-field-additional-badges .vocabulary-badges .field--name-field-badge-video a:hover,
+.field--name-field-member-badges .vocabulary-badges .field--name-field-badge-video a:focus,
+.field--name-field-additional-badges .vocabulary-badges .field--name-field-badge-video a:focus {
+  transform: scale(1.02);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.18);
+}
+.field--name-field-member-badges .vocabulary-badges .field--name-field-badge-video img,
+.field--name-field-additional-badges .vocabulary-badges .field--name-field-badge-video img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+/* Centered play-button overlay so the thumbnail reads clearly as a video. */
+.field--name-field-member-badges .vocabulary-badges .field--name-field-badge-video a::after,
+.field--name-field-additional-badges .vocabulary-badges .field--name-field-badge-video a::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 46px;
+  height: 46px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background-color: rgba(139, 25, 25, 0.92);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3E%3Cpath d='M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60% 60%;
+  pointer-events: none;
+  transition: background-color 0.15s ease;
+}
+.field--name-field-member-badges .vocabulary-badges .field--name-field-badge-video a:hover::after,
+.field--name-field-additional-badges .vocabulary-badges .field--name-field-badge-video a:hover::after,
+.field--name-field-member-badges .vocabulary-badges .field--name-field-badge-video a:focus::after,
+.field--name-field-additional-badges .vocabulary-badges .field--name-field-badge-video a:focus::after {
+  background-color: var(--mh-color-brand-primary, #8b1919);
+}
+
 /* Narrow viewports: stack image above the right column. */
 @media (max-width: 480px) {
   .field--name-field-member-badges .vocabulary-badges,
@@ -1592,6 +1686,25 @@
       "cta";
     justify-items: start;
     row-gap: 0.5rem;
+  }
+  /* Single column is too narrow for a side-by-side video — restack it to the
+     bottom. Higher-specificity :has() rule (above) is overridden here by an
+     equally-specific rule inside the media query. */
+  .field--name-field-member-badges .vocabulary-badges:has(.field--name-field-badge-video),
+  .field--name-field-additional-badges .vocabulary-badges:has(.field--name-field-badge-video) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "image"
+      "title"
+      "meta"
+      "cta"
+      "video";
+  }
+  .field--name-field-member-badges .vocabulary-badges .field--name-field-badge-video,
+  .field--name-field-additional-badges .vocabulary-badges .field--name-field-badge-video {
+    justify-self: start;
+    align-self: auto;
+    margin-top: 0.5rem;
   }
   .field--name-field-member-badges .vocabulary-badges .field--name-field-member-badge-image,
   .field--name-field-additional-badges .vocabulary-badges .field--name-field-member-badge-image {
