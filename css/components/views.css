@@ -65,10 +65,32 @@
 @media (max-width: 768px) {
     .view-filters .views-exposed-form .d-flex {
         flex-direction: column;
+        /* Reset the desktop `align-items: flex-end`. In a column that
+           value sizes each field to its content and pushes it to the
+           right, producing the ragged, misaligned filter rows. Stretch
+           makes every control span the full width instead. */
+        align-items: stretch;
     }
 
-    .view-filters .views-exposed-form .form-item {
+    .view-filters .views-exposed-form .form-item,
+    .view-filters .views-exposed-form .form-actions {
         padding: 0;
+        width: 100%;
+    }
+
+    /* Make the actual controls (text inputs, native selects, and the
+       Chosen widget that BEF swaps selects for) fill the column. */
+    .view-filters .views-exposed-form .form-control,
+    .view-filters .views-exposed-form .form-select,
+    .view-filters .views-exposed-form select,
+    .view-filters .views-exposed-form .chosen-container {
+        width: 100% !important;
+    }
+
+    /* Full-width, comfortable tap target for the submit button. */
+    .view-filters .views-exposed-form .form-actions .form-submit,
+    .view-filters .views-exposed-form .form-actions .button {
+        width: 100%;
     }
 }
 

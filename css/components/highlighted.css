@@ -1,5 +1,17 @@
 /* Highlighted Area of Theme */
 
+/* The highlighted region only carries system messages and the occasional
+   notice, each of which provides its own spacing (.content / .messages have
+   their own margins). The generic `.section { padding: 60px 0 }` rule was
+   reserving a ~120px empty band above the breadcrumb whenever there were no
+   messages. Collapse the region's section padding so it takes no vertical
+   space when empty. Higher specificity than `.section` so it wins regardless
+   of stylesheet order. */
+.highlighted > aside.section {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 /* Adjusting the styles for the content inside .highlighted to stand out */
 .highlighted .content {
     background-color: #f2f2f2; /* Light grey background for contrast */

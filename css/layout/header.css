@@ -340,3 +340,78 @@ nav#navbar-top .menu--account .nav-link:focus {
     width: 100%;
   }
 }
+
+/* ================================================================
+   Mobile header (< lg / 992px) — one compact bar with the logo on
+   the left and the hamburger on the right.
+
+   Previously the brand kept a residual `margin-left: auto` (from
+   Bootstrap's `.navbar-brand` margin combined with the column flex
+   layout) which shoved the logo to the right, while the toggler sat
+   centered on its own row below it — leaving an awkward, tall header.
+
+   These selectors are intentionally more specific than the broad
+   `#navbar-main` / `a.navbar-brand` rules migrated into
+   legacy-migrated.css (which loads after this file), so they win the
+   cascade without needing !important.
+   ================================================================ */
+@media (max-width: 991.98px) {
+  header#header nav#navbar-main {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    gap: var(--mh-space-xs) var(--mh-space-sm);
+    padding: var(--mh-space-2xs) var(--mh-space-md) var(--mh-space-sm);
+  }
+
+  /* Logo: left-aligned, phone-friendly size, no centering margins. */
+  #navbar-main .navbar-brand,
+  #navbar-main a.navbar-brand {
+    width: auto;
+    max-width: 62vw;
+    margin: 0;
+    flex: 0 1 auto;
+  }
+
+  #navbar-main .navbar-brand img {
+    width: auto;
+    max-width: 100%;
+    max-height: 40px;
+  }
+
+  /* Hamburger: hard right, vertically centered with the logo. */
+  #navbar-main .navbar-toggler {
+    margin: 0 0 0 auto;
+    flex: 0 0 auto;
+  }
+
+  /* Primary menu drops to its own full-width row below the logo/toggler
+     line; it occupies no space while collapsed. */
+  #navbar-main .navbar-collapse {
+    flex: 0 0 100%;
+    width: 100%;
+    margin-top: var(--mh-space-sm);
+  }
+
+  /* Tighten the upper account/search bar so the header isn't so tall. */
+  nav#navbar-top {
+    padding-top: var(--mh-space-2xs);
+    padding-bottom: var(--mh-space-2xs);
+    gap: var(--mh-space-xs);
+    flex-wrap: wrap;
+  }
+
+  /* Mobile primary menu: parent items link straight to their landing page
+     instead of opening a dropdown (the toggle is neutralised in
+     mobile-nav.js). Drop the dropdown caret and keep the child submenus
+     hidden so each top-level row is a single, tappable link. */
+  #navbar-main .navbar-nav > .nav-item.dropdown > .dropdown-toggle::after {
+    display: none;
+  }
+
+  #navbar-main .navbar-nav .dropdown-menu {
+    display: none !important;
+  }
+}

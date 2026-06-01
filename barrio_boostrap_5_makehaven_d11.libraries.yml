@@ -3,6 +3,7 @@ global-styling:
   js:
     js/global.js: {}
     js/sidebar-menu-fix.js: {}
+    js/mobile-nav.js: {}
     js/events-info-hero.js: {}
     js/interest-hierarchy.js: {}
     js/badges.js: {}

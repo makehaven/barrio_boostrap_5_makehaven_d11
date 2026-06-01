@@ -273,6 +273,14 @@ body.path-blog #sidebar_first .block-menu .dropdown-menu .dropdown-item a.is-act
     padding: var(--mh-space-sm) 0;
     margin-bottom: var(--mh-space-lg);
   }
+
+  /* When the layout stacks, Bootstrap's `order-first` utility pulls the
+     section nav (Resources/Equipment/…) above the main content, burying the
+     actual page content beneath a long menu. Put the content first and the
+     section nav after it. Overrides the Bootstrap utility's !important order. */
+  #main .row > #sidebar_first.order-first {
+    order: 2 !important;
+  }
 }
 
 /* --- Compact badge display in sidebar --- */

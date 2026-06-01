@@ -21,6 +21,12 @@
 .service-content a { color: #007bff; text-decoration: none; transition: color 0.3s ease; }
 .service-content a:hover { color: #0056b3; }
 .section { padding: 60px 0; position: relative; }
+/* 60px top+bottom is far too much vertical air on a phone; tighten the
+   generic section padding for interior pages. The front page manages its
+   own hero/section spacing, so leave it untouched there. */
+@media (max-width: 767.98px) {
+  body:not(.path-frontpage) .section { padding: 20px 0; }
+}
 .section-header { margin-bottom: 40px; }
 .section-title.shadow-title { font-size: 36px; font-weight: 700; text-align: center; text-transform: uppercase; color: #333; position: relative; z-index: 1; }
 .section-title.shadow-title:before { content: attr(data-title); position: absolute; top: 0; left: 50%; transform: translateX(-50%); font-size: 48px; color: rgba(0, 0, 0, 0.1); z-index: -1; }

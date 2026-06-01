@@ -384,3 +384,6 @@ body.page-view-library-tool-directory .view-library-tool-directory .card.border-
     gap: 14px;
   }
 }
+
+/* Note: mobile stacking of the exposed filter controls is handled
+   generically for all filter views in components/views.css. */
