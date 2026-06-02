@@ -307,10 +307,53 @@ div[id$="frontemailsignup"] {
 
 /* Mobile styles */
 @media (max-width: 767px) {
-  :is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow, #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow) h1.text-white { font-size: 40px; }
+  /* --- Hero: crop-to-fill on phones -------------------------------------
+     The slideshow uses jQuery Cycle with `fixed_height: 1`, which sizes the
+     slide to the image's NATURAL height. The full_screen image style is 16:9
+     (1920x1080), so at phone width that natural height is a short ~225px strip
+     while the block stays 90vh — leaving a tall transparent (white) gap below
+     the photo. Pin the block, every inner Cycle container, the slide, and the
+     image to one viewport-relative height with object-fit:cover so the photo
+     crops to fill and the gap disappears. `!important` is required: it beats
+     both the broken `height:100%` chain and the inline pixel height Cycle
+     writes at runtime (and re-writes on orientation change). */
+  :is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow, #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow),
+  body.path-frontpage .view-homepage-slideshow,
+  :is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow, #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow) .view-content,
+  :is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow, #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow) .skin-default,
+  :is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow, #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow) .views_slideshow_cycle_main,
+  :is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow, #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow) .views_slideshow_cycle_teaser_section,
+  :is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow, #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow) .views_slideshow_cycle_slide,
+  body.path-frontpage .views_slideshow_cycle_slide {
+    height: 72vh !important;
+    min-height: 480px !important;
+  }
+  :is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow, #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow) .views_slideshow_cycle_slide img,
+  body.path-frontpage .view-homepage-slideshow img.image-style-full-screen {
+    width: 100% !important;
+    height: 72vh !important;
+    min-height: 480px !important;
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+  /* Headline scales with screen width; clamp keeps it readable on small phones
+     and from overflowing the hero box alongside the four CTA buttons. */
+  :is(#block-slideshow-front-slideshow, #block-barrio-boostrap-5-makerspace-slideshow-front-slideshow, #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow) h1.text-white { font-size: clamp(30px, 8vw, 40px); }
   div[id$="frontthreethingsfront"] { min-height: 0; z-index: 10; }
   div[id$="fronttoolstomakeanything"] { min-height: 0; }
   div[id$="frontemailsignup"] { min-height: 250px; }
+
+  /* "The tools to make anything" cards: uniform vertical rhythm on phones.
+     The body markup splits the 9 cards into three separate .row blocks of 3.
+     `row-gap` only spaces cards WITHIN a .row (48px), so when the cards stack
+     on a phone the gap between the last card of one row and the first of the
+     next collapses to 0 — the uneven big/big/tight rhythm you see. Drive ALL
+     vertical spacing from one per-column margin so every card is evenly
+     spaced regardless of which .row it lives in. */
+  div[id$="fronttoolstomakeanything"] .row { row-gap: 0; }
+  div[id$="fronttoolstomakeanything"] .service { margin-bottom: 0; }
+  div[id$="fronttoolstomakeanything"] [class*="col-"] { margin-bottom: 3rem; }
+  div[id$="fronttoolstomakeanything"] .row:last-of-type [class*="col-"]:last-child { margin-bottom: 0; }
 }
 
 .path-frontpage .service {

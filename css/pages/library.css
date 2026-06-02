@@ -240,6 +240,11 @@ body.page-view-library-tool-directory .view-library-tool-directory .card {
   width: 100%;
   max-width: none;
   margin: 0;
+  /* No outer padding: the image sits edge-to-edge (clipped by the card's
+     overflow:hidden + radius) and the .card-body below provides the text
+     inset. Overrides the shared `:is(...) .card { padding }` rule in
+     equipment.css, which otherwise framed the photo with a gap. */
+  padding: 0 !important;
   border: 1px solid var(--mh-color-border);
   border-radius: 16px;
   overflow: hidden;
@@ -387,3 +392,38 @@ body.page-view-library-tool-directory .view-library-tool-directory .card.border-
 
 /* Note: mobile stacking of the exposed filter controls is handled
    generically for all filter views in components/views.css. */
+
+/* ----------------------------------------------------------------
+   Reclaim width inside nested boxes on phones.
+
+   The page stacks several padded boxes — page container (12px) →
+   .view-header / .view-filters (24px) → the membership CTA .card
+   (24px) → its .card-body (24px) → an .me-3 gutter (16px). Those
+   insets compound and squeeze the copy into a ~140px column. On small
+   screens we trim each layer (and remove the redundant outer-card
+   padding, since the card-body already provides its own) so the
+   content uses far more of the available width.
+   ---------------------------------------------------------------- */
+@media (max-width: 767.98px) {
+  body.page-view-library-tool-directory .view-library-tool-directory .view-header,
+  body.page-view-library-tool-directory .view-library-tool-directory .view-filters {
+    padding: var(--mh-space-md) var(--mh-space-sm);
+  }
+
+  /* The CTA card carries its own outer padding (from the shared card rule in
+     equipment.css) AND wraps a padded .card-body, double-insetting the copy.
+     Drop the outer inset and tighten the body so the text uses the full width.
+     (!important beats the shared `:is(...) .card { padding }` rule.) */
+  body.page-view-library-tool-directory .non-member-cta .card {
+    padding: 0 !important;
+  }
+
+  body.page-view-library-tool-directory .non-member-cta .card-body {
+    padding: var(--mh-space-md) !important;
+  }
+
+  /* Stacked (column) on phones, so the horizontal gutter just wastes width. */
+  body.page-view-library-tool-directory .non-member-cta .card-body .me-3 {
+    margin-right: 0 !important;
+  }
+}
