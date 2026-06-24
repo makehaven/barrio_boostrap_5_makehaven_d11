@@ -1,0 +1,13 @@
+/* === TEACH A WORKSHOP (node 29374) — from src/pages/TeachWorkshop.js = */
+
+.mh-teach code { color: var(--mh-red); }
+
+/* ── PAGE INTEGRATION ───────────────────────────────────────────── */
+.page-node-29374 .block-page-title-block,
+.page-node-29374 .block-system-breadcrumb-block,
+.page-node-29374 #sidebar_first { display: none; }
+.page-node-29374 main#content.main-content { flex: 0 0 100%; max-width: 100%; }
+.page-node-29374 { overflow-x: hidden; }
+.page-node-29374 main.main-content { padding-top: 0; }
+.page-node-29374 section.section { padding-top: 0; }
+.page-node-29374 #main-wrapper { background: transparent; }

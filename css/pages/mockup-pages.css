@@ -1,0 +1,143 @@
+/* =================================================================== */
+/* === SHARED MOCKUP PAGE SYSTEM ===================================== */
+/* === Common chrome ported from the React mockup (src/App.css) for   */
+/* === all full-bleed marketing pages. Each ported node body opens     */
+/* === with <div class="mh-page mh-<name>"> and adds page-specifics +   */
+/* === a `.page-node-<nid>` integration block in its own css/pages.    */
+/* =================================================================== */
+
+.mh-page {
+  --mh-red: #861216;
+  --mh-red-dark: #6f0f12;
+  --mh-soft: #f8f0f0;
+  --mh-panel: #f8f8f8;
+  --mh-ink: #1a1a1a;
+}
+
+/* Full-bleed: break out of Drupal's content column edge-to-edge. */
+.mh-page {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+/* ── Section title (red underline) ──────────────────────────────── */
+.mh-page .section-title {
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 700;
+  color: var(--mh-ink);
+}
+.mh-page .section-title::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 4px;
+  background: var(--mh-red);
+  margin: 0.5rem auto 0;
+}
+.mh-page .section-title.text-start::after { margin-left: 0; margin-right: auto; }
+
+/* ── Buttons ────────────────────────────────────────────────────── */
+.mh-page .btn-mh-red {
+  background: var(--mh-red);
+  border: 1px solid var(--mh-red);
+  color: #fff;
+}
+.mh-page .btn-mh-red:hover,
+.mh-page .btn-mh-red:focus { background: var(--mh-red-dark); border-color: var(--mh-red-dark); color: #fff; }
+.mh-page .btn-outline-mh-red {
+  background: transparent;
+  border: 1px solid var(--mh-red);
+  color: var(--mh-red);
+}
+.mh-page .btn-outline-mh-red:hover,
+.mh-page .btn-outline-mh-red:focus { background: var(--mh-red); color: #fff; }
+
+/* ── Page header banner ─────────────────────────────────────────── */
+.mh-page__banner {
+  background: linear-gradient(135deg, var(--mh-red) 0%, #4a0a0c 100%);
+  color: #fff;
+  padding: 3.5rem 0 2.5rem;
+}
+.mh-page__banner--dark {
+  background: var(--mh-ink);
+  border-bottom: 5px solid var(--mh-red);
+  padding: 3.75rem 0;
+}
+.mh-page__banner h1 {
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 700;
+  margin-bottom: .25rem;
+  color: #fff;
+}
+.mh-page__banner-lead { color: rgba(255, 255, 255, .8); margin-bottom: 0; }
+
+/* Breadcrumb rendered as a translucent black pill (matches the Donate page),
+   with its contents vertically centered. */
+.mh-page__crumb {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 0;
+  padding: .3rem .9rem;
+  font-size: .8rem;
+  background: rgba(0, 0, 0, .42);
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 999px;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+.mh-page__crumb .breadcrumb-item { display: inline-flex; align-items: center; }
+.mh-page__crumb .breadcrumb-item a { color: rgba(255, 255, 255, .8) !important; text-decoration: none; font-weight: 500; }
+.mh-page__crumb .breadcrumb-item a:hover { color: #fff !important; }
+.mh-page__crumb .breadcrumb-item.active { color: #fff !important; font-weight: 600; }
+.mh-page__crumb .breadcrumb-item + .breadcrumb-item::before { color: rgba(255, 255, 255, .4); padding: 0 .5rem; }
+/* Swap the theme's dark home glyph for a white one inside the pill. */
+.mh-page__crumb .breadcrumb-item:first-child a::before {
+  width: 15px; height: 15px; margin-right: .4rem;
+  background-size: 15px 15px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z'/%3E%3Cpath d='m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z'/%3E%3C/svg%3E") !important;
+}
+
+/* ── Surfaces & accents ─────────────────────────────────────────── */
+.mh-page__soft { background: var(--mh-soft); }
+.mh-page__panel { background: var(--mh-panel); }
+.mh-page__ico { color: var(--mh-red); }
+.mh-page__accent { color: var(--mh-red); }
+.mh-page__hover { transition: transform .18s ease, box-shadow .18s ease; }
+.mh-page__hover:hover { transform: translateY(-3px); box-shadow: 0 .5rem 1.25rem rgba(0,0,0,.15) !important; }
+
+/* Round avatar (Team) */
+.mh-page__avatar {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border: 3px solid var(--mh-soft);
+}
+
+/* Card with a brand-red top edge (program/guideline cards). */
+.mh-page__topcard { border-top: 4px solid var(--mh-red); }
+/* Dark feature card (Teambuild CTA). */
+.mh-page__darkcard { background: var(--mh-ink); color: #fff; }
+.mh-page__darkcard h2, .mh-page__darkcard h3 { color: #fff; }
+[data-bs-theme="dark"] .mh-page__darkcard { background: var(--mh-ink) !important; }
+
+/* ── CTA band ───────────────────────────────────────────────────── */
+.mh-page__cta { background: var(--mh-red); color: #fff; text-align: center; }
+.mh-page__cta h2 { font-family: "Roboto Condensed", sans-serif; font-weight: 700; color: #fff; }
+.mh-page__cta .lead { color: rgba(255, 255, 255, .9); }
+.mh-page__cta .btn-light { color: var(--mh-red); font-weight: 700; }
+
+/* ── DARK MODE ──────────────────────────────────────────────────── */
+[data-bs-theme="dark"] .mh-page .section-title { color: #f1f1f1; }
+[data-bs-theme="dark"] .mh-page__ico,
+[data-bs-theme="dark"] .mh-page__accent { color: #e8595d; }
+[data-bs-theme="dark"] .mh-page a.btn-mh-red { color: #fff !important; }
+[data-bs-theme="dark"] .mh-page a.btn-outline-mh-red { color: #e8595d !important; border-color: #e8595d !important; }
+[data-bs-theme="dark"] .mh-page a.btn-outline-mh-red:hover { background: #e8595d !important; color: #121212 !important; }
+/* Keep brand-red bands red (theme would flip them to #1e1e1e). */
+[data-bs-theme="dark"] .mh-page__cta { background: var(--mh-red) !important; }
+[data-bs-theme="dark"] .mh-page__banner { background: linear-gradient(135deg, var(--mh-red) 0%, #4a0a0c 100%) !important; }
+[data-bs-theme="dark"] .mh-page__banner--dark { background: var(--mh-ink) !important; }
+[data-bs-theme="dark"] .mh-page__cta .btn-light { color: var(--mh-red) !important; }

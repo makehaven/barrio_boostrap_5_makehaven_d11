@@ -1,0 +1,20 @@
+/* === TEAM PAGE (node 427) — ported from src/pages/Team.js ==========
+   Uses the shared .mh-page system. */
+
+.mh-team__role { font-size: 0.8rem; }
+.mh-team__intro { max-width: 75%; }
+.mh-team__vol { border-top: 3px solid var(--mh-red); }
+
+@media (max-width: 575.98px) {
+  .mh-team__intro { max-width: 100%; }
+}
+
+/* ── PAGE INTEGRATION ───────────────────────────────────────────── */
+.page-node-427 .block-page-title-block,
+.page-node-427 .block-system-breadcrumb-block,
+.page-node-427 #sidebar_first { display: none; }
+.page-node-427 main#content.main-content { flex: 0 0 100%; max-width: 100%; }
+.page-node-427 { overflow-x: hidden; }
+.page-node-427 main.main-content { padding-top: 0; }
+.page-node-427 section.section { padding-top: 0; }
+.page-node-427 #main-wrapper { background: transparent; }

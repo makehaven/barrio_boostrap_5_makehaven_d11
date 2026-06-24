@@ -1,0 +1,45 @@
+/* === FAQ PAGE (node 5045) — ported from src/pages/FAQ.js ===========
+   Uses the shared .mh-page system + native Bootstrap pills/accordion. */
+
+.mh-faq__sticky { top: 80px; }
+.mh-faq__heading { letter-spacing: .05em; }
+
+/* Section pills: brand-red active state (Bootstrap default is blue). */
+.mh-faq__nav .nav-link {
+  color: #343a40;
+  background: #f6f6f6;
+}
+.mh-faq__nav .nav-link:hover { background: var(--mh-soft); color: var(--mh-red); }
+.mh-faq__nav .nav-link.active {
+  background: var(--mh-red);
+  color: #fff;
+}
+
+/* Accordion: brand-red open state, no blue focus ring. */
+.mh-faq .accordion-button:not(.collapsed) {
+  color: var(--mh-red);
+  background: var(--mh-soft);
+  box-shadow: none;
+}
+.mh-faq .accordion-button:focus {
+  border-color: transparent;
+  box-shadow: none;
+}
+.mh-faq .accordion-button:not(.collapsed)::after {
+  filter: none;
+}
+
+/* Dark mode tweaks */
+[data-bs-theme="dark"] .mh-faq__nav .nav-link { background: rgba(255,255,255,.05); color: rgba(255,255,255,.85); }
+[data-bs-theme="dark"] .mh-faq__nav .nav-link.active { background: var(--mh-red); color: #fff; }
+[data-bs-theme="dark"] .mh-faq .accordion-button:not(.collapsed) { background: rgba(255,255,255,.06); color: #e8595d; }
+
+/* ── PAGE INTEGRATION ───────────────────────────────────────────── */
+.page-node-5045 .block-page-title-block,
+.page-node-5045 .block-system-breadcrumb-block,
+.page-node-5045 #sidebar_first { display: none; }
+.page-node-5045 main#content.main-content { flex: 0 0 100%; max-width: 100%; }
+.page-node-5045 { overflow-x: hidden; }
+.page-node-5045 main.main-content { padding-top: 0; }
+.page-node-5045 section.section { padding-top: 0; }
+.page-node-5045 #main-wrapper { background: transparent; }

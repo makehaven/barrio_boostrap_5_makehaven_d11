@@ -1,0 +1,16 @@
+/* === GEMS PAGE (node 30278) — ported from src/pages/Gems.js ======== */
+
+.mh-gems__table thead { background: var(--mh-red); color: #fff; }
+.mh-gems__table thead th { border: 0; }
+[data-bs-theme="dark"] .mh-gems__table { background: #1e1e1e !important; }
+[data-bs-theme="dark"] .mh-gems__table thead { background: var(--mh-red); }
+
+/* ── PAGE INTEGRATION ───────────────────────────────────────────── */
+.page-node-30278 .block-page-title-block,
+.page-node-30278 .block-system-breadcrumb-block,
+.page-node-30278 #sidebar_first { display: none; }
+.page-node-30278 main#content.main-content { flex: 0 0 100%; max-width: 100%; }
+.page-node-30278 { overflow-x: hidden; }
+.page-node-30278 main.main-content { padding-top: 0; }
+.page-node-30278 section.section { padding-top: 0; }
+.page-node-30278 #main-wrapper { background: transparent; }

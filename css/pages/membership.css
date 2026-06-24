@@ -1,0 +1,29 @@
+/* === MEMBERSHIP PAGE (node 35973) — from src/pages/Membership.js ==== */
+
+.mh-membership .pricing-card {
+  border: 2px solid #dee2e6;
+  background: #fff;
+  transition: border-color .2s ease;
+}
+.mh-membership .pricing-card.featured { border-color: var(--mh-red); background: #fff8f8; }
+.mh-membership .pricing-card .price { font-size: 2.4rem; font-weight: 700; color: var(--mh-red); }
+.mh-membership__badge { background: var(--mh-red); }
+.mh-membership__step { width: 48px; height: 48px; background: var(--mh-red); font-size: 1.2rem; }
+
+.mh-membership .accordion-button:not(.collapsed) { color: var(--mh-red); background: var(--mh-soft); box-shadow: none; }
+.mh-membership .accordion-button:focus { border-color: transparent; box-shadow: none; }
+
+[data-bs-theme="dark"] .mh-membership .pricing-card { background: #1e1e1e !important; border-color: rgba(255,255,255,.12); }
+[data-bs-theme="dark"] .mh-membership .pricing-card.featured { border-color: var(--mh-red); }
+[data-bs-theme="dark"] .mh-membership .pricing-card .price { color: #e8595d; }
+[data-bs-theme="dark"] .mh-membership .accordion-button:not(.collapsed) { background: rgba(255,255,255,.06); color: #e8595d; }
+
+/* ── PAGE INTEGRATION ───────────────────────────────────────────── */
+.page-node-35973 .block-page-title-block,
+.page-node-35973 .block-system-breadcrumb-block,
+.page-node-35973 #sidebar_first { display: none; }
+.page-node-35973 main#content.main-content { flex: 0 0 100%; max-width: 100%; }
+.page-node-35973 { overflow-x: hidden; }
+.page-node-35973 main.main-content { padding-top: 0; }
+.page-node-35973 section.section { padding-top: 0; }
+.page-node-35973 #main-wrapper { background: transparent; }

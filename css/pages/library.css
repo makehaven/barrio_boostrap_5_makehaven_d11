@@ -427,3 +427,137 @@ body.page-view-library-tool-directory .view-library-tool-directory .card.border-
     margin-right: 0 !important;
   }
 }
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Library tool DETAIL page — any `library_item` full node view (e.g.
+   /library/15-branch-loppers). The red banner + breadcrumb pill come from the
+   theme banner system (`.mh-banner-page` in rooms.css; node bundle matched in
+   `_..._mh_banner_crumb()`). Here we frame the detail fields into a centered
+   card: status badge, location/value info rows, framed photo, and a branded
+   Report Issue button. Generic — works for every tool node.
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* Center + constrain the detail under the full-bleed banner. */
+.mh-banner-page .node--type-library-item.node--view-mode-full {
+  max-width: 820px;
+  margin: 0 auto 3rem;
+  padding: 0 clamp(1rem, 4vw, 1.5rem);
+}
+
+/* The field stack becomes one clean card. */
+.node--type-library-item.node--view-mode-full .node__content {
+  background: var(--mh-color-surface, #fff);
+  border: 1px solid var(--mh-color-border, #e5e7eb);
+  border-radius: var(--mh-radius-lg, 16px);
+  box-shadow: var(--mh-shadow-sm, 0 4px 14px rgba(30, 31, 36, .08));
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+.node--type-library-item.node--view-mode-full .node__content > * { margin-bottom: 1rem; }
+.node--type-library-item.node--view-mode-full .node__content > *:last-child { margin-bottom: 0; }
+
+/* Status badge — green when available, brand red for any other state. */
+.node--type-library-item.node--view-mode-full .lending-library-status {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: .7rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  margin: 0 0 1.25rem;
+}
+.node--type-library-item.node--view-mode-full .lending-library-status::before {
+  font-size: 1.05em;
+  line-height: 1;
+}
+.node--type-library-item.node--view-mode-full .lending-library-status.status-available {
+  background: rgba(31, 140, 91, .12);
+  color: #14633d;
+  border-color: rgba(31, 140, 91, .25);
+}
+.node--type-library-item.node--view-mode-full .lending-library-status.status-available::before { content: "✔"; }
+.node--type-library-item.node--view-mode-full .lending-library-status:not(.status-available) {
+  background: rgba(178, 34, 34, .1);
+  color: var(--mh-color-brand-primary-strong, #710a0a);
+  border-color: rgba(178, 34, 34, .25);
+}
+.node--type-library-item.node--view-mode-full .lending-library-status:not(.status-available)::before { content: "●"; }
+
+/* Inline info rows (Row / Shelf Number / Replacement Value): label left,
+   value right, with a hairline separator. */
+.node--type-library-item.node--view-mode-full .field--label-inline {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 0;
+  padding: .6rem .25rem;
+  border-bottom: 1px solid var(--mh-color-border, #eee);
+}
+.node--type-library-item.node--view-mode-full .field--label-inline .field__label {
+  font-weight: 600;
+  color: var(--mh-color-neutral-700, #374151);
+  margin: 0;
+}
+.node--type-library-item.node--view-mode-full .field--label-inline .field__item {
+  color: var(--mh-color-neutral-900, #111827);
+  text-align: right;
+}
+
+/* Above-label fields (image, etc.). */
+.node--type-library-item.node--view-mode-full .field--label-above > .field__label {
+  font-weight: 600;
+  font-size: .95rem;
+  color: var(--mh-color-neutral-700, #374151);
+  margin: 0 0 .5rem;
+}
+
+/* Framed inspection photo. */
+.node--type-library-item.node--view-mode-full .field--name-field-library-item-inspect-image img.image-style-content-width {
+  width: 100%;
+  height: auto;
+  max-height: 520px;
+  object-fit: contain;
+  border-radius: var(--mh-radius-md, 12px);
+  background: #f3f4f6;
+  box-shadow: 0 6px 20px rgba(30, 31, 36, .12);
+}
+
+/* The field-level "Library Item Status" duplicates the badge above — hide it. */
+.node--type-library-item.node--view-mode-full .field--name-field-library-item-status { display: none; }
+
+/* Report Issue (and any other action button) → branded outline pill. */
+.node--type-library-item.node--view-mode-full .lending-library-actions-wrapper { margin-top: 1.25rem; }
+.node--type-library-item.node--view-mode-full .lending-library-action-buttons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .6rem 1.3rem;
+  border-radius: 999px;
+  border: 1px solid var(--mh-color-brand-primary, #861216);
+  color: var(--mh-color-brand-primary, #861216);
+  background: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .15s ease, color .15s ease;
+}
+.node--type-library-item.node--view-mode-full .lending-library-action-buttons a:hover,
+.node--type-library-item.node--view-mode-full .lending-library-action-buttons a:focus {
+  background: var(--mh-color-brand-primary, #861216);
+  color: #fff;
+}
+
+/* Dark mode. */
+[data-bs-theme="dark"] .node--type-library-item.node--view-mode-full .node__content {
+  background: #1e1e1e;
+  border-color: rgba(255, 255, 255, .08);
+}
+[data-bs-theme="dark"] .node--type-library-item.node--view-mode-full .field--label-inline {
+  border-bottom-color: rgba(255, 255, 255, .08);
+}
+[data-bs-theme="dark"] .node--type-library-item.node--view-mode-full .lending-library-action-buttons a {
+  background: transparent;
+  color: #e8595d;
+  border-color: #e8595d;
+}

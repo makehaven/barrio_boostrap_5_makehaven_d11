@@ -1,0 +1,30 @@
+/* === RESOURCES PAGE (node 619) — from src/pages/Resources.js ======= */
+
+.mh-res__intro { max-width: 680px; margin: 0 auto; }
+.mh-res__loc { font-size: 0.78rem; }
+.mh-res__discount { background: #2e7d32; }
+
+/* Category tabs: red active, outlined idle (Bootstrap pills). */
+.mh-res__tabs .btn {
+  border: 1px solid #6c757d;
+  color: #6c757d;
+  background: transparent;
+}
+.mh-res__tabs .btn:hover { border-color: var(--mh-red); color: var(--mh-red); }
+.mh-res__tabs .btn.active {
+  background: var(--mh-red);
+  border-color: var(--mh-red);
+  color: #fff;
+}
+[data-bs-theme="dark"] .mh-res__tabs .btn { color: rgba(255,255,255,.75); border-color: rgba(255,255,255,.35); }
+[data-bs-theme="dark"] .mh-res__tabs .btn.active { background: var(--mh-red); color: #fff; border-color: var(--mh-red); }
+
+/* ── PAGE INTEGRATION ───────────────────────────────────────────── */
+.page-node-619 .block-page-title-block,
+.page-node-619 .block-system-breadcrumb-block,
+.page-node-619 #sidebar_first { display: none; }
+.page-node-619 main#content.main-content { flex: 0 0 100%; max-width: 100%; }
+.page-node-619 { overflow-x: hidden; }
+.page-node-619 main.main-content { padding-top: 0; }
+.page-node-619 section.section { padding-top: 0; }
+.page-node-619 #main-wrapper { background: transparent; }

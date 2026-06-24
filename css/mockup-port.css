@@ -1,0 +1,678 @@
+/* =================================================================== */
+/* === MAKEHAVEN MOCKUP DESIGN PORT ================================== */
+/* === Ported from the React mockup (D:\makehaven, src/App.css).       */
+/* === Light is the default; dark mode applies when                    */
+/* === <html data-bs-theme="dark"> is set by the header toggle.        */
+/* === Chunk 1 of N: brand tokens + navbar + dark-mode foundation.     */
+/* =================================================================== */
+
+/* --- Brand tokens aligned to the mockup --------------------------- */
+:root {
+  --mh-color-brand-primary: #861216;
+  --mh-color-brand-primary-strong: #721013;
+  --mh-color-brand-primary-muted: #a81519;
+}
+
+/* =================== NAVBAR (LIGHT — from mockup) ================= */
+/* Header: white, soft shadow (mockup drops the heavy gray bar + red line) */
+header#header {
+  background: #fff;
+  border-bottom: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
+}
+
+/* Thin red utility strip (Log in / account / search / theme toggle) */
+nav#navbar-top {
+  background: var(--mh-color-brand-primary);
+  padding: 4px 0;
+  font-size: .85rem;
+}
+nav#navbar-top .menu--account .nav-link {
+  color: rgba(255, 255, 255, .9);
+  background: transparent;
+  border: 0;
+  font-weight: 600;
+}
+nav#navbar-top .menu--account .nav-link:hover,
+nav#navbar-top .menu--account .nav-link:focus {
+  color: #fff;
+  background: transparent;
+  text-decoration: none;
+}
+
+/* Main navbar: white with clean dark links + red hover (mockup) */
+#navbar-main {
+  background: #fff;
+}
+.navbar-nav .nav-link {
+  color: #343a40;
+  text-shadow: none;
+  font-weight: 500;
+  font-size: 1.05rem;
+}
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus,
+.navbar-nav .nav-item.show > .nav-link {
+  color: var(--mh-color-brand-primary);
+}
+
+/* Dropdowns: floating rounded panels with a soft tinted hover */
+#navbar-main .dropdown-menu {
+  border: 0;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .12);
+  padding: .4rem;
+  margin-top: .35rem;
+}
+#navbar-main .dropdown-menu a,
+#navbar-main .dropdown-item {
+  border-radius: 8px;
+  transition: background .15s ease, color .15s ease;
+}
+#navbar-main .dropdown-menu a:hover,
+#navbar-main .dropdown-item:hover,
+#navbar-main .dropdown-item:focus {
+  background-color: #f8f0f0;
+  color: var(--mh-color-brand-primary);
+}
+
+/* Links inherit the brand red site-wide (mockup) */
+a { color: var(--mh-color-brand-primary); }
+a:hover { color: var(--mh-color-brand-primary-strong); }
+
+/* --- Theme toggle button (injected as the last primary-nav item) --- */
+.mh-theme-toggle-item { display: flex; align-items: center; }
+@media (min-width: 992px) { .mh-theme-toggle-item { margin-left: .35rem; } }
+
+.mh-theme-toggle {
+  appearance: none;
+  background: transparent;
+  border: 1.5px solid currentColor;
+  color: #343a40;               /* light mode: dark icon on the white bar */
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s ease, color .15s ease, transform .15s ease;
+}
+.mh-theme-toggle:hover {
+  background: rgba(0, 0, 0, .06);
+  transform: translateY(-1px);
+}
+[data-bs-theme="dark"] .mh-theme-toggle {
+  color: rgba(255, 255, 255, .9);   /* dark mode: light icon on the dark bar */
+}
+[data-bs-theme="dark"] .mh-theme-toggle:hover {
+  background: rgba(255, 255, 255, .14);
+}
+
+/* =================== FULL-WIDTH HEADER (revamp) ================== */
+/* Span both header bars edge-to-edge with a consistent inset, replacing
+   the old centered ~1000px island that left big side gutters. The inset
+   scales with the viewport so content never jams against the edge. */
+header#header { --mh-header-inset: clamp(1rem, 3.5vw, 3.5rem); }
+
+/* Red utility strip: full width, content aligned to the right inset. */
+header#header nav#navbar-top {
+  max-width: none;
+  margin: 0;
+  padding-left: var(--mh-header-inset);
+  padding-right: var(--mh-header-inset);
+  gap: .5rem;
+}
+
+/* White primary bar: full width with the same inset, so the logo sits at
+   the left edge and the menu at the right edge, aligned with the strip. */
+header#header #navbar-main {
+  max-width: none;
+  margin: 0;
+}
+@media (min-width: 992px) {
+  header#header #navbar-main {
+    padding-left: var(--mh-header-inset);
+    padding-right: var(--mh-header-inset);
+  }
+  header#header #navbar-main .navbar-brand { margin-left: 0; }
+  /* A little more breathing room between top-level items. */
+  #navbar-main .navbar-nav { gap: .4rem; }
+  #navbar-main .navbar-nav .nav-link { padding-left: .9rem; padding-right: .9rem; }
+}
+@media (max-width: 991.98px) {
+  header#header nav#navbar-main {
+    padding-left: var(--mh-header-inset);
+    padding-right: var(--mh-header-inset);
+  }
+}
+
+/* =================== DARK MODE (opt-in via toggle) =============== */
+[data-bs-theme="dark"] body,
+[data-bs-theme="dark"] {
+  background-color: #121212;
+  color: rgba(255, 255, 255, .87);
+}
+/* Surfaces */
+[data-bs-theme="dark"] header#header,
+[data-bs-theme="dark"] #navbar-main {
+  background: #1e1e1e;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .5);
+}
+[data-bs-theme="dark"] section,
+[data-bs-theme="dark"] .bg-white,
+[data-bs-theme="dark"] .bg-light,
+[data-bs-theme="dark"] .card,
+[data-bs-theme="dark"] .service-content,
+[data-bs-theme="dark"] main {
+  background-color: #1e1e1e !important;
+  border-color: rgba(255, 255, 255, .08) !important;
+  color: rgba(255, 255, 255, .87) !important;
+}
+/* Typography */
+[data-bs-theme="dark"] h1,
+[data-bs-theme="dark"] h2,
+[data-bs-theme="dark"] h3,
+[data-bs-theme="dark"] h4,
+[data-bs-theme="dark"] h5,
+[data-bs-theme="dark"] h6 {
+  color: rgba(255, 255, 255, .95);
+}
+[data-bs-theme="dark"] .text-muted {
+  color: rgba(255, 255, 255, .6) !important;
+}
+/* Brand red tuned to a vibrant coral for dark backgrounds (mockup) */
+[data-bs-theme="dark"] a,
+[data-bs-theme="dark"] .text-mh-red,
+[data-bs-theme="dark"] .navbar-nav .nav-link:hover {
+  color: #ff6b6b !important;
+}
+[data-bs-theme="dark"] .navbar-nav .nav-link {
+  color: rgba(255, 255, 255, .9);
+}
+/* Dark dropdowns */
+[data-bs-theme="dark"] #navbar-main .dropdown-menu {
+  background-color: #1e1e1e;
+  border-color: rgba(255, 255, 255, .08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, .5);
+}
+[data-bs-theme="dark"] #navbar-main .dropdown-item,
+[data-bs-theme="dark"] #navbar-main .dropdown-menu a {
+  color: rgba(255, 255, 255, .87);
+}
+[data-bs-theme="dark"] #navbar-main .dropdown-item:hover,
+[data-bs-theme="dark"] #navbar-main .dropdown-menu a:hover {
+  background-color: rgba(255, 255, 255, .05);
+  color: #ff6b6b;
+}
+
+/* =================================================================== */
+/* === END MAKEHAVEN MOCKUP DESIGN PORT ============================= */
+
+/* =================== HERO (mockup look) ========================== */
+/* Strong selectors (incl. the slideshow block id) + !important so these
+   cleanly beat the theme's legacy id-based hero rules.                 */
+
+/* TEMP placeholder photo — REMOVE this sub-block once J.R.'s real slide
+   images are in place (then the slideshow's own <img> slides show). */
+.path-frontpage #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow,
+.path-frontpage .view-homepage-slideshow {
+  background:
+    linear-gradient(rgba(15, 16, 20, .58), rgba(15, 16, 20, .42)),
+    url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80')
+    center / cover no-repeat !important;
+}
+.path-frontpage .views_slideshow_cycle_slide img { opacity: 0 !important; }
+/* END TEMP placeholder photo */
+
+/* Clean condensed headline — no dated outline/glow */
+.path-frontpage #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow h1.text-white,
+.path-frontpage .view-homepage-slideshow h1.text-white {
+  font-family: 'Roboto Condensed', var(--mh-font-sans) !important;
+  font-weight: 700 !important;
+  letter-spacing: .3px !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, .5) !important;
+  animation: mhFadeUp .7s cubic-bezier(.2, .7, .2, 1) both;
+}
+
+/* Clean hero CTAs: outline-white, first is solid brand */
+.path-frontpage #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow .block-action,
+.path-frontpage .view-homepage-slideshow .block-action {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  animation: mhFadeUp .7s .15s cubic-bezier(.2, .7, .2, 1) both;
+}
+.path-frontpage #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow .block-action .btn,
+.path-frontpage .view-homepage-slideshow .block-action .btn {
+  margin: 0 !important;
+  padding: 12px 28px !important;
+  border-radius: 999px !important;
+  border: 2px solid #fff !important;
+  background: transparent !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  text-transform: uppercase;
+  box-shadow: none !important;
+  transition: background .2s ease, color .2s ease, transform .2s ease !important;
+}
+.path-frontpage #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow .block-action .btn:first-child,
+.path-frontpage .view-homepage-slideshow .block-action .btn:first-child {
+  background: var(--mh-color-brand-primary) !important;
+  border-color: #fff !important;
+}
+.path-frontpage #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow .block-action .btn:hover,
+.path-frontpage .view-homepage-slideshow .block-action .btn:hover {
+  background: #fff !important;
+  color: var(--mh-color-brand-primary) !important;
+  transform: translateY(-2px);
+}
+
+@keyframes mhFadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* =================== TEMP LOGO WORDMARK ========================== */
+/* Real logo image isn't in the package yet — show a clean wordmark
+   instead of the broken "Home" image. REMOVE once the logo lands. */
+#navbar-main .navbar-brand img { display: none !important; }
+#navbar-main .navbar-brand::after {
+  content: "MakeHaven";
+  font-family: 'Roboto Condensed', var(--mh-font-sans);
+  font-weight: 700;
+  font-size: 1.7rem;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  color: var(--mh-color-brand-primary);
+}
+[data-bs-theme="dark"] #navbar-main .navbar-brand::after { color: #ff6b6b; }
+
+/* =================== NAVBAR REDO (full-width, no boxiness) ======= */
+/* The red utility strip was a centered ~1000px band, leaving boxy gaps
+   on each side. Make both bars full-width and cleanly aligned.        */
+header#header nav#navbar-top {
+  max-width: none !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 5px clamp(14px, 4vw, 44px) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 10px !important;
+}
+header#header #navbar-main {
+  min-height: 62px;
+  padding-top: .2rem !important;
+  padding-bottom: .2rem !important;
+}
+.navbar-nav { gap: .15rem !important; }
+.navbar-nav .nav-link { padding: .5rem .9rem !important; border-radius: 8px; }
+.navbar-nav .nav-link:hover { background: rgba(134, 18, 22, .07); }
+[data-bs-theme="dark"] .navbar-nav .nav-link:hover { background: rgba(255, 107, 107, .12); }
+
+/* Search → clean white pill in the red bar */
+#views-exposed-form-site-search-page-1 input.form-control,
+#views-exposed-form-site-search-page-1 input[type="text"],
+#views-exposed-form-site-search-page-1 input[type="search"] {
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, .95) !important;
+}
+/* Log in → subtle outlined chip on the red bar */
+nav#navbar-top .menu--account .nav-link {
+  border: 1px solid rgba(255, 255, 255, .55) !important;
+  border-radius: 999px !important;
+  padding: 3px 14px !important;
+}
+nav#navbar-top .menu--account .nav-link:hover {
+  background: rgba(255, 255, 255, .15) !important;
+}
+
+/* =================== UNDER-HERO CLEANUP ========================= */
+/* Audience band (INVENTORS / HOBBYISTS / ARTISANS): tighter, and the
+   cards become clean text blocks instead of boxy panels on the red. */
+.path-frontpage div[id$="frontthreethingsfront"] { padding: 3.5rem 0 !important; }
+.path-frontpage [id$="frontthreethingsfront"] .service-content {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.path-frontpage [id$="frontthreethingsfront"] .service-content::before { display: none !important; }
+.path-frontpage [id$="frontthreethingsfront"] .service-title,
+.path-frontpage [id$="frontthreethingsfront"] .service p { color: #fff !important; }
+
+/* "The tools to make anything" heading: readable + on-brand (was murky teal) */
+.path-frontpage div[id$="fronttoolstomakeanything"] h2 { color: var(--mh-color-brand-primary) !important; }
+[data-bs-theme="dark"] .path-frontpage div[id$="fronttoolstomakeanything"] h2 { color: #ff6b6b !important; }
+/* Tool cards: consistent rounding + readable body in both modes */
+.path-frontpage div[id$="fronttoolstomakeanything"] .service-content { border-radius: 16px !important; }
+[data-bs-theme="dark"] .path-frontpage div[id$="fronttoolstomakeanything"] .service p { color: rgba(255, 255, 255, .7) !important; }
+
+/* === REAL LOGO (replaces the temp wordmark) === */
+#navbar-main .navbar-brand::after {
+  content: "" !important;
+  width: 210px;
+  height: 46px;
+  background: url('../images/makehaven-logo.jpg') left center / contain no-repeat;
+}
+
+/* === REAL LOGO v2 (robust: swap the <img> itself) === */
+#navbar-main .navbar-brand img {
+  display: inline-block !important;
+  content: url('../images/makehaven-logo.jpg') !important;
+  height: 46px !important;
+  width: auto !important;
+  max-width: 230px !important;
+}
+#navbar-main .navbar-brand::after { content: none !important; }
+
+/* === DROPDOWN HOVER FIX (desktop) === */
+@media (min-width: 992px) {
+  #navbar-main .navbar-nav .nav-item.dropdown { position: relative; }
+  #navbar-main .navbar-nav .nav-item.dropdown:hover > .dropdown-menu { display: block; }
+  #navbar-main .dropdown-menu { margin-top: 0 !important; }
+  /* transparent bridge so the cursor can travel from link to menu without
+     crossing a gap that drops the :hover state */
+  #navbar-main .navbar-nav .nav-item.dropdown > .dropdown-menu::before {
+    content: "";
+    position: absolute;
+    top: -12px; left: 0; right: 0; height: 12px;
+    background: transparent;
+  }
+}
+
+/* =================== LANDING REVAMP (mockup-aligned) ============= */
+
+/* ---- Section rhythm ---- */
+.path-frontpage div[id$="fronttoolstomakeanything"] .section { padding: 4.5rem 0 !important; }
+.path-frontpage div[id$="frontthreethingsfront"] { padding: 4rem 0 !important; }
+
+/* ================= AUDIENCE BAND (Inventors/Hobbyists/Artisans) === */
+.path-frontpage div[id$="frontthreethingsfront"] {
+  background: var(--mh-color-brand-primary) !important;   /* unify brand red, both modes */
+}
+.path-frontpage [id$="frontthreethingsfront"] .service.vertical { padding: 0 1rem; }
+.path-frontpage [id$="frontthreethingsfront"] .front-icons {
+  height: 76px !important;
+  width: 76px !important;
+  margin-bottom: 1.25rem;
+  transition: transform .2s ease;
+}
+.path-frontpage [id$="frontthreethingsfront"] .service:hover .front-icons {
+  transform: translateY(-4px) scale(1.05);
+}
+.path-frontpage [id$="frontthreethingsfront"] .service-title {
+  color: #fff !important;
+  font-family: 'Roboto Condensed', var(--mh-font-sans) !important;
+  font-size: 1.5rem !important;
+  letter-spacing: .5px;
+}
+.path-frontpage [id$="frontthreethingsfront"] .service-title.title-underblock::after { display: none !important; }
+.path-frontpage [id$="frontthreethingsfront"] .service p {
+  color: rgba(255, 255, 255, .9) !important;
+  max-width: 22rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ================= TOOLS SECTION → mockup tool-cards ============== */
+.path-frontpage div[id$="fronttoolstomakeanything"] {
+  background: var(--mh-color-surface-muted) !important;
+}
+[data-bs-theme="dark"] .path-frontpage div[id$="fronttoolstomakeanything"] { background: #161616 !important; }
+
+.path-frontpage div[id$="fronttoolstomakeanything"] h2 {
+  font-family: 'Roboto Condensed', var(--mh-font-sans) !important;
+  color: var(--mh-color-brand-primary) !important;
+  font-weight: 700 !important;
+  margin-bottom: 2.5rem !important;
+}
+[data-bs-theme="dark"] .path-frontpage div[id$="fronttoolstomakeanything"] h2 { color: #ff6b6b !important; }
+
+.path-frontpage div[id$="fronttoolstomakeanything"] .service-content {
+  background: #fff !important;
+  border: 1px solid var(--mh-color-border) !important;
+  border-top: 4px solid var(--mh-color-brand-primary) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 6px 18px rgba(30, 31, 36, .08) !important;
+  padding: 1.75rem 1.5rem !important;
+  height: 100%;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.path-frontpage div[id$="fronttoolstomakeanything"] .service-content:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 34px rgba(134, 18, 22, .16) !important;
+}
+.path-frontpage div[id$="fronttoolstomakeanything"] .service-title {
+  color: var(--mh-color-brand-primary) !important;
+  font-family: 'Roboto Condensed', var(--mh-font-sans) !important;
+  font-weight: 700 !important;
+  letter-spacing: .4px;
+  margin-bottom: .75rem !important;
+}
+.path-frontpage div[id$="fronttoolstomakeanything"] .service-content p { color: #555 !important; }
+.path-frontpage div[id$="fronttoolstomakeanything"] .service-content a {
+  display: inline-block;
+  margin-top: .5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: .85rem;
+  letter-spacing: .04em;
+  color: var(--mh-color-brand-primary) !important;
+  text-decoration: none;
+}
+.path-frontpage div[id$="fronttoolstomakeanything"] .service-content a:hover { color: var(--mh-color-brand-primary-strong) !important; }
+.path-frontpage div[id$="fronttoolstomakeanything"] .service-content a::after { content: " \2192"; }
+
+/* dark-mode tool cards */
+[data-bs-theme="dark"] .path-frontpage div[id$="fronttoolstomakeanything"] .service-content {
+  background: #1e1e1e !important;
+  border-color: rgba(255, 255, 255, .08) !important;
+  border-top-color: #ff6b6b !important;
+}
+[data-bs-theme="dark"] .path-frontpage div[id$="fronttoolstomakeanything"] .service-title,
+[data-bs-theme="dark"] .path-frontpage div[id$="fronttoolstomakeanything"] .service-content a { color: #ff6b6b !important; }
+[data-bs-theme="dark"] .path-frontpage div[id$="fronttoolstomakeanything"] .service-content p { color: rgba(255, 255, 255, .7) !important; }
+
+/* ================= EMAIL SIGNUP BAND ============================= */
+.path-frontpage div[id$="frontemailsignup"] { padding: 3.5rem 1rem !important; }
+.path-frontpage #mc_embed_signup_scroll input[type="email"] {
+  border-radius: 999px;
+  border: 0;
+  padding: .7rem 1.1rem;
+  min-width: 260px;
+}
+.path-frontpage #mc_embed_signup_scroll .button {
+  border-radius: 999px;
+  padding: .7rem 1.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: var(--mh-color-accent-gold);
+  color: #1e1f24;
+  border: 0;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.path-frontpage #mc_embed_signup_scroll .button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, .25);
+  background: #ffd27a !important;
+}
+
+/* ================= Section titles: drop dated double-shadow ======= */
+.path-frontpage .section-title.shadow-title::before { display: none !important; }
+.path-frontpage .section-title.shadow-title {
+  font-family: 'Roboto Condensed', var(--mh-font-sans) !important;
+}
+
+/* === DARK TOP-BAR FIX (no black box behind search/login) ========= */
+/* Keep the red strip, but force every wrapper inside it transparent. */
+[data-bs-theme="dark"] nav#navbar-top .region-top-header,
+[data-bs-theme="dark"] nav#navbar-top .region-top-header-form,
+[data-bs-theme="dark"] nav#navbar-top .block,
+[data-bs-theme="dark"] nav#navbar-top .content,
+[data-bs-theme="dark"] nav#navbar-top .navbar-form,
+[data-bs-theme="dark"] nav#navbar-top form,
+[data-bs-theme="dark"] nav#navbar-top .menu--account,
+[data-bs-theme="dark"] nav#navbar-top .menu--account .nav,
+[data-bs-theme="dark"] #views-exposed-form-site-search-page-1,
+[data-bs-theme="dark"] #views-exposed-form-site-search-page-1 .js-form-item,
+[data-bs-theme="dark"] #views-exposed-form-site-search-page-1 .form-actions,
+[data-bs-theme="dark"] #views-exposed-form-site-search-page-1 .form-item {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+/* input stays a clean white pill; submit stays brand red */
+[data-bs-theme="dark"] #views-exposed-form-site-search-page-1 input.form-control,
+[data-bs-theme="dark"] #views-exposed-form-site-search-page-1 input[type="text"],
+[data-bs-theme="dark"] #views-exposed-form-site-search-page-1 input[type="search"] {
+  background: rgba(255, 255, 255, .95) !important;
+  color: #222 !important;
+}
+[data-bs-theme="dark"] #views-exposed-form-site-search-page-1 .form-actions .form-submit {
+  background: var(--mh-color-brand-primary) !important;
+}
+
+/* === LIVE SEARCH DROPDOWN ======================================= */
+.mh-qs-dropdown {
+  position: fixed;
+  z-index: 3000;
+  max-height: 60vh;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid var(--mh-color-border);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(30, 31, 36, .22);
+  padding: 6px;
+}
+.mh-qs-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #222 !important;
+  text-decoration: none !important;
+}
+.mh-qs-item + .mh-qs-item { border-top: 1px solid var(--mh-color-neutral-100); }
+.mh-qs-item:hover { background: #f8f0f0; }
+.mh-qs-title { font-weight: 600; }
+.mh-qs-type {
+  font-size: .68rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: #fff;
+  background: var(--mh-color-brand-primary);
+  padding: 2px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.mh-qs-empty { padding: 14px 12px; color: #666; font-size: .9rem; }
+[data-bs-theme="dark"] .mh-qs-dropdown { background: #1e1e1e; border-color: rgba(255, 255, 255, .1); }
+[data-bs-theme="dark"] .mh-qs-item { color: rgba(255, 255, 255, .9) !important; }
+[data-bs-theme="dark"] .mh-qs-item + .mh-qs-item { border-top-color: rgba(255, 255, 255, .06); }
+[data-bs-theme="dark"] .mh-qs-item:hover { background: rgba(255, 255, 255, .06); }
+[data-bs-theme="dark"] .mh-qs-empty { color: rgba(255, 255, 255, .6); }
+
+/* =================== MOBILE NAV + HEADER (<992px) ===============
+   Architecture: NO JavaScript. When the hamburger opens, every section AND
+   all its sub-items are shown as one flat, indented, scrollable list — parent
+   items act as non-interactive section headers and the sub-items are the tap
+   targets. Nothing to toggle, nothing to break. (Bootstrap's collapse still
+   opens/closes the whole panel via the navbar-toggler; that's independent.) */
+@media (max-width: 991.98px) {
+  #navbar-main .navbar-collapse {
+    padding: .25rem 0 1rem;
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
+  }
+  #navbar-main .navbar-nav { gap: 0 !important; width: 100%; }
+
+  /* Top-level rows separated by hairline dividers. */
+  #navbar-main .navbar-nav > li.nav-item { width: 100%; border-top: 1px solid rgba(0, 0, 0, .08); }
+  #navbar-main .navbar-nav > li.nav-item:first-child { border-top: 0; }
+
+  /* Parent of a dropdown = section header (a label, not a control). */
+  #navbar-main .navbar-nav > li.nav-item.dropdown > .nav-link.dropdown-toggle {
+    pointer-events: none;            /* not clickable — the sub-items are the links */
+    font-family: "Roboto Condensed", var(--mh-font-sans);
+    font-weight: 700;
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--mh-color-brand-primary);
+    padding: 1rem .25rem .3rem !important;
+  }
+  /* No caret — there is nothing to expand/collapse. */
+  #navbar-main .nav-item.dropdown > .nav-link.dropdown-toggle::after { display: none !important; }
+
+  /* Sub-items: ALWAYS visible, static, indented. No toggle, no JS. */
+  #navbar-main .nav-item.dropdown > .dropdown-menu {
+    display: block !important;
+    position: static !important;
+    float: none;
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 0 .35rem !important;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+    transform: none !important;
+  }
+  #navbar-main .dropdown-menu .dropdown-item,
+  #navbar-main .dropdown-menu .dropdown-item > a,
+  #navbar-main .dropdown-menu a {
+    display: block;
+    padding: .5rem .25rem .5rem 1rem;
+    white-space: normal;
+    font-size: 1.02rem;
+    color: #343a40;
+    border-radius: 0;
+  }
+  #navbar-main .dropdown-menu a:hover,
+  #navbar-main .dropdown-menu a:focus { background: rgba(134, 18, 22, .06); color: var(--mh-color-brand-primary); }
+
+  /* Non-dropdown top-level links (Donate, Log in) stay as tappable rows. */
+  #navbar-main .navbar-nav > li.nav-item:not(.dropdown) > .nav-link {
+    padding: .9rem .25rem !important;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border-radius: 0 !important;
+  }
+
+  /* Theme-toggle row. */
+  #navbar-main .mh-theme-toggle-item {
+    width: 100%;
+    border-top: 1px solid rgba(0, 0, 0, .08);
+    padding: .8rem .25rem 0;
+    justify-content: flex-start;
+  }
+
+  /* Header bars: tidy logo + hamburger. */
+  header#header #navbar-main { min-height: 56px; }
+  #navbar-main .navbar-brand img { height: 38px !important; }
+  #navbar-main .navbar-toggler { padding: .3rem .55rem; border-color: rgba(0, 0, 0, .18); }
+
+  /* Top utility strip: let search + login wrap and center instead of cramming. */
+  header#header nav#navbar-top {
+    flex-wrap: wrap;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 6px clamp(10px, 4vw, 20px) !important;
+  }
+
+  /* Dark mode. */
+  [data-bs-theme="dark"] #navbar-main .navbar-nav > li.nav-item,
+  [data-bs-theme="dark"] #navbar-main .mh-theme-toggle-item { border-top-color: rgba(255, 255, 255, .1); }
+  [data-bs-theme="dark"] #navbar-main .dropdown-menu a { color: rgba(255, 255, 255, .85); }
+  [data-bs-theme="dark"] #navbar-main .navbar-nav > li.nav-item.dropdown > .nav-link.dropdown-toggle { color: #ff6b6b; }
+  [data-bs-theme="dark"] #navbar-main .navbar-nav > li.nav-item:not(.dropdown) > .nav-link { color: rgba(255, 255, 255, .9); }
+}

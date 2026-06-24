@@ -1,22 +1,22 @@
 /* Events calendar page (/events/calendar/public/starts) */
 
-body.path-events-calendar-public-starts {
+body.page-view-events-calendar {
   background-color: var(--mh-color-neutral-100);
 }
 
-body.path-events-calendar-public-starts #main-wrapper {
+body.page-view-events-calendar #main-wrapper {
   max-width: calc(var(--mh-container-max) + 160px);
 }
 
-body.path-events-calendar-public-starts .view-events-calendar {
+body.page-view-events-calendar .view-events-calendar {
   display: flex;
   flex-direction: column;
   gap: var(--mh-space-lg);
 }
 
-body.path-events-calendar-public-starts .view-events-calendar .view-content,
-body.path-events-calendar-public-starts .view-events-calendar .fullcalendar-view-wrapper,
-body.path-events-calendar-public-starts .view-events-calendar .fullcalendar {
+body.page-view-events-calendar .view-events-calendar .view-content,
+body.page-view-events-calendar .view-events-calendar .fullcalendar-view-wrapper,
+body.page-view-events-calendar .view-events-calendar .fullcalendar {
   background: var(--mh-color-surface);
   border: 1px solid var(--mh-color-border);
   border-radius: var(--mh-radius-lg);
@@ -24,32 +24,32 @@ body.path-events-calendar-public-starts .view-events-calendar .fullcalendar {
   box-shadow: var(--mh-shadow-sm);
 }
 
-body.path-events-calendar-public-starts .fc {
+body.page-view-events-calendar .fc {
   font-family: var(--mh-font-sans);
   max-width: 100%;
 }
 
-body.path-events-calendar-public-starts table {
+body.page-view-events-calendar table {
   display: table;
   width: 100%;
   max-width: 100%;
   overflow: visible;
 }
 
-body.path-events-calendar-public-starts table thead,
-body.path-events-calendar-public-starts .fc table thead {
+body.page-view-events-calendar table thead,
+body.page-view-events-calendar .fc table thead {
   display: table-header-group;
 }
 
-body.path-events-calendar-public-starts .fc table tbody {
+body.page-view-events-calendar .fc table tbody {
   display: table-row-group;
 }
 
-body.path-events-calendar-public-starts .fc table tfoot {
+body.page-view-events-calendar .fc table tfoot {
   display: table-footer-group;
 }
 
-body.path-events-calendar-public-starts .fc table {
+body.page-view-events-calendar .fc table {
   display: table;
   width: 100%;
   white-space: normal;
@@ -57,20 +57,20 @@ body.path-events-calendar-public-starts .fc table {
   table-layout: fixed;
 }
 
-body.path-events-calendar-public-starts .fc .fc-toolbar {
+body.page-view-events-calendar .fc .fc-toolbar {
   flex-wrap: wrap;
   gap: var(--mh-space-sm);
   margin-bottom: var(--mh-space-md);
   padding: var(--mh-space-sm) 0;
 }
 
-body.path-events-calendar-public-starts .fc .fc-toolbar-title {
+body.page-view-events-calendar .fc .fc-toolbar-title {
   font-family: var(--mh-font-display);
   font-size: clamp(1.5rem, 3vw, 2.25rem);
   color: var(--mh-color-neutral-900);
 }
 
-body.path-events-calendar-public-starts .fc .fc-button {
+body.page-view-events-calendar .fc .fc-button {
   background-color: var(--mh-color-brand-primary);
   border: none;
   border-radius: var(--mh-radius-md);
@@ -80,52 +80,52 @@ body.path-events-calendar-public-starts .fc .fc-button {
   text-transform: capitalize;
 }
 
-body.path-events-calendar-public-starts .fc .fc-button:disabled {
+body.page-view-events-calendar .fc .fc-button:disabled {
   background-color: var(--mh-color-neutral-300);
   color: var(--mh-color-neutral-600);
 }
 
-body.path-events-calendar-public-starts .fc .fc-button:hover,
-body.path-events-calendar-public-starts .fc .fc-button:focus {
+body.page-view-events-calendar .fc .fc-button:hover,
+body.page-view-events-calendar .fc .fc-button:focus {
   background-color: var(--mh-color-brand-primary-strong);
 }
 
-body.path-events-calendar-public-starts .fc-scrollgrid {
+body.page-view-events-calendar .fc-scrollgrid {
   border: none;
   background: var(--mh-color-surface);
   border-radius: var(--mh-radius-lg);
 }
 
-body.path-events-calendar-public-starts .fc-theme-standard th,
-body.path-events-calendar-public-starts .fc-theme-standard td {
+body.page-view-events-calendar .fc-theme-standard th,
+body.page-view-events-calendar .fc-theme-standard td {
   border: 1px solid var(--mh-color-border);
   width: 14.28%;
 }
 
-body.path-events-calendar-public-starts .fc-col-header-cell {
+body.page-view-events-calendar .fc-col-header-cell {
   background: var(--mh-color-neutral-150);
   color: var(--mh-color-neutral-700);
   font-weight: 600;
 }
 
-body.path-events-calendar-public-starts .fc-daygrid-day-number {
+body.page-view-events-calendar .fc-daygrid-day-number {
   color: var(--mh-color-neutral-700);
   font-weight: 600;
 }
 
-body.path-events-calendar-public-starts .fc-daygrid-day-top {
+body.page-view-events-calendar .fc-daygrid-day-top {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: var(--mh-space-2xs) var(--mh-space-xs);
 }
 
-body.path-events-calendar-public-starts .fc-daygrid-day.fc-day-today {
+body.page-view-events-calendar .fc-daygrid-day.fc-day-today {
   background-color: rgba(139, 25, 25, 0.08);
 }
 
-body.path-events-calendar-public-starts .fc-h-event,
-body.path-events-calendar-public-starts .fc-daygrid-event {
+body.page-view-events-calendar .fc-h-event,
+body.page-view-events-calendar .fc-daygrid-event {
   border: none;
   border-radius: var(--mh-radius-md);
   padding: var(--mh-space-2xs) var(--mh-space-xs);
@@ -133,86 +133,87 @@ body.path-events-calendar-public-starts .fc-daygrid-event {
   box-shadow: var(--mh-shadow-xs);
 }
 
-body.path-events-calendar-public-starts .fc-daygrid-event-dot {
+body.page-view-events-calendar .fc-daygrid-event-dot {
   border-color: var(--mh-color-brand-primary);
 }
 
-body.path-events-calendar-public-starts .fc-daygrid-event:hover {
+body.page-view-events-calendar .fc-daygrid-event:hover {
   filter: brightness(0.95);
 }
 
-body.path-events-calendar-public-starts .fc-event-title,
-body.path-events-calendar-public-starts .fc-event-title-container {
+body.page-view-events-calendar .fc-event-title,
+body.page-view-events-calendar .fc-event-title-container {
   font-weight: 600;
   color: var(--mh-color-neutral-900);
 }
 
-body.path-events-calendar-public-starts .fc-list-table,
-body.path-events-calendar-public-starts .fc-list-day-cushion {
+body.page-view-events-calendar .fc-list-table,
+body.page-view-events-calendar .fc-list-day-cushion {
   color: var(--mh-color-neutral-900);
 }
 
-body.path-events-calendar-public-starts .fc-list-day {
+body.page-view-events-calendar .fc-list-day {
   background: var(--mh-color-neutral-150);
   font-weight: 600;
 }
 
-body.path-events-calendar-public-starts .fc-list-event {
+body.page-view-events-calendar .fc-list-event {
   border-left: 4px solid var(--mh-color-brand-primary);
   border-radius: var(--mh-radius-md);
   margin: var(--mh-space-xs) var(--mh-space-sm);
 }
 
-body.path-events-calendar-public-starts .fc-list-event-graphic {
+body.page-view-events-calendar .fc-list-event-graphic {
   display: none;
 }
 
-body.path-events-calendar-public-starts .fc .fc-toolbar.fc-header-toolbar {
+body.page-view-events-calendar .fc .fc-toolbar.fc-header-toolbar {
   border-bottom: 1px solid var(--mh-color-border);
   padding-bottom: var(--mh-space-sm);
 }
 
-body.path-events-calendar-public-starts .fc .fc-daygrid-day {
+body.page-view-events-calendar .fc .fc-daygrid-day {
   background: var(--mh-color-surface);
   min-height: 140px;
 }
 
-body.path-events-calendar-public-starts .fc .fc-daygrid-day-frame {
+body.page-view-events-calendar .fc .fc-daygrid-day-frame {
   padding: var(--mh-space-xs);
   min-height: 140px;
 }
 
-body.path-events-calendar-public-starts .fc .fc-daygrid-day-top {
+body.page-view-events-calendar .fc .fc-daygrid-day-top {
   align-items: center;
 }
 
-body.path-events-calendar-public-starts .fc .fc-daygrid-day-number {
+body.page-view-events-calendar .fc .fc-daygrid-day-number {
   color: var(--mh-color-neutral-700);
   font-weight: 600;
   font-size: 0.9rem;
 }
 
-body.path-events-calendar-public-starts .views-exposed-form {
+body.page-view-events-calendar .views-exposed-form {
   margin-bottom: 0;
 }
 
 @media (max-width: 768px) {
-  body.path-events-calendar-public-starts .fc .fc-toolbar {
+  body.page-view-events-calendar .fc .fc-toolbar {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  body.path-events-calendar-public-starts .view-events-calendar .fullcalendar-view-wrapper {
+  body.page-view-events-calendar .view-events-calendar .fullcalendar-view-wrapper {
     padding: var(--mh-space-sm);
   }
 }
 
 /* ----------------------------------------------------------------------------
  * Calendar full-width layout + multi-line events + legend.
- * Drupal's body class for /events/calendar/public/starts is `page-view-events-calendar`
- * (the older `path-events-calendar-public-starts` selectors above don't actually match
- * — kept for backward-compat in case body classes change). For reservations we target
- * the view's body class as currently rendered.
+ * Drupal's body class for /events/calendar/public/starts is
+ * `page-view-events-calendar` — all rules in this file use it. (This calendar
+ * is FullCalendar v4, so v4 class names apply: .fc-day-header, .fc-day-number,
+ * .fc-today, .fc-center h2, .fc-button-active — NOT the v5 .fc-col-header-cell
+ * / .fc-daygrid-* / .fc-toolbar-title names.) Reservations use .path-reservations.
  * -------------------------------------------------------------------------- */
 
 body.page-view-events-calendar aside.section:not(.featured-top__inner),
@@ -289,3 +290,75 @@ body.page-view-events-calendar .fc-day-grid-event .fc-content {
   border: 1px solid rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
 }
+
+/* ===================================================================
+ * Brand polish (2026-06-23) — this calendar is FullCalendar v4, so the
+ * selectors below use v4 class names (.fc-day-header, .fc-day-number,
+ * .fc-today, .fc-center h2 — NOT the v5 .fc-col-header-cell / .fc-daygrid-*).
+ * =================================================================== */
+
+/* Month / year title → condensed, bold, brand ink (v4 = <h2> in .fc-center). */
+body.page-view-events-calendar .fc-toolbar .fc-center h2,
+body.page-view-events-calendar .fc-toolbar h2 {
+  font-family: "Roboto Condensed", var(--mh-font-display, sans-serif);
+  font-weight: 700;
+  letter-spacing: .3px;
+  color: #1a1a1a;
+}
+
+/* Day-of-week header → solid brand-red bar with white labels.
+   FullCalendar v4 puts the grey background on the header CONTAINER
+   (.fc-head-container / .fc-row.fc-widget-header), with transparent <th>
+   cells on top — so colour the container (and the th, for good measure). */
+body.page-view-events-calendar .fc-head .fc-head-container,
+body.page-view-events-calendar .fc-head .fc-row.fc-widget-header,
+body.page-view-events-calendar th.fc-day-header,
+body.page-view-events-calendar .fc-day-header {
+  background: #861216 !important;
+  border-color: #861216 !important;
+}
+body.page-view-events-calendar th.fc-day-header {
+  color: #fff !important;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  font-size: .78rem;
+  font-weight: 700;
+  padding: .5rem 0;
+}
+body.page-view-events-calendar .fc-day-header span,
+body.page-view-events-calendar .fc-day-header a { color: #fff !important; text-decoration: none; }
+
+/* Distinguish the active view button (month / week / day / list). */
+body.page-view-events-calendar .fc-button.fc-button-active {
+  background-color: var(--mh-color-brand-primary-strong) !important;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, .28);
+}
+body.page-view-events-calendar .fc-button:focus,
+body.page-view-events-calendar .fc-button:focus-visible {
+  box-shadow: 0 0 0 .2rem rgba(134, 18, 22, .3);
+}
+
+/* "Today" → soft red wash on the cell + the date number as a red circle. */
+body.page-view-events-calendar td.fc-today,
+body.page-view-events-calendar .fc-day.fc-today { background-color: rgba(134, 18, 22, .06) !important; }
+body.page-view-events-calendar .fc-today .fc-day-number {
+  background: var(--mh-color-brand-primary);
+  color: #fff;
+  border-radius: 999px;
+  min-width: 1.6rem;
+  height: 1.6rem;
+  line-height: 1.6rem;
+  padding: 0 .35rem;
+  display: inline-block;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* List view: brand-tinted day headings. */
+body.page-view-events-calendar .fc-list-heading-main { color: var(--mh-color-brand-primary); font-weight: 700; }
+
+/* Dark mode. */
+[data-bs-theme="dark"] body.page-view-events-calendar .fc-toolbar .fc-center h2 { color: #f1f1f1; }
+[data-bs-theme="dark"] body.page-view-events-calendar td.fc-today,
+[data-bs-theme="dark"] body.page-view-events-calendar .fc-day.fc-today { background-color: rgba(255, 107, 107, .10) !important; }
+

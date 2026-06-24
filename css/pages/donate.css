@@ -1,0 +1,277 @@
+/* =================================================================== */
+/* === DONATE PAGE — ported from React mockup (src/pages/Donate.js) === */
+/* === All visual styling lives here; the node body holds only       === */
+/* === semantic, class-based markup scoped to .mh-donate.            === */
+/* =================================================================== */
+
+.mh-donate {
+  --mh-donate-red: #861216;
+  --mh-donate-dark: #343a40;
+}
+
+/* The donate page content is full-bleed: cancel the default node padding
+   and let each section manage its own background + container. */
+.page-node-37638 .region-content,
+.page-node-37638 .node--type-page,
+.page-node-37638 main .container > .row > .col,
+.page-node-37638 .node__content { margin: 0; padding: 0; }
+.mh-donate { margin: 0 0 -1.5rem; }
+
+/* Generic section title used across sections */
+.mh-donate .section-title {
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 700;
+  text-transform: none;
+  color: #1a1a1a;
+}
+
+/* ── HERO ─────────────────────────────────────────────────────────── */
+.mh-donate__hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: clamp(450px, 31.25vw, 600px);
+  color: #fff;
+  background-image:
+    linear-gradient(to right,
+      rgba(10, 10, 10, 0.88) 0%,
+      rgba(10, 10, 10, 0.70) 55%,
+      rgba(10, 10, 10, 0.30) 100%),
+    url("../../images/donate-banner.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+.mh-donate__hero-breadcrumb {
+  position: absolute;
+  top: 20px; left: 0; right: 0;
+  z-index: 2;
+}
+/* Breadcrumb styled as a translucent pill so it reads over any part of the
+   banner. White text overrides the theme's red link colour; the home icon
+   (a theme ::before with a baked dark SVG) is swapped for a white one. */
+.mh-donate__hero-breadcrumb .breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 0;
+  padding: .3rem .9rem;
+  font-size: .8rem;
+  background: rgba(0, 0, 0, .42);
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 999px;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+.mh-donate__hero-breadcrumb .breadcrumb-item { display: inline-flex; align-items: center; }
+.mh-donate__hero-breadcrumb .breadcrumb-item a {
+  color: rgba(255, 255, 255, .8) !important;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color .15s ease;
+}
+.mh-donate__hero-breadcrumb .breadcrumb-item a:hover { color: #fff !important; }
+.mh-donate__hero-breadcrumb .breadcrumb-item.active { color: #fff !important; font-weight: 600; }
+.mh-donate__hero-breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+  color: rgba(255, 255, 255, .4);
+  padding: 0 .5rem;
+}
+.mh-donate__hero-breadcrumb .breadcrumb-item:first-child a { display: inline-flex; align-items: center; }
+.mh-donate__hero-breadcrumb .breadcrumb-item:first-child a::before {
+  width: 15px;
+  height: 15px;
+  margin-right: .4rem;
+  background-size: 15px 15px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z'/%3E%3Cpath d='m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z'/%3E%3C/svg%3E") !important;
+}
+.mh-donate__hero-inner { position: relative; z-index: 1; }
+.mh-donate__eyebrow {
+  color: #fff;
+  letter-spacing: .12em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+.mh-donate__hero h1 {
+  color: #fff;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1.25rem;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .5);
+}
+.mh-donate__hero-lead {
+  font-size: 1.15rem;
+  color: rgba(255, 255, 255, .85);
+  max-width: 540px;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+.mh-donate__hero-lead strong { color: #fff; }
+.mh-donate__hero-fade {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, var(--bs-body-bg));
+  pointer-events: none;
+}
+
+/* Buttons */
+.mh-donate .btn-mh-red {
+  background: var(--mh-donate-red);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 16px rgba(134, 18, 22, .5);
+}
+.mh-donate .btn-mh-red:hover { background: #6f0f12; color: #fff; }
+.mh-donate .btn-mh-dark { background: var(--mh-donate-dark); color: #fff; border: none; }
+.mh-donate .btn-mh-dark:hover { background: #23272b; color: #fff; }
+.mh-donate .btn-mh-outline {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, .6);
+}
+.mh-donate .btn-mh-outline:hover { background: rgba(255, 255, 255, .12); color: #fff; }
+
+/* ── IMPACT STATS ─────────────────────────────────────────────────── */
+.mh-donate__stat-num {
+  font-size: 2.4rem;
+  color: var(--mh-donate-red);
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+/* ── GIVING CARDS ─────────────────────────────────────────────────── */
+.mh-donate__give { background: #f8f8f8; }
+.mh-donate__card { border: 0; border-radius: 12px; }
+.mh-donate__card--monthly { border-top: 5px solid var(--mh-donate-red); }
+.mh-donate__card--once { border-top: 5px solid var(--mh-donate-dark); }
+.mh-donate__card-icon {
+  width: 72px; height: 72px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  margin: 0 auto 1.5rem;
+  font-size: 1.8rem;
+}
+.mh-donate__card--monthly .mh-donate__card-icon { background: #f8f0f0; color: var(--mh-donate-red); }
+.mh-donate__card--once .mh-donate__card-icon { background: #f0f0f0; color: var(--mh-donate-dark); }
+.mh-donate__badge {
+  background: var(--mh-donate-red);
+  color: #fff;
+  font-size: 0.75rem;
+  display: inline-block;
+  padding: .35em .65em;
+  border-radius: .375rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* ── 501c3 STATEMENT ──────────────────────────────────────────────── */
+.mh-donate__statement {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 0.92rem;
+}
+.mh-donate__statement .bi { color: var(--mh-donate-red); }
+
+/* ── OTHER WAYS ───────────────────────────────────────────────────── */
+.mh-donate__way {
+  border: 0;
+  border-left: 4px solid transparent;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .08);
+  transition: border-color .2s, transform .15s, box-shadow .15s;
+  height: 100%;
+}
+.mh-donate__way:hover {
+  border-left-color: var(--mh-donate-red);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(134, 18, 22, .12);
+}
+.mh-donate__way h6 { color: var(--mh-donate-dark); }
+.mh-donate__way:hover h6 { color: var(--mh-donate-red); }
+.mh-donate__way-emoji { font-size: 1.8rem; line-height: 1; }
+.mh-donate a.mh-donate__way-link { text-decoration: none; display: block; height: 100%; }
+
+/* ── SPONSORS (dark) ──────────────────────────────────────────────── */
+.mh-donate__sponsors { background: #1a1a1a; }
+.mh-donate__sponsors h2 { font-family: "Roboto Condensed", sans-serif; color: #fff; }
+.mh-donate__sponsors-sub { color: rgba(255, 255, 255, .55); font-size: 0.9rem; }
+.mh-donate__tier {
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: .5rem;
+  height: 100%;
+}
+.mh-donate__tier-name {
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.mh-donate__tier-name--platinum { color: #78716c; }
+.mh-donate__tier-name--gold { color: #b45309; }
+.mh-donate__tier-name--silver { color: #64748b; }
+.mh-donate__tier-name--bronze { color: #92400e; }
+.mh-donate__tier li { color: rgba(255, 255, 255, .75); font-size: 0.85rem; }
+
+/* ── FINAL CTA BAND ───────────────────────────────────────────────── */
+.mh-donate__cta {
+  background: linear-gradient(135deg, var(--mh-donate-red), #5d0c0f);
+  color: #fff;
+  text-align: center;
+}
+.mh-donate__cta h2 { font-family: "Roboto Condensed", sans-serif; font-weight: 700; color: #fff; }
+.mh-donate__cta .lead { color: rgba(255, 255, 255, .9); }
+.mh-donate__cta .btn-light { color: var(--mh-donate-red); font-weight: 700; }
+
+/* ── PAGE INTEGRATION ─────────────────────────────────────────────── */
+/* Hide Drupal's duplicated page title + theme breadcrumb; the hero
+   carries its own title and breadcrumb (matches the mockup). */
+.page-node-37638 .block-page-title-block,
+.page-node-37638 .block-system-breadcrumb-block { display: none; }
+
+/* This is a full-width landing layout: drop the left sidebar (the public
+   menu, already in the top navbar) and let the content column fill the row.
+   Removing the sidebar's 240px offset is what lets the full-bleed breakout
+   below land symmetrically on the viewport. */
+.page-node-37638 #sidebar_first { display: none; }
+.page-node-37638 main#content.main-content {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+/* Full-bleed: break the donate content out of the (now centered) content
+   column so each section spans edge to edge like the mockup. */
+.page-node-37638 { overflow-x: hidden; }
+.page-node-37638 .mh-donate {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+/* Remove the content region's top padding/gap so the hero sits flush under
+   the navbar (kills the blank band), and make the page wrapper transparent
+   so its hardcoded-white background never shows in the side gutters. */
+.page-node-37638 main.main-content { padding-top: 0; }
+.page-node-37638 section.section { padding-top: 0; }
+.page-node-37638 #main-wrapper { background: transparent; }
+
+/* ── DARK MODE ────────────────────────────────────────────────────── */
+/* The theme flips the light section backgrounds to ~#1e1e1e under
+   <html data-bs-theme="dark">. Card headings/body text already go light;
+   recolor the few bits that stay hardcoded-dark so they're legible. */
+[data-bs-theme="dark"] .mh-donate .section-title { color: #f1f1f1; }
+/* The theme sets `[data-bs-theme="dark"] a { color:#ff6b6b !important }`,
+   so button labels need !important to stay white. */
+[data-bs-theme="dark"] .mh-donate a.btn-mh-red,
+[data-bs-theme="dark"] .mh-donate a.btn-mh-dark,
+[data-bs-theme="dark"] .mh-donate a.btn-mh-outline { color: #fff !important; }
+[data-bs-theme="dark"] .mh-donate__stat-num { color: #e8595d; }
+[data-bs-theme="dark"] .mh-donate__way h6 { color: #f1f1f1; }
+[data-bs-theme="dark"] .mh-donate__way:hover h6 { color: #e8595d; }
+[data-bs-theme="dark"] .mh-donate__card-icon { background: rgba(255, 255, 255, .08); }
+[data-bs-theme="dark"] .mh-donate__statement .bi,
+[data-bs-theme="dark"] .mh-donate__card--monthly .mh-donate__card-icon { color: #e8595d; }

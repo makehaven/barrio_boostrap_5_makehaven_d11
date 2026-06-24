@@ -1,0 +1,164 @@
+/* =================================================================== */
+/* === ABOUT PAGE — ported from React mockup (src/pages/About.js)    === */
+/* === Visual styling lives here; the node body holds semantic,      === */
+/* === class-based markup scoped to .mh-about (node 1 / /about-us).   === */
+/* =================================================================== */
+
+.mh-about {
+  --mh-about-red: #861216;
+  --mh-about-red-dark: #6f0f12;
+  --mh-about-dark: #1a1a1a;
+}
+
+/* Generic section title (red underline) — matches the mockup's App.css. */
+.mh-about .section-title {
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+.mh-about .section-title::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 4px;
+  background: var(--mh-about-red);
+  margin: 0.5rem auto 0;
+}
+/* Left-aligned variant: underline hugs the left edge. */
+.mh-about .section-title.text-start::after { margin-left: 0; margin-right: auto; }
+
+/* Brand button (Get Directions). */
+.mh-about .btn-mh-red {
+  background: var(--mh-about-red);
+  border-color: var(--mh-about-red);
+  color: #fff;
+}
+.mh-about .btn-mh-red:hover,
+.mh-about .btn-mh-red:focus {
+  background: var(--mh-about-red-dark);
+  border-color: var(--mh-about-red-dark);
+  color: #fff;
+}
+
+/* Red icon / red text helpers. */
+.mh-about__ico { color: var(--mh-about-red); }
+.mh-about__size { color: var(--mh-about-red); }
+
+/* ── PAGE HEADER BANNER ──────────────────────────────────────────── */
+.mh-about__banner {
+  background: linear-gradient(135deg, var(--mh-about-red) 0%, #4a0a0c 100%);
+  color: #fff;
+  padding: 3.5rem 0 2.5rem;
+}
+.mh-about__title {
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 700;
+  margin-bottom: 0;
+  color: #fff;
+}
+/* Breadcrumb as a translucent black pill (matches Donate), vertically centered. */
+.mh-about__crumb {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 0;
+  padding: .3rem .9rem;
+  font-size: .8rem;
+  background: rgba(0, 0, 0, .42);
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 999px;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+.mh-about__crumb .breadcrumb-item { display: inline-flex; align-items: center; }
+.mh-about__crumb .breadcrumb-item a { color: rgba(255, 255, 255, .8) !important; text-decoration: none; font-weight: 500; }
+.mh-about__crumb .breadcrumb-item a:hover { color: #fff !important; }
+.mh-about__crumb .breadcrumb-item.active { color: #fff !important; font-weight: 600; }
+.mh-about__crumb .breadcrumb-item + .breadcrumb-item::before { color: rgba(255, 255, 255, .4); padding: 0 .5rem; }
+.mh-about__crumb .breadcrumb-item:first-child a::before {
+  width: 15px; height: 15px; margin-right: .4rem;
+  background-size: 15px 15px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z'/%3E%3Cpath d='m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z'/%3E%3C/svg%3E") !important;
+}
+
+/* ── CONTACT CARD (dark) ─────────────────────────────────────────── */
+.mh-about__contact { background: var(--mh-about-dark); color: #fff; }
+.mh-about__contact-head { color: var(--mh-about-red); }
+.mh-about__contact .mh-about__contact-link { color: #fff; text-decoration: none; }
+.mh-about__contact .mh-about__contact-link:hover { color: #fff; text-decoration: underline; }
+
+/* ── MISSION & VISION ────────────────────────────────────────────── */
+.mh-about__mv { border-left: 5px solid var(--mh-about-red); }
+.mh-about__mv h4 { color: var(--mh-about-red); }
+
+/* ── PRINCIPLE CARDS ─────────────────────────────────────────────── */
+.mh-about .principle-card { border-left: 4px solid var(--mh-about-red); }
+.mh-about .principle-card .card-title { color: var(--mh-about-red); }
+
+/* ── FACILITY / ACTIVITIES PANELS ────────────────────────────────── */
+.mh-about__panel { background: #f8f8f8; }
+.mh-about__panel-head { color: var(--mh-about-red); }
+
+/* ── PARTNERS ────────────────────────────────────────────────────── */
+.mh-about__partner {
+  display: inline-block;
+  border: 1px solid #ccc;
+  color: #666;
+  font-weight: 400;
+  border-radius: .375rem;
+  padding: .5rem 1rem;
+  font-size: 1rem;
+}
+
+/* ── FINAL CTA BAND ──────────────────────────────────────────────── */
+.mh-about__cta {
+  background: var(--mh-about-red);
+  color: #fff;
+  text-align: center;
+}
+.mh-about__cta h2 { font-family: "Roboto Condensed", sans-serif; font-weight: 700; color: #fff; }
+.mh-about__cta .lead { color: rgba(255, 255, 255, .9); }
+.mh-about__cta-join { color: var(--mh-about-red); }
+
+/* ── PAGE INTEGRATION ────────────────────────────────────────────── */
+/* The hero banner carries its own title + breadcrumb (matches the mockup),
+   so hide Drupal's duplicated title and theme breadcrumb blocks. */
+.page-node-1 .block-page-title-block,
+.page-node-1 .block-system-breadcrumb-block { display: none; }
+
+/* Full-width landing layout: drop the left sidebar and let content fill. */
+.page-node-1 #sidebar_first { display: none; }
+.page-node-1 main#content.main-content { flex: 0 0 100%; max-width: 100%; }
+
+/* Full-bleed: break the about content edge-to-edge like the mockup. */
+.page-node-1 { overflow-x: hidden; }
+.page-node-1 .mh-about {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+/* Hero sits flush under the navbar; kill the content region's top gap. */
+.page-node-1 main.main-content { padding-top: 0; }
+.page-node-1 section.section { padding-top: 0; }
+.page-node-1 #main-wrapper { background: transparent; }
+
+/* ── DARK MODE ───────────────────────────────────────────────────── */
+/* The theme flips light section backgrounds to ~#1e1e1e under
+   [data-bs-theme="dark"]; recolor the bits that stay hardcoded. */
+[data-bs-theme="dark"] .mh-about .section-title { color: #f1f1f1; }
+[data-bs-theme="dark"] .mh-about__ico,
+[data-bs-theme="dark"] .mh-about__size,
+[data-bs-theme="dark"] .mh-about__contact-head,
+[data-bs-theme="dark"] .mh-about__mv h4,
+[data-bs-theme="dark"] .mh-about .principle-card .card-title,
+[data-bs-theme="dark"] .mh-about__panel-head { color: #e8595d; }
+/* Theme sets `[data-bs-theme="dark"] a { color:#ff6b6b !important }`,
+   so button labels need !important to stay readable. */
+[data-bs-theme="dark"] .mh-about a.btn-mh-red { color: #fff !important; }
+[data-bs-theme="dark"] .mh-about a.mh-about__cta-join { color: var(--mh-about-red) !important; }
+[data-bs-theme="dark"] .mh-about__contact .mh-about__contact-link { color: #fff !important; }
+/* Keep the CTA band red (it would otherwise flip to #1e1e1e). */
+[data-bs-theme="dark"] .mh-about__cta { background: var(--mh-about-red) !important; }
+[data-bs-theme="dark"] .mh-about__banner { background: linear-gradient(135deg, var(--mh-about-red) 0%, #4a0a0c 100%) !important; }
+[data-bs-theme="dark"] .mh-about__contact { background: var(--mh-about-dark) !important; }

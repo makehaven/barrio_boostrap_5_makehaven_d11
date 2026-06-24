@@ -1,0 +1,20 @@
+/* === WORK PAGE (node 413) — ported from src/pages/Work.js ==========
+   Uses the shared .mh-page system. Dark banner + red-edged job cards. */
+
+.mh-work__title {
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 3rem;
+  color: #fff;
+}
+.mh-work__job { border-left: 5px solid var(--mh-red); }
+
+/* ── PAGE INTEGRATION ───────────────────────────────────────────── */
+.page-node-413 .block-page-title-block,
+.page-node-413 .block-system-breadcrumb-block,
+.page-node-413 #sidebar_first { display: none; }
+.page-node-413 main#content.main-content { flex: 0 0 100%; max-width: 100%; }
+.page-node-413 { overflow-x: hidden; }
+.page-node-413 main.main-content { padding-top: 0; }
+.page-node-413 section.section { padding-top: 0; }
+.page-node-413 #main-wrapper { background: transparent; }

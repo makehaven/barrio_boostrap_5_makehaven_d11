@@ -1,12 +1,14 @@
 global-styling:
-  version: VERSION
+  version: '1.2.5'
   js:
+    js/jquery-compat.js: { weight: -100 }
     js/global.js: {}
     js/sidebar-menu-fix.js: {}
-    js/mobile-nav.js: {}
     js/events-info-hero.js: {}
     js/interest-hierarchy.js: {}
     js/badges.js: {}
+    js/theme-toggle.js: {}
+    js/quicksearch.js: {}
   css:
     base:
       css/base/tokens.css: {}
@@ -62,6 +64,24 @@ global-styling:
       css/pages/makerspace-dashboard.css: {}
       css/colors.css: {}
       css/pages/events-modern.css: {}
+      css/pages/donate.css: {}
+      css/pages/mockup-pages.css: {}
+      css/pages/about.css: {}
+      css/pages/team.css: {}
+      css/pages/work.css: {}
+      css/pages/faq.css: {}
+      css/pages/programs.css: {}
+      css/pages/gems.css: {}
+      css/pages/teambuild.css: {}
+      css/pages/teachworkshop.css: {}
+      css/pages/membership.css: {}
+      css/pages/visit.css: {}
+      css/pages/workspace.css: {}
+      css/pages/resources.css: {}
+      css/pages/sponsors.css: {}
+      css/pages/financial.css: {}
+      css/pages/rooms.css: {}
+      css/mockup-port.css: {}
   dependencies: # Ensure it loads after Bootstrap and jQuery
     - core/jquery
     - core/popperjs

@@ -1,0 +1,14 @@
+/* === PROGRAMS PAGE (node 4436) — ported from src/pages/Programs.js === */
+
+.mh-prog__intro { max-width: 680px; margin: 0 auto; }
+.mh-prog__feature { border-left: 5px solid var(--mh-red); }
+
+/* ── PAGE INTEGRATION ───────────────────────────────────────────── */
+.page-node-4436 .block-page-title-block,
+.page-node-4436 .block-system-breadcrumb-block,
+.page-node-4436 #sidebar_first { display: none; }
+.page-node-4436 main#content.main-content { flex: 0 0 100%; max-width: 100%; }
+.page-node-4436 { overflow-x: hidden; }
+.page-node-4436 main.main-content { padding-top: 0; }
+.page-node-4436 section.section { padding-top: 0; }
+.page-node-4436 #main-wrapper { background: transparent; }

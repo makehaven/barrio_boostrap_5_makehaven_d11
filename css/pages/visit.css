@@ -1,0 +1,11 @@
+/* === VISIT PAGE (node 8205) — from src/pages/Visit.js ============== */
+
+/* ── PAGE INTEGRATION ───────────────────────────────────────────── */
+.page-node-8205 .block-page-title-block,
+.page-node-8205 .block-system-breadcrumb-block,
+.page-node-8205 #sidebar_first { display: none; }
+.page-node-8205 main#content.main-content { flex: 0 0 100%; max-width: 100%; }
+.page-node-8205 { overflow-x: hidden; }
+.page-node-8205 main.main-content { padding-top: 0; }
+.page-node-8205 section.section { padding-top: 0; }
+.page-node-8205 #main-wrapper { background: transparent; }

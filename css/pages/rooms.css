@@ -1,0 +1,113 @@
+/* === BANNER PAGES ==================================================
+   Body class .mh-banner-page (set in the theme) for View pages + special
+   nodes that can't carry the mockup's node-body markup but should still match
+   the ported pages: Rooms / Member Businesses / Blog views, Room/Zone item
+   nodes, and the Instructor Interest webform. The page-title block becomes a
+   full-bleed red banner with the breadcrumb pill injected into it (see
+   THEME_preprocess_block); View pages also get a constrained container and
+   per-view card grids. ================================================ */
+
+.mh-banner-page { --mh-red: #861216; --mh-red-dark: #6f0f12; }
+
+/* Standalone theme breadcrumb hidden — the pill is injected into the title block. */
+.mh-banner-page .block-system-breadcrumb-block { display: none; }
+
+/* Full-width: drop any sidebar. */
+.mh-banner-page #sidebar_first { display: none; }
+.mh-banner-page main#content.main-content { flex: 0 0 100%; max-width: 100%; }
+.mh-banner-page { overflow-x: hidden; }
+
+/* Pull the banner flush under the header — kill the top padding/margin the
+   theme puts on the content wrappers so there's no white gap above it. */
+.mh-banner-page #main-wrapper,
+.mh-banner-page #main,
+.mh-banner-page .row,
+.mh-banner-page main.main-content,
+.mh-banner-page section.section,
+.mh-banner-page .region-content { padding-top: 0 !important; margin-top: 0 !important; }
+.mh-banner-page #main-wrapper { background: transparent; }
+
+/* ── BANNER: the page-title block (now also holding the injected pill) ── */
+.mh-banner-page .block-page-title-block {
+  background: linear-gradient(135deg, var(--mh-red) 0%, #4a0a0c 100%);
+  color: #fff;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  margin: 0 -50vw 2.5rem;     /* top, left/right (full-bleed), bottom */
+  padding: 2.5rem 0;
+}
+.mh-banner-page .block-page-title-block .content {
+  display: block;                        /* defeat the theme's flex on .content */
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 1.5rem);
+  text-align: left;
+}
+.mh-banner-page .block-page-title-block .mh-rooms-crumb { display: block; margin: 0 0 1rem; }
+.mh-banner-page .block-page-title-block .title {
+  color: #fff;
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 700;
+  margin: 0;
+  text-align: left;
+}
+/* Subtitle only on the Rooms listing. */
+.path-rooms .block-page-title-block .title::after {
+  content: "Explore the specialized zones and shops inside our makerspace.";
+  display: block;
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, .8);
+  margin-top: .4rem;
+}
+
+/* Constrain View content to the banner width. */
+.mh-banner-page .views-element-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 1.5rem) 3rem;
+}
+/* ── ROOM CARDS (restyle the rooms bootstrap-table into a grid) ────── */
+.path-rooms .view-rooms table { display: block; width: 100%; border: 0; margin: 0; }
+.path-rooms .view-rooms thead { display: none; }
+.path-rooms .view-rooms tbody {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 1.5rem;
+  border: 0;
+}
+.path-rooms .view-rooms tr {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--mh-color-border, #e5e5e5);
+  border-top: 4px solid var(--mh-red);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(30, 31, 36, .08);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.path-rooms .view-rooms tr:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(134, 18, 22, .15); }
+.path-rooms .view-rooms td { display: block; border: 0; padding: 0; }
+.path-rooms .view-rooms .views-field-nothing { display: none; }
+.path-rooms .views-field-title h1 { display: flex; flex-direction: column; margin: 0; font-size: 1rem; }
+.path-rooms .views-field-title br { display: none; }
+.path-rooms .views-field-title img { order: -1; width: 100%; height: 200px; object-fit: cover; }
+.path-rooms .views-field-title a {
+  padding: 1rem 1.25rem 1.25rem;
+  color: var(--mh-red);
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+.path-rooms .views-field-title a:hover { color: var(--mh-red-dark); text-decoration: underline; }
+
+/* ── DARK MODE ───────────────────────────────────────────────────── */
+[data-bs-theme="dark"] .path-rooms .view-rooms tr { background: #1e1e1e; border-color: rgba(255, 255, 255, .08); }
+[data-bs-theme="dark"] .path-rooms .views-field-title a { color: #e8595d; }
+[data-bs-theme="dark"] .mh-banner-page .block-page-title-block {
+  background: linear-gradient(135deg, var(--mh-red) 0%, #4a0a0c 100%);
+}

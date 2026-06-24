@@ -587,3 +587,188 @@ function barrio_boostrap_5_makehaven_d11_preprocess_views_view(array &$variables
   $variables['header'] = ['calendar_legend' => $legend] + ($variables['header'] ?? []);
 }
 
+/**
+ * The item_category term IDs that mark an item node as a Room/Zone.
+ * @see /rooms view (views.view.rooms) filter.
+ */
+const BARRIO_MH_ROOM_CATEGORY_TIDS = [472, 2341];
+
+/**
+ * Whether the given node is a Room/Zone (so it belongs under /rooms).
+ */
+function _barrio_boostrap_5_makehaven_d11_is_room(?NodeInterface $node): bool {
+  if (!$node instanceof NodeInterface || $node->bundle() !== 'item' || !$node->hasField('field_item_category')) {
+    return FALSE;
+  }
+  $tids = array_column($node->get('field_item_category')->getValue(), 'target_id');
+  return (bool) array_intersect($tids, BARRIO_MH_ROOM_CATEGORY_TIDS);
+}
+
+/**
+ * Build the breadcrumb trail for a "banner page".
+ *
+ * Banner pages are View pages and special nodes that can't carry the mockup's
+ * node-body markup, but should still get a full-bleed red banner with the
+ * breadcrumb pill injected into the page-title block (see
+ * THEME_preprocess_block + css/pages/rooms.css). Covers: Rooms / Member
+ * Businesses / Blog views, Room/Zone item nodes, and the Instructor Interest
+ * webform. Views are matched by route name (stable across environments); the
+ * node cases use ids/categories that are stable because the dev DB shares the
+ * production lineage.
+ *
+ * @return array|null
+ *   List of [text, url|null] pairs (last entry = current page, no url), or NULL.
+ */
+function _barrio_boostrap_5_makehaven_d11_mh_banner_crumb(): ?array {
+  $route_match = \Drupal::routeMatch();
+  $membership = '/membership-information-members';
+  $programming = '/programs';
+  $resources = '/resources';
+
+  // CiviCRM event INFO pages (any event). All /civicrm/* paths share one
+  // route, so match by path. The event title shows in the banner heading;
+  // the pill links back to the events listing.
+  if (strpos(\Drupal::service('path.current')->getPath(), '/civicrm/event/info') === 0) {
+    return [['Home', '/'], ['Events', '/events'], ['Event Details', NULL]];
+  }
+
+  // View pages, keyed by route name (stable across environments). Value is the
+  // trail AFTER Home: [..parents.., [current page, NULL]].
+  $views = [
+    'view.rooms.page_1'                 => [['Rooms', NULL]],
+    'view.businesses.incubating'        => [['About', '/about-us'], ['Member Businesses', NULL]],
+    'view.blog.page_1'                  => [['About', '/about-us'], ['Blog', NULL]],
+    'view.event_set.all_upcoming'       => [['Programming', $programming], ['Upcoming Events', NULL]],
+    'view.events_calendar.page_3'       => [['Programming', $programming], ['Calendar', NULL]],
+    'view.public_course_catalog.page_1' => [['Programming', $programming], ['Workshops', NULL]],
+    // Resources tab. /equipment 301s to /rooms/zones/equipment; both hit this
+    // view route. /business/products is a custom controller route (not a view)
+    // but matches here the same way since it renders a page-title block.
+    'view.equipment.page_1'                     => [['Resources', $resources], ['Equipment', NULL]],
+    'view.library_tool_directory.library_list'  => [['Resources', $resources], ['Lending Library', NULL]],
+    'view.resources.page_2'                     => [['Resources', $resources], ['Suppliers & Resources', NULL]],
+    'view.projects.page_1'                      => [['Resources', $resources], ['Projects', NULL]],
+    'makerspace_business_visibility.products'   => [['Resources', $resources], ['Shop Local Makers', NULL]],
+  ];
+  $route = $route_match->getRouteName();
+  if (isset($views[$route])) {
+    return array_merge([['Home', '/']], $views[$route]);
+  }
+
+  $node = $route_match->getParameter('node');
+  if (!$node instanceof NodeInterface) {
+    return NULL;
+  }
+
+  // Room / Zone item node → Home / Rooms / {title}.
+  if (_barrio_boostrap_5_makehaven_d11_is_room($node)) {
+    return [['Home', '/'], ['Rooms', '/rooms'], [$node->label(), NULL]];
+  }
+  // Any blog post → Home / About / Blog / {title}.
+  if ($node->bundle() === 'blog') {
+    return [['Home', '/'], ['About', '/about-us'], ['Blog', '/blog'], [$node->label(), NULL]];
+  }
+  // Any library tool detail → Home / Resources / Lending Library / {title}.
+  if ($node->bundle() === 'library_item') {
+    return [['Home', '/'], ['Resources', $resources], ['Lending Library', '/library'], [$node->label(), NULL]];
+  }
+
+  // Section landing pages whose own title IS the section → 2-level crumb
+  // (Home / {section}) with no self-link.
+  $section_landings = [
+    619 => 'Resources',                          // /resources tab landing.
+  ];
+  $section_id = (int) $node->id();
+  if (isset($section_landings[$section_id])) {
+    return [['Home', '/'], [$section_landings[$section_id], NULL]];
+  }
+
+  // Specific nodes → [parent label, parent url]. IDs are stable because the dev
+  // DB shares the production lineage.
+  $node_parents = [
+    14366 => ['About', '/about-us'],            // Instructor Interest webform.
+    41379 => ['Membership', $membership],        // Membership Agreement.
+    332   => ['Membership', $membership],         // Gift a Membership.
+    707   => ['Membership', $membership],         // Membership Overview (landing).
+    14254 => ['Programming', $programming],       // Private Classes webform.
+    16200 => ['Programming', $programming],       // Event Gift Card.
+    3143  => ['Resources', $resources],           // Room Rentals webform.
+    // NB: /workspace (node 3890) is intentionally NOT here — it's a ported
+    // mockup landing that carries its own banner in node-body markup and hides
+    // the theme page-title block via css/pages/workspace.css.
+  ];
+  $id = (int) $node->id();
+  if (isset($node_parents[$id])) {
+    return [['Home', '/'], $node_parents[$id], [$node->label(), NULL]];
+  }
+  return NULL;
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for breadcrumb.
+ *
+ * Sets a sensible trail on banner pages. (The standalone breadcrumb block is
+ * hidden via CSS — the visible pill is injected in preprocess_block — but this
+ * keeps the breadcrumb data correct for accessibility / other render contexts.)
+ */
+function barrio_boostrap_5_makehaven_d11_preprocess_breadcrumb(&$variables) {
+  $crumb = _barrio_boostrap_5_makehaven_d11_mh_banner_crumb();
+  if (!$crumb) {
+    return;
+  }
+  $links = [];
+  $last = count($crumb) - 1;
+  foreach ($crumb as $i => [$text, $url]) {
+    $item = ['text' => $text];
+    if ($url !== NULL && $i !== $last) {
+      $item['url'] = $url;
+    }
+    $links[] = $item;
+  }
+  $variables['breadcrumb'] = $links;
+  $variables['#cache']['contexts'][] = 'url.path';
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for html.
+ *
+ * Adds the .mh-banner-page body class on banner pages so the banner +
+ * breadcrumb-pill styling (css/pages/rooms.css) can scope to them.
+ */
+function barrio_boostrap_5_makehaven_d11_preprocess_html(&$variables) {
+  if (_barrio_boostrap_5_makehaven_d11_mh_banner_crumb() !== NULL) {
+    $variables['attributes']['class'][] = 'mh-banner-page';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for block.
+ *
+ * On banner pages, inject the breadcrumb pill into the page-title block so the
+ * pill and heading render as one contiguous banner (the standalone theme
+ * breadcrumb block is hidden via CSS). Reuses the .mh-page__crumb pill style.
+ */
+function barrio_boostrap_5_makehaven_d11_preprocess_block(&$variables) {
+  if (($variables['plugin_id'] ?? '') !== 'page_title_block') {
+    return;
+  }
+  $crumb = _barrio_boostrap_5_makehaven_d11_mh_banner_crumb();
+  if (!$crumb) {
+    return;
+  }
+  $last = count($crumb) - 1;
+  $items = '';
+  foreach ($crumb as $i => [$text, $url]) {
+    $text = \Drupal\Component\Utility\Html::escape($text);
+    if ($url !== NULL && $i !== $last) {
+      $items .= '<li class="breadcrumb-item"><a href="' . \Drupal\Component\Utility\Html::escape($url) . '">' . $text . '</a></li>';
+    }
+    else {
+      $items .= '<li class="breadcrumb-item active" aria-current="page">' . $text . '</li>';
+    }
+  }
+  $html = '<nav aria-label="breadcrumb" class="mh-rooms-crumb"><ol class="breadcrumb mh-page__crumb">' . $items . '</ol></nav>';
+  $variables['content']['#prefix'] = $html . ($variables['content']['#prefix'] ?? '');
+  $variables['#cache']['contexts'][] = 'url.path';
+}
+

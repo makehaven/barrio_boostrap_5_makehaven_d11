@@ -1,0 +1,23 @@
+/* === SPONSORS PAGE (node 3703) — from src/pages/Sponsors.js ======== */
+
+.mh-sponsors__title { font-family: "Roboto Condensed", sans-serif; font-weight: 700; font-size: 3rem; color: #fff; }
+.mh-sponsors__logo { max-height: 80px; object-fit: contain; }
+.mh-sponsors__level { letter-spacing: .05em; }
+.mh-sponsors__chk { font-size: .8rem; }
+.mh-sponsors__cta { max-width: 800px; }
+.mh-sponsors__cta-text { color: rgba(255, 255, 255, .7); }
+.mh-sponsors__cta-note { color: rgba(255, 255, 255, .5); }
+
+/* Keep tier headers + logo tiles on their intended light backgrounds in dark mode. */
+[data-bs-theme="dark"] .mh-sponsors .card-body.bg-light { background: #f3f3f3 !important; }
+[data-bs-theme="dark"] .mh-sponsors .card-body.bg-light .bg-white { background: #fff !important; }
+
+/* ── PAGE INTEGRATION ───────────────────────────────────────────── */
+.page-node-3703 .block-page-title-block,
+.page-node-3703 .block-system-breadcrumb-block,
+.page-node-3703 #sidebar_first { display: none; }
+.page-node-3703 main#content.main-content { flex: 0 0 100%; max-width: 100%; }
+.page-node-3703 { overflow-x: hidden; }
+.page-node-3703 main.main-content { padding-top: 0; }
+.page-node-3703 section.section { padding-top: 0; }
+.page-node-3703 #main-wrapper { background: transparent; }

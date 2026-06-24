@@ -34,6 +34,30 @@ body.page-view-event-set .view-event-set .view-filters .d-flex.flex-wrap {
   margin: 0;
 }
 
+/* The view header is empty on the listing displays — drop the stray empty card. */
+body.page-view-event-set .view-event-set .view-header { display: none; }
+
+/* Exposed filter: keep the field + Apply on one tidy, vertically-centered row.
+   (Without this the labelled select sits lower than the unlabelled button.) */
+body.page-view-event-set .view-event-set .view-filters .d-flex.flex-wrap {
+  align-items: center;
+  gap: .6rem 1rem;
+}
+body.page-view-event-set .view-event-set .view-filters .form-item,
+body.page-view-event-set .view-event-set .view-filters .form-actions {
+  margin: 0;
+}
+/* Apply button: match the select's height and use the brand red. */
+body.page-view-event-set .view-event-set .view-filters .form-actions .btn {
+  padding: .5rem 1.25rem;
+  background: var(--mh-color-brand-primary, #861216);
+  border-color: var(--mh-color-brand-primary, #861216);
+}
+body.page-view-event-set .view-event-set .view-filters .form-actions .btn:hover {
+  background: #6f0f12;
+  border-color: #6f0f12;
+}
+
 body.page-view-event-set .view-event-set .view-content > .row {
   --bs-gutter-x: 0;
   --bs-gutter-y: 0;
@@ -1590,3 +1614,59 @@ body.page-civicrm-event-info .view-event-information-bar.view-display-id-event_i
   line-height: 1.2;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
+
+/* ===================================================================
+ * Event INFO page — tidy the lower sections (Instructor/Areas, Notices,
+ * Accessibility, price-adjustment cards). They were stretched full-width
+ * and sparse; constrain to a readable centered column and give the cards a
+ * consistent brand-accented look. (The banner still full-bleeds out of this.)
+ * =================================================================== */
+
+/* Readable centered column for all the event-info content. */
+body.page-civicrm-event-info main#content.main-content {
+  max-width: 1000px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Section cards (Notices, Accessibility, Need-based price adjustment). */
+body.page-civicrm-event-info .card {
+  border: 1px solid var(--mh-color-border, #e5e7eb);
+  border-radius: 12px;
+  box-shadow: var(--mh-shadow-xs, 0 1px 3px rgba(0, 0, 0, .06));
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+}
+body.page-civicrm-event-info .card-header {
+  background: var(--mh-color-surface-muted, #f6f7f8);
+  border-bottom: 1px solid var(--mh-color-border, #e5e7eb);
+  border-left: 4px solid var(--mh-color-brand-primary, #861216);
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: #1a1a1a;
+  font-size: 1rem;
+  padding: .7rem 1rem;
+}
+body.page-civicrm-event-info .card-body { padding: 1rem 1.15rem; line-height: 1.6; }
+body.page-civicrm-event-info .card-body a { color: var(--mh-color-brand-primary, #861216); }
+
+/* Instructor / Areas block: left-align (it was centered) + tidy heading. */
+body.page-civicrm-event-info .block-views-blockevent-instructor-event-instructor,
+body.page-civicrm-event-info .view-id-event_instructor,
+body.page-civicrm-event-info .view-id-event_instructor .views-field,
+body.page-civicrm-event-info .view-id-event_instructor .views-field-nothing {
+  text-align: left !important;
+  margin-left: 0 !important;
+}
+body.page-civicrm-event-info .block-views-blockevent-instructor-event-instructor { margin-bottom: 1.25rem; }
+body.page-civicrm-event-info .block-views-blockevent-instructor-event-instructor h2 {
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #1a1a1a;
+  margin: 0 0 .35rem;
+}
+/* Hide the instructor block entirely if it has no value (avoids a lone heading). */
+body.page-civicrm-event-info .view-id-event_instructor .view-content:has(.views-field-nothing:only-child:empty) { display: none; }

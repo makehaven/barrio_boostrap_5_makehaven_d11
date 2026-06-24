@@ -1,0 +1,14 @@
+/* === TEAM-BUILDING PAGE (node 27700) — from src/pages/Teambuild.js = */
+
+.mh-teambuild__cta { max-width: 800px; }
+.mh-teambuild__cta-text { color: rgba(255, 255, 255, .7); }
+
+/* ── PAGE INTEGRATION ───────────────────────────────────────────── */
+.page-node-27700 .block-page-title-block,
+.page-node-27700 .block-system-breadcrumb-block,
+.page-node-27700 #sidebar_first { display: none; }
+.page-node-27700 main#content.main-content { flex: 0 0 100%; max-width: 100%; }
+.page-node-27700 { overflow-x: hidden; }
+.page-node-27700 main.main-content { padding-top: 0; }
+.page-node-27700 section.section { padding-top: 0; }
+.page-node-27700 #main-wrapper { background: transparent; }

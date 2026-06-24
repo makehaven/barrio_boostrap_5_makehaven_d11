@@ -1,0 +1,54 @@
+/* === FINANCIAL INFORMATION (node 13706) — /990-tax-forms-... ========
+   No React mockup; built in the shared .mh-page system. */
+
+.mh-fin__intro { max-width: 760px; margin: 0 auto; }
+
+/* Give the data table extra room on this page so all 10 columns fit
+   without horizontal scrolling on typical desktop widths. */
+.mh-fin > .container { max-width: 1400px; }
+
+/* Table: brand-red header, striped, hover. Compact so it fits unscrolled. */
+.mh-fin__table { margin-bottom: 0; font-size: .85rem; }
+.mh-fin__table thead th {
+  background: var(--mh-red);
+  color: #fff;
+  border: 0;
+  white-space: normal;          /* let multi-word headers wrap (narrower cols) */
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  padding: .6rem .5rem;
+  vertical-align: bottom;
+}
+.mh-fin__table tbody td { padding: .5rem; white-space: nowrap; vertical-align: middle; }
+.mh-fin__table tbody td:first-child,
+.mh-fin__table thead th:first-child { padding-left: .85rem; }
+.mh-fin__year { color: var(--mh-red); }
+.mh-fin__link { color: var(--mh-red); text-decoration: none; font-weight: 600; white-space: nowrap; }
+.mh-fin__link:hover { color: var(--mh-red-dark); text-decoration: underline; }
+.mh-fin__note { max-width: 900px; margin: 1rem auto 0; }
+
+/* Sticky first column (Year) so it stays visible while scrolling wide data. */
+.mh-fin__table thead th:first-child,
+.mh-fin__table tbody td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+.mh-fin__table tbody td:first-child { background: #fff; }
+.mh-fin__table thead th:first-child { background: var(--mh-red); z-index: 2; }
+
+/* Dark mode */
+[data-bs-theme="dark"] .mh-fin__table tbody td:first-child { background: #1e1e1e; }
+[data-bs-theme="dark"] .mh-fin__year,
+[data-bs-theme="dark"] .mh-fin__link { color: #e8595d; }
+
+/* ── PAGE INTEGRATION ───────────────────────────────────────────── */
+.page-node-13706 .block-page-title-block,
+.page-node-13706 .block-system-breadcrumb-block,
+.page-node-13706 #sidebar_first { display: none; }
+.page-node-13706 main#content.main-content { flex: 0 0 100%; max-width: 100%; }
+.page-node-13706 { overflow-x: hidden; }
+.page-node-13706 main.main-content { padding-top: 0; }
+.page-node-13706 section.section { padding-top: 0; }
+.page-node-13706 #main-wrapper { background: transparent; }
