@@ -277,20 +277,12 @@ header#header #navbar-main {
   to   { opacity: 1; transform: none; }
 }
 
-/* =================== TEMP LOGO WORDMARK ========================== */
-/* Real logo image isn't in the package yet — show a clean wordmark
-   instead of the broken "Home" image. REMOVE once the logo lands. */
-#navbar-main .navbar-brand img { display: none !important; }
-#navbar-main .navbar-brand::after {
-  content: "MakeHaven";
-  font-family: 'Roboto Condensed', var(--mh-font-sans);
-  font-weight: 700;
-  font-size: 1.7rem;
-  letter-spacing: .5px;
-  text-transform: uppercase;
-  color: var(--mh-color-brand-primary);
-}
-[data-bs-theme="dark"] #navbar-main .navbar-brand::after { color: #ff6b6b; }
+/* =================== LOGO ========================================
+   Temp wordmark + img content-swap (below) removed: together they
+   forced a fixed height (46px) against a max-width (230px) clamp,
+   which squished the logo on real pages. The configured site logo
+   (mh_logo_0.png) now renders proportionally via header.css
+   (.navbar-brand img). */
 
 /* =================== NAVBAR REDO (full-width, no boxiness) ======= */
 /* The red utility strip was a centered ~1000px band, leaving boxy gaps
@@ -353,23 +345,13 @@ nav#navbar-top .menu--account .nav-link:hover {
 .path-frontpage div[id$="fronttoolstomakeanything"] .service-content { border-radius: 16px !important; }
 [data-bs-theme="dark"] .path-frontpage div[id$="fronttoolstomakeanything"] .service p { color: rgba(255, 255, 255, .7) !important; }
 
-/* === REAL LOGO (replaces the temp wordmark) === */
-#navbar-main .navbar-brand::after {
-  content: "" !important;
-  width: 210px;
-  height: 46px;
-  background: url('../images/makehaven-logo.jpg') left center / contain no-repeat;
-}
+/* REAL LOGO (::after background) removed — see the LOGO note above. It
+   would otherwise double up with the real <img> now that the v2 img-swap
+   that cancelled it is gone. header.css owns logo sizing. */
 
-/* === REAL LOGO v2 (robust: swap the <img> itself) === */
-#navbar-main .navbar-brand img {
-  display: inline-block !important;
-  content: url('../images/makehaven-logo.jpg') !important;
-  height: 46px !important;
-  width: auto !important;
-  max-width: 230px !important;
-}
-#navbar-main .navbar-brand::after { content: none !important; }
+/* REAL LOGO v2 removed — see the LOGO note above. header.css now owns
+   logo sizing (proportional, max-width 300px desktop / max-height 40px
+   mobile). */
 
 /* === DROPDOWN HOVER FIX (desktop) === */
 @media (min-width: 992px) {
@@ -656,9 +638,9 @@ nav#navbar-top .menu--account .nav-link:hover {
     justify-content: flex-start;
   }
 
-  /* Header bars: tidy logo + hamburger. */
+  /* Header bars: tidy logo + hamburger. (Logo height left to header.css
+     so the aspect ratio is preserved — see the LOGO note above.) */
   header#header #navbar-main { min-height: 56px; }
-  #navbar-main .navbar-brand img { height: 38px !important; }
   #navbar-main .navbar-toggler { padding: .3rem .55rem; border-color: rgba(0, 0, 0, .18); }
 
   /* Top utility strip: let search + login wrap and center instead of cramming. */

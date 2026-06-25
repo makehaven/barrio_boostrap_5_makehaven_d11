@@ -6,6 +6,15 @@
     margin: 0 auto; /* Center the image horizontally */
 }
 
+/* Linked images in body copy (social-icon rows, inline badges) are inline
+   elements, not standalone figures — keep them on one line instead of
+   stacking each as a centered block. */
+.field--name-body a img,
+.field--type-text-with-summary a img {
+    display: inline-block;
+    margin: 0;
+}
+
 /** two column layout images **/
 
 .group-left img {
