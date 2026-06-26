@@ -13,8 +13,11 @@
   pointer-events: auto;
   border: 0;
   border-radius: 16px 0 0 16px;
-  background: #8b1919;
-  color: #fff;
+  /* Amber (warning token), not brand red, so the floating feedback tab is
+     not mistaken for the red Save/Confirm buttons (member report 2026-06-21).
+     Dark ink text keeps contrast accessible on the light amber. */
+  background: var(--mh-color-warning, #ffb347);
+  color: var(--mh-color-neutral-900, #1e1f24);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
   padding: 0.9rem 0.7rem;
   writing-mode: vertical-rl;
@@ -27,7 +30,7 @@
 
 .mh-feedback-toggle:hover,
 .mh-feedback-toggle:focus-visible {
-  background: #bc3030;
+  background: color-mix(in srgb, var(--mh-color-warning, #ffb347) 85%, #000);
   outline: none;
 }
 

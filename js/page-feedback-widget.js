@@ -261,8 +261,10 @@
 
       toggle.style.pointerEvents = 'auto';
       toggle.style.border = '0';
-      toggle.style.background = '#8b1919';
-      toggle.style.color = '#fff';
+      // Amber, distinct from the red Save button (member report 2026-06-21);
+      // matches --mh-color-warning. Dark ink text for contrast on amber.
+      toggle.style.background = '#ffb347';
+      toggle.style.color = '#1e1f24';
       toggle.style.boxShadow = '0 10px 30px rgba(0,0,0,.22)';
       toggle.style.fontWeight = '700';
       toggle.style.lineHeight = '1';
