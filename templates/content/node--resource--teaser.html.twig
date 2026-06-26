@@ -24,11 +24,11 @@
 
   <div class="resource-card__image card-img-top">
     {% if node.field_resource_logo.0.entity %}
-      <a href="{{ url }}" rel="bookmark" aria-label="{{ label }}">
+      <a href="{{ url }}" rel="bookmark" aria-label="{{ node.label }}">
         {{ content.field_resource_logo }}
       </a>
     {% else %}
-      <a href="{{ url }}" class="resource-card__no-image" rel="bookmark" aria-label="{{ label }}">
+      <a href="{{ url }}" class="resource-card__no-image" rel="bookmark" aria-label="{{ node.label }}">
         <span aria-hidden="true">{{ fallback_emoji }}</span>
       </a>
     {% endif %}

@@ -11,7 +11,9 @@
 .mh-fin__table { margin-bottom: 0; font-size: .85rem; }
 .mh-fin__table thead th {
   background: var(--mh-red);
-  color: #fff;
+  /* !important needed: base general.css forces dark text on all `table thead th`
+     for readability — but this header is on a red background, so opt back into white. */
+  color: #fff !important;
   border: 0;
   white-space: normal;          /* let multi-word headers wrap (narrower cols) */
   font-size: .7rem;

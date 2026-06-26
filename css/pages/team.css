@@ -5,6 +5,20 @@
 .mh-team__intro { max-width: 75%; }
 .mh-team__vol { border-top: 3px solid var(--mh-red); }
 
+/* ── Member cards: large square photo + generous spacing ───────────
+   Restores the old "big card" feel (square headshot flush to the card
+   edges, hover lift, contact link pinned to the bottom) on top of the
+   shared .mh-page card system. Used for Staff + Board + Fellows. */
+.mh-team__card { overflow: hidden; transition: transform .18s ease, box-shadow .18s ease; }
+.mh-team__card:hover { transform: translateY(-3px); box-shadow: 0 .5rem 1.25rem rgba(0,0,0,.15) !important; }
+.mh-team__photo { width: 100%; aspect-ratio: 1 / 1; background: var(--mh-soft); overflow: hidden; }
+.mh-team__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+.mh-team__card .card-body { padding: 1.25rem 1.25rem 1.5rem; }
+.mh-team__link { font-size: 0.85rem; font-weight: 600; color: var(--mh-red); text-decoration: none; }
+.mh-team__link:hover { text-decoration: underline; }
+
+[data-bs-theme="dark"] .mh-team__link { color: #e8595d; }
+
 @media (max-width: 575.98px) {
   .mh-team__intro { max-width: 100%; }
 }

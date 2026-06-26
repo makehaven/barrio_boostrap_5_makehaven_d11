@@ -1,7 +1,9 @@
 /* === GEMS PAGE (node 30278) — ported from src/pages/Gems.js ======== */
 
 .mh-gems__table thead { background: var(--mh-red); color: #fff; }
-.mh-gems__table thead th { border: 0; }
+/* !important: base general.css forces dark text on all `table thead th`; this
+   header is on a red background, so opt back into white. */
+.mh-gems__table thead th { border: 0; color: #fff !important; }
 [data-bs-theme="dark"] .mh-gems__table { background: #1e1e1e !important; }
 [data-bs-theme="dark"] .mh-gems__table thead { background: var(--mh-red); }
 

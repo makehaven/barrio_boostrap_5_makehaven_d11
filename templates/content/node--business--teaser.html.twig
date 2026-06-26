@@ -1,0 +1,52 @@
+{#
+/**
+ * @file
+ * Business node — teaser view mode.
+ * Bootstrap card mirroring node--resource--teaser: hero logo (or emoji
+ * fallback), title, type chip, trimmed body, website + Details buttons.
+ */
+#}
+{{ attach_library('bootstrap_barrio/node') }}
+
+<article{{ attributes.addClass(['card', 'h-100', 'business-card']) }}>
+
+  <div class="business-card__image card-img-top">
+    {% if node.field_business_logo.0.entity %}
+      <a href="{{ url }}" rel="bookmark" aria-label="{{ node.label }}">
+        {{ content.field_business_logo }}
+      </a>
+    {% else %}
+      <a href="{{ url }}" class="business-card__no-image" rel="bookmark" aria-label="{{ node.label }}">
+        <span aria-hidden="true">🏢</span>
+      </a>
+    {% endif %}
+  </div>
+
+  <div class="card-body d-flex flex-column">
+
+    {{ title_prefix }}
+    <h5 class="card-title">
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h5>
+    {{ title_suffix }}
+
+    {% if content.field_business_type|render|trim %}
+      <div class="business-card__type">
+        {{ content.field_business_type }}
+      </div>
+    {% endif %}
+
+    <div class="card-text business-card__body flex-grow-1">
+      {{ content.body }}
+    </div>
+
+  </div>
+
+  <div class="card-footer bg-transparent border-0 pb-3 mt-auto business-card__actions">
+    {% if node.field_business_website.0.uri %}
+      <a href="{{ node.field_business_website.0.uri }}" class="btn btn-outline-secondary btn-sm" target="_blank" rel="noopener">{{ 'Visit website'|t }}</a>
+    {% endif %}
+    <a href="{{ url }}" class="btn btn-primary btn-sm">{{ 'Read more'|t }}</a>
+  </div>
+
+</article>

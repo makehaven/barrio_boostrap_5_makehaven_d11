@@ -47,7 +47,7 @@ The files JR needs (everything else here — `*.pdf`, `*.csv`, `dump-node.php`, 
 | `membership-body.html` | 35973 | page | /membership-information-members |
 | `visit-body.html` | 8205 | page | /visit |
 | `workspace-body.html` | 3890 | landing_page | /workspace |
-| `resources-body.html` | 619 | page | /resources |
+| ~~`resources-body.html`~~ | 619 | page | /resources | **← DO NOT APPLY.** /resources is a **banner-only section landing** (theme provides the red "Resources" banner via `.theme` line ~679; the Member Menu block fills the content region). It must have an **empty** body. The earlier supplier-card-list port was a mistake and was reverted 2026-06-25; the dropped markup is archived as `resources-body.DROPPED-supplier-list.html`. `resources-body.html` is intentionally empty. |
 | `sponsors-body.html` | 3703 | page | /sponsors |
 | `donate-body.html` | 37638 | page | /donate-makehaven |
 | `financial-body.html` | 13706 | page | /990-tax-forms-and-financial-information |

@@ -1,5 +1,5 @@
 global-styling:
-  version: '1.2.8'
+  version: '1.2.12'
   js:
     js/jquery-compat.js: { weight: -100 }
     js/global.js: {}
@@ -81,6 +81,7 @@ global-styling:
       css/pages/workspace.css: {}
       css/pages/resources.css: {}
       css/pages/sponsors.css: {}
+      css/pages/businesses.css: {}
       css/pages/financial.css: {}
       css/pages/rooms.css: {}
       css/mockup-port.css: {}

@@ -81,6 +81,7 @@
 .path-rooms .view-rooms tr {
   display: flex;
   flex-direction: column;
+  position: relative;          /* anchor for the whole-card stretched link */
   background: #fff;
   border: 1px solid var(--mh-color-border, #e5e5e5);
   border-top: 4px solid var(--mh-red);
@@ -104,6 +105,16 @@
   text-decoration: none;
 }
 .path-rooms .views-field-title a:hover { color: var(--mh-red-dark); text-decoration: underline; }
+/* Make the entire card clickable: the title link's ::after overlays the whole
+   card (Bootstrap "stretched-link" pattern). There is only one link per card,
+   so no overlap conflict. */
+.path-rooms .view-rooms tr { cursor: pointer; }
+.path-rooms .views-field-title a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
 
 /* ── DARK MODE ───────────────────────────────────────────────────── */
 [data-bs-theme="dark"] .path-rooms .view-rooms tr { background: #1e1e1e; border-color: rgba(255, 255, 255, .08); }
