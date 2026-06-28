@@ -490,3 +490,22 @@ body.page-view-library-tool-directory .view-library-tool-directory .btn-outline-
   background: var(--mh-color-brand-primary-strong, #710a0a);
   border-color: var(--mh-color-brand-primary-strong, #710a0a);
 }
+
+/* Equipment cards: pin the photo to a uniform aspect ratio so every card is
+   the same ("standard") height. The equipment_card image style only scales to
+   1200px wide (no crop), so without this the natural photo ratios make the
+   2-up cards uneven. Mirrors the facilitator card-img treatment above. */
+.view-equipment .card-img-top {
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #f4f4f4;
+}
+.view-equipment .card-img-top img,
+.view-equipment img.image-style-equipment-card {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
