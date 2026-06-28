@@ -41,6 +41,17 @@
 .mh-fin__table thead th:first-child { background: var(--mh-red); z-index: 2; }
 
 /* Dark mode */
+/* Bootstrap table cells default to a white --bs-table-bg; flip the whole
+   table (incl. striped rows) to dark surfaces so the data is readable. */
+[data-bs-theme="dark"] .mh-fin__table {
+  --bs-table-bg: #1e1e1e;
+  --bs-table-color: rgba(255, 255, 255, .87);
+  --bs-table-striped-bg: #242424;
+  --bs-table-striped-color: rgba(255, 255, 255, .87);
+  --bs-table-hover-bg: #2c2c2c;
+  --bs-table-hover-color: #fff;
+  --bs-table-border-color: rgba(255, 255, 255, .08);
+}
 [data-bs-theme="dark"] .mh-fin__table tbody td:first-child { background: #1e1e1e; }
 [data-bs-theme="dark"] .mh-fin__year,
 [data-bs-theme="dark"] .mh-fin__link { color: #e8595d; }

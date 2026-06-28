@@ -168,11 +168,23 @@ header#header #navbar-main {
 [data-bs-theme="dark"] .bg-light,
 [data-bs-theme="dark"] .card,
 [data-bs-theme="dark"] .service-content,
-[data-bs-theme="dark"] main {
+[data-bs-theme="dark"] main,
+/* Surfaces that slipped past the flip and rendered white with light text
+   (blog article card, accordions, exposed-filter + chosen dropdowns). */
+[data-bs-theme="dark"] article.node,
+[data-bs-theme="dark"] .accordion-item,
+[data-bs-theme="dark"] .accordion-button,
+[data-bs-theme="dark"] .view-filters,
+[data-bs-theme="dark"] .chosen-single,
+[data-bs-theme="dark"] .chosen-drop {
   background-color: #1e1e1e !important;
   border-color: rgba(255, 255, 255, .08) !important;
   color: rgba(255, 255, 255, .87) !important;
 }
+/* Accordion chevron is a dark SVG by default — invert it so it shows on dark. */
+[data-bs-theme="dark"] .accordion-button::after { filter: invert(1) grayscale(1) brightness(1.6); }
+[data-bs-theme="dark"] .chosen-container .chosen-results { background-color: #1e1e1e; color: rgba(255, 255, 255, .87); }
+[data-bs-theme="dark"] .chosen-container .chosen-results li.highlighted { background-color: #8b1919; }
 /* Typography */
 [data-bs-theme="dark"] h1,
 [data-bs-theme="dark"] h2,

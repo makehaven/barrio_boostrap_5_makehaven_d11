@@ -140,4 +140,8 @@
 [data-bs-theme="dark"] .mh-page__cta { background: var(--mh-red) !important; }
 [data-bs-theme="dark"] .mh-page__banner { background: linear-gradient(135deg, var(--mh-red) 0%, #4a0a0c 100%) !important; }
 [data-bs-theme="dark"] .mh-page__banner--dark { background: var(--mh-ink) !important; }
+/* Soft/panel surfaces on non-card elements (alerts, plain divs on /work,
+   /membership) keep the light var(--mh-soft) in dark mode — flip them dark. */
+[data-bs-theme="dark"] .mh-page__soft,
+[data-bs-theme="dark"] .mh-page__panel { background-color: #1e1e1e !important; }
 [data-bs-theme="dark"] .mh-page__cta .btn-light { color: var(--mh-red) !important; }

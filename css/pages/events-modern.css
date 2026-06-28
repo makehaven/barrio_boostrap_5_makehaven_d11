@@ -1670,3 +1670,35 @@ body.page-civicrm-event-info .block-views-blockevent-instructor-event-instructor
 }
 /* Hide the instructor block entirely if it has no value (avoids a lone heading). */
 body.page-civicrm-event-info .view-id-event_instructor .view-content:has(.views-field-nothing:only-child:empty) { display: none; }
+
+/* ── DARK MODE ───────────────────────────────────────────────────────
+   The events listing shipped with no dark handling: the page faded to
+   white, card titles/dates were dark (unreadable), the filter bar +
+   category tabs stayed light. Scoped recolor below. */
+[data-bs-theme="dark"] body.page-view-event-set {
+  background:
+    radial-gradient(circle at 5% 0%, rgb(232 89 93 / 0.10), transparent 40%),
+    linear-gradient(180deg, #121212 0%, #1a1a1a 100%) !important;
+}
+[data-bs-theme="dark"] body.page-view-event-set .view-event-set .card-title { color: #f1f1f1; }
+[data-bs-theme="dark"] body.page-view-event-set .view-event-set .card-title a:hover { color: #e8595d; }
+[data-bs-theme="dark"] body.page-view-event-set .view-event-set .card-text,
+[data-bs-theme="dark"] body.page-view-event-set .view-event-set time,
+[data-bs-theme="dark"] body.page-view-event-set .view-event-set .datetime { color: rgba(255, 255, 255, .72); }
+/* Experience-level chips carried dark text (e.g. introductory green #1f6b34)
+   that vanished on the dark card — brighten them. */
+[data-bs-theme="dark"] body.page-view-event-set .view-event-set .experience-level.introductory,
+[data-bs-theme="dark"] body.page-view-event-set .view-event-set .experience-level.beginner { color: #5fd07e; }
+[data-bs-theme="dark"] body.page-view-event-set .view-event-set .experience-level.intermediate { color: #e8b84a; }
+[data-bs-theme="dark"] body.page-view-event-set .view-event-set .experience-level.advanced,
+[data-bs-theme="dark"] body.page-view-event-set .view-event-set .experience-level.expert,
+[data-bs-theme="dark"] body.page-view-event-set .view-event-set .experience-level.master { color: #e8595d; }
+/* Exposed-filter labels were dark-on-dark. */
+[data-bs-theme="dark"] body.page-view-event-set .view-filters label,
+[data-bs-theme="dark"] body.page-view-event-set .view-filters .form-label { color: rgba(255, 255, 255, .87); }
+/* Category tab pills (#f8f9fa) -> dark. */
+[data-bs-theme="dark"] body.page-view-event-set a[class*="nav-link--events"] {
+  background-color: #1e1e1e;
+  color: rgba(255, 255, 255, .85);
+  border-color: rgba(255, 255, 255, .12);
+}
