@@ -454,3 +454,16 @@ body.path-frontpage .view-homepage-slideshow .view-header .block-action .btn:hov
   color: #8b1919 !important;
   transform: translateY(-2px);
 }
+
+/* Hero CTA contrast: "Join Now" is solid red, but the secondary buttons
+   (Classes / Take a Tour / Donate) are transparent ghost buttons that wash
+   out over light or busy slideshow photos. Give the non-primary buttons a
+   subtle dark scrim + drop shadow so the white text/outline stays legible on
+   any slide, without touching the red primary button. */
+body.path-frontpage .view-homepage-slideshow .view-header .block-action .btn:not(:first-child) {
+  background-color: rgba(0, 0, 0, .32) !important;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, .35);
+}
+body.path-frontpage .view-homepage-slideshow .view-header .block-action .btn:not(:first-child):hover {
+  background-color: rgba(0, 0, 0, .55) !important;
+}
