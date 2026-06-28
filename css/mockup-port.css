@@ -151,6 +151,8 @@ header#header #navbar-main {
 
 /* =================== DARK MODE (opt-in via toggle) =============== */
 [data-bs-theme="dark"] body,
+[data-bs-theme="dark"] #page,
+[data-bs-theme="dark"] #page-wrapper,
 [data-bs-theme="dark"] {
   background-color: #121212;
   color: rgba(255, 255, 255, .87);

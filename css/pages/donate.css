@@ -275,3 +275,5 @@
 [data-bs-theme="dark"] .mh-donate__card-icon { background: rgba(255, 255, 255, .08); }
 [data-bs-theme="dark"] .mh-donate__statement .bi,
 [data-bs-theme="dark"] .mh-donate__card--monthly .mh-donate__card-icon { color: #e8595d; }
+/* Plain #f8f8f8 panel — not caught by the .card/.bg-light dark flip. */
+[data-bs-theme="dark"] .mh-donate__give { background: #1e1e1e; }

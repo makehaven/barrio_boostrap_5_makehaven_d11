@@ -162,3 +162,8 @@
 [data-bs-theme="dark"] .mh-about__cta { background: var(--mh-about-red) !important; }
 [data-bs-theme="dark"] .mh-about__banner { background: linear-gradient(135deg, var(--mh-about-red) 0%, #4a0a0c 100%) !important; }
 [data-bs-theme="dark"] .mh-about__contact { background: var(--mh-about-dark) !important; }
+/* Facility / Activities panels are plain divs (#f8f8f8) — not caught by the
+   theme's .card/.bg-light dark flip — so flip them to a dark surface here,
+   else they render light with light text (unreadable). */
+[data-bs-theme="dark"] .mh-about__panel { background: #1e1e1e; }
+[data-bs-theme="dark"] .mh-about__partner { border-color: rgba(255, 255, 255, .15); color: rgba(255, 255, 255, .7); }
