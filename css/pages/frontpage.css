@@ -461,9 +461,11 @@ body.path-frontpage .view-homepage-slideshow .view-header .block-action .btn:hov
    subtle dark scrim + drop shadow so the white text/outline stays legible on
    any slide, without touching the red primary button. */
 body.path-frontpage .view-homepage-slideshow .view-header .block-action .btn:not(:first-child) {
-  background-color: rgba(0, 0, 0, .32) !important;
+  /* .32 still washed out on bright slides (member report 2026-07-11);
+     a darker neutral scrim keeps white text readable on any photo. */
+  background-color: rgba(30, 31, 36, .58) !important;
   box-shadow: 0 1px 5px rgba(0, 0, 0, .35);
 }
 body.path-frontpage .view-homepage-slideshow .view-header .block-action .btn:not(:first-child):hover {
-  background-color: rgba(0, 0, 0, .55) !important;
+  background-color: rgba(30, 31, 36, .8) !important;
 }

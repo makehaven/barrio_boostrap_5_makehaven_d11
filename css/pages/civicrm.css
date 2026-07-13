@@ -28,3 +28,27 @@ body.page-civicrm-event-info #crm-container {
     padding: var(--mh-space-md);
   }
 }
+
+/* Mobile: the event-info fee/price table has an intrinsic wide layout and
+   pushed past narrow viewports (member report 2026-07-11, 411px phone).
+   Constrain CRM tables and let the label column stack instead of forcing
+   horizontal overflow. */
+@media (max-width: 768px) {
+  body[class*="path-civicrm"] #crm-container table,
+  body[class*="page-civicrm"] #crm-container table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  body[class*="path-civicrm"] #crm-container .crm-section .label,
+  body[class*="page-civicrm"] #crm-container .crm-section .label {
+    width: auto;
+    float: none;
+  }
+
+  body[class*="path-civicrm"] #crm-container .crm-section .content,
+  body[class*="page-civicrm"] #crm-container .crm-section .content {
+    margin-left: 0;
+  }
+}
