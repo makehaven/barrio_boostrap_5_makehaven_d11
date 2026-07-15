@@ -131,3 +131,100 @@ form#profile-main-add-form button#edit-submit {
     padding: var(--mh-space-md);
     font-weight: bold;
 }
+
+/*
+ * 2026-07-14 staff-feedback restyle: the CiviCRM profile sections on
+ * /user/register (Address, Member Demographics, SMS Consent) rendered with
+ * CiviCRM's floated label/content grid — "like a database, not like the
+ * site". Restyled to match the theme: labels stacked above inputs, inputs
+ * shaped like Bootstrap form controls, section titles in the display face.
+ */
+
+.user-register-form div#crm-container {
+  background: var(--mh-color-surface, #fff);
+  min-width: 0;
+}
+
+/* Stack every label above its field; kill the two-column float grid. */
+.user-register-form #crm-container .crm-section .label {
+  float: none;
+  width: auto;
+  text-align: left;
+  padding: 0;
+  margin: 0 0 var(--mh-space-2xs);
+  font-weight: 600;
+  color: var(--mh-color-neutral-800);
+}
+
+.user-register-form #crm-container .crm-section .content {
+  margin-left: 0 !important;
+}
+
+.user-register-form #crm-container .crm-section {
+  margin-bottom: var(--mh-space-md);
+  overflow: visible;
+}
+
+/* Section titles (Address, Member Demographics, SMS Consent…). */
+.user-register-form #crm-container fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0 0 var(--mh-space-lg);
+  background: transparent;
+}
+
+.user-register-form #crm-container fieldset legend,
+.user-register-form #crm-container h3 {
+  font-family: var(--mh-font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--mh-color-neutral-900);
+  border-bottom: 2px solid var(--mh-color-brand-primary);
+  padding: 0 0 var(--mh-space-2xs);
+  margin: 0 0 var(--mh-space-md);
+  width: 100%;
+  background: transparent;
+}
+
+/* Inputs shaped like the rest of the site's form controls. */
+.user-register-form #crm-container input[type="text"],
+.user-register-form #crm-container input[type="tel"],
+.user-register-form #crm-container input[type="email"],
+.user-register-form #crm-container input[type="number"],
+.user-register-form #crm-container select {
+  display: block;
+  width: 100%;
+  max-width: 26rem;
+  padding: 0.45rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--mh-color-neutral-900);
+  background: var(--mh-color-surface, #fff);
+  border: 1px solid var(--mh-color-border, #d9d9d9);
+  border-radius: var(--mh-radius-md);
+  box-shadow: none;
+}
+
+.user-register-form #crm-container input:focus,
+.user-register-form #crm-container select:focus {
+  outline: none;
+  border-color: var(--mh-color-brand-primary);
+  box-shadow: 0 0 0 3px rgba(139, 25, 25, 0.15);
+}
+
+/* Select2 widgets (State, etc.) get the same silhouette. */
+.user-register-form #crm-container .select2-container .select2-choice,
+.user-register-form #crm-container .select2-container .select2-selection {
+  border: 1px solid var(--mh-color-border, #d9d9d9);
+  border-radius: var(--mh-radius-md);
+  background: var(--mh-color-surface, #fff);
+  padding: 0.2rem 0.5rem;
+  height: auto;
+}
+
+/* Help/description text under fields reads like Drupal's. */
+.user-register-form #crm-container .description,
+.user-register-form #crm-container .helprow-post .content {
+  font-size: 0.875rem;
+  color: var(--mh-color-neutral-600);
+}
