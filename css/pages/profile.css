@@ -88,7 +88,7 @@
 #edit-group-preferences .fieldset-wrapper {
     display: flex;
     flex-wrap: wrap;
-    gap: 100px; /* Space between items */
+    gap: 15px 100px; /* row gap kept tight — 100px row gap read as ~5 blank lines when items wrap (staff feedback 2026-07-16) */
     align-items: flex-start; /* Align items to the top */
 }
 
@@ -111,7 +111,7 @@
 #edit-group-activity .fieldset-wrapper {
     display: flex;
     flex-wrap: wrap;
-    gap: 100px; /* Space between items */
+    gap: 15px 100px; /* row gap kept tight — 100px row gap read as ~5 blank lines when items wrap (staff feedback 2026-07-16) */
     align-items: flex-start; /* Align items to the top */
 }
 
