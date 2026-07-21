@@ -21,3 +21,94 @@
 .page-node-3703 main.main-content { padding-top: 0; }
 .page-node-3703 section.section { padding-top: 0; }
 .page-node-3703 #main-wrapper { background: transparent; }
+
+/* ══ SPONSORS VIEW (view.sponsors.page_1 — /sponsors) ══════════════
+   The sponsors page was rebuilt as a View of sponsor content grouped by
+   tier, superseding the hand-built node body (now at /sponsors-old).
+   The View ships unstyled: its rows are bare divs inside a Bootstrap
+   `.row` with no column wrappers, so logo rows stack full-width and the
+   tier groups render as plain <h3> text. These rules give the View the
+   tier-band + logo-tile treatment the redesign was built around, reusing
+   the original page's palette. Markup is untouched — CSS only. */
+
+/* Full-width treatment, matching what the node page got above. */
+.path-sponsors .block-page-title-block,
+.path-sponsors #sidebar_first { display: none; }
+.path-sponsors main#content.main-content { flex: 0 0 100%; max-width: 100%; }
+
+/* Tier bands span the row; cards flow beside each other. Bootstrap's
+   `.row > *` forces width:100% on children — flex-basis overrides it. */
+.mh-sponsors .view-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin: 0;
+}
+
+.mh-sponsors .view-content > h3 {
+  flex: 0 0 100%;
+  margin: 2rem 0 .25rem;
+  padding: .7rem 1.25rem;
+  border-radius: 10px;
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #212529;
+  background: #e9ecef;
+}
+.mh-sponsors .view-content > h3:first-child { margin-top: 0; }
+
+/* Tier colours from the original page. The heading carries no tier class
+   of its own, so `:has()` picks it out by the card that follows it. */
+.mh-sponsors .view-content > h3:has(+ .sponsor-tier-platinum) { background: #e5e4e2; }
+.mh-sponsors .view-content > h3:has(+ .sponsor-tier-gold)     { background: #ffc107; }
+.mh-sponsors .view-content > h3:has(+ .sponsor-tier-silver)   { background: #c0c0c0; }
+.mh-sponsors .view-content > h3:has(+ .sponsor-tier-bronze)   { background: #cd7f32; color: #fff; }
+.mh-sponsors .view-content > h3:has(+ .sponsor-tier-inkind)   { background: #d8cfc0; }
+
+/* Logo tile — white card, centred logo, "since" caption pinned bottom. */
+.mh-sponsors .sponsor-card {
+  flex: 1 1 200px;
+  max-width: 280px;
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem;
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.mh-sponsors .sponsor-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+}
+.mh-sponsors .sponsor-card .views-field-field-sponsor-logo img {
+  max-height: 80px;
+  max-width: 100%;   /* wide, short logos (e.g. 220x32) must not overflow a narrow tile */
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+.mh-sponsors .sponsor-card .views-field-name { font-weight: 600; line-height: 1.3; }
+.mh-sponsors .sponsor-card .views-field-name a { color: inherit; text-decoration: none; }
+.mh-sponsors .sponsor-card .views-field-name a:hover { color: var(--mh-color-brand-primary); }
+.mh-sponsors .sponsor-card .views-field-field-sponsor-description { font-size: .9rem; color: #6c757d; }
+.mh-sponsors .sponsor-card .views-field-field-sponsor-since {
+  margin-top: auto;
+  padding-top: .5rem;
+  font-size: .8rem;
+  color: #6c757d;
+}
+
+/* Dark mode: keep tiles light so logos (dark artwork on transparent)
+   stay legible — same approach as the node page rules above. */
+[data-bs-theme="dark"] .mh-sponsors .sponsor-card {
+  background: #f3f3f3;
+  border-color: rgba(0, 0, 0, .12);
+}
+[data-bs-theme="dark"] .mh-sponsors .sponsor-card .views-field-name a { color: #212529; }
+[data-bs-theme="dark"] .mh-sponsors .view-content > h3 { color: #212529; }
