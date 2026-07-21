@@ -676,7 +676,8 @@ function _barrio_boostrap_5_makehaven_d11_mh_banner_crumb(): ?array {
   // Section landing pages whose own title IS the section → 2-level crumb
   // (Home / {section}) with no self-link.
   $section_landings = [
-    619 => 'Resources',                          // /resources tab landing.
+    619  => 'Resources',                         // /resources tab landing.
+    5045 => 'FAQ',                               // /frequently-asked-questions-faq.
   ];
   $section_id = (int) $node->id();
   if (isset($section_landings[$section_id])) {

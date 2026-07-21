@@ -1,5 +1,5 @@
 global-styling:
-  version: '1.2.16'
+  version: '1.2.17'
   js:
     js/jquery-compat.js: { weight: -100 }
     js/global.js: {}
@@ -8,6 +8,7 @@ global-styling:
     js/events-info-hero.js: {}
     js/interest-hierarchy.js: {}
     js/badges.js: {}
+    js/faq-accordion.js: {}
     js/theme-toggle.js: {}
     # js/quicksearch.js disabled until the /api/quicksearch backend exists.
     # js/quicksearch.js: {}
