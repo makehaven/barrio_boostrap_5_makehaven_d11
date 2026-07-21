@@ -649,6 +649,10 @@ function _barrio_boostrap_5_makehaven_d11_mh_banner_crumb(): ?array {
     'view.resources.page_2'                     => [['Resources', $resources], ['Suppliers & Resources', NULL]],
     'view.projects.page_1'                      => [['Resources', $resources], ['Projects', NULL]],
     'makerspace_business_visibility.products'   => [['Resources', $resources], ['Shop Local Makers', NULL]],
+    // Sponsors is a View of sponsor content (the hand-built node body it
+    // replaced is parked at /sponsors-old). Trail matches the crumb the
+    // redesigned page carried: Home / Donate / Sponsors.
+    'view.sponsors.page_1'                      => [['Donate', '/donate-makehaven'], ['Sponsors', NULL]],
   ];
   $route = $route_match->getRouteName();
   if (isset($views[$route])) {

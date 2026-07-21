@@ -31,8 +31,10 @@
    tier-band + logo-tile treatment the redesign was built around, reusing
    the original page's palette. Markup is untouched — CSS only. */
 
-/* Full-width treatment, matching what the node page got above. */
-.path-sponsors .block-page-title-block,
+/* Full-width treatment, matching what the node page got above. The
+   page-title block is deliberately NOT hidden here (unlike the node page):
+   the View route is registered in _mh_banner_crumb(), so that block renders
+   the banner heading plus the injected Home / Donate / Sponsors pill. */
 .path-sponsors #sidebar_first { display: none; }
 .path-sponsors main#content.main-content { flex: 0 0 100%; max-width: 100%; }
 
