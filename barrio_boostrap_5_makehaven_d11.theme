@@ -635,6 +635,11 @@ function _barrio_boostrap_5_makehaven_d11_mh_banner_crumb(): ?array {
   // View pages, keyed by route name (stable across environments). Value is the
   // trail AFTER Home: [..parents.., [current page, NULL]].
   $views = [
+    // Site search results — reachable from the header search box on every
+    // page, so the crumb is the only way back out of a results list. The
+    // site_search view serves /search under core's existing route name,
+    // so this is keyed 'search.view' rather than 'view.site_search.page_1'.
+    'search.view'                       => [['Search', NULL]],
     'view.rooms.page_1'                 => [['Rooms', NULL]],
     'view.businesses.incubating'        => [['About', '/about-us'], ['Member Businesses', NULL]],
     'view.blog.page_1'                  => [['About', '/about-us'], ['Blog', NULL]],
