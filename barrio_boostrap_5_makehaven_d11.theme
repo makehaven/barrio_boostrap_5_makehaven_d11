@@ -676,31 +676,46 @@ function _barrio_boostrap_5_makehaven_d11_mh_banner_crumb(): ?array {
   // Section landing pages whose own title IS the section → 2-level crumb
   // (Home / {section}) with no self-link.
   $section_landings = [
-    619  => 'Resources',                         // /resources tab landing.
-    5045 => 'FAQ',                               // /frequently-asked-questions-faq.
+    619   => 'Resources',                        // /resources tab landing.
+    1     => 'About',                            // /about-us.
+    35973 => 'Membership',                       // /membership-information-members.
+    37638 => 'Donate',                           // /donate-makehaven.
+    8205  => 'Visit',                            // /visit.
   ];
   $section_id = (int) $node->id();
   if (isset($section_landings[$section_id])) {
     return [['Home', '/'], [$section_landings[$section_id], NULL]];
   }
 
-  // Specific nodes → [parent label, parent url]. IDs are stable because the dev
-  // DB shares the production lineage.
+  // Specific nodes → [parent label, parent url] with an optional third element
+  // overriding the crumb's own label (node titles like "990 Tax Forms and
+  // Financial Information" are too long for the pill). Parents follow the main
+  // menu. IDs are stable because the dev DB shares the production lineage.
   $node_parents = [
-    14366 => ['About', '/about-us'],            // Instructor Interest webform.
-    41379 => ['Membership', $membership],        // Membership Agreement.
+    14366 => ['About', '/about-us'],              // Instructor Interest webform.
+    41379 => ['Membership', $membership],         // Membership Agreement.
     332   => ['Membership', $membership],         // Gift a Membership.
     707   => ['Membership', $membership],         // Membership Overview (landing).
     14254 => ['Programming', $programming],       // Private Classes webform.
     16200 => ['Programming', $programming],       // Event Gift Card.
     3143  => ['Resources', $resources],           // Room Rentals webform.
-    // NB: /workspace (node 3890) is intentionally NOT here — it's a ported
-    // mockup landing that carries its own banner in node-body markup and hides
-    // the theme page-title block via css/pages/workspace.css.
+    // Redesigned marketing pages. These hid the theme page-title block while
+    // waiting on a node-body banner that was never applied to production,
+    // leaving them with no visible heading — the theme supplies it instead.
+    427   => ['About', '/about-us'],              // Team.
+    413   => ['About', '/about-us'],              // Work at MakeHaven.
+    29374 => ['About', '/about-us'],              // Teach a Workshop.
+    5045  => ['About', '/about-us', 'FAQ'],
+    13706 => ['About', '/about-us', 'Financial Information'],
+    27700 => ['Programming', $programming],       // Team-Building Workshops.
+    30278 => ['Programming', $programming, 'GEMS'],
+    3890  => ['Resources', $resources],           // Workspaces for Makers.
   ];
   $id = (int) $node->id();
   if (isset($node_parents[$id])) {
-    return [['Home', '/'], $node_parents[$id], [$node->label(), NULL]];
+    [$parent_label, $parent_url] = $node_parents[$id];
+    $self = $node_parents[$id][2] ?? $node->label();
+    return [['Home', '/'], [$parent_label, $parent_url], [$self, NULL]];
   }
   return NULL;
 }

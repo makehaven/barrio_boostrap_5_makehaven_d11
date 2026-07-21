@@ -8,7 +8,8 @@
 [data-bs-theme="dark"] .mh-gems__table thead { background: var(--mh-red); }
 
 /* ── PAGE INTEGRATION ───────────────────────────────────────────── */
-.page-node-30278 .block-page-title-block,
+/* page-title block deliberately NOT hidden: the node is registered in
+   _mh_banner_crumb(), so this block renders the banner heading + crumb pill. */
 .page-node-30278 .block-system-breadcrumb-block,
 .page-node-30278 #sidebar_first { display: none; }
 .page-node-30278 main#content.main-content { flex: 0 0 100%; max-width: 100%; }

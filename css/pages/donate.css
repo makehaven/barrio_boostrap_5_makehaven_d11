@@ -229,7 +229,8 @@
 /* ── PAGE INTEGRATION ─────────────────────────────────────────────── */
 /* Hide Drupal's duplicated page title + theme breadcrumb; the hero
    carries its own title and breadcrumb (matches the mockup). */
-.page-node-37638 .block-page-title-block,
+/* page-title block deliberately NOT hidden: the node is registered in
+   _mh_banner_crumb(), so this block renders the banner heading + crumb pill. */
 .page-node-37638 .block-system-breadcrumb-block { display: none; }
 
 /* This is a full-width landing layout: drop the left sidebar (the public

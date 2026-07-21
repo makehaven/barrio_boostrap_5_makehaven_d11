@@ -122,7 +122,8 @@
 /* ── PAGE INTEGRATION ────────────────────────────────────────────── */
 /* The hero banner carries its own title + breadcrumb (matches the mockup),
    so hide Drupal's duplicated title and theme breadcrumb blocks. */
-.page-node-1 .block-page-title-block,
+/* page-title block deliberately NOT hidden: the node is registered in
+   _mh_banner_crumb(), so this block renders the banner heading + crumb pill. */
 .page-node-1 .block-system-breadcrumb-block { display: none; }
 
 /* Full-width landing layout: drop the left sidebar and let content fill. */
