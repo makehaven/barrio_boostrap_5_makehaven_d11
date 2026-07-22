@@ -139,3 +139,30 @@ Theme files changed for this Resources/Library work (all under the theme folder)
 - `css/pages/library.css` — library tool **detail** page styling (`.node--type-library-item.node--view-mode-full`): status badge (green/red), info rows, framed photo, Report Issue pill, dark mode.
 - `barrio_boostrap_5_makehaven_d11.libraries.yml` — `global-styling` version → `1.2.5`.
 - (`css/pages/rooms.css` already carried the generic `.mh-banner-page` banner styling these pages reuse — unchanged this round.)
+
+---
+
+## 7. 2026-07 theme batch — content deploy (surgical, not full-body)
+
+The 2026-07 batch (sponsors View styling, restored page headings, FAQ accordion,
+quicksearch, GEMS + workspace live-listings, membership CTA restyle) needs three
+content actions on each environment. **Two are surgical find-replaces** against
+current live content (drift-safe, idempotent) — do NOT use the full-body ports
+for these, which are the never-applied June redesign versions and would clobber
+live copy:
+
+```bash
+# 1. Workspace availability token + membership CTA restyle (nodes 3890, 35973):
+lando drush php:script _content-ports/apply-2026-07-live-content-tweaks.php
+
+# 2. GEMS body — token replaces the hardcoded "Upcoming Cohort" card (node 30278):
+lando drush php:script _content-ports/apply-page-body.php -- 30278 gems-body.html
+```
+
+Also required for GEMS + quicksearch to light up:
+- **Config:** `config/views.view.gems_cohorts.yml` must deploy (drush cim). The
+  old `workspace_listing` **block placement** is removed (deleted config) — the
+  listing now renders inline via the body token, so leaving the block placed
+  would double-render it.
+- **Quicksearch (PR #5):** create the `api/v0/quicksearch` REST-export View in
+  the admin UI (spec in the PR). Until then quicksearch stays dark (safe).
