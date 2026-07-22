@@ -302,6 +302,70 @@ function barrio_boostrap_5_makehaven_d11_preprocess_node(&$variables) {
 }
 
 /**
+ * Implements hook_preprocess_field().
+ *
+ * Swaps live-content tokens left in a node body for their rendered widget:
+ *  - [[GEMS_UPCOMING]] on /gems (node 30278) → gems_cohorts View block.
+ *  - [[WORKSPACE_AVAILABILITY]] on /workspace (node 3890) → the
+ *    workspace_listing block (available units from the workspace_rental module).
+ *
+ * Both bodies stay fully staff-editable; the token marks where the live widget
+ * goes, so the list is never hand-maintained. This hooks the body FIELD rather
+ * than the node because these pages can render through Layout Builder, which
+ * nests the body field-block away from $variables['content']['body'] where a
+ * hook_preprocess_node would reach it. The field hook fires either way.
+ *
+ * Each widget's cache metadata is bubbled onto the field so the underlying data
+ * (a new cohort event, a new rental agreement) invalidates the page; an hourly
+ * max-age backstops any missed invalidation.
+ */
+function barrio_boostrap_5_makehaven_d11_preprocess_field(array &$variables): void {
+  if (
+    ($variables['field_name'] ?? '') !== 'body'
+    || !($variables['element']['#object'] ?? NULL) instanceof NodeInterface
+    || empty($variables['items'][0]['content']['#text'])
+  ) {
+    return;
+  }
+  $nid = (int) $variables['element']['#object']->id();
+  $text = $variables['items'][0]['content']['#text'];
+
+  // /gems — upcoming GEMS cohorts View.
+  if ($nid === 30278 && strpos($text, '[[GEMS_UPCOMING]]') !== FALSE) {
+    $build = views_embed_view('gems_cohorts', 'block_1');
+    $html = (string) \Drupal::service('renderer')->renderInIsolation($build);
+    $variables['items'][0]['content']['#text'] = str_replace('[[GEMS_UPCOMING]]', $html, $text);
+    CacheableMetadata::createFromRenderArray($build)
+      ->merge(CacheableMetadata::createFromRenderArray($variables['items'][0]['content']))
+      ->setCacheMaxAge(3600)
+      ->applyTo($variables['items'][0]['content']);
+    return;
+  }
+
+  // /workspace — live "Available Workspaces" listing (a block plugin, not a
+  // View: workspace_listing_block reads the workspace + rental_agreement
+  // entities). Replaces the old hand-maintained availability table.
+  if ($nid === 3890 && strpos($text, '[[WORKSPACE_AVAILABILITY]]') !== FALSE) {
+    try {
+      $build = \Drupal::service('plugin.manager.block')
+        ->createInstance('workspace_listing_block', [])
+        ->build();
+    }
+    catch (\Throwable $e) {
+      // workspace_rental unavailable — drop the token rather than print it raw.
+      $variables['items'][0]['content']['#text'] = str_replace('[[WORKSPACE_AVAILABILITY]]', '', $text);
+      return;
+    }
+    $html = (string) \Drupal::service('renderer')->renderInIsolation($build);
+    $variables['items'][0]['content']['#text'] = str_replace('[[WORKSPACE_AVAILABILITY]]', $html, $text);
+    CacheableMetadata::createFromRenderArray($build)
+      ->merge(CacheableMetadata::createFromRenderArray($variables['items'][0]['content']))
+      ->setCacheMaxAge(3600)
+      ->applyTo($variables['items'][0]['content']);
+  }
+}
+
+/**
  * Build structured reservation display data for the reservation full node view.
  */
 function _barrio_boostrap_5_makehaven_d11_build_reservation_page_data(NodeInterface $node): array {

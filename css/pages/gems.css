@@ -17,3 +17,39 @@
 .page-node-30278 main.main-content { padding-top: 0; }
 .page-node-30278 section.section { padding-top: 0; }
 .page-node-30278 #main-wrapper { background: transparent; }
+
+/* ── UPCOMING COHORTS (auto-listed by the gems_cohorts View) ─────── */
+/* The View wraps rows in `.view-content.row` (Bootstrap flex) and each card
+   carries `.card`; both are single-class rules that load after this file, so
+   these overrides are scoped two-deep (and use !important where they fight a
+   Bootstrap utility) to force a clean vertical stack of full-width rows that
+   reads well whether there is one cohort or several. */
+.mh-gems-upcoming .view-content {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem;
+  margin: 0;
+}
+/* Each card lays title / date / actions out in one horizontal row, wrapping
+   to stacked on narrow screens. */
+.mh-gems-upcoming .mh-gems-cohort {
+  width: 100% !important;
+  max-width: 100% !important;
+  flex-direction: row !important;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 1.25rem;
+  margin: 0;
+}
+.mh-gems-upcoming .mh-gems-cohort__title { margin: 0; font-size: 1.15rem; }
+.mh-gems-upcoming .mh-gems-cohort__title a { text-decoration: none; }
+.mh-gems-upcoming .mh-gems-cohort__label { color: var(--mh-red); font-weight: 600; }
+.mh-gems-upcoming .mh-gems-cohort time.datetime { color: inherit; }
+/* Push the buttons to the far right; keep the date beside the title. */
+.mh-gems-upcoming .mh-gems-cohort__actions { margin-left: auto; white-space: nowrap; }
+.mh-gems-upcoming__empty {
+  text-align: center;
+  color: var(--bs-secondary-color, #6c757d);
+  padding: 1.5rem 0;
+}
+[data-bs-theme="dark"] .mh-gems-upcoming .mh-gems-cohort.card { background: #1e1e1e; }
