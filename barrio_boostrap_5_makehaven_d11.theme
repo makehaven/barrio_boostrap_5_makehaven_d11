@@ -654,6 +654,21 @@ function _barrio_boostrap_5_makehaven_d11_mh_banner_crumb(): ?array {
     'view.resources.page_2'                     => [['Resources', $resources], ['Suppliers & Resources', NULL]],
     'view.projects.page_1'                      => [['Resources', $resources], ['Projects', NULL]],
     'makerspace_business_visibility.products'   => [['Resources', $resources], ['Shop Local Makers', NULL]],
+    // Remaining public listings — the visitor-facing pages still without a
+    // crumb after the sections above. Parents follow the main menu.
+    'view.public_program_catalog.page_1'        => [['Programming', NULL]],
+    'view.event_set.page_3'                     => [['Programming', $programming], ['Ticketed Workshops', NULL]],
+    'view.event_set.public_events'              => [['Programming', $programming], ['Public Events', NULL]],
+    'view.event_set.events_past'                => [['Programming', $programming], ['Past Events', NULL]],
+    'view.event_set.member_events'              => [['Programming', $programming], ['Member Events', NULL]],
+    'view.instructors.page_1'                   => [['Programming', $programming], ['Instructors', NULL]],
+    'view.policies.page_1'                      => [['About', '/about-us'], ['Policies', NULL]],
+    'view.companies.page_1'                     => [['About', '/about-us'], ['Member Companies', NULL]],
+    'view.store.page_1'                         => [['Resources', $resources], ['Store', NULL]],
+    'view.badges.page_1'                        => [['Resources', $resources], ['Badges', NULL]],
+    'view.resources.page_3'                     => [['Resources', $resources], ['Discounts', NULL]],
+    'view.projects.page_2'                      => [['Resources', $resources], ['Completed Projects', NULL]],
+    'view.rooms.page_2'                         => [['Rooms', '/rooms'], ['Zones', NULL]],
   ];
   $route = $route_match->getRouteName();
   if (isset($views[$route])) {
@@ -715,6 +730,7 @@ function _barrio_boostrap_5_makehaven_d11_mh_banner_crumb(): ?array {
     27700 => ['Programming', $programming],       // Team-Building Workshops.
     30278 => ['Programming', $programming, 'GEMS'],
     3890  => ['Resources', $resources],           // Workspaces for Makers.
+    24707 => ['Membership', $membership],         // Join MakeHaven.
   ];
   $id = (int) $node->id();
   if (isset($node_parents[$id])) {
