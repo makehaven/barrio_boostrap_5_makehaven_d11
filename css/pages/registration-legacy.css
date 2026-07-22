@@ -25,7 +25,11 @@
     align-items: start; 
   }
 
-  .user-register-form .fieldset-wrapper > #edit-account {
+  /* Account block and Pronouns span full width. On the member hand-off flow the
+     first/last-name fields are hidden (supplied at payment), which otherwise
+     stranded Pronouns alone in a narrow side column. */
+  .user-register-form .fieldset-wrapper > #edit-account,
+  .user-register-form .fieldset-wrapper > #edit-field-pronoun-txt-wrapper {
     grid-column: 1 / -1;
   }
 
@@ -62,19 +66,38 @@
    line-height: 1.2 !important;
 }
 
-/* Birth Date spacing fix */
+/* Member Demographics: single-column so each section (Birth Date, Gender,
+   Ethnicity) stacks on its own line instead of a cramped 2-column grid that
+   pushed SMS Consent oddly "to the side" (staff review 2026-07-21). */
 @media (min-width: 768px) {
   #profilewrap34 > fieldset {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 0 var(--mh-space-lg) !important; 
-    align-items: start !important;
+    display: block !important;
   }
 
-  #profilewrap34 > fieldset > #editrow-birth_date {
-    grid-column: 1 / -1 !important;
-    margin-bottom: var(--mh-space-lg) !important; 
+  #profilewrap34 > fieldset > .crm-section {
+    margin-bottom: var(--mh-space-lg) !important;
   }
+
+  /* Keep every CiviCRM profile block full-width and stacked. */
+  #crm-container [id^="profilewrap"] {
+    float: none !important;
+    width: 100% !important;
+    clear: both !important;
+  }
+}
+
+/* The membership-agreement checkbox label renders as display:flex, which
+   blockifies its three children (text — link — text) into side-by-side columns
+   and breaks the sentence apart. Force normal inline flow. */
+#edit-legal .form-check-label {
+  display: block !important;
+}
+#edit-legal .form-check-label a {
+  display: inline !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: auto !important;
+  float: none !important;
 }
 
 /* SMS Consent Section Styling */
