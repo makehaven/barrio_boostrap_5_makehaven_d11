@@ -702,7 +702,12 @@ function _barrio_boostrap_5_makehaven_d11_mh_banner_crumb(): ?array {
   $section_landings = [
     619   => 'Resources',                        // /resources tab landing.
     1     => 'About',                            // /about-us.
-    35973 => 'Membership',                       // /membership-information-members.
+    // NB: /membership-information-members (35973) is intentionally NOT here.
+    // Unlike the other redesigned pages, its node body DID receive the
+    // redesign's styled hero (".join-gift-section" → its own <h1> + lead), so
+    // it already renders a visible heading. Registering it would unhide the
+    // theme page-title block and stack a second <h1> above that hero. It keeps
+    // its title block hidden via css/pages/membership.css.
     37638 => 'Donate',                           // /donate-makehaven.
     8205  => 'Visit',                            // /visit.
   ];

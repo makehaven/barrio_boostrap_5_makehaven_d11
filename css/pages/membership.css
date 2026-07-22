@@ -19,8 +19,11 @@
 [data-bs-theme="dark"] .mh-membership .accordion-button:not(.collapsed) { background: rgba(255,255,255,.06); color: #e8595d; }
 
 /* ── PAGE INTEGRATION ───────────────────────────────────────────── */
-/* page-title block deliberately NOT hidden: the node is registered in
-   _mh_banner_crumb(), so this block renders the banner heading + crumb pill. */
+/* Page-title block IS hidden here (unlike the other redesigned pages): this
+   node's body already carries the redesign's styled hero (".join-gift-section"
+   with its own <h1>), so the theme heading would be a duplicate. The node is
+   deliberately not registered in _mh_banner_crumb() for the same reason. */
+.page-node-35973 .block-page-title-block,
 .page-node-35973 .block-system-breadcrumb-block,
 .page-node-35973 #sidebar_first { display: none; }
 .page-node-35973 main#content.main-content { flex: 0 0 100%; max-width: 100%; }

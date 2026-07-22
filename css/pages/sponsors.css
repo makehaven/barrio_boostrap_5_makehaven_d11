@@ -60,13 +60,16 @@
 }
 .mh-sponsors .view-content > h3:first-child { margin-top: 0; }
 
-/* Tier colours from the original page. The heading carries no tier class
-   of its own, so `:has()` picks it out by the card that follows it. */
-.mh-sponsors .view-content > h3:has(+ .sponsor-tier-platinum) { background: #e5e4e2; }
-.mh-sponsors .view-content > h3:has(+ .sponsor-tier-gold)     { background: #ffc107; }
-.mh-sponsors .view-content > h3:has(+ .sponsor-tier-silver)   { background: #c0c0c0; }
-.mh-sponsors .view-content > h3:has(+ .sponsor-tier-bronze)   { background: #cd7f32; color: #fff; }
-.mh-sponsors .view-content > h3:has(+ .sponsor-tier-inkind)   { background: #d8cfc0; }
+/* Tier colours. The heading carries no tier class of its own, so `:has()`
+   picks it out by the card that follows it. Authoritative tiers on the sponsor
+   vocabulary are platinum / gold / silver / community / inkind (Bronze was
+   removed 2026-06-17). `community` and `inkind` both render inside the single
+   "Community Supporters" group, so they share one warm-neutral band. */
+.mh-sponsors .view-content > h3:has(+ .sponsor-tier-platinum)  { background: #e5e4e2; }
+.mh-sponsors .view-content > h3:has(+ .sponsor-tier-gold)      { background: #ffc107; }
+.mh-sponsors .view-content > h3:has(+ .sponsor-tier-silver)    { background: #c0c0c0; }
+.mh-sponsors .view-content > h3:has(+ .sponsor-tier-community) { background: #d8cfc0; }
+.mh-sponsors .view-content > h3:has(+ .sponsor-tier-inkind)    { background: #d8cfc0; }
 
 /* Logo tile — white card, centred logo, "since" caption pinned bottom. */
 .mh-sponsors .sponsor-card {
