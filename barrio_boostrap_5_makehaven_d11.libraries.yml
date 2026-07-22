@@ -1,5 +1,5 @@
 global-styling:
-  version: '1.2.16'
+  version: '1.2.17'
   js:
     js/jquery-compat.js: { weight: -100 }
     js/global.js: {}
@@ -9,8 +9,11 @@ global-styling:
     js/interest-hierarchy.js: {}
     js/badges.js: {}
     js/theme-toggle.js: {}
-    # js/quicksearch.js disabled until the /api/quicksearch backend exists.
-    # js/quicksearch.js: {}
+    # Live search dropdown. Safe to ship ahead of its backend: if the
+    # /api/v0/quicksearch view is not present on an environment, the first
+    # request fails and the script stands down for the session, leaving the
+    # header search behaving exactly as it does without it.
+    js/quicksearch.js: {}
   css:
     base:
       css/base/tokens.css: {}
