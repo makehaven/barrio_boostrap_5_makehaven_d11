@@ -801,7 +801,10 @@ function _barrio_boostrap_5_makehaven_d11_mh_banner_crumb(): ?array {
     5045  => ['About', '/about-us', 'FAQ'],
     13706 => ['About', '/about-us', 'Financial Information'],
     27700 => ['Programming', $programming],       // Team-Building Workshops.
-    30278 => ['Programming', $programming, 'GEMS'],
+    // NB: /gems (30278) is intentionally NOT here. Like /membership, its node
+    // body carries its own .mh-page__banner hero (heading + crumb pill + lead),
+    // so registering it would stack a second theme-rendered heading above that
+    // banner. It keeps the theme page-title block hidden via css/pages/gems.css.
     3890  => ['Resources', $resources],           // Workspaces for Makers.
     24707 => ['Membership', $membership],         // Join MakeHaven.
   ];

@@ -8,8 +8,11 @@
 [data-bs-theme="dark"] .mh-gems__table thead { background: var(--mh-red); }
 
 /* ── PAGE INTEGRATION ───────────────────────────────────────────── */
-/* page-title block deliberately NOT hidden: the node is registered in
-   _mh_banner_crumb(), so this block renders the banner heading + crumb pill. */
+/* The node body carries its own .mh-page__banner hero (heading + crumb pill +
+   lead), so the node is NOT registered in _mh_banner_crumb() and the theme
+   page-title block is hidden to avoid a duplicate heading (mirrors /membership,
+   node 35973). */
+.page-node-30278 .block-page-title-block,
 .page-node-30278 .block-system-breadcrumb-block,
 .page-node-30278 #sidebar_first { display: none; }
 .page-node-30278 main#content.main-content { flex: 0 0 100%; max-width: 100%; }
@@ -41,12 +44,23 @@
   gap: 0.25rem 1.25rem;
   margin: 0;
 }
-.mh-gems-upcoming .mh-gems-cohort__title { margin: 0; font-size: 1.15rem; }
+/* Fixed-width title column so "Starts:" / dates line up down the list. */
+.mh-gems-upcoming .mh-gems-cohort__title {
+  margin: 0;
+  font-size: 1.15rem;
+  flex: 0 0 auto;
+  min-width: 11rem;
+}
 .mh-gems-upcoming .mh-gems-cohort__title a { text-decoration: none; }
 .mh-gems-upcoming .mh-gems-cohort__label { color: var(--mh-red); font-weight: 600; }
 .mh-gems-upcoming .mh-gems-cohort time.datetime { color: inherit; }
-/* Push the buttons to the far right; keep the date beside the title. */
-.mh-gems-upcoming .mh-gems-cohort__actions { margin-left: auto; white-space: nowrap; }
+/* Push the button group to a common right edge so it aligns across all rows. */
+.mh-gems-upcoming .mh-gems-cohort__actions {
+  margin-left: auto;
+  display: flex;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
 .mh-gems-upcoming__empty {
   text-align: center;
   color: var(--bs-secondary-color, #6c757d);
