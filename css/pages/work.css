@@ -10,7 +10,8 @@
 .mh-work__job { border-left: 5px solid var(--mh-red); }
 
 /* ── PAGE INTEGRATION ───────────────────────────────────────────── */
-.page-node-413 .block-page-title-block,
+/* page-title block deliberately NOT hidden: the node is registered in
+   _mh_banner_crumb(), so this block renders the banner heading + crumb pill. */
 .page-node-413 .block-system-breadcrumb-block,
 .page-node-413 #sidebar_first { display: none; }
 .page-node-413 main#content.main-content { flex: 0 0 100%; max-width: 100%; }

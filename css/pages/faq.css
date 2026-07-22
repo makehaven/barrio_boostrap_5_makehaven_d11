@@ -1,8 +1,23 @@
 /* === FAQ PAGE (node 5045) — ported from src/pages/FAQ.js ===========
    Uses the shared .mh-page system + native Bootstrap pills/accordion. */
 
+/* .mh-faq is now applied to the plain node-body field by js/faq-accordion.js,
+   so it can sit outside the .mh-page wrapper that used to declare these
+   tokens. Declare them locally so the accordion styling below still resolves. */
+.mh-faq { --mh-red: #861216; --mh-soft: #f8f0f0; }
+
 .mh-faq__sticky { top: 80px; }
 .mh-faq__heading { letter-spacing: .05em; }
+
+/* Accordion built from editorial markup: give the questions room to breathe
+   and keep answer content (lists, tables, links) readable inside the panel. */
+.mh-faq__accordion { background: #fff; }
+.mh-faq__accordion .accordion-button { font-size: 1.02rem; padding: .95rem 1.15rem; }
+.mh-faq__accordion .accordion-body > *:last-child { margin-bottom: 0; }
+.mh-faq__accordion .accordion-body table { width: 100%; }
+.mh-faq__accordion .accordion-body ul,
+.mh-faq__accordion .accordion-body ol { padding-left: 1.25rem; }
+[data-bs-theme="dark"] .mh-faq__accordion { background: #1e1e1e; }
 
 /* Section pills: brand-red active state (Bootstrap default is blue). */
 .mh-faq__nav .nav-link {
@@ -35,7 +50,10 @@
 [data-bs-theme="dark"] .mh-faq .accordion-button:not(.collapsed) { background: rgba(255,255,255,.06); color: #e8595d; }
 
 /* ── PAGE INTEGRATION ───────────────────────────────────────────── */
-.page-node-5045 .block-page-title-block,
+/* The page-title block is deliberately NOT hidden: node 5045 is registered
+   in _mh_banner_crumb(), so that block renders the banner heading plus the
+   injected Home / FAQ pill. The standalone breadcrumb block stays hidden —
+   the visible pill lives in the page-title block. */
 .page-node-5045 .block-system-breadcrumb-block,
 .page-node-5045 #sidebar_first { display: none; }
 .page-node-5045 main#content.main-content { flex: 0 0 100%; max-width: 100%; }

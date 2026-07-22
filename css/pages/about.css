@@ -122,7 +122,8 @@
 /* ── PAGE INTEGRATION ────────────────────────────────────────────── */
 /* The hero banner carries its own title + breadcrumb (matches the mockup),
    so hide Drupal's duplicated title and theme breadcrumb blocks. */
-.page-node-1 .block-page-title-block,
+/* page-title block deliberately NOT hidden: the node is registered in
+   _mh_banner_crumb(), so this block renders the banner heading + crumb pill. */
 .page-node-1 .block-system-breadcrumb-block { display: none; }
 
 /* Full-width landing layout: drop the left sidebar and let content fill. */
@@ -167,3 +168,62 @@
    else they render light with light text (unreadable). */
 [data-bs-theme="dark"] .mh-about__panel { background: #1e1e1e; }
 [data-bs-theme="dark"] .mh-about__partner { border-color: rgba(255, 255, 255, .15); color: rgba(255, 255, 255, .7); }
+
+/* ══ PARTNER / FUNDER / MEMBER LOGO STRIPS ═════════════════════════
+   The lower half of the About body lists partner, funder and membership
+   logos as plain editorial <img>s with no classes, at whatever size each
+   file happens to be (they currently range 100px to 237px tall). The
+   theme's images.css makes body images display:block, so each one lands
+   on its own line — a long ragged column of mismatched logos.
+
+   Normalise them into tidy wrapping strips. Every image in this body is
+   a logo; if a content photo is ever added here it will need a class of
+   its own to escape the cap below. */
+
+/* Any run of two or more images becomes a logo grid. auto-fit columns keep
+   the rows balanced whatever the logo count is — one added or removed
+   reflows on its own, no rule change needed. Grid also avoids the ragged
+   wrapping flex gives here, since one logo is wrapped in an <a> whose
+   inline box measures differently from the bare <img>s beside it. */
+.page-node-1 .field--name-body p:has(img + img),
+.page-node-1 .field--name-body div:has(> img + img) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 2rem 1.5rem;
+  margin: 1.25rem 0 2.25rem;
+}
+.page-node-1 .field--name-body p:has(img + img) > a { display: block; }
+
+/* Common cap so the logos read as one row rather than a size jumble.
+   width/height auto overrides the inline width/height attributes on the
+   source images; object-fit keeps aspect ratio inside the cap. */
+.page-node-1 .field--name-body img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: min(190px, 100%);
+  max-height: 68px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+.page-node-1 .field--name-body p:has(img + img) img,
+.page-node-1 .field--name-body div:has(> img + img) img { margin: 0; }
+
+/* Section labels ("Programatic Partner Organizations", "Funded By",
+   "Member of:") are bare <p><strong> — give them a little air so the
+   strips read as grouped sections rather than one long run. */
+.page-node-1 .field--name-body p > strong:only-child {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-size: 1.05rem;
+}
+
+/* The "Member of" logo sits in a plain editorial table — strip its
+   borders so it matches the strips above rather than reading as data. */
+.page-node-1 .field--name-body table.table:has(img) {
+  width: auto !important;
+  margin: 0 auto 1.5rem;
+}
+.page-node-1 .field--name-body table.table:has(img) td { border: 0; padding: 0; }

@@ -57,7 +57,8 @@
 [data-bs-theme="dark"] .mh-fin__link { color: #e8595d; }
 
 /* ── PAGE INTEGRATION ───────────────────────────────────────────── */
-.page-node-13706 .block-page-title-block,
+/* page-title block deliberately NOT hidden: the node is registered in
+   _mh_banner_crumb(), so this block renders the banner heading + crumb pill. */
 .page-node-13706 .block-system-breadcrumb-block,
 .page-node-13706 #sidebar_first { display: none; }
 .page-node-13706 main#content.main-content { flex: 0 0 100%; max-width: 100%; }

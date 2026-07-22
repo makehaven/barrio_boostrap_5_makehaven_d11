@@ -8,6 +8,7 @@ global-styling:
     js/events-info-hero.js: {}
     js/interest-hierarchy.js: {}
     js/badges.js: {}
+    js/faq-accordion.js: {}
     js/theme-toggle.js: {}
     # js/quicksearch.js disabled until the /api/quicksearch backend exists.
     # js/quicksearch.js: {}
