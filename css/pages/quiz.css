@@ -241,6 +241,21 @@ body.path-quiz .answering-form table input[type="checkbox"] {
   margin: 0;
   accent-color: var(--mh-color-brand-primary, #8b1919);
 }
+/* The tableselect wraps its radio in a .form-check/.form-item; the ROW is the
+   card, so strip the option-card treatment off that inner wrapper (higher
+   specificity than the option-card rule above) — otherwise it draws a second,
+   nested box around the radio. */
+body.path-quiz .answering-form table .form-check,
+body.path-quiz .answering-form table .form-item,
+body.path-quiz .answering-form table .js-form-type-radio,
+body.path-quiz .answering-form table .js-form-type-checkbox {
+  display: block;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  background: none;
+}
 
 /* ── Mobile ────────────────────────────────────────────────────────────────── */
 @media (max-width: 575.98px) {

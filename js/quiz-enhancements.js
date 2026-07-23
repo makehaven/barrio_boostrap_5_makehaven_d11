@@ -21,6 +21,12 @@
       // (1) Make each answer option fully clickable + reflect selection.
       // Covers core (.form-item) and Bootstrap (.form-check) renderings.
       once('mh-quiz-option', '.answering-form .form-radios .form-item, .answering-form .form-checkboxes .form-item, .answering-form .form-check', context).forEach(function (item) {
+        // Multichoice renders as a tableselect whose radio sits in a nested
+        // .form-check inside a table cell — that is NOT an option card; the whole
+        // ROW is (handled below). Skip it here so we don't wire the inner box.
+        if (item.closest('table')) {
+          return;
+        }
         var input = item.querySelector('input[type="radio"], input[type="checkbox"]');
         if (!input) {
           return;
@@ -47,6 +53,28 @@
         });
         // Initial sync.
         item.classList.toggle('mh-option-selected', input.checked);
+      });
+
+      // (1b) Multichoice renders as a tableselect — make the whole ROW clickable
+      // (not just the radio). The selected-state highlight is CSS :has(:checked).
+      once('mh-quiz-mc-row', '.answering-form table tbody tr', context).forEach(function (row) {
+        var input = row.querySelector('input[type="radio"], input[type="checkbox"]');
+        if (!input) {
+          return;
+        }
+        row.style.cursor = 'pointer';
+        row.addEventListener('click', function (e) {
+          if (e.target.tagName === 'INPUT' || e.target.tagName === 'LABEL' || e.target.closest('label')) {
+            return;
+          }
+          if (input.type === 'radio') {
+            input.checked = true;
+          }
+          else {
+            input.checked = !input.checked;
+          }
+          input.dispatchEvent(new Event('change', { bubbles: true }));
+        });
       });
 
       // (2) + (3) Feedback page: class the narrative + add a check-mark legend.
