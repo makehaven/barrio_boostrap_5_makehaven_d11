@@ -172,10 +172,11 @@ body.path-quiz .mh-quiz-legend .swatch {
 body.path-quiz .mh-quiz-legend .swatch--you { background: #2e6b3a; }
 body.path-quiz .mh-quiz-legend .swatch--answer { background: #808080; }
 
-/* Narrative explanation — make it stand out as a callout. */
+/* Narrative explanation — stand out as an INFO callout (blue, not brand-red:
+   red reads like an error message). */
 body.path-quiz .mh-quiz-explanation {
-  background: rgba(139, 25, 25, 0.05);
-  border-left: 4px solid var(--mh-color-brand-primary, #8b1919);
+  background: rgba(78, 161, 211, 0.10);
+  border-left: 4px solid var(--mh-color-info, #4ea1d3);
   border-radius: 0 8px 8px 0;
   padding: 1rem 1.25rem;
   margin: 1rem auto 1.5rem;
@@ -191,8 +192,54 @@ body.path-quiz .mh-quiz-explanation::before {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--mh-color-brand-primary, #8b1919);
+  color: #2a6591;
   margin-bottom: 0.35rem;
+}
+
+/* Multichoice questions render as a Drupal tableselect (a <table>), not
+   .form-radios — so they missed the option-card treatment above. Style the
+   table rows to read like the true/false cards. Scoped to the answering form
+   so the feedback results table (.quiz-result-table) is untouched. */
+body.path-quiz .answering-form table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 0.75rem;
+}
+body.path-quiz .answering-form table thead { display: none; }
+body.path-quiz .answering-form table tbody tr td {
+  background: transparent;
+  border-top: 2px solid var(--mh-color-border, #d9d3ca);
+  border-bottom: 2px solid var(--mh-color-border, #d9d3ca);
+  padding: 1rem 1.1rem;
+  vertical-align: middle;
+  font-size: 1.2rem;
+}
+body.path-quiz .answering-form table tbody tr td:first-child {
+  border-left: 2px solid var(--mh-color-border, #d9d3ca);
+  border-radius: 10px 0 0 10px;
+  width: 3.25rem;
+  text-align: center;
+  padding-right: 0;
+}
+body.path-quiz .answering-form table tbody tr td:last-child {
+  border-right: 2px solid var(--mh-color-border, #d9d3ca);
+  border-radius: 0 10px 10px 0;
+}
+body.path-quiz .answering-form table tbody tr:hover td {
+  border-color: var(--mh-color-brand-primary, #8b1919);
+  background: rgba(139, 25, 25, 0.04);
+}
+body.path-quiz .answering-form table tbody tr:has(input:checked) td,
+body.path-quiz .answering-form table tbody tr.selected td {
+  border-color: var(--mh-color-brand-primary, #8b1919);
+  background: rgba(139, 25, 25, 0.08);
+}
+body.path-quiz .answering-form table input[type="radio"],
+body.path-quiz .answering-form table input[type="checkbox"] {
+  width: 1.4rem;
+  height: 1.4rem;
+  margin: 0;
+  accent-color: var(--mh-color-brand-primary, #8b1919);
 }
 
 /* ── Mobile ────────────────────────────────────────────────────────────────── */

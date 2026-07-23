@@ -1,5 +1,5 @@
 global-styling:
-  version: '1.2.23'
+  version: '1.2.24'
   js:
     js/jquery-compat.js: { weight: -100 }
     js/global.js: {}
