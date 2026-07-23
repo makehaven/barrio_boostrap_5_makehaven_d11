@@ -1,0 +1,49 @@
+/**
+ * Orientation-video page: quiz button above the video + overlay on the video.
+ * Injected by js/orientation-video.js (behavior mhOrientationVideoQuiz).
+ */
+
+/* (1) Button above the video. */
+.mh-ov-quiz-top {
+  text-align: center;
+  margin: 0 0 var(--mh-space-lg, 1.5rem);
+}
+.mh-ov-quiz-top .mh-ov-quiz-btn {
+  font-weight: 700;
+}
+.mh-ov-quiz-top .mh-ov-quiz-hint {
+  margin: 0.4rem 0 0;
+  font-size: 0.85rem;
+  color: var(--mh-color-text-muted, #6f675f);
+}
+
+/* (2) Overlay button pinned to the video's bottom-right corner. */
+.mh-ov-video-holder {
+  position: relative;
+  display: block;
+}
+.mh-ov-video-holder .mh-ov-quiz-overlay {
+  position: absolute;
+  right: 14px;
+  bottom: 20px;
+  z-index: 3;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+  opacity: 0.94;
+}
+.mh-ov-video-holder .mh-ov-quiz-overlay:hover,
+.mh-ov-video-holder .mh-ov-quiz-overlay:focus-visible {
+  opacity: 1;
+}
+
+/* On narrow screens the corner button can crowd the video controls — drop it
+   below the video instead of overlapping the YouTube control bar. */
+@media (max-width: 575.98px) {
+  .mh-ov-video-holder .mh-ov-quiz-overlay {
+    position: static;
+    display: block;
+    margin: 0.6rem auto 0;
+    width: max-content;
+    box-shadow: none;
+  }
+}

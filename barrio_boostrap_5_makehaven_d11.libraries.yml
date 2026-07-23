@@ -1,5 +1,5 @@
 global-styling:
-  version: '1.2.21'
+  version: '1.2.23'
   js:
     js/jquery-compat.js: { weight: -100 }
     js/global.js: {}
@@ -10,6 +10,12 @@ global-styling:
     js/badges.js: {}
     js/faq-accordion.js: {}
     js/theme-toggle.js: {}
+    # Orientation-video page: adds a quiz button above the video + a corner
+    # overlay on the video (self-scopes to /orientation-video, no-op elsewhere).
+    js/orientation-video.js: {}
+    # Quiz UX: clickable option cards, feedback narrative callout, check-mark
+    # legend (self-scopes to body.path-quiz). Pairs with css/pages/quiz.css.
+    js/quiz-enhancements.js: {}
     # Live search dropdown. Safe to ship ahead of its backend: if the
     # /api/v0/quicksearch view is not present on an environment, the first
     # request fails and the script stands down for the session, leaving the
@@ -55,6 +61,8 @@ global-styling:
       css/pages/taxonomy.css: {}
       css/pages/registration.css: {}
       css/pages/registration-legacy.css: {}
+      css/pages/orientation-video.css: {}
+      css/pages/quiz.css: {}
       css/pages/contribution.css: {}
       css/pages/profile.css: {}
       css/pages/blog.css: {}

@@ -1,0 +1,211 @@
+/**
+ * @file
+ * Quiz styling — applies to ALL quizzes (scoped to body.path-quiz), theme-side
+ * so it needs no changes to the contrib Quiz module. Covers the question page
+ * and the per-question feedback page, and reads well on mobile.
+ *
+ * Targets the Quiz module's stable, theme-independent classes:
+ *   - .answering-form, .form-radios .form-item, label.option (question page)
+ *   - .quiz-result-table, .quiz-result-cell-*, .quiz-score-icon (feedback)
+ * plus .mh-quiz-explanation, which js/quiz-enhancements.js adds to the
+ * feedback narrative so it can be styled as a callout.
+ */
+
+/* ── Shared: constrain width so lines aren't uncomfortably wide ────────────── */
+body.path-quiz .answering-form,
+body.path-quiz .quiz-result,
+body.path-quiz .quiz-result-answer,
+body.path-quiz .mh-quiz-explanation,
+body.path-quiz .quiz-result-table {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Question page ─────────────────────────────────────────────────────────── */
+/* Larger, more readable question text. */
+body.path-quiz .answering-form .field--name-body {
+  font-size: 1.3rem;
+  line-height: 1.55;
+  margin-bottom: 1.5rem;
+}
+body.path-quiz .answering-form .field--name-body .field__label {
+  display: none; /* the redundant "Question" label above the question text */
+}
+
+/* The "Choose one" legend. */
+body.path-quiz .answering-form .fieldset__legend {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+/* Answer options as large, tappable cards. Covers both core Drupal
+   (.form-radios > .form-item) and Bootstrap Barrio (.form-check) renderings. */
+body.path-quiz .answering-form .form-radios .form-item,
+body.path-quiz .answering-form .form-checkboxes .form-item,
+body.path-quiz .answering-form .form-check {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  border: 2px solid var(--mh-color-border, #d9d3ca);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin: 0 0 0.85rem;
+  cursor: pointer;
+  transition: border-color 0.12s ease, background-color 0.12s ease;
+}
+/* Bootstrap indents .form-check with padding-left for the floated input; undo
+   it since we lay the row out with flex instead. */
+body.path-quiz .answering-form .form-check {
+  padding-left: 1.25rem;
+}
+body.path-quiz .answering-form .form-radios .form-item:hover,
+body.path-quiz .answering-form .form-checkboxes .form-item:hover,
+body.path-quiz .answering-form .form-check:hover {
+  border-color: var(--mh-color-brand-primary, #8b1919);
+  background: rgba(139, 25, 25, 0.04);
+}
+/* Selected state (modern browsers with :has). */
+body.path-quiz .answering-form .form-item:has(input:checked),
+body.path-quiz .answering-form .form-check:has(input:checked) {
+  border-color: var(--mh-color-brand-primary, #8b1919);
+  background: rgba(139, 25, 25, 0.08);
+}
+/* JS fallback class for :has-less browsers (added by quiz-enhancements.js). */
+body.path-quiz .answering-form .mh-option-selected {
+  border-color: var(--mh-color-brand-primary, #8b1919);
+  background: rgba(139, 25, 25, 0.08);
+}
+
+/* Bigger radio/checkbox control + label. */
+body.path-quiz .answering-form .form-radios .form-item input,
+body.path-quiz .answering-form .form-checkboxes .form-item input,
+body.path-quiz .answering-form .form-check input.form-check-input {
+  width: 1.4rem;
+  height: 1.4rem;
+  margin: 0;
+  float: none;
+  flex: 0 0 auto;
+  accent-color: var(--mh-color-brand-primary, #8b1919);
+}
+body.path-quiz .answering-form .form-item label.option,
+body.path-quiz .answering-form .form-check label.form-check-label {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 0;
+  flex: 1 1 auto;
+  cursor: pointer;
+}
+
+/* The Next / Finish button — give it presence. */
+body.path-quiz .answering-form .form-actions .btn,
+body.path-quiz .answering-form .form-actions input[type="submit"] {
+  font-size: 1.1rem;
+  padding: 0.65rem 1.6rem;
+  margin-top: 0.5rem;
+}
+
+/* ── Feedback page ─────────────────────────────────────────────────────────── */
+/* Results table: clean borders, breathing room, aligned icons. */
+body.path-quiz .quiz-result-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem auto 1.25rem;
+  font-size: 1.05rem;
+}
+body.path-quiz .quiz-result-table th {
+  text-align: left;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--mh-color-text-muted, #6f675f);
+  border-bottom: 2px solid var(--mh-color-border, #d9d3ca);
+  padding: 0.6rem 0.9rem;
+}
+body.path-quiz .quiz-result-table td {
+  padding: 0.75rem 0.9rem;
+  border-bottom: 1px solid var(--mh-color-border, #e7e2da);
+  vertical-align: middle;
+}
+body.path-quiz .quiz-result-table .quiz-result-cell-choice {
+  font-weight: 600;
+}
+body.path-quiz .quiz-score-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  vertical-align: middle;
+}
+/* Tint the row the member actually chose so their answer is obvious. */
+body.path-quiz .quiz-result-table tr.quiz-result-correct {
+  background: rgba(46, 107, 58, 0.10);
+}
+body.path-quiz .quiz-result-table tr.quiz-result-not-correct {
+  background: rgba(178, 42, 42, 0.09);
+}
+/* Column that marks the correct answer — subtle emphasis. */
+body.path-quiz .quiz-result-table .quiz-result-cell-solution {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+/* Legend clarifying the two check marks (injected by quiz-enhancements.js). */
+body.path-quiz .mh-quiz-legend {
+  max-width: 720px;
+  margin: -0.5rem auto 1rem;
+  font-size: 0.85rem;
+  color: var(--mh-color-text-muted, #6f675f);
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+body.path-quiz .mh-quiz-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+body.path-quiz .mh-quiz-legend .swatch {
+  width: 0.95rem;
+  height: 0.95rem;
+  border-radius: 3px;
+  display: inline-block;
+}
+body.path-quiz .mh-quiz-legend .swatch--you { background: #2e6b3a; }
+body.path-quiz .mh-quiz-legend .swatch--answer { background: #808080; }
+
+/* Narrative explanation — make it stand out as a callout. */
+body.path-quiz .mh-quiz-explanation {
+  background: rgba(139, 25, 25, 0.05);
+  border-left: 4px solid var(--mh-color-brand-primary, #8b1919);
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.25rem;
+  margin: 1rem auto 1.5rem;
+  font-size: 1.1rem;
+  line-height: 1.55;
+}
+body.path-quiz .mh-quiz-explanation > :first-child { margin-top: 0; }
+body.path-quiz .mh-quiz-explanation > :last-child { margin-bottom: 0; }
+body.path-quiz .mh-quiz-explanation::before {
+  content: "Why";
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mh-color-brand-primary, #8b1919);
+  margin-bottom: 0.35rem;
+}
+
+/* ── Mobile ────────────────────────────────────────────────────────────────── */
+@media (max-width: 575.98px) {
+  body.path-quiz .answering-form .field--name-body { font-size: 1.15rem; }
+  body.path-quiz .answering-form .form-item label.option { font-size: 1.1rem; }
+  body.path-quiz .answering-form .form-radios .form-item { padding: 0.85rem 1rem; }
+
+  /* Let the results table scroll rather than crush columns. */
+  body.path-quiz .quiz-result-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    font-size: 0.98rem;
+  }
+}
