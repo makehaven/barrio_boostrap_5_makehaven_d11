@@ -13,10 +13,43 @@
   padding-left: 1.25rem;
 }
 
-.interest-parent-only label {
-  cursor: default;
+/* Parent categories are derived, never chosen: the box ticks itself when one of
+   its children is picked. Showing a checkbox that cannot be clicked reads as
+   "tick this first" — a member reported exactly that confusion (2026-07-15) —
+   so render the row as a plain heading instead.
+
+   The input stays in the DOM and keeps its checked state: that state is what
+   submits the parent term with the field. It is visually hidden rather than
+   `display: none` so it still posts and remains reachable to assistive tech,
+   where `aria-disabled` (set in interest-hierarchy.js) explains it. */
+.interest-parent-only input.form-checkbox {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
 }
 
-.interest-parent-only input.form-checkbox {
-  pointer-events: none;
+.interest-parent-only {
+  padding-left: 0;
+  margin-top: 1.15rem;
+  margin-bottom: 0.35rem;
+  border-bottom: 1px solid var(--mh-color-border, #e7e2da);
+  padding-bottom: 0.3rem;
+}
+
+.interest-parent-only:first-child {
+  margin-top: 0;
+}
+
+.interest-parent-only label {
+  cursor: default;
+  padding-left: 0;
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mh-color-text-muted, #6f675f);
 }
