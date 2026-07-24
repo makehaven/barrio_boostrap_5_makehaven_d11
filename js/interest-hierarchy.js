@@ -26,6 +26,25 @@
     return text.trim().charAt(0) === '-';
   }
 
+  /**
+   * Remove the leading '-' depth markers from a checkbox label.
+   *
+   * The dashes are Drupal's taxonomy depth convention and are only used above to
+   * classify parents vs subcategories — showing them to members ("-Woodworking")
+   * is just noise, and the CSS already indents subcategories. Checkbox widgets
+   * only; <option> depth is left alone because browsers ignore option padding,
+   * so there the dash is the only depth cue.
+   */
+  function stripDepthPrefix(label) {
+    const node = Array.from(label.childNodes).find(
+      (child) => child.nodeType === Node.TEXT_NODE && /^\s*-/.test(child.nodeValue)
+    );
+
+    if (node) {
+      node.nodeValue = node.nodeValue.replace(/^\s*-+\s*/, '');
+    }
+  }
+
   function classifySelect(wrapper) {
     wrapper.querySelectorAll('select option').forEach((option) => {
       const text = option.textContent.trim();
@@ -93,8 +112,14 @@
       const text = label.textContent.trim();
       item.classList.remove('interest-parent-category', 'interest-subcategory', 'interest-parent-only');
 
-      if (textStartsWithDash(text)) {
+      // Record the depth before stripping the dashes, so a re-attach (AJAX
+      // rebuilds) still classifies this item correctly once they are gone.
+      const isSubcategory = item.dataset.interestSubcategory === '1' || textStartsWithDash(text);
+
+      if (isSubcategory) {
+        item.dataset.interestSubcategory = '1';
         item.classList.add('interest-subcategory');
+        stripDepthPrefix(label);
         if (currentParentCheckbox?.id) {
           checkbox.dataset.parent = currentParentCheckbox.id;
           parentChildren.set(
