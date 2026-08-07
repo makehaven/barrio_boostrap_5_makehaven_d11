@@ -62,14 +62,18 @@
 
 /* Tier colours. The heading carries no tier class of its own, so `:has()`
    picks it out by the card that follows it. Authoritative tiers on the sponsor
-   vocabulary are platinum / gold / silver / community / inkind (Bronze was
-   removed 2026-06-17). `community` and `inkind` both render inside the single
-   "Community Supporters" group, so they share one warm-neutral band. */
-.mh-sponsors .view-content > h3:has(+ .sponsor-tier-platinum)  { background: #e5e4e2; }
-.mh-sponsors .view-content > h3:has(+ .sponsor-tier-gold)      { background: #ffc107; }
-.mh-sponsors .view-content > h3:has(+ .sponsor-tier-silver)    { background: #c0c0c0; }
-.mh-sponsors .view-content > h3:has(+ .sponsor-tier-community) { background: #d8cfc0; }
-.mh-sponsors .view-content > h3:has(+ .sponsor-tier-inkind)    { background: #d8cfc0; }
+   vocabulary are gold / silver / bronze / community / inkind — renamed from
+   platinum / gold / silver on 2026-08-07 because the two greys were hard to
+   tell apart; prices did not change. `community` and `inkind` both render
+   inside the single "Community Supporters" group, so they share one
+   warm-neutral band. Bands are tinted rather than saturated so they sit under
+   the benefits matrix's accents (makerspace_sponsorship/css/sponsor-benefits.css)
+   without competing with them. */
+.mh-sponsors .view-content > h3:has(+ .sponsor-tier-gold)      { background: #f6e3b0; }
+.mh-sponsors .view-content > h3:has(+ .sponsor-tier-silver)    { background: #dfe3e6; }
+.mh-sponsors .view-content > h3:has(+ .sponsor-tier-bronze)    { background: #ecd8c6; }
+.mh-sponsors .view-content > h3:has(+ .sponsor-tier-community) { background: #e6e2da; }
+.mh-sponsors .view-content > h3:has(+ .sponsor-tier-inkind)    { background: #e6e2da; }
 
 /* Logo tile — white card, centred logo, "since" caption pinned bottom. */
 .mh-sponsors .sponsor-card {
