@@ -272,6 +272,19 @@ header#header #navbar-main {
   background: var(--mh-color-brand-primary) !important;
   border-color: #fff !important;
 }
+/* Secondary CTAs (Classes / Take a Tour / Donate) are outline-white, so on a
+   slide with a bright or busy area behind them the white label and border wash
+   out. Give them a translucent dark scrim + soft shadow: enough to seat the
+   white text on any photo, still light enough to read as a ghost button next
+   to the solid red primary.
+   NOTE: frontpage.css carries the same intent, but these selectors include the
+   block ID (1,3,x) and outrank it (0,6,1) — so the scrim has to live here to
+   take effect. */
+.path-frontpage #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow .block-action .btn:not(:first-child),
+.path-frontpage .view-homepage-slideshow .block-action .btn:not(:first-child) {
+  background: rgba(30, 31, 36, .55) !important;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, .35) !important;
+}
 .path-frontpage #block-barrio-boostrap-5-makehaven-d11-slideshow-front-slideshow .block-action .btn:hover,
 .path-frontpage .view-homepage-slideshow .block-action .btn:hover {
   background: #fff !important;
