@@ -308,11 +308,6 @@ function barrio_boostrap_5_makehaven_d11_preprocess_node(&$variables) {
  *  - [[GEMS_UPCOMING]] on /gems (node 30278) → gems_cohorts View block.
  *  - [[WORKSPACE_AVAILABILITY]] on /workspace (node 3890) → the
  *    workspace_listing block (available units from the workspace_rental module).
- *  - [[STORAGE_PRICING]] on /node/13029 → the storage_pricing block (types,
- *    photos/diagrams, prices and live availability from the storage_type
- *    taxonomy). The page previously carried a hand-typed price list that had
- *    drifted badly — it advertised $46 and $60 for floor spaces billed at $65
- *    and $85 — so prices must only ever render from field_monthly_price.
  *
  * Both bodies stay fully staff-editable; the token marks where the live widget
  * goes, so the list is never hand-maintained. This hooks the body FIELD rather
@@ -367,74 +362,7 @@ function barrio_boostrap_5_makehaven_d11_preprocess_field(array &$variables): vo
       ->merge(CacheableMetadata::createFromRenderArray($variables['items'][0]['content']))
       ->setCacheMaxAge(3600)
       ->applyTo($variables['items'][0]['content']);
-    return;
   }
-
-  // /node/13029 "Get Storage" — storage types, prices and live availability.
-  //
-  // Unlike /gems and /workspace this body is basic_html, which strips <table>,
-  // <div> and class attributes. Splicing rendered HTML into #text would send
-  // the widget through that filter and silently delete it, so the block is
-  // spliced in as a sibling render element instead: the author's prose still
-  // goes through its text format, and only the trusted block renders raw.
-  if ($nid === 13029 && strpos($text, '[[STORAGE_PRICING]]') !== FALSE) {
-    try {
-      $build = \Drupal::service('plugin.manager.block')
-        ->createInstance('storage_pricing_block', [])
-        ->build();
-    }
-    catch (\Throwable $e) {
-      // storage_manager unavailable — drop the token rather than print it raw.
-      $variables['items'][0]['content']['#text'] = str_replace('[[STORAGE_PRICING]]', '', $text);
-      return;
-    }
-    _barrio_boostrap_5_makehaven_d11_splice_body_widget($variables, '[[STORAGE_PRICING]]', $build);
-  }
-}
-
-/**
- * Replaces a token in a body field with a render array, without re-filtering.
- *
- * The prose on either side of the token is re-wrapped in its own processed_text
- * element so it still passes through the node's text format. The widget is a
- * sibling, so a restrictive format (basic_html strips tables, divs and classes)
- * cannot eat it. Cache metadata from the widget is bubbled onto the field.
- *
- * @param array $variables
- *   The hook_preprocess_field() variables, modified by reference.
- * @param string $token
- *   The literal token to replace, e.g. '[[STORAGE_PRICING]]'.
- * @param array $build
- *   Render array to splice in where the token was.
- */
-function _barrio_boostrap_5_makehaven_d11_splice_body_widget(array &$variables, string $token, array $build): void {
-  $content = $variables['items'][0]['content'];
-  $parts = explode($token, $content['#text'], 2);
-  $format = $content['#format'] ?? 'basic_html';
-
-  $replacement = [];
-  if (trim($parts[0]) !== '') {
-    $replacement['before'] = [
-      '#type' => 'processed_text',
-      '#text' => $parts[0],
-      '#format' => $format,
-    ];
-  }
-  $replacement['widget'] = $build;
-  if (isset($parts[1]) && trim($parts[1]) !== '') {
-    $replacement['after'] = [
-      '#type' => 'processed_text',
-      '#text' => $parts[1],
-      '#format' => $format,
-    ];
-  }
-
-  CacheableMetadata::createFromRenderArray($build)
-    ->merge(CacheableMetadata::createFromRenderArray($content))
-    ->setCacheMaxAge(3600)
-    ->applyTo($replacement);
-
-  $variables['items'][0]['content'] = $replacement;
 }
 
 /**
