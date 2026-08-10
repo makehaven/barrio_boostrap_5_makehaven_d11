@@ -146,3 +146,13 @@ body.mh-feedback-panel-open .mh-feedback-toggle {
     max-width: 100vw;
   }
 }
+
+/* Hidden while the member-setup bar is on the page: brand-new members
+   mid-funnel get one clear next step, not a competing feedback affordance
+   (JR, 2026-08-10). The setup bar's block visibility is the funnel path
+   list, so this scopes itself. welcome@ + the thank-you page's help line
+   remain the funnel feedback channel. */
+/* !important: the widget's own JS sets an inline display when it mounts. */
+body:has(.mh-setup-bar) .mh-feedback-widget {
+  display: none !important;
+}
