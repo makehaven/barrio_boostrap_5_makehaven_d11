@@ -40,9 +40,13 @@
     }
 
     var path = window.location.pathname || '';
+    // /legal_accept: the T&C navigation lock blocks every other route for the
+    // session, so a widget iframe spawned here gets redirected back to
+    // /legal_accept — recursing into more locked requests whose session
+    // writes race the accept form's own unlock.
     return FEEDBACK_FORM_PATHS.some(function (feedbackPath) {
       return path.indexOf(feedbackPath) === 0;
-    }) || path.indexOf('/admin/') === 0;
+    }) || path.indexOf('/admin/') === 0 || path.indexOf('/legal_accept') === 0;
   }
 
   function collectPageContext() {
@@ -109,7 +113,7 @@
     success.style.flexDirection = 'column';
     success.style.gap = '.75rem';
     success.innerHTML = [
-      '<h3 style="margin:0;font-size:1.1rem;">Feedback sent</h3>',
+      '<h3 class="mh-feedback-panel__success-heading" style="margin:0;font-size:1.1rem;">Feedback sent</h3>',
       '<p class="mh-feedback-panel__success-text" style="margin:0;color:#4b5563;">Thanks. Your report was submitted with this page context.</p>',
       '<button type="button" class="mh-feedback-panel__reset" style="align-self:flex-start;border:0;border-radius:999px;background:#8b1919;color:#fff;padding:.7rem 1rem;font-weight:700;cursor:pointer;">Send another report</button>'
     ].join('');
@@ -140,7 +144,11 @@
       '    <button type="button" class="mh-feedback-panel__close" aria-label="Close feedback panel">&times;</button>',
       '  </div>',
       '  <p class="mh-feedback-panel__summary"></p>',
-      '  <iframe class="mh-feedback-panel__frame" title="Website feedback form" loading="lazy" src="' + FEEDBACK_IFRAME_SRC + '"></iframe>',
+      // No src yet: the form is a full authenticated page render, so loading
+      // it on every pageview costs a hidden Drupal request per view and lets
+      // redirects (login, T&C lock) land inside the frame unnoticed. The src
+      // is assigned on first open.
+      '  <iframe class="mh-feedback-panel__frame" title="Website feedback form"></iframe>',
       '</aside>'
     ].join('');
 
@@ -247,6 +255,7 @@
     var summary = widget.querySelector('.mh-feedback-panel__summary');
     var frame = widget.querySelector('.mh-feedback-panel__frame');
     var success = ensureSuccessMessage(panel);
+    var successHeading = success.querySelector('.mh-feedback-panel__success-heading');
     var successText = success.querySelector('.mh-feedback-panel__success-text');
     var resetButton = success.querySelector('.mh-feedback-panel__reset');
 
@@ -260,10 +269,6 @@
 
     if (panel.parentNode !== document.body) {
       document.body.appendChild(panel);
-    }
-
-    if (frame.getAttribute('src') !== FEEDBACK_IFRAME_SRC) {
-      frame.setAttribute('src', FEEDBACK_IFRAME_SRC);
     }
 
     function chatbotMobileOffsetPx() {
@@ -387,14 +392,28 @@
       frame.style.display = 'block';
     }
 
-    function showSuccess(message) {
+    function showNotice(heading, message, buttonLabel) {
+      if (successHeading) {
+        successHeading.textContent = heading;
+      }
       if (successText) {
-        successText.textContent = message || 'Thanks. Your report was submitted with this page context.';
+        successText.textContent = message;
+      }
+      if (resetButton) {
+        resetButton.textContent = buttonLabel;
       }
       frame.hidden = true;
       frame.style.display = 'none';
       success.hidden = false;
       success.style.display = 'flex';
+    }
+
+    function showSuccess(message) {
+      showNotice('Feedback sent', message || 'Thanks. Your report was submitted with this page context.', 'Send another report');
+    }
+
+    function showUnavailable() {
+      showNotice('Feedback form unavailable', 'The feedback form could not be loaded right now. Please try again in a moment.', 'Try again');
     }
 
     function resetForm() {
@@ -407,6 +426,9 @@
     }
 
     function openPanel() {
+      if (!frame.getAttribute('src')) {
+        frame.setAttribute('src', FEEDBACK_IFRAME_SRC);
+      }
       refreshSummary();
       panel.hidden = false;
       overlay.hidden = false;
@@ -437,10 +459,16 @@
 
     frame.addEventListener('load', function () {
       var doc;
+      var framePath;
       var message;
+
+      if (!frame.getAttribute('src')) {
+        return;
+      }
 
       try {
         doc = frame.contentDocument || frame.contentWindow.document;
+        framePath = frame.contentWindow.location.pathname || '';
       }
       catch (e) {
         return;
@@ -453,6 +481,15 @@
       if (doc.querySelector('form.webform-submission-form, form[id^="webform-submission-"]')) {
         showForm();
         injectIframeTweaks(frame, collectPageContext());
+        return;
+      }
+
+      // A formless document only means "submitted" if we are still on the
+      // feedback form's own URL. A redirect (T&C lock, login, access denied)
+      // also lands here formless, and claiming "sent" for it told members we
+      // filed reports they never wrote.
+      if (!FEEDBACK_FORM_PATHS.some(function (feedbackPath) { return framePath.indexOf(feedbackPath) !== -1; })) {
+        showUnavailable();
         return;
       }
 

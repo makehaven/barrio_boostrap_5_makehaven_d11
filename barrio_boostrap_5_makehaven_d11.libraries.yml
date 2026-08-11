@@ -133,6 +133,10 @@ landing_page:
       css/pages/landing.css: {}
 
 page-feedback:
+  # Bump this version on every widget JS change: the aggregate filename hash
+  # ignores file contents, so without a bump browsers and nginx keep serving
+  # the stale aggregate after deploy.
+  version: '1.1'
   js:
     js/page-feedback-widget.js: {}
   css:
