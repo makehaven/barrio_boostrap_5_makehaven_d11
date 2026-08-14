@@ -127,6 +127,19 @@
         </div>
       </div>
 
+      {# Teaching call-to-action. Without it a course page dead-ends for anyone
+         who reads it and thinks they could run it: the sidebar offers to notify
+         them when someone else schedules it, and nothing else. Copy and
+         destination come from instructor_companion, which varies them by
+         whether the reader is signed in and a member. #}
+      {% if content.teach_this_course|render %}
+        <div class="card mb-4 course-teach-card">
+          <div class="card-body">
+            {{ content.teach_this_course }}
+          </div>
+        </div>
+      {% endif %}
+
       <div class="card mb-4 course-sessions-card">
         <div class="card-body">
           <h5 class="card-title">{{ 'Scheduled Sessions'|t }}</h5>
