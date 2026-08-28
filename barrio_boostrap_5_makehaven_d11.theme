@@ -365,9 +365,9 @@ function barrio_boostrap_5_makehaven_d11_preprocess_field(array &$variables): vo
 /**
  * Renders a widget into a body token, carrying its assets and cache metadata.
  *
- * renderInIsolation() is what lets these widgets render from inside a
- * preprocess hook without a "render context" error, but it throws away
- * everything the widget bubbled up. Cache metadata was already re-applied;
+ * Rendering in isolation is what lets these widgets render from inside a
+ * preprocess hook without a "render context" error, but renderInIsolation()
+ * throws away everything the widget bubbled up. Cache metadata was re-applied;
  * #attached was not, so a widget's own CSS/JS only reached the page if some
  * OTHER element on it happened to attach the same library. The workspace
  * floorplan did exactly that — it borrowed its library from a duplicate block
