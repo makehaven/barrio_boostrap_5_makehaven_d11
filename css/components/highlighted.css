@@ -6,8 +6,23 @@
    reserving a ~120px empty band above the breadcrumb whenever there were no
    messages. Collapse the region's section padding so it takes no vertical
    space when empty. Higher specificity than `.section` so it wins regardless
-   of stylesheet order. */
-.highlighted > aside.section {
+   of stylesheet order.
+
+   2026-09-09: that held on desktop but NOT on mobile, and the band was still
+   there on live. The responsive rule
+   `@media (max-width: 767.98px) { body:not(.path-frontpage) .section { padding: 20px 0 } }`
+   scores (0,2,1) — exactly the same as `.highlighted > aside.section` — so the
+   tie broke on load order and the later aggregate won, leaving 40px of empty
+   region above the breadcrumb on every non-front page on a phone. That is what
+   members reported as "the join page looks blank at the top" (ledger #42480,
+   open since 2026-06-16); /join-makehaven and /events both measured 40px with
+   zero text content on live. The second selector below simply outscores the
+   responsive rule (0,3,2) so the collapse holds at every width. Keep both
+   selectors: the first is the plain case, the second only exists to win the
+   tie. Real messages are unaffected — they carry their own margins, and this
+   only zeroes the wrapper's padding. */
+.highlighted > aside.section,
+body:not(.path-frontpage) .highlighted > aside.section {
   padding-top: 0;
   padding-bottom: 0;
 }
