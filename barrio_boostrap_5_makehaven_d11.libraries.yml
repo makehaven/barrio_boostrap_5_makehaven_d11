@@ -86,6 +86,7 @@ global-styling:
       css/pages/faq.css: {}
       css/pages/programs.css: {}
       css/pages/gems.css: {}
+      css/pages/course.css: {}
       css/pages/teambuild.css: {}
       css/pages/teachworkshop.css: {}
       css/pages/membership.css: {}

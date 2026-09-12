@@ -5,10 +5,10 @@
  * card grid (see css/pages/events-modern.css). The teaser template emits the
  * same Bootstrap card DOM (.card / .card-img-top / .card-body / .card-title /
  * .card-text / .summary / .btn), so the rules below largely parallel the
- * event-card rules but are scoped to .view-public-course-catalog.
+ * event-card rules but are scoped to :is(.view-public-course-catalog, .view-public-program-catalog).
  */
 
-.view-public-course-catalog .view-content {
+:is(.view-public-course-catalog, .view-public-program-catalog) .view-content {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   column-gap: clamp(1rem, 1.8vw, 1.35rem);
@@ -17,13 +17,13 @@
   padding-bottom: 1.25rem;
 }
 
-.view-public-course-catalog .views-row {
+:is(.view-public-course-catalog, .view-public-program-catalog) .views-row {
   margin: 0;
   display: flex;
   min-width: 0;
 }
 
-.view-public-course-catalog .card {
+:is(.view-public-course-catalog, .view-public-program-catalog) .card {
   height: 100%;
   width: 100%;
   max-width: none;
@@ -39,7 +39,7 @@
   transition: transform var(--mh-transition-base), box-shadow var(--mh-transition-base);
 }
 
-.view-public-course-catalog .card:hover {
+:is(.view-public-course-catalog, .view-public-program-catalog) .card:hover {
   transform: translateY(-3px);
   box-shadow: var(--mh-shadow-md);
 }
@@ -51,7 +51,7 @@
  * cover-fit. Putting aspect-ratio on the <img> alone (as before) left the
  * nested .field / <a> wrappers free to inherit baseline gaps, producing the
  * inset / padded look on /workshops cards. */
-.view-public-course-catalog .card-img-top {
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-img-top {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -61,9 +61,9 @@
   line-height: 0;
 }
 
-.view-public-course-catalog .card-img-top > .field,
-.view-public-course-catalog .card-img-top .field__item,
-.view-public-course-catalog .card-img-top a {
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-img-top > .field,
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-img-top .field__item,
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-img-top a {
   display: block;
   width: 100%;
   height: 100%;
@@ -72,7 +72,7 @@
   line-height: 0;
 }
 
-.view-public-course-catalog .card-img-top img {
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-img-top img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -82,7 +82,7 @@
   vertical-align: top;
 }
 
-.view-public-course-catalog .card-body {
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-body {
   display: flex;
   flex-direction: column;
   gap: var(--mh-space-sm);
@@ -92,7 +92,7 @@
   padding-bottom: 2.7rem;
 }
 
-.view-public-course-catalog .card-title {
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-title {
   margin: 0;
   font-family: var(--mh-font-display);
   font-size: clamp(1.1rem, 1.5vw, 1.45rem);
@@ -100,22 +100,22 @@
   color: var(--mh-color-neutral-900);
 }
 
-.view-public-course-catalog .card-title a {
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-title a {
   color: inherit;
   text-decoration: none;
 }
 
-.view-public-course-catalog .card-title a:hover {
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-title a:hover {
   color: var(--mh-color-brand-primary);
 }
 
-.view-public-course-catalog .card-text {
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-text {
   display: block;
   color: var(--mh-color-neutral-800);
   line-height: 1.55;
 }
 
-.view-public-course-catalog .card-text time {
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-text time {
   display: flex;
   align-items: center;
   margin-bottom: var(--mh-space-sm);
@@ -127,7 +127,7 @@
   width: fit-content;
 }
 
-.view-public-course-catalog .card-text .summary {
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-text .summary {
   margin-top: var(--mh-space-sm);
   margin-bottom: 0;
   color: var(--mh-color-neutral-700);
@@ -142,7 +142,7 @@
   -webkit-box-orient: vertical;
 }
 
-.view-public-course-catalog .card-text .summary::after {
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-text .summary::after {
   content: "";
   position: absolute;
   left: 0;
@@ -158,7 +158,7 @@
   pointer-events: none;
 }
 
-.view-public-course-catalog .card-text .btn {
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-text .btn {
   margin-top: 0;
   width: auto;
   position: absolute;
@@ -172,27 +172,27 @@
   color: #fff;
 }
 
-.view-public-course-catalog .card-text .btn:hover,
-.view-public-course-catalog .card-text .btn:focus {
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-text .btn:hover,
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-text .btn:focus {
   border-color: var(--mh-color-brand-primary-strong);
   background: var(--mh-color-brand-primary-strong);
   color: #fff;
 }
 
 /* Exposed filter bar — neutralize default Bootstrap form spacing */
-.view-public-course-catalog .views-exposed-form {
+:is(.view-public-course-catalog, .view-public-program-catalog) .views-exposed-form {
   margin-bottom: 1.5rem;
 }
 
 /* Responsive collapse: 2-up on tablet, 1-up on mobile */
 @media (max-width: 992px) {
-  .view-public-course-catalog .view-content {
+  :is(.view-public-course-catalog, .view-public-program-catalog) .view-content {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 576px) {
-  .view-public-course-catalog .view-content {
+  :is(.view-public-course-catalog, .view-public-program-catalog) .view-content {
     grid-template-columns: 1fr;
   }
 }
@@ -205,10 +205,10 @@
  * gated, which is enforced on the CiviCRM event (event type 16, "Ticketed
  * Member Only").
  */
-.view-public-course-catalog .course-teaser--member-only {
+:is(.view-public-course-catalog, .view-public-program-catalog) .course-teaser--member-only {
   position: relative;
 }
-.view-public-course-catalog .course-teaser--member-only::before {
+:is(.view-public-course-catalog, .view-public-program-catalog) .course-teaser--member-only::before {
   content: "Member Only";
   position: absolute;
   top: 0.55rem;
@@ -232,14 +232,14 @@
  * field_stat_upcoming / field_stat_runs fields (maintained by
  * instructor_companion.stats_sync).
  */
-.view-public-course-catalog .card-text .course-stat-chips {
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-text .course-stat-chips {
   display: flex;
   flex-wrap: wrap;
   gap: var(--mh-space-2xs);
   margin-bottom: var(--mh-space-sm);
 }
 
-.view-public-course-catalog .card-text .course-stat-chip {
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-text .course-stat-chip {
   display: inline-flex;
   align-items: center;
   padding: var(--mh-space-2xs) var(--mh-space-sm);
@@ -252,12 +252,12 @@
 }
 
 /* Cancel the legacy time-only spacing now that the container owns gap. */
-.view-public-course-catalog .card-text .course-stat-chips time {
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-text .course-stat-chips time {
   margin-bottom: 0;
   width: auto;
 }
 
-.view-public-course-catalog .card-text .course-stat-chip--runs {
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-text .course-stat-chip--runs {
   background: #eef0f4;
   color: var(--mh-color-neutral-600);
 }

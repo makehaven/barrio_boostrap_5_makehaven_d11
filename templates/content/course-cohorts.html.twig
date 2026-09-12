@@ -1,0 +1,44 @@
+{#
+/**
+ * @file
+ * Partial: the upcoming scheduled runs of a course as a vertical list of
+ * rows — title, start date, Register button.
+ *
+ * Used by node--course--program--full.html.twig (after the body) and by the
+ * [[COURSE_UPCOMING]] body token (wherever staff place it in the body), so a
+ * program page lists its cohorts exactly once, in the same markup either way.
+ *
+ * Rows say "Starts" rather than "session" because for a program each event
+ * record is the first meeting of a multi-week cohort, and readers were asking
+ * staff what day of the week the cohort met (ledger #45066).
+ *
+ * Variables:
+ *  - events: rows from _barrio_boostrap_5_makehaven_d11_course_upcoming_events().
+ *  - nouns: from _barrio_boostrap_5_makehaven_d11_course_nouns().
+ */
+#}
+<div class="mh-cohorts" id="cohorts">
+  {% if events %}
+    <ul class="mh-cohorts__list list-unstyled">
+      {% for ev in events %}
+        <li class="mh-cohort card border-0 shadow-sm">
+          <h3 class="mh-cohort__title h5"><a href="{{ ev.info }}">{{ ev.title }}</a></h3>
+          <div class="mh-cohort__when">
+            <span class="mh-cohort__label">{{ 'Starts:'|t }}</span>
+            <time datetime="{{ ev.iso }}">{{ ev.date }} &middot; {{ ev.time }}</time>
+          </div>
+          <div class="mh-cohort__actions">
+            <a href="{{ ev.register }}" class="btn btn-mh-red btn-sm">{{ 'Register'|t }} &rarr;</a>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="mh-cohorts__empty">
+      {{ 'No @plural are open for registration right now. New @plural are announced regularly — follow this @single below to hear first.'|t({
+        '@plural': nouns.instance_plural,
+        '@single': nouns.single,
+      }) }}
+    </p>
+  {% endif %}
+</div>

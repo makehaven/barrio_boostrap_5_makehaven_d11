@@ -1,0 +1,80 @@
+/* === COURSE PAGES (node type: course) ============================== */
+/* Body classes .page-course / .page-course--{type} are set in
+   THEME_preprocess_html(). Program pages (.page-course--program) render
+   node--course--program--full.html.twig: a full-bleed .mh-page landing with
+   its own banner, so the theme chrome that the other mockup pages hide per
+   node id (see gems.css, membership.css) is hidden here per course type. */
+
+/* Every course page: the node template renders its own <h1>, so the theme
+   page-title block was a duplicate heading directly above it. */
+.page-course .block-page-title-block { display: none; }
+
+/* ── Program pages: full-bleed landing layout ─────────────────────── */
+.page-course--program .block-system-breadcrumb-block,
+.page-course--program #sidebar_first { display: none; }
+.page-course--program main#content.main-content { flex: 0 0 100%; max-width: 100%; }
+.page-course--program { overflow-x: hidden; }
+.page-course--program main.main-content,
+.page-course--program section.section { padding-top: 0; }
+.page-course--program #main-wrapper { background: transparent; }
+
+/* Banner meta line: "2 upcoming cohorts ↓ · 19 cohorts so far". */
+.mh-program__meta {
+  margin: .75rem 0 0;
+  font-size: .95rem;
+  color: rgba(255, 255, 255, .85);
+}
+.mh-program__meta a { color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, .5); }
+.mh-program__meta a:hover { border-bottom-color: #fff; }
+.mh-program__meta-sep { margin: 0 .5rem; }
+
+/* Staff-only "Schedule a cohort" action sits above the body, out of the copy. */
+.mh-program__staff { text-align: right; }
+
+/* Aside cards: badges / coaches / follow. */
+.mh-program__card .instructor-list li { margin-bottom: .25rem; }
+.mh-program__card .course-notify-area .flag a { font-weight: 600; }
+
+/* ── Cohort list (course-cohorts.html.twig) ───────────────────────── */
+/* One full-width row per cohort: title · Starts: date · Register. Wraps to a
+   stack on narrow screens. Same shape as the old gems_cohorts View rows so the
+   page reads the same after the move. */
+.mh-cohorts__list {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  margin: 0;
+  padding: 0;
+}
+.mh-cohort {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .25rem 1.25rem;
+  padding: 1.25rem 1.5rem;
+  margin: 0;
+}
+.mh-cohort__title {
+  margin: 0;
+  font-size: 1.15rem;
+  flex: 0 0 auto;
+  min-width: 11rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.mh-cohort__title a { text-decoration: none; color: var(--mh-red, var(--mh-color-brand-primary)); }
+.mh-cohort__label { color: var(--mh-red, var(--mh-color-brand-primary)); font-weight: 600; }
+.mh-cohort__actions { margin-left: auto; display: flex; gap: .5rem; }
+.mh-cohorts__empty {
+  text-align: center;
+  color: var(--bs-secondary-color, #6c757d);
+  font-style: italic;
+}
+[data-bs-theme="dark"] .mh-cohort.card { background: #1e1e1e; }
+[data-bs-theme="dark"] .mh-program__card.card { background: #1e1e1e; }
+
+@media (max-width: 575.98px) {
+  .mh-cohort__actions { margin-left: 0; width: 100%; }
+  .mh-cohort__actions .btn { width: 100%; }
+}

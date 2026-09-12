@@ -9,6 +9,9 @@
  *  - workshop_flag_link: Notification link (Flag or Login/Register).
  *  - workshop_interest_count: Number of people interested.
  *  - workshop_runs_count: Total historical runs.
+ *  - course_nouns: type-aware wording (workshop / program / meetup / class).
+ *
+ * Programs do not use this template — see node--course--program--full.html.twig.
  */
 #}
 <article{{ attributes.addClass('node', 'node--type-course', 'node--view-mode-full', 'container') }}>
@@ -66,7 +69,7 @@
 
       {% if workshop_instructors %}
         <div class="course-instructors mb-5">
-          <h3>{{ 'Taught by'|t }}</h3>
+          <h3>{{ course_nouns.type == 'meetup' ? 'Hosted by'|t : 'Taught by'|t }}</h3>
           <ul class="instructor-list">
             {% for instr in workshop_instructors %}
               <li><a href="{{ instr.url }}">{{ instr.name }}</a></li>
@@ -120,7 +123,7 @@
             {{ workshop_flag_link }}
             {% if workshop_interest_count > 0 %}
               <p class="mt-2 small text-muted">
-                {{ '★ @count people are currently interested in this workshop.'|t({'@count': workshop_interest_count}) }}
+                {{ '★ @count people are currently interested in this @single.'|t({'@count': workshop_interest_count, '@single': course_nouns.single}) }}
               </p>
             {% endif %}
           </div>
@@ -142,7 +145,7 @@
 
       <div class="card mb-4 course-sessions-card">
         <div class="card-body">
-          <h5 class="card-title">{{ 'Scheduled Sessions'|t }}</h5>
+          <h5 class="card-title">{{ 'Scheduled @plural'|t({'@plural': course_nouns.instance_plural|capitalize}) }}</h5>
           {% if workshop_upcoming_events %}
             <ul class="list-group list-group-flush upcoming-sessions-list">
               {% for ev in workshop_upcoming_events %}
@@ -157,7 +160,7 @@
             </ul>
           {% else %}
             <p class="card-text text-muted italic">
-              {{ 'No sessions currently scheduled. Join the notification list to be alerted when new dates are added!'|t }}
+              {{ 'No @plural currently scheduled. Join the notification list to be alerted when new dates are added!'|t({'@plural': course_nouns.instance_plural}) }}
             </p>
           {% endif %}
         </div>

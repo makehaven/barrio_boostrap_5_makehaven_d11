@@ -1,14 +1,16 @@
 {#
 /**
  * @file
- * Teaser template for Course nodes — used by the public catalog at
- * /workshops. Mirrors the event-card DOM (.card / .card-img-top /
+ * Teaser template for Course nodes — used by the public catalogs at
+ * /workshops and /programs (and the member catalog). Mirrors the event-card DOM (.card / .card-img-top /
  * .card-body / .card-title / .card-text) so the catalog inherits the same
  * visual treatment as /events.
  *
  * Variables provided by barrio_boostrap_5_makehaven_d11_preprocess_node__course__teaser():
  *  - workshop_upcoming_count: Number of scheduled future instances.
  *  - workshop_runs_count: Total historical runs.
+ *  - course_nouns: type-aware wording — the button says "View program" on a
+ *    program card, "View workshop" on a workshop card, etc.
  *  - attributes adds 'course-teaser--member-only' on badge_class courses.
  */
 #}
@@ -30,13 +32,17 @@
         {% if workshop_upcoming_count > 0 %}
           <time class="course-stat-chip course-stat-chip--upcoming">
             {{ workshop_upcoming_count }}
-            {{ workshop_upcoming_count == 1 ? 'upcoming session'|t : 'upcoming sessions'|t }}
+            {{ workshop_upcoming_count == 1 ? 'upcoming @instance'|t({'@instance': course_nouns.instance}) : 'upcoming @plural'|t({'@plural': course_nouns.instance_plural}) }}
           </time>
         {% endif %}
 
         {% if workshop_runs_count > 0 %}
           <span class="course-stat-chip course-stat-chip--runs">
-            {{ workshop_runs_count == 1 ? 'Run 1 time'|t : 'Run @count times'|t({'@count': workshop_runs_count}) }}
+            {% if course_nouns.type == 'program' %}
+              {{ workshop_runs_count == 1 ? '1 cohort so far'|t : '@count cohorts so far'|t({'@count': workshop_runs_count}) }}
+            {% else %}
+              {{ workshop_runs_count == 1 ? 'Run 1 time'|t : 'Run @count times'|t({'@count': workshop_runs_count}) }}
+            {% endif %}
           </span>
         {% endif %}
       </div>
@@ -54,7 +60,7 @@
         </div>
       {% endif %}
 
-      <a href="{{ url }}" class="btn btn-primary">{{ 'View workshop'|t }} →</a>
+      <a href="{{ url }}" class="btn btn-primary">{{ course_nouns.view }} →</a>
     </div>
   </div>
 

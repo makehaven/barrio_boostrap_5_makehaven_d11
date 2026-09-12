@@ -66,6 +66,148 @@ function barrio_boostrap_5_makehaven_d11_form_system_theme_settings_alter(&$form
 }
 
 /**
+ * Wording for a course by its type.
+ *
+ * Course nodes describe four different things — a workshop, a program (a
+ * multi-week cohort with a coach, e.g. GEMS), a meetup, and a Build & Badge
+ * class — and every template used to say "workshop" for all of them. Staff
+ * reported the mismatch on the GEMS page twice (ledger #44028, #45066). One
+ * table here, read by the course templates and the cohort-list partial, so a
+ * new course type is a one-line change and no template hardcodes a noun.
+ *
+ * @param string|null $type
+ *   The field_course_type value.
+ *
+ * @return array
+ *   Keys: single (the thing), instance / instance_plural (one scheduled run
+ *   of it), view (catalog-card button label).
+ */
+function _barrio_boostrap_5_makehaven_d11_course_nouns(?string $type): array {
+  switch ($type) {
+    case 'program':
+      return [
+        'type' => 'program',
+        'single' => t('program'),
+        'instance' => t('cohort'),
+        'instance_plural' => t('cohorts'),
+        'view' => t('View program'),
+      ];
+
+    case 'meetup':
+      return [
+        'type' => 'meetup',
+        'single' => t('meetup'),
+        'instance' => t('meetup'),
+        'instance_plural' => t('meetups'),
+        'view' => t('View meetup'),
+      ];
+
+    case 'badge_class':
+      return [
+        'type' => 'badge_class',
+        'single' => t('class'),
+        'instance' => t('session'),
+        'instance_plural' => t('sessions'),
+        'view' => t('View class'),
+      ];
+
+    default:
+      return [
+        'type' => 'workshop',
+        'single' => t('workshop'),
+        'instance' => t('session'),
+        'instance_plural' => t('sessions'),
+        'view' => t('View workshop'),
+      ];
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for node.
+ *
+ * Adds node--course--{type}--{view_mode} so a course type can own its page.
+ * Programs use it: a program's course node IS its public page (see
+ * node--course--program--full.html.twig), while workshops keep the generic
+ * two-column course template.
+ */
+function barrio_boostrap_5_makehaven_d11_theme_suggestions_node_alter(array &$suggestions, array $variables): void {
+  $node = $variables['elements']['#node'] ?? NULL;
+  if (!$node instanceof NodeInterface || $node->bundle() !== 'course' || !$node->hasField('field_course_type')) {
+    return;
+  }
+  $type = $node->get('field_course_type')->value;
+  if ($type === NULL || $type === '') {
+    return;
+  }
+  $view_mode = $variables['elements']['#view_mode'] ?? 'full';
+  $suggestions[] = 'node__course__' . $type;
+  $suggestions[] = 'node__course__' . $type . '__' . $view_mode;
+}
+
+/**
+ * Upcoming scheduled runs of a course.
+ *
+ * CiviCRM events linked by field_parent_course, not templates, active,
+ * starting from now. Shared by the course full-page preprocess (sidebar /
+ * program cohort list)
+ * and the [[COURSE_UPCOMING]] body token. Each row: id, title, date, time,
+ * iso, info (event page) and register (registration page) URLs.
+ *
+ * @param \Drupal\node\NodeInterface $node
+ *   The course node.
+ * @param int $limit
+ *   Maximum rows.
+ *
+ * @return array
+ *   Rows, soonest first. Empty when nothing is scheduled or the CiviCRM
+ *   tables are unavailable.
+ */
+function _barrio_boostrap_5_makehaven_d11_course_upcoming_events(NodeInterface $node, int $limit = 8): array {
+  $database = \Drupal::database();
+  $rows = [];
+  try {
+    if (!$database->schema()->tableExists('civicrm_event__field_parent_course')) {
+      return [];
+    }
+    $linked = $database->select('civicrm_event__field_parent_course', 'pc')
+      ->fields('pc', ['entity_id'])
+      ->condition('pc.field_parent_course_target_id', (int) $node->id())
+      ->execute()
+      ->fetchCol();
+    if (empty($linked)) {
+      return [];
+    }
+    $result = $database->select('civicrm_event', 'e')
+      ->fields('e', ['id', 'start_date', 'title'])
+      ->condition('e.id', $linked, 'IN')
+      ->condition('e.is_template', 0)
+      ->condition('e.is_active', 1)
+      ->condition('e.start_date', date('Y-m-d H:i:s'), '>=')
+      ->orderBy('e.start_date', 'ASC')
+      ->range(0, $limit)
+      ->execute()
+      ->fetchAll();
+    foreach ($result as $row) {
+      $ts = strtotime($row->start_date);
+      $rows[] = [
+        'id' => (int) $row->id,
+        'title' => (string) $row->title,
+        'date' => date('D, M j, Y', $ts),
+        'time' => date('g:ia', $ts),
+        'iso' => date('c', $ts),
+        'url' => '/civicrm-event/' . $row->id,
+        'info' => '/civicrm/event/info?id=' . $row->id . '&reset=1',
+        'register' => '/civicrm/event/register?id=' . $row->id . '&reset=1',
+      ];
+    }
+  }
+  catch (\Throwable $e) {
+    return [];
+  }
+  return $rows;
+}
+
+/**
  * Implements hook_preprocess_node__course().
  *
  * Provides data for the course node full view:
@@ -82,9 +224,23 @@ function barrio_boostrap_5_makehaven_d11_preprocess_node__course(array &$variabl
   $nid = $node->id();
   $database = \Drupal::database();
   $current_user = \Drupal::currentUser();
-  $now = date('Y-m-d H:i:s');
 
   $variables['#cache']['contexts'][] = 'user.roles:authenticated';
+
+  // 0. What kind of course this is, and the words that go with it.
+  $type = $node->hasField('field_course_type') ? $node->get('field_course_type')->value : NULL;
+  $nouns = _barrio_boostrap_5_makehaven_d11_course_nouns($type);
+  $variables['course_type'] = $nouns['type'];
+  $variables['course_nouns'] = $nouns;
+  // Body summary doubles as the banner lead on program pages.
+  $variables['course_lead'] = $node->hasField('body')
+    ? trim(strip_tags((string) ($node->get('body')->summary ?? '')))
+    : '';
+  // Staff can place [[COURSE_UPCOMING]] in the body where the cohort list
+  // should appear (see preprocess_field); the program template then does
+  // not append a second list after the body.
+  $variables['course_upcoming_in_body'] = $node->hasField('body')
+    && strpos((string) ($node->get('body')->value ?? ''), '[[COURSE_UPCOMING]]') !== FALSE;
 
   // 1. Notification / Interest Flag.
   try {
@@ -101,7 +257,9 @@ function barrio_boostrap_5_makehaven_d11_preprocess_node__course(array &$variabl
           '<a href="' . $login_url . '" class="login-to-notify">' . t('Login') . '</a> ' .
           t('or') . ' ' .
           '<a href="' . $reg_url . '" class="register-to-notify">' . t('Register') . '</a> ' .
-          t('to get notified when this workshop is scheduled.') .
+          ($nouns['type'] === 'program'
+            ? t('to get notified when the next @instance opens.', ['@instance' => $nouns['instance']])
+            : t('to get notified when this @single is scheduled.', ['@single' => $nouns['single']])) .
           '</div>',
       ];
     }
@@ -126,28 +284,8 @@ function barrio_boostrap_5_makehaven_d11_preprocess_node__course(array &$variabl
         ->fetchCol();
 
       if (!empty($linked_event_ids)) {
-        // Upcoming events.
-        $upcoming_rows = $database->select('civicrm_event', 'e')
-          ->fields('e', ['id', 'start_date', 'title'])
-          ->condition('e.id', $linked_event_ids, 'IN')
-          ->condition('e.is_template', 0)
-          ->condition('e.is_active', 1)
-          ->condition('e.start_date', $now, '>=')
-          ->orderBy('e.start_date', 'ASC')
-          ->range(0, 5)
-          ->execute()
-          ->fetchAll();
-
-        $upcoming_events = [];
-        foreach ($upcoming_rows as $ev_row) {
-          $ts = strtotime($ev_row->start_date);
-          $upcoming_events[] = [
-            'url'  => '/civicrm-event/' . $ev_row->id,
-            'date' => date('D, M j, Y', $ts),
-            'time' => date('g:ia', $ts),
-          ];
-        }
-        $variables['workshop_upcoming_events'] = $upcoming_events;
+        // Upcoming events (shared helper — also feeds the body token).
+        $variables['workshop_upcoming_events'] = _barrio_boostrap_5_makehaven_d11_course_upcoming_events($node);
 
         // Instructors.
         $instructor_uids = $database->select('civicrm_event__field_civi_event_instructor', 'i')
@@ -250,6 +388,18 @@ function barrio_boostrap_5_makehaven_d11_preprocess_node__course(array &$variabl
 }
 
 /**
+ * Implements hook_preprocess_node__course__program__full().
+ *
+ * Drupal runs preprocess for the base hook (node) and for the exact template
+ * hook that renders, not for intermediate suggestions — so the program page
+ * template (node--course--program--full) would not get the course variables
+ * unless this delegates.
+ */
+function barrio_boostrap_5_makehaven_d11_preprocess_node__course__program__full(array &$variables): void {
+  barrio_boostrap_5_makehaven_d11_preprocess_node__course($variables);
+}
+
+/**
  * Implements hook_preprocess_node__course__teaser().
  *
  * The catalog view at /workshops renders course nodes in teaser view mode.
@@ -275,9 +425,15 @@ function barrio_boostrap_5_makehaven_d11_preprocess_node__course__teaser(array &
     ? (int) ($node->get('field_stat_upcoming')->value ?? 0)
     : 0;
 
+  $type = $node->hasField('field_course_type') ? $node->get('field_course_type')->value : NULL;
+  $variables['course_type'] = $type;
+  $variables['course_nouns'] = _barrio_boostrap_5_makehaven_d11_course_nouns($type);
+  if ($type) {
+    $variables['attributes']['class'][] = 'course-teaser--' . $type;
+  }
+
   // Member-only registration marker.
-  if ($node->hasField('field_course_type')
-      && $node->get('field_course_type')->value === 'badge_class') {
+  if ($type === 'badge_class') {
     $variables['attributes']['class'][] = 'course-teaser--member-only';
   }
 }
@@ -306,7 +462,8 @@ function barrio_boostrap_5_makehaven_d11_preprocess_node(&$variables) {
  * Implements hook_preprocess_field().
  *
  * Swaps live-content tokens left in a node body for their rendered widget:
- *  - [[GEMS_UPCOMING]] on /gems (node 30278) → gems_cohorts View block.
+ *  - [[COURSE_UPCOMING]] on any course node → that course's upcoming runs.
+ *  - [[GEMS_UPCOMING]] (legacy, old /gems page node) → gems_cohorts View block.
  *  - [[WORKSPACE_AVAILABILITY]] on /workspace (node 3890) → the
  *    workspace_listing block (available units from the workspace_rental module).
  *
@@ -337,8 +494,30 @@ function barrio_boostrap_5_makehaven_d11_preprocess_field(array &$variables): vo
   $nid = (int) $variables['element']['#object']->id();
   $text = $variables['items'][0]['content']['#text'];
 
-  // /gems — upcoming GEMS cohorts View.
-  if ($nid === 30278 && strpos($text, '[[GEMS_UPCOMING]]') !== FALSE) {
+  // Any course node — [[COURSE_UPCOMING]] → the course's own upcoming runs
+  // (events linked by field_parent_course), rendered with the same partial
+  // the program template uses. Lets staff put the cohort list mid-page,
+  // between the overview and the schedule, instead of at the bottom.
+  $node = $variables['element']['#object'];
+  if ($node->bundle() === 'course' && strpos($text, '[[COURSE_UPCOMING]]') !== FALSE) {
+    $type = $node->hasField('field_course_type') ? $node->get('field_course_type')->value : NULL;
+    $build = [
+      '#type' => 'inline_template',
+      '#template' => "{% include '@barrio_boostrap_5_makehaven_d11/content/course-cohorts.html.twig' with { events: events, nouns: nouns } only %}",
+      '#context' => [
+        'events' => _barrio_boostrap_5_makehaven_d11_course_upcoming_events($node),
+        'nouns' => _barrio_boostrap_5_makehaven_d11_course_nouns($type),
+      ],
+      '#cache' => ['tags' => ['civicrm_event_list'], 'max-age' => 3600],
+    ];
+    _barrio_boostrap_5_makehaven_d11_embed_widget($variables, '[[COURSE_UPCOMING]]', $build);
+    return;
+  }
+
+  // Legacy: [[GEMS_UPCOMING]] → gems_cohorts View block. Was the /gems page
+  // node (30278) before GEMS moved onto its course node (2026-09-12); kept
+  // so an old body still renders if the content port has not run yet.
+  if (strpos($text, '[[GEMS_UPCOMING]]') !== FALSE) {
     $build = views_embed_view('gems_cohorts', 'block_1');
     _barrio_boostrap_5_makehaven_d11_embed_widget($variables, '[[GEMS_UPCOMING]]', $build);
     return;
@@ -884,6 +1063,18 @@ function barrio_boostrap_5_makehaven_d11_preprocess_breadcrumb(&$variables) {
 function barrio_boostrap_5_makehaven_d11_preprocess_html(&$variables) {
   if (_barrio_boostrap_5_makehaven_d11_mh_banner_crumb() !== NULL) {
     $variables['attributes']['class'][] = 'mh-banner-page';
+  }
+  // Course pages: .page-course (+ .page-course--{type}) so css/pages/course.css
+  // can hide the duplicate theme page title on every course page and give
+  // program pages the full-bleed landing layout.
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node instanceof NodeInterface && $node->bundle() === 'course'
+    && \Drupal::routeMatch()->getRouteName() === 'entity.node.canonical') {
+    $variables['attributes']['class'][] = 'page-course';
+    $type = $node->hasField('field_course_type') ? $node->get('field_course_type')->value : NULL;
+    if ($type) {
+      $variables['attributes']['class'][] = 'page-course--' . $type;
+    }
   }
 }
 

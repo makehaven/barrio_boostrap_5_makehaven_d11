@@ -1,0 +1,130 @@
+{#
+/**
+ * @file
+ * Full-page template for Course nodes of type "program" (GEMS, Foundations
+ * of Fabrication, Pathway to Trades, ...).
+ *
+ * A program's course node IS its public page. Before 2026-09-12 GEMS had two:
+ * a hand-built landing page at /gems and this course node at /course/gems,
+ * and the /programs catalog sent visitors to the bare course node, which
+ * called the program a workshop and listed cohort start dates as "sessions".
+ * Now the landing copy lives in this node's body, the cohorts come from the
+ * CiviCRM events linked to it, and the vanity alias (/gems) points here.
+ *
+ * Layout mirrors the theme's other full-bleed landing pages (.mh-page):
+ *  - red banner with breadcrumb pill, title and the body summary as lead;
+ *  - the body, which may carry [[COURSE_UPCOMING]] where the cohort list
+ *    should sit (preprocess_field swaps it in); if it does not, the list is
+ *    appended after the body;
+ *  - badges earned, coaches, and the follow/notify control.
+ * No "teach this" offer: instructor_companion already skips programs.
+ *
+ * Variables (see barrio_boostrap_5_makehaven_d11_preprocess_node__course()):
+ *  - course_nouns, course_lead, course_upcoming_in_body
+ *  - workshop_upcoming_events, workshop_instructors, workshop_flag_link,
+ *    workshop_interest_count, workshop_runs_count
+ */
+#}
+{% set nouns = course_nouns %}
+<article{{ attributes.addClass('node', 'node--type-course', 'node--course-program', 'node--view-mode-full', 'mh-page', 'mh-program') }}>
+
+  <section class="mh-page__banner">
+    <div class="container">
+      <nav aria-label="breadcrumb" class="mb-2">
+        <ol class="breadcrumb mb-0 mh-page__crumb">
+          <li class="breadcrumb-item"><a href="/">{{ 'Home'|t }}</a></li>
+          <li class="breadcrumb-item"><a href="{{ path('view.public_program_catalog.page_1') }}">{{ 'Programs'|t }}</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{ label }}</li>
+        </ol>
+      </nav>
+      {{ title_prefix }}
+      <h1{{ title_attributes.addClass('mh-program__title') }}>{{ label }}</h1>
+      {{ title_suffix }}
+      {% if course_lead %}
+        <p class="mh-page__banner-lead">{{ course_lead }}</p>
+      {% endif %}
+      {% if workshop_upcoming_events or workshop_runs_count > 0 %}
+        <p class="mh-program__meta">
+          {% if workshop_upcoming_events %}
+            <a href="#cohorts">
+              {%- set n = workshop_upcoming_events|length -%}
+              {{ n == 1 ? '1 upcoming @instance'|t({'@instance': nouns.instance}) : '@count upcoming @plural'|t({'@count': n, '@plural': nouns.instance_plural}) }} &darr;
+            </a>
+          {% endif %}
+          {% if workshop_runs_count > 0 %}
+            <span class="mh-program__meta-sep" aria-hidden="true">&middot;</span>
+            <a href="{{ path('view.course_instances.page_1', {'node': node.id}) }}">
+              {{ workshop_runs_count == 1 ? '1 @instance so far'|t({'@instance': nouns.instance}) : '@count @plural so far'|t({'@count': workshop_runs_count, '@plural': nouns.instance_plural}) }}
+            </a>
+          {% endif %}
+        </p>
+      {% endif %}
+    </div>
+  </section>
+
+  <div class="container py-5 mh-program__content">
+
+    {% if content.schedule_instance_button|render %}
+      <div class="mh-program__staff mb-4">
+        {{ content.schedule_instance_button }}
+      </div>
+    {% endif %}
+
+    {% if content.body|render %}
+      <div class="mh-program__body">
+        {{ content.body }}
+      </div>
+    {% elseif content.field_course_image|render %}
+      <div class="mh-program__image mb-4">
+        {{ content.field_course_image }}
+      </div>
+    {% endif %}
+
+    {% if not course_upcoming_in_body %}
+      <section class="mh-program__cohorts mb-5">
+        <h2 class="section-title text-center mb-4">{{ 'Upcoming @plural'|t({'@plural': nouns.instance_plural|capitalize}) }}</h2>
+        {% include '@barrio_boostrap_5_makehaven_d11/content/course-cohorts.html.twig' with { events: workshop_upcoming_events, nouns: nouns } only %}
+      </section>
+    {% endif %}
+
+    <div class="row g-4 mh-program__aside">
+      {% if content.field_course_badges|render %}
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm p-4 mh-program__card">
+            <h3 class="h5 fw-bold">{{ 'Badges you earn'|t }}</h3>
+            {{ content.field_course_badges }}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if workshop_instructors %}
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm p-4 mh-program__card">
+            <h3 class="h5 fw-bold">{{ 'Coaches'|t }}</h3>
+            <ul class="list-unstyled mb-0 instructor-list">
+              {% for instr in workshop_instructors %}
+                <li><a href="{{ instr.url }}">{{ instr.name }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm p-4 mh-program__card course-action-card">
+          <h3 class="h5 fw-bold">{{ 'Stay informed'|t }}</h3>
+          <div class="course-notify-area">
+            {{ workshop_flag_link }}
+            {% if workshop_interest_count > 0 %}
+              <p class="mt-2 small text-muted mb-0">
+                {{ '★ @count people are following this @single.'|t({'@count': workshop_interest_count, '@single': nouns.single}) }}
+              </p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</article>
