@@ -23,6 +23,99 @@
   .mh-team__intro { max-width: 100%; }
 }
 
+/* ── Board roster embed (Governance Dance) ─────────────────────────
+   The Board section of /team is no longer hand-written: node 427 carries
+   <script src="https://governance-dance.web.app/embed.js" data-view="board">
+   which renders the published term register into #gd-board. The script
+   ships layout-only rules on gd-* classes and injects them into <head>
+   AFTER the theme, so every rule here carries extra specificity on
+   purpose. These restore the card treatment the hand-written grid had:
+   white bordered card, square headshot flush to the top, condensed name,
+   muted role line, link pinned to the bottom, three across on desktop. */
+.page-node-427 .gd-embed { text-align: left; }
+.page-node-427 .gd-embed .gd-grid {
+  gap: 2rem 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
+}
+@media (min-width: 992px) {
+  .page-node-427 .gd-embed .gd-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.page-node-427 .gd-embed .gd-person {
+  display: flex;
+  flex-direction: column;
+  background: var(--mh-color-surface, #fff);
+  border: 1px solid #eee;
+  border-radius: 6px;
+  box-shadow: var(--mh-shadow-sm, 0 2px 6px rgb(0 0 0 / .12));
+  padding: 0 0 1rem;
+  overflow: hidden;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.page-node-427 .gd-embed .gd-person:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 .5rem 1.25rem rgb(0 0 0 / .15);
+}
+.page-node-427 .gd-embed .gd-photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 0;
+  margin: 0 0 .75rem;
+  background: var(--mh-soft, #f8f0f0);
+}
+.page-node-427 .gd-embed .gd-photo--none {
+  font-family: var(--mh-font-display, "Roboto Condensed", sans-serif);
+  font-size: 3.5rem;
+  opacity: .35;
+}
+.page-node-427 .gd-embed .gd-name,
+.page-node-427 .gd-embed .gd-title,
+.page-node-427 .gd-embed .gd-bio,
+.page-node-427 .gd-embed .gd-link { padding-inline: .875rem; }
+.page-node-427 .gd-embed .gd-name {
+  font-family: var(--mh-font-display, "Roboto Condensed", sans-serif);
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #1e1f24;
+  margin-bottom: .25rem;
+}
+.page-node-427 .gd-embed .gd-title {
+  font-family: var(--mh-font-display, "Roboto Condensed", sans-serif);
+  font-size: .9rem;
+  font-weight: 500;
+  color: #6c757d;
+  opacity: 1;
+  margin-bottom: .6rem;
+}
+.page-node-427 .gd-embed .gd-bio { margin: 0 0 .75rem; color: #3b3b3b; }
+.page-node-427 .gd-embed .gd-link {
+  margin-top: auto;
+  align-self: flex-start;
+  font-size: 1rem;
+  color: var(--mh-red, var(--mh-color-brand-primary));
+}
+/* Fellows sub-section: the embed emits a small-caps h3; make it read
+   like the page's other section headings. */
+.page-node-427 .gd-embed .gd-heading {
+  font-family: var(--mh-font-display, "Roboto Condensed", sans-serif);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  opacity: 1;
+  color: #343a40;
+  margin: 2.5rem 0 .25rem;
+}
+.page-node-427 .gd-embed .gd-note { margin-bottom: 1.25rem; }
+
+[data-bs-theme="dark"] .page-node-427 .gd-embed .gd-person { background: #1e1f24; border-color: #333; }
+[data-bs-theme="dark"] .page-node-427 .gd-embed .gd-name,
+[data-bs-theme="dark"] .page-node-427 .gd-embed .gd-bio,
+[data-bs-theme="dark"] .page-node-427 .gd-embed .gd-heading { color: inherit; }
+[data-bs-theme="dark"] .page-node-427 .gd-embed .gd-link { color: #e8595d; }
+
 /* ── PAGE INTEGRATION ───────────────────────────────────────────── */
 /* page-title block deliberately NOT hidden: the node is registered in
    _mh_banner_crumb(), so this block renders the banner heading + crumb pill. */
