@@ -208,6 +208,106 @@ function _barrio_boostrap_5_makehaven_d11_course_upcoming_events(NodeInterface $
 }
 
 /**
+ * Instructor / coach teasers for a course page.
+ *
+ * Course pages listed instructors as bare name links. A program is chosen as
+ * much on who coaches it as on what it covers, and the instructor profiles
+ * already carry a photo, a bio and topics — so show a little of each, plus
+ * two numbers that speak to experience: sessions taught and the year they
+ * started (JR, 2026-09-14). Everything comes from data that exists; nothing
+ * new to maintain.
+ *
+ * @param int[] $uids
+ *   Instructor user ids.
+ *
+ * @return array[]
+ *   One row per instructor: name, url, photo (styled URL or ''), initials,
+ *   blurb (plain text, ~140 chars), topics (up to 3 labels), sessions (int),
+ *   since (year or ''). Ordered by sessions taught, most first.
+ */
+function _barrio_boostrap_5_makehaven_d11_course_instructor_teasers(array $uids): array {
+  if (!$uids) {
+    return [];
+  }
+  $etm = \Drupal::entityTypeManager();
+  $database = \Drupal::database();
+  $users = $etm->getStorage('user')->loadMultiple($uids);
+  /** @var \Drupal\profile\ProfileStorageInterface $profile_storage */
+  $profile_storage = $etm->getStorage('profile');
+  $style = $etm->getStorage('image_style')->load('medium_square');
+
+  // Experience: every non-template event they have instructed, site-wide.
+  $stats = [];
+  try {
+    $rows = $database->select('civicrm_event__field_civi_event_instructor', 'i');
+    $rows->join('civicrm_event', 'e', 'e.id = i.entity_id');
+    $rows->addField('i', 'field_civi_event_instructor_target_id', 'uid');
+    $rows->addExpression('COUNT(DISTINCT e.id)', 'sessions');
+    $rows->addExpression('MIN(e.start_date)', 'first');
+    $rows->condition('i.field_civi_event_instructor_target_id', $uids, 'IN')
+      ->condition('e.is_template', 0)
+      ->condition('e.start_date', date('Y-m-d H:i:s'), '<=')
+      ->groupBy('i.field_civi_event_instructor_target_id');
+    foreach ($rows->execute() as $r) {
+      $stats[(int) $r->uid] = ['sessions' => (int) $r->sessions, 'since' => $r->first ? date('Y', strtotime($r->first)) : ''];
+    }
+  }
+  catch (\Throwable $e) {
+    // Teasers still render without the numbers.
+  }
+
+  $list = [];
+  foreach ($users as $u) {
+    $uid = (int) $u->id();
+    $name = $u->getDisplayName();
+    $url = $u->toUrl()->toString();
+    $photo = '';
+    $blurb = '';
+    $topics = [];
+    $profile = $profile_storage->loadByUser($u, 'instructor');
+    if ($profile) {
+      $url = $profile->toUrl()->toString();
+      if ($profile->hasField('field_instructor_photo') && !$profile->get('field_instructor_photo')->isEmpty()) {
+        $file = $profile->get('field_instructor_photo')->entity;
+        if ($file && $style) {
+          $photo = $style->buildUrl($file->getFileUri());
+        }
+      }
+      if ($profile->hasField('field_instructor_bio')) {
+        $text = trim(preg_replace('~\s+~', ' ', strip_tags((string) $profile->get('field_instructor_bio')->value)));
+        if (mb_strlen($text) > 150) {
+          $cut = mb_substr($text, 0, 150);
+          $text = rtrim(mb_substr($cut, 0, (int) mb_strrpos($cut, ' ') ?: 150), " ,;:") . '…';
+        }
+        $blurb = $text;
+      }
+      if ($profile->hasField('field_instructor_topics')) {
+        foreach ($profile->get('field_instructor_topics')->referencedEntities() as $term) {
+          $topics[] = $term->label();
+          if (count($topics) === 3) {
+            break;
+          }
+        }
+      }
+    }
+    $parts = preg_split('~\s+~', trim($name)) ?: [];
+    $initials = mb_strtoupper(mb_substr($parts[0] ?? '', 0, 1) . mb_substr($parts[count($parts) - 1] ?? '', 0, 1));
+    $list[] = [
+      'name' => $name,
+      'url' => $url,
+      'photo' => $photo,
+      'initials' => $initials ?: '?',
+      'blurb' => $blurb,
+      'topics' => $topics,
+      'sessions' => $stats[$uid]['sessions'] ?? 0,
+      'since' => $stats[$uid]['since'] ?? '',
+    ];
+  }
+  usort($list, static fn($a, $b) => $b['sessions'] <=> $a['sessions']);
+  return $list;
+}
+
+/**
  * Implements hook_preprocess_node__course().
  *
  * Provides data for the course node full view:
@@ -284,23 +384,7 @@ function barrio_boostrap_5_makehaven_d11_preprocess_node__course(array &$variabl
           ->fetchCol();
 
         if (!empty($instructor_uids)) {
-          $instructors = \Drupal::entityTypeManager()->getStorage('user')->loadMultiple($instructor_uids);
-          $instructor_list = [];
-          /** @var \Drupal\profile\ProfileStorageInterface $profile_storage */
-          $profile_storage = \Drupal::entityTypeManager()->getStorage('profile');
-
-          foreach ($instructors as $u) {
-            $url = $u->toUrl()->toString();
-            $profile = $profile_storage->loadByUser($u, 'instructor');
-            if ($profile) {
-              $url = $profile->toUrl()->toString();
-            }
-            $instructor_list[] = [
-              'name' => $u->getDisplayName(),
-              'url'  => $url,
-            ];
-          }
-          $variables['workshop_instructors'] = $instructor_list;
+          $variables['workshop_instructors'] = _barrio_boostrap_5_makehaven_d11_course_instructor_teasers(array_map('intval', $instructor_uids));
         }
 
         // 3. Feedback rating — webform_1181 (event_id-linked) + legacy (title-matched).

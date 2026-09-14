@@ -70,11 +70,7 @@
       {% if workshop_instructors %}
         <div class="course-instructors mb-5">
           <h3>{{ course_nouns.type == 'meetup' ? 'Hosted by'|t : 'Taught by'|t }}</h3>
-          <ul class="instructor-list">
-            {% for instr in workshop_instructors %}
-              <li><a href="{{ instr.url }}">{{ instr.name }}</a></li>
-            {% endfor %}
-          </ul>
+          {% include '@barrio_boostrap_5_makehaven_d11/content/course-instructors.html.twig' with { instructors: workshop_instructors } only %}
         </div>
       {% endif %}
 

@@ -1,0 +1,48 @@
+{#
+/**
+ * @file
+ * Partial: instructor / coach teasers on a course page.
+ *
+ * One row per person — photo (or initials), name linking to their profile,
+ * "N sessions · since YYYY", a short bio line, up to three topics. Fed by
+ * _barrio_boostrap_5_makehaven_d11_course_instructor_teasers(). Used by the
+ * program template ("Coaches") and the generic course template ("Taught by").
+ *
+ * Variables:
+ *  - instructors: rows (name, url, photo, initials, blurb, topics, sessions, since).
+ */
+#}
+<ul class="course-people list-unstyled">
+  {% for p in instructors %}
+    <li class="course-person">
+      <a class="course-person__photo" href="{{ p.url }}" aria-hidden="true" tabindex="-1">
+        {% if p.photo %}
+          <img src="{{ p.photo }}" alt="" loading="lazy" width="64" height="64">
+        {% else %}
+          <span class="course-person__initials">{{ p.initials }}</span>
+        {% endif %}
+      </a>
+      <div class="course-person__body">
+        <a class="course-person__name" href="{{ p.url }}">{{ p.name }}</a>
+        {% if p.sessions > 0 or p.since %}
+          <div class="course-person__meta">
+            {%- if p.sessions > 0 -%}
+              {{ p.sessions == 1 ? '1 session'|t : '@count sessions'|t({'@count': p.sessions}) }}
+            {%- endif -%}
+            {%- if p.sessions > 0 and p.since %} &middot; {% endif -%}
+            {%- if p.since %}{{ 'since @year'|t({'@year': p.since}) }}{% endif -%}
+          </div>
+        {% endif %}
+        {% if p.blurb %}
+          <p class="course-person__blurb">{{ p.blurb }}</p>
+        {% endif %}
+        {% if p.topics %}
+          <div class="course-person__topics">
+            {% for t in p.topics %}<span class="course-person__topic">{{ t }}</span>{% endfor %}
+          </div>
+        {% endif %}
+        <a class="course-person__more" href="{{ p.url }}">{{ 'Profile'|t }} &rarr;</a>
+      </div>
+    </li>
+  {% endfor %}
+</ul>

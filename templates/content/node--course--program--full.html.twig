@@ -87,6 +87,13 @@
       </section>
     {% endif %}
 
+    {% if workshop_instructors %}
+      <section class="mh-program__coaches mb-5">
+        <h2 class="section-title text-center mb-4">{{ workshop_instructors|length == 1 ? 'Your coach'|t : 'Your coaches'|t }}</h2>
+        {% include '@barrio_boostrap_5_makehaven_d11/content/course-instructors.html.twig' with { instructors: workshop_instructors } only %}
+      </section>
+    {% endif %}
+
     <div class="row g-4 mh-program__aside">
       {% if content.field_course_badges|render %}
         <div class="col-md-4">
@@ -97,18 +104,6 @@
         </div>
       {% endif %}
 
-      {% if workshop_instructors %}
-        <div class="col-md-4">
-          <div class="card h-100 border-0 shadow-sm p-4 mh-program__card">
-            <h3 class="h5 fw-bold">{{ 'Coaches'|t }}</h3>
-            <ul class="list-unstyled mb-0 instructor-list">
-              {% for instr in workshop_instructors %}
-                <li><a href="{{ instr.url }}">{{ instr.name }}</a></li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-      {% endif %}
 
       <div class="col-md-4">
         <div class="card h-100 border-0 shadow-sm p-4 mh-program__card course-action-card">
