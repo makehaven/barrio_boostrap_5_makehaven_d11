@@ -1451,7 +1451,9 @@
    :has() so video-less badges keep the original two-column layout (no empty
    third track / trailing gap). */
 .field--name-field-member-badges .vocabulary-badges:has(.field--name-field-badge-video),
-.field--name-field-additional-badges .vocabulary-badges:has(.field--name-field-badge-video) {
+.field--name-field-additional-badges .vocabulary-badges:has(.field--name-field-badge-video),
+.field--name-field-member-badges .vocabulary-badges:has(.mh-badge-video),
+.field--name-field-additional-badges .vocabulary-badges:has(.mh-badge-video) {
   grid-template-columns: 130px 1fr auto;
   grid-template-areas:
     "image  title  video"
@@ -1599,13 +1601,30 @@
    caption above it and a play-button overlay on the image. Only rendered when
    the badge has a video, so it places itself on a new full-width row via
    grid-column rather than a named area (no phantom gap on video-less badges). */
+/* .mh-badge-video is the lightbox wrapper appointment_facilitator renders in
+   place of the field since 2026-09-12; it carries its own label, so it takes
+   the grid placement below but not the ::before caption. */
 .field--name-field-member-badges .vocabulary-badges .field--name-field-badge-video,
-.field--name-field-additional-badges .vocabulary-badges .field--name-field-badge-video {
+.field--name-field-additional-badges .vocabulary-badges .field--name-field-badge-video,
+.field--name-field-member-badges .vocabulary-badges .mh-badge-video,
+.field--name-field-additional-badges .vocabulary-badges .mh-badge-video {
   grid-area: video;
   justify-self: end;
   align-self: center;
   margin: 0;
   padding: 0;
+}
+/* The lightbox thumbnail ships at up to 320px; in the card's auto column
+   that sizes the track to the poster's intrinsic 480px. Cap it to the
+   thumbnail size the old formatter rendered. */
+.field--name-field-member-badges .vocabulary-badges .mh-badge-video,
+.field--name-field-additional-badges .vocabulary-badges .mh-badge-video {
+  width: 220px;
+  max-width: 100%;
+}
+.field--name-field-member-badges .vocabulary-badges .mh-badge-video__thumb,
+.field--name-field-additional-badges .vocabulary-badges .mh-badge-video__thumb {
+  width: 100%;
 }
 .field--name-field-member-badges .vocabulary-badges .field--name-field-badge-video::before,
 .field--name-field-additional-badges .vocabulary-badges .field--name-field-badge-video::before {
