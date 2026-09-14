@@ -249,19 +249,7 @@ function barrio_boostrap_5_makehaven_d11_preprocess_node__course(array &$variabl
         ->build('node', $nid, 'course_interest', 'workshop_catalog');
     }
     else {
-      $dest = $node->toUrl()->toString();
-      $login_url = Url::fromRoute('user.login', [], ['query' => ['destination' => $dest]])->toString();
-      $reg_url   = Url::fromRoute('user.register', [], ['query' => ['destination' => $dest]])->toString();
-      $variables['workshop_flag_link'] = [
-        '#markup' => '<div class="workshop-auth-prompt">' .
-          '<a href="' . $login_url . '" class="login-to-notify">' . t('Login') . '</a> ' .
-          t('or') . ' ' .
-          '<a href="' . $reg_url . '" class="register-to-notify">' . t('Register') . '</a> ' .
-          ($nouns['type'] === 'program'
-            ? t('to get notified when the next @instance opens.', ['@instance' => $nouns['instance']])
-            : t('to get notified when this @single is scheduled.', ['@single' => $nouns['single']])) .
-          '</div>',
-      ];
+      $variables['workshop_flag_link'] = _barrio_boostrap_5_makehaven_d11_course_signin_prompt($node, $nouns);
     }
 
     $interest_count = $database->select('flag_counts', 'fc')
@@ -385,6 +373,75 @@ function barrio_boostrap_5_makehaven_d11_preprocess_node__course(array &$variabl
 
   // 4. Stats.
   $variables['workshop_runs_count'] = (int) ($node->get('field_stat_runs')->value ?? 0);
+}
+
+/**
+ * The signed-out "follow this course" prompt.
+ *
+ * Following needs an account, but the account a follower needs is the basic
+ * kind — not the member sign-up. Before 2026-09-14 the prompt's "Register"
+ * link sent people to /user/register, which greeted them with "Member setup,
+ * step 3 of 8" and a ten-field form with a waiver (JR, on the GEMS page). So
+ * the prompt now leads with Google sign-in, which creates the basic account
+ * with no form and returns to this page (social_auth honours ?destination=),
+ * and keeps log in / create account as the quiet alternatives.
+ *
+ * @param \Drupal\node\NodeInterface $node
+ *   The course node.
+ * @param array $nouns
+ *   From _barrio_boostrap_5_makehaven_d11_course_nouns().
+ *
+ * @return array
+ *   Render array.
+ */
+function _barrio_boostrap_5_makehaven_d11_course_signin_prompt(NodeInterface $node, array $nouns): array {
+  $dest = $node->toUrl()->toString();
+  $query = ['query' => ['destination' => $dest]];
+  $lead = $nouns['type'] === 'program'
+    ? t('Sign in to follow this program and hear first when the next @instance opens.', ['@instance' => $nouns['instance']])
+    : t('Sign in to follow this @single and hear when it is next scheduled.', ['@single' => $nouns['single']]);
+
+  $build = [
+    '#type' => 'container',
+    '#attributes' => ['class' => ['workshop-auth-prompt', 'course-signin']],
+    'lead' => ['#markup' => '<p class="course-signin__lead">' . $lead . '</p>'],
+  ];
+  if (\Drupal::moduleHandler()->moduleExists('social_auth_google')) {
+    $build['google'] = [
+      '#type' => 'link',
+      '#title' => t('Continue with Google'),
+      '#url' => Url::fromRoute('social_auth.network.redirect', ['network' => 'google'], $query),
+      '#attributes' => ['class' => ['btn', 'btn-outline-dark', 'mh-google-btn'], 'rel' => 'nofollow'],
+    ];
+  }
+  $build['alt'] = [
+    '#markup' => '<p class="course-signin__alt small">'
+      . t('or <a href=":login" class="login-to-notify">log in</a> · <a href=":register" class="register-to-notify">create a free account</a>', [
+        ':login' => Url::fromRoute('user.login', [], $query)->toString(),
+        ':register' => Url::fromRoute('user.register', [], $query)->toString(),
+      ])
+      . '</p>',
+  ];
+  return $build;
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for login_with (social_auth's button row).
+ *
+ * The block never passes a destination, so a visitor who signed in with
+ * Google from /user/register?destination=/gems landed on /user instead of
+ * back on the page they came from. Carry the current request's internal
+ * ?destination= through; the template already knows what to do with it.
+ */
+function barrio_boostrap_5_makehaven_d11_preprocess_login_with(array &$variables): void {
+  if (!empty($variables['destination'])) {
+    return;
+  }
+  $destination = (string) \Drupal::request()->query->get('destination', '');
+  if ($destination !== '' && $destination[0] === '/' && !str_starts_with($destination, '//')) {
+    $variables['destination'] = $destination;
+    $variables['#cache']['contexts'][] = 'url.query_args:destination';
+  }
 }
 
 /**
@@ -1052,6 +1109,38 @@ function barrio_boostrap_5_makehaven_d11_preprocess_breadcrumb(&$variables) {
   }
   $variables['breadcrumb'] = $links;
   $variables['#cache']['contexts'][] = 'url.path';
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for page.
+ *
+ * Collapses the featured-top band when nothing in it renders. Barrio's page
+ * template tests `page.featured_top`, which is true whenever a block is
+ * PLACED there — the onboarding progress bar is placed on every funnel page
+ * but renders nothing for a finished member, or for a signed-out visitor on
+ * /user/register who is not the paid-membership hand-off — and the region
+ * wrapper carries a grey background and padding, so an empty region showed
+ * as a blank band above the breadcrumb (JR, 2026-09-14). Render a copy to
+ * find out, keep its cache metadata so a cached page still varies the way
+ * the blocks inside asked it to, and drop the region when it is blank.
+ */
+function barrio_boostrap_5_makehaven_d11_preprocess_page(array &$variables): void {
+  if (empty($variables['page']['featured_top'])) {
+    return;
+  }
+  $copy = $variables['page']['featured_top'];
+  try {
+    $html = (string) \Drupal::service('renderer')->renderInIsolation($copy);
+  }
+  catch (\Throwable $e) {
+    return;
+  }
+  CacheableMetadata::createFromRenderArray($copy)
+    ->merge(CacheableMetadata::createFromRenderArray($variables))
+    ->applyTo($variables);
+  if (trim(strip_tags($html)) === '') {
+    unset($variables['page']['featured_top']);
+  }
 }
 
 /**

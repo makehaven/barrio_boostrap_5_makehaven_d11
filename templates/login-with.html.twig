@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Override of social_auth's login-with template (the "Sign in with ..." row
+ * on /user/login and /user/register).
+ *
+ * The module's template renders one bare provider icon per network under the
+ * block's label. Here it is a real button — "Continue with Google" — with the
+ * one sentence people need (no form; an existing account with the same email
+ * is linked), because on the register page this is the path that spares
+ * event attendees and program followers the ten-field member form.
+ *
+ * Variables:
+ *  - networks: social_auth network plugins.
+ *  - destination: internal path to return to after sign-in (set by
+ *    barrio_boostrap_5_makehaven_d11_preprocess_login_with() from
+ *    ?destination=; social_auth honours it).
+ */
+#}
+{% set options = destination ? {'query': {'destination': destination}} : {} %}
+<div class="mh-social-signin">
+  <p class="mh-social-signin__lead">
+    {{ 'No form to fill in. If you already have a MakeHaven account with the same email, it links to that.'|t }}
+  </p>
+  <div class="mh-social-signin__buttons">
+    {% for id, network in networks %}
+      <a class="social-auth auth-link btn btn-outline-dark mh-google-btn mh-social-signin__btn" rel="nofollow" href="{{ network.getRedirectUrl(options).toString }}">
+        {{ 'Continue with @network'|t({'@network': network.getSocialNetwork}) }}
+      </a>
+    {% endfor %}
+  </div>
+  <p class="mh-social-signin__or" aria-hidden="true">{{ 'or'|t }}</p>
+</div>
