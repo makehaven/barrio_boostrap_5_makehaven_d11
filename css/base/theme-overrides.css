@@ -9,3 +9,14 @@ ol.breadcrumb
 .node .field--type-image {
     float: none;
 }
+
+/* Inline form errors were invisible: Drupal marks the input `error` and
+   Barrio's form-element template prints the message in `.invalid-feedback`,
+   but Bootstrap only shows that block next to an `.is-invalid` input and
+   Barrio's preprocess never adds `is-invalid` to <input> (its attributes are
+   an Attribute object, which the preprocess skips). Members saw "1 error has
+   been found" with no reason (store tab opt-in, 2026-09-14). */
+.has-error .invalid-feedback,
+.has-error .form-item--error-message {
+  display: block;
+}
