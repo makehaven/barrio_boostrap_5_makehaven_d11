@@ -479,6 +479,23 @@ function barrio_boostrap_5_makehaven_d11_preprocess_node__course(array &$variabl
 }
 
 /**
+ * Whether "Continue with Google" can actually complete on this environment.
+ *
+ * social_auth_google 500s at /user/login/google when the client secret is
+ * empty ("Module configuration validation failed"). The secret is injected by
+ * settings.php from a Pantheon secret, so it exists on dev/test/live and never
+ * on Lando (JR hit the 500 locally, 2026-09-14). Offer the button only where
+ * it can work; the log in / create account links remain either way.
+ */
+function _barrio_boostrap_5_makehaven_d11_google_signin_available(): bool {
+  if (!\Drupal::moduleHandler()->moduleExists('social_auth_google')) {
+    return FALSE;
+  }
+  $settings = \Drupal::config('social_auth_google.settings');
+  return trim((string) $settings->get('client_id')) !== '' && trim((string) $settings->get('client_secret')) !== '';
+}
+
+/**
  * The signed-out "follow this course" prompt.
  *
  * Following needs an account, but the account a follower needs is the basic
@@ -509,7 +526,7 @@ function _barrio_boostrap_5_makehaven_d11_course_signin_prompt(NodeInterface $no
     '#attributes' => ['class' => ['workshop-auth-prompt', 'course-signin']],
     'lead' => ['#markup' => '<p class="course-signin__lead">' . $lead . '</p>'],
   ];
-  if (\Drupal::moduleHandler()->moduleExists('social_auth_google')) {
+  if (_barrio_boostrap_5_makehaven_d11_google_signin_available()) {
     $build['google'] = [
       '#type' => 'link',
       '#title' => t('Continue with Google'),
@@ -537,6 +554,11 @@ function _barrio_boostrap_5_makehaven_d11_course_signin_prompt(NodeInterface $no
  * ?destination= through; the template already knows what to do with it.
  */
 function barrio_boostrap_5_makehaven_d11_preprocess_login_with(array &$variables): void {
+  // No secret on this environment → no button (the redirect would 500).
+  if (!_barrio_boostrap_5_makehaven_d11_google_signin_available()) {
+    $variables['networks'] = [];
+  }
+  $variables['#cache']['tags'][] = 'config:social_auth_google.settings';
   if (!empty($variables['destination'])) {
     return;
   }
@@ -1058,7 +1080,11 @@ function _barrio_boostrap_5_makehaven_d11_is_room(?NodeInterface $node): bool {
 function _barrio_boostrap_5_makehaven_d11_mh_banner_crumb(): ?array {
   $route_match = \Drupal::routeMatch();
   $membership = '/membership-information-members';
-  $programming = '/programs';
+  // The menu heading over events, workshops, programs and instructors.
+  // Was "Programming" — read as coding by half a makerspace's visitors
+  // (renamed 2026-09-14); the parent link goes where the traffic goes.
+  $programming = '/events';
+  $programming_label = 'Events & Classes';
   $resources = '/resources';
 
   // CiviCRM event INFO pages (any event). All /civicrm/* paths share one
@@ -1079,9 +1105,9 @@ function _barrio_boostrap_5_makehaven_d11_mh_banner_crumb(): ?array {
     'view.rooms.page_1'                 => [['Rooms', NULL]],
     'view.businesses.incubating'        => [['About', '/about-us'], ['Member Businesses', NULL]],
     'view.blog.page_1'                  => [['About', '/about-us'], ['Blog', NULL]],
-    'view.event_set.all_upcoming'       => [['Programming', $programming], ['Upcoming Events', NULL]],
-    'view.events_calendar.page_3'       => [['Programming', $programming], ['Calendar', NULL]],
-    'view.public_course_catalog.page_1' => [['Programming', $programming], ['Workshops', NULL]],
+    'view.event_set.all_upcoming'       => [[$programming_label, $programming], ['Upcoming Events', NULL]],
+    'view.events_calendar.page_3'       => [[$programming_label, $programming], ['Calendar', NULL]],
+    'view.public_course_catalog.page_1' => [[$programming_label, $programming], ['Workshops', NULL]],
     // Resources tab. /equipment 301s to /rooms/zones/equipment; both hit this
     // view route. /business/products is a custom controller route (not a view)
     // but matches here the same way since it renders a page-title block.
@@ -1096,12 +1122,12 @@ function _barrio_boostrap_5_makehaven_d11_mh_banner_crumb(): ?array {
     'view.sponsors.page_1'                      => [['Donate', '/donate-makehaven'], ['Sponsors', NULL]],
     // Remaining public listings — the visitor-facing pages still without a
     // crumb after the sections above. Parents follow the main menu.
-    'view.public_program_catalog.page_1'        => [['Programming', NULL]],
-    'view.event_set.page_3'                     => [['Programming', $programming], ['Ticketed Workshops', NULL]],
-    'view.event_set.public_events'              => [['Programming', $programming], ['Public Events', NULL]],
-    'view.event_set.events_past'                => [['Programming', $programming], ['Past Events', NULL]],
-    'view.event_set.member_events'              => [['Programming', $programming], ['Member Events', NULL]],
-    'view.instructors.page_1'                   => [['Programming', $programming], ['Instructors', NULL]],
+    'view.public_program_catalog.page_1'        => [[$programming_label, $programming], ['Programs', NULL]],
+    'view.event_set.page_3'                     => [[$programming_label, $programming], ['Ticketed Workshops', NULL]],
+    'view.event_set.public_events'              => [[$programming_label, $programming], ['Public Events', NULL]],
+    'view.event_set.events_past'                => [[$programming_label, $programming], ['Past Events', NULL]],
+    'view.event_set.member_events'              => [[$programming_label, $programming], ['Member Events', NULL]],
+    'view.instructors.page_1'                   => [[$programming_label, $programming], ['Instructors', NULL]],
     'view.policies.page_1'                      => [['About', '/about-us'], ['Policies', NULL]],
     'view.companies.page_1'                     => [['About', '/about-us'], ['Member Companies', NULL]],
     'view.store.page_1'                         => [['Resources', $resources], ['Store', NULL]],
@@ -1161,8 +1187,8 @@ function _barrio_boostrap_5_makehaven_d11_mh_banner_crumb(): ?array {
     41379 => ['Membership', $membership],         // Membership Agreement.
     332   => ['Membership', $membership],         // Gift a Membership.
     707   => ['Membership', $membership],         // Membership Overview (landing).
-    14254 => ['Programming', $programming],       // Private Classes webform.
-    16200 => ['Programming', $programming],       // Event Gift Card.
+    14254 => [$programming_label, $programming],       // Private Classes webform.
+    16200 => [$programming_label, $programming],       // Event Gift Card.
     3143  => ['Resources', $resources],           // Room Rentals webform.
     // Redesigned marketing pages. These hid the theme page-title block while
     // waiting on a node-body banner that was never applied to production,
@@ -1172,7 +1198,7 @@ function _barrio_boostrap_5_makehaven_d11_mh_banner_crumb(): ?array {
     29374 => ['About', '/about-us'],              // Teach a Workshop.
     5045  => ['About', '/about-us', 'FAQ'],
     13706 => ['About', '/about-us', 'Financial Information'],
-    27700 => ['Programming', $programming],       // Team-Building Workshops.
+    27700 => [$programming_label, $programming],       // Team-Building Workshops.
     // NB: /gems (30278) is intentionally NOT here. Like /membership, its node
     // body carries its own .mh-page__banner hero (heading + crumb pill + lead),
     // so registering it would stack a second theme-rendered heading above that

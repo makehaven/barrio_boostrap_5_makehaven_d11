@@ -18,6 +18,7 @@
  */
 #}
 {% set options = destination ? {'query': {'destination': destination}} : {} %}
+{% if networks %}
 <div class="mh-social-signin">
   <p class="mh-social-signin__lead">
     {{ 'No form to fill in. If you already have a MakeHaven account with the same email, it links to that.'|t }}
@@ -31,3 +32,4 @@
   </div>
   <p class="mh-social-signin__or" aria-hidden="true">{{ 'or'|t }}</p>
 </div>
+{% endif %}
