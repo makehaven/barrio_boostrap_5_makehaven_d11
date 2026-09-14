@@ -45,3 +45,14 @@
   .mh-instructor__stats { gap: 1rem 1.5rem; }
   .mh-instructor__stats strong { font-size: 1.6rem; }
 }
+
+/* ── /instructors directory (views-view-unformatted--instructors) ─── */
+.mh-directory__intro { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem 1.5rem; margin: 0 0 1.5rem; }
+.mh-directory__count { margin: 0; color: var(--bs-secondary-color, #6c757d); max-width: 60ch; }
+.mh-directory__teach { white-space: nowrap; }
+/* Bigger cards than the in-page coach list: this page IS the people. */
+.course-people--directory .course-people { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; }
+.course-people--directory .course-person { padding: 1.1rem 1.2rem; background: var(--bs-body-bg, #fff); border: 1px solid var(--mh-color-neutral-200, #e6dedc); border-radius: .5rem; }
+.course-people--directory .course-person__photo { flex-basis: 80px; width: 80px; height: 80px; }
+.course-people--directory .course-person__name { font-size: 1.2rem; }
+[data-bs-theme="dark"] .course-people--directory .course-person { background: #1e1e1e; border-color: #3a3232; }

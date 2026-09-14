@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ * /instructors directory rows: teaser cards, not full profiles.
+ *
+ * Variables (from barrio_boostrap_5_makehaven_d11_preprocess_views_view_unformatted__instructors):
+ *  - instructors: rows for course-instructors.html.twig, ordered by
+ *    sessions taught then name.
+ *  - instructor_count, teach_url.
+ */
+#}
+<div class="mh-directory">
+  <div class="mh-directory__intro">
+    <p class="mh-directory__count">
+      {{ instructor_count == 1 ? '1 active instructor'|t : '@count active instructors'|t({'@count': instructor_count}) }}
+      &middot; {{ 'members and local makers who teach workshops, badge classes and programs at MakeHaven.'|t }}
+    </p>
+    <a class="btn btn-outline-dark mh-directory__teach" href="{{ teach_url }}">{{ 'Teach at MakeHaven'|t }} &rarr;</a>
+  </div>
+  {% if instructors %}
+    <div class="course-people--directory">
+      {% include '@barrio_boostrap_5_makehaven_d11/content/course-instructors.html.twig' with { instructors: instructors } only %}
+    </div>
+  {% else %}
+    <p class="text-muted">{{ 'No instructors match that topic yet.'|t }}</p>
+  {% endif %}
+</div>

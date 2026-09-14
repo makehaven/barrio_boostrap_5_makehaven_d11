@@ -322,7 +322,7 @@ function _barrio_boostrap_5_makehaven_d11_course_instructor_teasers(array $uids)
       'since' => $stats[$uid]['since'] ?? '',
     ];
   }
-  usort($list, static fn($a, $b) => $b['sessions'] <=> $a['sessions']);
+  usort($list, static fn($a, $b) => [$b['sessions'], $a['name']] <=> [$a['sessions'], $b['name']]);
   return $list;
 }
 
@@ -1212,6 +1212,28 @@ function barrio_boostrap_5_makehaven_d11_preprocess_breadcrumb(&$variables) {
   }
   $variables['breadcrumb'] = $links;
   $variables['#cache']['contexts'][] = 'url.path';
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for views-view-unformatted--instructors.
+ *
+ * The /instructors directory rendered every profile as its full two-column
+ * page, newest profile first — 35 full bios, 24,000 pixels, no way to tell
+ * who actually teaches (JR, 2026-09-14). The View still does the filtering
+ * (active instructors, topic facet); the theme renders the rows as the same
+ * teaser cards the course pages use, ordered by sessions taught then name.
+ */
+function barrio_boostrap_5_makehaven_d11_preprocess_views_view_unformatted__instructors(array &$variables): void {
+  $uids = [];
+  foreach ($variables['view']->result as $row) {
+    $entity = $row->_entity ?? NULL;
+    if ($entity && method_exists($entity, 'getOwnerId') && $entity->getOwnerId()) {
+      $uids[(int) $entity->getOwnerId()] = TRUE;
+    }
+  }
+  $variables['instructors'] = _barrio_boostrap_5_makehaven_d11_course_instructor_teasers(array_keys($uids));
+  $variables['instructor_count'] = count($variables['instructors']);
+  $variables['teach_url'] = Url::fromUserInput('/instructor')->toString();
 }
 
 /**
