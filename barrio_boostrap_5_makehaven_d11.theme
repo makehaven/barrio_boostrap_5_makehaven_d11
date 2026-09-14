@@ -546,6 +546,31 @@ function _barrio_boostrap_5_makehaven_d11_course_signin_prompt(NodeInterface $no
 }
 
 /**
+ * Implements hook_preprocess_HOOK() for menu--account.
+ *
+ * Adds a "Join" button to the top bar for signed-out visitors. Join (1,136
+ * views in 90 days) and Tours (806) were in no menu at all (2026-09-14).
+ * Rendered here rather than stored as a menu link because signed-in members
+ * are served a different theme, where a shared account-menu link would have
+ * shown "Join" to people who already had.
+ */
+function barrio_boostrap_5_makehaven_d11_preprocess_menu__account(array &$variables): void {
+  $variables['#cache']['contexts'][] = 'user.roles:anonymous';
+  if (\Drupal::currentUser()->isAuthenticated()) {
+    return;
+  }
+  $variables['items'] = ['mh_join' => [
+    'title' => t('Join'),
+    'url' => Url::fromUserInput('/join-makehaven'),
+    'attributes' => new \Drupal\Core\Template\Attribute(['class' => ['mh-join-link']]),
+    'below' => [],
+    'is_expanded' => FALSE,
+    'is_collapsed' => FALSE,
+    'in_active_trail' => FALSE,
+  ]] + $variables['items'];
+}
+
+/**
  * Implements hook_preprocess_HOOK() for login_with (social_auth's button row).
  *
  * The block never passes a destination, so a visitor who signed in with
@@ -1079,7 +1104,7 @@ function _barrio_boostrap_5_makehaven_d11_is_room(?NodeInterface $node): bool {
  */
 function _barrio_boostrap_5_makehaven_d11_mh_banner_crumb(): ?array {
   $route_match = \Drupal::routeMatch();
-  $membership = '/membership-information-members';
+  $membership = '/start/take-next-step';
   // The menu heading over events, workshops, programs and instructors.
   // Was "Programming" — read as coding by half a makerspace's visitors
   // (renamed 2026-09-14); the parent link goes where the traffic goes.
@@ -1102,7 +1127,7 @@ function _barrio_boostrap_5_makehaven_d11_mh_banner_crumb(): ?array {
     // site_search view serves /search under core's existing route name,
     // so this is keyed 'search.view' rather than 'view.site_search.page_1'.
     'search.view'                       => [['Search', NULL]],
-    'view.rooms.page_1'                 => [['Rooms', NULL]],
+    'view.rooms.page_1'                 => [['Resources', $resources], ['Rooms', NULL]],
     'view.businesses.incubating'        => [['About', '/about-us'], ['Member Businesses', NULL]],
     'view.blog.page_1'                  => [['About', '/about-us'], ['Blog', NULL]],
     'view.event_set.all_upcoming'       => [[$programming_label, $programming], ['Upcoming Events', NULL]],
@@ -1183,8 +1208,8 @@ function _barrio_boostrap_5_makehaven_d11_mh_banner_crumb(): ?array {
   // Financial Information" are too long for the pill). Parents follow the main
   // menu. IDs are stable because the dev DB shares the production lineage.
   $node_parents = [
-    14366 => ['About', '/about-us'],              // Instructor Interest webform.
-    41379 => ['Membership', $membership],         // Membership Agreement.
+    14366 => [$programming_label, $programming], // Instructor Interest webform (Teach group).
+    41379 => ['About', '/about-us'],              // Membership Agreement (a policy; menu: About).
     332   => ['Membership', $membership],         // Gift a Membership.
     707   => ['Membership', $membership],         // Membership Overview (landing).
     14254 => [$programming_label, $programming],       // Private Classes webform.
@@ -1195,9 +1220,9 @@ function _barrio_boostrap_5_makehaven_d11_mh_banner_crumb(): ?array {
     // leaving them with no visible heading — the theme supplies it instead.
     427   => ['About', '/about-us'],              // Team.
     413   => ['About', '/about-us'],              // Work at MakeHaven.
-    29374 => ['About', '/about-us'],              // Teach a Workshop.
+    29374 => [$programming_label, $programming, 'Teach at MakeHaven'],
     5045  => ['About', '/about-us', 'FAQ'],
-    13706 => ['About', '/about-us', 'Financial Information'],
+    13706 => ['Donate', '/donate-makehaven', 'Financial Information'], // menu: Donate.
     27700 => [$programming_label, $programming],       // Team-Building Workshops.
     // NB: /gems (30278) is intentionally NOT here. Like /membership, its node
     // body carries its own .mh-page__banner hero (heading + crumb pill + lead),

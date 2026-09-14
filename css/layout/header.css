@@ -415,3 +415,19 @@ nav#navbar-top .menu--account .nav-link:focus {
     display: none !important;
   }
 }
+
+/* Top-bar "Join" (account menu link to /join-makehaven, visitors only — the
+   theme drops it once signed in). The one filled button in the bar, so it
+   reads as the call to action next to the quiet Log in link. */
+nav#navbar-top .menu--account .nav-link[href$="/join-makehaven"] {
+  background: var(--mh-color-brand-primary);
+  color: #fff;
+  border-radius: 999px;
+  padding: var(--mh-space-2xs) var(--mh-space-sm);
+}
+nav#navbar-top .menu--account .nav-link[href$="/join-makehaven"]:hover,
+nav#navbar-top .menu--account .nav-link[href$="/join-makehaven"]:focus {
+  background: var(--mh-color-brand-primary-strong);
+  color: #fff;
+  text-decoration: none;
+}
