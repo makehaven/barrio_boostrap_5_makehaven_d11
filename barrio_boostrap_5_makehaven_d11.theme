@@ -208,6 +208,25 @@ function _barrio_boostrap_5_makehaven_d11_course_upcoming_events(NodeInterface $
 }
 
 /**
+ * A person's public name: first + last name fields when set, else the
+ * display name (which for older accounts is the login email).
+ */
+function _barrio_boostrap_5_makehaven_d11_person_name(\Drupal\user\UserInterface $user): string {
+  $first = $user->hasField('field_first_name') ? trim((string) $user->get('field_first_name')->value) : '';
+  $last = $user->hasField('field_last_name') ? trim((string) $user->get('field_last_name')->value) : '';
+  $name = trim($first . ' ' . $last);
+  return $name !== '' ? $name : $user->getDisplayName();
+}
+
+/**
+ * Whether a formatted-text field holds real text (not just tags or &nbsp;).
+ */
+function _barrio_boostrap_5_makehaven_d11_text_has_content(?string $html): bool {
+  $text = html_entity_decode(strip_tags((string) $html), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+  return trim(str_replace("\xC2\xA0", ' ', $text)) !== '';
+}
+
+/**
  * Instructor / coach teasers for a course page.
  *
  * Course pages listed instructors as bare name links. A program is chosen as
@@ -259,7 +278,7 @@ function _barrio_boostrap_5_makehaven_d11_course_instructor_teasers(array $uids)
   $list = [];
   foreach ($users as $u) {
     $uid = (int) $u->id();
-    $name = $u->getDisplayName();
+    $name = _barrio_boostrap_5_makehaven_d11_person_name($u);
     $url = $u->toUrl()->toString();
     $photo = '';
     $blurb = '';
@@ -1196,6 +1215,203 @@ function barrio_boostrap_5_makehaven_d11_preprocess_breadcrumb(&$variables) {
 }
 
 /**
+ * Implements hook_preprocess_HOOK() for profile.
+ *
+ * Instructor profile pages (/profile/{id}) rendered the raw entity: a
+ * numbered title, a photo, one field label and a topic, with the bio usually
+ * empty — while the site knows how many sessions the person has taught,
+ * since when, how many people they have taught, which courses, and what is
+ * coming up (JR, 2026-09-14: "not very interesting"). Full view only; the
+ * /instructors listing and teasers keep their own displays.
+ *
+ * Sets $variables['instructor'] for profile--instructor--full.html.twig.
+ */
+function barrio_boostrap_5_makehaven_d11_preprocess_profile(array &$variables): void {
+  /** @var \Drupal\profile\Entity\ProfileInterface $profile */
+  $profile = $variables['profile'] ?? ($variables['elements']['#profile'] ?? NULL);
+  if (!$profile || $profile->bundle() !== 'instructor' || ($variables['view_mode'] ?? '') !== 'full') {
+    return;
+  }
+  $owner = $profile->getOwner();
+  if (!$owner) {
+    return;
+  }
+  $uid = (int) $owner->id();
+  $etm = \Drupal::entityTypeManager();
+  $database = \Drupal::database();
+  $now = date('Y-m-d H:i:s');
+  $data = [
+    'name' => _barrio_boostrap_5_makehaven_d11_person_name($owner),
+    'photo' => '',
+    'topics' => [],
+    'bio' => $variables['content']['field_instructor_bio'] ?? NULL,
+    'has_bio' => $profile->hasField('field_instructor_bio')
+      && _barrio_boostrap_5_makehaven_d11_text_has_content($profile->get('field_instructor_bio')->value),
+    'private_available' => FALSE,
+    'private_text' => $variables['content']['field_instructor_private_session'] ?? NULL,
+    'has_private_text' => $profile->hasField('field_instructor_private_session')
+      && _barrio_boostrap_5_makehaven_d11_text_has_content($profile->get('field_instructor_private_session')->value),
+    'private_class_url' => Url::fromUserInput('/private-class-inquiry', ['query' => ['instructor' => _barrio_boostrap_5_makehaven_d11_person_name($owner)]])->toString(),
+    'stats' => ['sessions' => 0, 'since' => '', 'students' => 0, 'upcoming' => 0, 'rating' => 0.0, 'ratings' => 0],
+    'courses' => [],
+    'upcoming' => [],
+  ];
+
+  if ($profile->hasField('field_instructor_photo') && !$profile->get('field_instructor_photo')->isEmpty()) {
+    $file = $profile->get('field_instructor_photo')->entity;
+    $style = $etm->getStorage('image_style')->load('medium_square');
+    if ($file && $style) {
+      $data['photo'] = $style->buildUrl($file->getFileUri());
+    }
+  }
+  if ($profile->hasField('field_instructor_topics')) {
+    foreach ($profile->get('field_instructor_topics')->referencedEntities() as $term) {
+      $data['topics'][] = $term->label();
+    }
+  }
+  if ($profile->hasField('field_instructor_availability')) {
+    $avail = (string) $profile->get('field_instructor_availability')->value;
+    $data['private_available'] = $avail !== '' && !in_array(strtolower($avail), ['no', 'none', '0', 'not_available'], TRUE);
+  }
+
+  try {
+    if ($database->schema()->tableExists('civicrm_event__field_civi_event_instructor')) {
+      $event_ids = $database->select('civicrm_event__field_civi_event_instructor', 'i')
+        ->fields('i', ['entity_id'])
+        ->condition('i.field_civi_event_instructor_target_id', $uid)
+        ->execute()->fetchCol();
+      if ($event_ids) {
+        // Sessions taught, first year, upcoming count.
+        $agg = $database->select('civicrm_event', 'e')
+          ->condition('e.id', $event_ids, 'IN')
+          ->condition('e.is_template', 0);
+        $agg->addExpression("SUM(e.start_date <= '$now')", 'past');
+        $agg->addExpression("SUM(e.start_date > '$now' AND e.is_active = 1)", 'upcoming');
+        $agg->addExpression("MIN(CASE WHEN e.start_date <= '$now' THEN e.start_date END)", 'first');
+        $row = $agg->execute()->fetchObject();
+        $data['stats']['sessions'] = (int) ($row->past ?? 0);
+        $data['stats']['upcoming'] = (int) ($row->upcoming ?? 0);
+        $data['stats']['since'] = !empty($row->first) ? date('Y', strtotime($row->first)) : '';
+
+        // People taught: distinct registered/attended participants on past sessions.
+        if ($database->schema()->tableExists('civicrm_participant')) {
+          $st = $database->select('civicrm_participant', 'p');
+          $st->join('civicrm_event', 'e', 'e.id = p.event_id');
+          $st->addExpression('COUNT(DISTINCT p.contact_id)', 'students');
+          $st->condition('p.event_id', $event_ids, 'IN')
+            ->condition('p.status_id', [1, 2], 'IN')
+            ->condition('e.start_date', $now, '<=');
+          $data['stats']['students'] = (int) $st->execute()->fetchField();
+        }
+
+        // Ratings from the event feedback form (same source as course pages).
+        $sids = $database->select('webform_submission_data', 'eid')
+          ->fields('eid', ['sid'])
+          ->condition('eid.webform_id', 'webform_1181')
+          ->condition('eid.name', 'event_id')
+          ->condition('eid.value', array_map('strval', $event_ids), 'IN')
+          ->execute()->fetchCol();
+        if ($sids) {
+          $ratings = $database->select('webform_submission_data', 'r')
+            ->fields('r', ['value'])
+            ->condition('r.webform_id', 'webform_1181')
+            ->condition('r.name', 'overall_how_satisfied_were_you_with_the_event')
+            ->condition('r.sid', $sids, 'IN')
+            ->execute()->fetchCol();
+          $sum = 0;
+          $n = 0;
+          foreach ($ratings as $v) {
+            $v = (int) $v;
+            if ($v >= 1 && $v <= 5) {
+              $sum += $v;
+              $n++;
+            }
+          }
+          if ($n >= 3) {
+            $data['stats']['rating'] = round($sum / $n, 1);
+            $data['stats']['ratings'] = $n;
+          }
+        }
+
+        // Courses they teach: parent course nodes of their events, with runs.
+        if ($database->schema()->tableExists('civicrm_event__field_parent_course')) {
+          $cq = $database->select('civicrm_event__field_parent_course', 'pc');
+          $cq->join('civicrm_event', 'e', 'e.id = pc.entity_id');
+          $cq->join('node_field_data', 'n', 'n.nid = pc.field_parent_course_target_id');
+          $cq->addField('n', 'nid');
+          $cq->addField('n', 'title');
+          $cq->addExpression('COUNT(DISTINCT e.id)', 'runs');
+          $cq->addExpression("SUM(e.start_date > '$now' AND e.is_active = 1)", 'upcoming');
+          $cq->condition('pc.entity_id', $event_ids, 'IN')
+            ->condition('e.is_template', 0)
+            ->condition('n.status', 1)
+            ->groupBy('n.nid')->groupBy('n.title')
+            ->orderBy('runs', 'DESC');
+          $course_rows = $cq->execute()->fetchAll();
+          $nids = array_map(static fn($r) => (int) $r->nid, $course_rows);
+          $nodes = $nids ? $etm->getStorage('node')->loadMultiple($nids) : [];
+          foreach ($course_rows as $r) {
+            $node = $nodes[(int) $r->nid] ?? NULL;
+            if (!$node) {
+              continue;
+            }
+            $type = $node->hasField('field_course_type') ? $node->get('field_course_type')->value : NULL;
+            $nouns = _barrio_boostrap_5_makehaven_d11_course_nouns($type);
+            $image = '';
+            if ($node->hasField('field_course_image') && !$node->get('field_course_image')->isEmpty()) {
+              $file = $node->get('field_course_image')->entity;
+              $style = $etm->getStorage('image_style')->load('medium');
+              if ($file && $style) {
+                $image = $style->buildUrl($file->getFileUri());
+              }
+            }
+            $data['courses'][] = [
+              'title' => $node->label(),
+              'url' => $node->toUrl()->toString(),
+              'image' => $image,
+              'runs' => (int) $r->runs,
+              'upcoming' => (int) $r->upcoming,
+              'noun' => $nouns,
+              'listed' => $node->hasField('field_publicly_listed') && (int) $node->get('field_publicly_listed')->value === 1,
+            ];
+          }
+        }
+
+        // Upcoming sessions.
+        $up = $database->select('civicrm_event', 'e')
+          ->fields('e', ['id', 'title', 'start_date'])
+          ->condition('e.id', $event_ids, 'IN')
+          ->condition('e.is_template', 0)
+          ->condition('e.is_active', 1)
+          ->condition('e.is_public', 1)
+          ->condition('e.start_date', $now, '>')
+          ->orderBy('e.start_date')
+          ->range(0, 6)
+          ->execute();
+        foreach ($up as $ev) {
+          $ts = strtotime($ev->start_date);
+          $data['upcoming'][] = [
+            'title' => $ev->title,
+            'date' => date('D, M j', $ts),
+            'time' => date('g:ia', $ts),
+            'url' => '/civicrm/event/info?id=' . $ev->id . '&reset=1',
+            'register' => '/civicrm/event/register?id=' . $ev->id . '&reset=1',
+          ];
+        }
+      }
+    }
+  }
+  catch (\Throwable $e) {
+    // The page still renders with whatever was gathered.
+  }
+
+  $variables['instructor'] = $data;
+  $variables['#attached']['library'][] = 'barrio_boostrap_5_makehaven_d11/global-styling';
+  $variables['#cache']['tags'][] = 'civicrm_event_list';
+  $variables['#cache']['max-age'] = 3600;
+}
+
+/**
  * Implements hook_preprocess_HOOK() for page.
  *
  * Collapses the featured-top band when nothing in it renders. Barrio's page
@@ -1236,6 +1452,17 @@ function barrio_boostrap_5_makehaven_d11_preprocess_page(array &$variables): voi
 function barrio_boostrap_5_makehaven_d11_preprocess_html(&$variables) {
   if (_barrio_boostrap_5_makehaven_d11_mh_banner_crumb() !== NULL) {
     $variables['attributes']['class'][] = 'mh-banner-page';
+  }
+  // Instructor profile pages: own hero (profile--instructor--full.html.twig),
+  // so hide the theme title block and give the tab the person's name instead
+  // of "Instructor #1793".
+  $profile = \Drupal::routeMatch()->getParameter('profile');
+  if ($profile instanceof \Drupal\profile\Entity\ProfileInterface && $profile->bundle() === 'instructor'
+    && \Drupal::routeMatch()->getRouteName() === 'entity.profile.canonical') {
+    $variables['attributes']['class'][] = 'page-profile--instructor';
+    if ($profile->getOwner()) {
+      $variables['head_title']['title'] = _barrio_boostrap_5_makehaven_d11_person_name($profile->getOwner());
+    }
   }
   // Course pages: .page-course (+ .page-course--{type}) so css/pages/course.css
   // can hide the duplicate theme page title on every course page and give

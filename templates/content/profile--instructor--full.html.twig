@@ -1,0 +1,138 @@
+{#
+/**
+ * @file
+ * Instructor profile page (/profile/{id}, full view).
+ *
+ * Built from what the site already knows about the person: the profile's
+ * photo, bio, topics and private-instruction availability, plus the CiviCRM
+ * events they have instructed — sessions taught, since when, people taught,
+ * rating (when there are enough), the courses those sessions belong to, and
+ * what is coming up. Falls back to the plain entity render when the
+ * preprocess did not run.
+ *
+ * Variables: instructor (see barrio_boostrap_5_makehaven_d11_preprocess_profile()).
+ */
+#}
+{% if instructor is not defined %}
+  <div{{ attributes.addClass('profile', 'profile--type--instructor') }}>{{ title_suffix.contextual_links }}{{ content }}</div>
+{% else %}
+{% set st = instructor.stats %}
+<article{{ attributes.addClass('profile', 'profile--type--instructor', 'profile--view-mode--full', 'mh-page', 'mh-instructor') }}>
+  {{ title_suffix.contextual_links }}
+
+  <section class="mh-page__banner mh-instructor__banner">
+    <div class="container">
+      <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb mb-0 mh-page__crumb">
+          <li class="breadcrumb-item"><a href="/">{{ 'Home'|t }}</a></li>
+          <li class="breadcrumb-item"><a href="{{ path('view.instructors.page_1') }}">{{ 'Instructors'|t }}</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{ instructor.name }}</li>
+        </ol>
+      </nav>
+      <div class="mh-instructor__hero">
+        <div class="mh-instructor__photo">
+          {% if instructor.photo %}
+            <img src="{{ instructor.photo }}" alt="{{ instructor.name }}" width="160" height="160">
+          {% else %}
+            <span class="mh-instructor__initials">{{ instructor.name|split(' ')|first|first }}{{ instructor.name|split(' ')|last|first }}</span>
+          {% endif %}
+        </div>
+        <div class="mh-instructor__id">
+          <p class="mh-instructor__eyebrow">{{ 'MakeHaven instructor'|t }}</p>
+          <h1 class="mh-instructor__name">{{ instructor.name }}</h1>
+          {% if instructor.topics %}
+            <ul class="mh-instructor__topics list-unstyled">
+              {% for t in instructor.topics %}<li>{{ t }}</li>{% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+      </div>
+      {% if st.sessions > 0 or st.upcoming > 0 %}
+        <ul class="mh-instructor__stats list-unstyled">
+          {% if st.sessions > 0 %}
+            <li><strong>{{ st.sessions }}</strong><span>{{ st.sessions == 1 ? 'session taught'|t : 'sessions taught'|t }}</span></li>
+          {% endif %}
+          {% if st.students > 0 %}
+            <li><strong>{{ st.students }}</strong><span>{{ 'people taught'|t }}</span></li>
+          {% endif %}
+          {% if st.since %}
+            <li><strong>{{ st.since }}</strong><span>{{ 'teaching here since'|t }}</span></li>
+          {% endif %}
+          {% if st.ratings > 0 %}
+            <li><strong>{{ st.rating }}<small>/5</small></strong><span>{{ '@count ratings'|t({'@count': st.ratings}) }}</span></li>
+          {% endif %}
+          {% if st.upcoming > 0 %}
+            <li><strong>{{ st.upcoming }}</strong><span>{{ st.upcoming == 1 ? 'upcoming session'|t : 'upcoming sessions'|t }}</span></li>
+          {% endif %}
+        </ul>
+      {% endif %}
+    </div>
+  </section>
+
+  <div class="container py-5">
+    <div class="row g-5">
+      <div class="col-lg-7 mh-instructor__main">
+        {% if instructor.has_bio %}
+          <h2 class="section-title text-start mb-3">{{ 'About @name'|t({'@name': instructor.name|split(' ')|first}) }}</h2>
+          <div class="mh-instructor__bio">{{ instructor.bio }}</div>
+        {% endif %}
+
+        {% if instructor.courses %}
+          <h2 class="section-title text-start mb-3 mt-4">{{ 'Teaches'|t }}</h2>
+          <ul class="mh-instructor__courses list-unstyled">
+            {% for c in instructor.courses %}
+              <li class="mh-instructor__course card border-0 shadow-sm">
+                {% if c.image %}<a class="mh-instructor__course-img" href="{{ c.url }}" aria-hidden="true" tabindex="-1"><img src="{{ c.image }}" alt="" loading="lazy"></a>{% endif %}
+                <div class="mh-instructor__course-body">
+                  <a class="mh-instructor__course-title" href="{{ c.url }}">{{ c.title }}</a>
+                  <div class="mh-instructor__course-meta">
+                    {{ c.runs == 1 ? '1 @instance'|t({'@instance': c.noun.instance}) : '@count @plural'|t({'@count': c.runs, '@plural': c.noun.instance_plural}) }}
+                    {% if c.upcoming > 0 %} &middot; <span class="mh-instructor__course-upcoming">{{ c.upcoming == 1 ? '1 upcoming'|t : '@count upcoming'|t({'@count': c.upcoming}) }}</span>{% endif %}
+                  </div>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        {% if not instructor.has_bio and not instructor.courses %}
+          <p class="text-muted">{{ '@name has not added a bio yet.'|t({'@name': instructor.name}) }}</p>
+        {% endif %}
+      </div>
+
+      <aside class="col-lg-5 mh-instructor__aside">
+        <div class="card border-0 shadow-sm p-4 mb-4">
+          <h3 class="h5 fw-bold">{{ 'Upcoming sessions'|t }}</h3>
+          {% if instructor.upcoming %}
+            <ul class="list-unstyled mb-0 mh-instructor__upcoming">
+              {% for ev in instructor.upcoming %}
+                <li>
+                  <a class="mh-instructor__ev-title" href="{{ ev.url }}">{{ ev.title }}</a>
+                  <div class="mh-instructor__ev-when">{{ ev.date }} &middot; {{ ev.time }} &nbsp; <a class="mh-instructor__ev-register" href="{{ ev.register }}">{{ 'Register'|t }} &rarr;</a></div>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="text-muted mb-2">{{ 'Nothing on the calendar right now.'|t }}</p>
+            {% if instructor.courses %}
+              <p class="small mb-0">{{ 'Follow one of the classes @name teaches to hear when it is next scheduled.'|t({'@name': instructor.name|split(' ')|first}) }}</p>
+            {% endif %}
+          {% endif %}
+        </div>
+
+        {% if instructor.private_available %}
+          <div class="card border-0 shadow-sm p-4 mb-4 mh-instructor__private">
+            <h3 class="h5 fw-bold">{{ 'Private instruction'|t }}</h3>
+            {% if instructor.has_private_text %}
+              <div class="mh-instructor__private-text">{{ instructor.private_text }}</div>
+            {% else %}
+              <p>{{ '@name is available for one-on-one or small-group sessions.'|t({'@name': instructor.name|split(' ')|first}) }}</p>
+            {% endif %}
+            <a class="btn btn-mh-red" href="{{ instructor.private_class_url }}">{{ 'Request a private class'|t }}</a>
+          </div>
+        {% endif %}
+      </aside>
+    </div>
+  </div>
+</article>
+{% endif %}
