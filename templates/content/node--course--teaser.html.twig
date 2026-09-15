@@ -29,6 +29,9 @@
 
     <div class="card-text">
       <div class="course-stat-chips">
+        {% if course_status %}
+          <span class="course-stat-chip course-status-chip course-status-chip--{{ course_status.tone }}">{{ course_status.chip }}</span>
+        {% endif %}
         {% if workshop_upcoming_count > 0 %}
           <time class="course-stat-chip course-stat-chip--upcoming">
             {{ workshop_upcoming_count }}

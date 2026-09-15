@@ -82,6 +82,49 @@ function barrio_boostrap_5_makehaven_d11_form_system_theme_settings_alter(&$form
  *   Keys: single (the thing), instance / instance_plural (one scheduled run
  *   of it), view (catalog-card button label).
  */
+/**
+ * The honest status of a program: one chip, one sentence.
+ *
+ * Two dimensions (Programs and Partnerships Framework, 2026-09-14): enrollment
+ * is DERIVED from linked events (an upcoming one = enrolling), offering mode
+ * is the ONE thing staff set (field_offering_mode). Returns NULL for
+ * non-program courses and for programs that are enrolling — the cohort rows
+ * say it better than a chip.
+ *
+ * @return array{key:string,chip:string,tone:string,sentence:string}|null
+ */
+function _barrio_boostrap_5_makehaven_d11_course_status(NodeInterface $node, int $upcoming): ?array {
+  $type = $node->hasField('field_course_type') ? $node->get('field_course_type')->value : NULL;
+  if ($type !== 'program') {
+    return NULL;
+  }
+  if ($upcoming > 0) {
+    return ['key' => 'enrolling', 'chip' => t('Enrolling now'), 'tone' => 'ok', 'sentence' => ''];
+  }
+  $mode = $node->hasField('field_offering_mode') ? (string) ($node->get('field_offering_mode')->value ?? '') : '';
+  switch ($mode) {
+    case 'interest_list':
+      return ['key' => 'interest', 'chip' => t('Interest list'), 'tone' => 'warn',
+        'sentence' => t('The next cohort runs once enough people ask. Join the interest list and we will email you when it is scheduled.')];
+
+    case 'partner_groups':
+      return ['key' => 'partner', 'chip' => t('For partner groups'), 'tone' => 'info',
+        'sentence' => t('Delivered for organizations that bring their own participants, and run publicly when there is demand. Follow the program to hear about a public cohort, or ask about bringing it to your organization.')];
+
+    case 'partner_delivered':
+      return ['key' => 'partner-run', 'chip' => t('Running with a partner'), 'tone' => 'brand',
+        'sentence' => t('Currently delivered for a partner organization; enrollment is through them. Follow the program to hear about a public cohort.')];
+
+    case 'paused':
+      return ['key' => 'paused', 'chip' => t('Not currently offered'), 'tone' => 'quiet',
+        'sentence' => t('Not currently offered. Follow the program and we will email you if it comes back.')];
+
+    default:
+      return ['key' => 'planned', 'chip' => t('Next cohort not yet scheduled'), 'tone' => 'quiet',
+        'sentence' => t('No cohort is open right now. Follow the program to hear first when the next one is announced.')];
+  }
+}
+
 function _barrio_boostrap_5_makehaven_d11_course_nouns(?string $type): array {
   switch ($type) {
     case 'program':
@@ -476,6 +519,7 @@ function barrio_boostrap_5_makehaven_d11_preprocess_node__course(array &$variabl
 
   // 4. Stats.
   $variables['workshop_runs_count'] = (int) ($node->get('field_stat_runs')->value ?? 0);
+  $variables['course_status'] = _barrio_boostrap_5_makehaven_d11_course_status($node, count($variables['workshop_upcoming_events'] ?? []));
 }
 
 /**
@@ -653,6 +697,10 @@ function barrio_boostrap_5_makehaven_d11_preprocess_node__course__teaser(array &
   if ($type) {
     $variables['attributes']['class'][] = 'course-teaser--' . $type;
   }
+  $variables['course_status'] = _barrio_boostrap_5_makehaven_d11_course_status($node, (int) $variables['workshop_upcoming_count']);
+  if ($variables['course_status']) {
+    $variables['attributes']['class'][] = 'course-teaser--status-' . $variables['course_status']['key'];
+  }
 
   // Member-only registration marker.
   if ($type === 'badge_class') {
@@ -725,10 +773,11 @@ function barrio_boostrap_5_makehaven_d11_preprocess_field(array &$variables): vo
     $type = $node->hasField('field_course_type') ? $node->get('field_course_type')->value : NULL;
     $build = [
       '#type' => 'inline_template',
-      '#template' => "{% include '@barrio_boostrap_5_makehaven_d11/content/course-cohorts.html.twig' with { events: events, nouns: nouns } only %}",
+      '#template' => "{% include '@barrio_boostrap_5_makehaven_d11/content/course-cohorts.html.twig' with { events: events, nouns: nouns, status: status } only %}",
       '#context' => [
-        'events' => _barrio_boostrap_5_makehaven_d11_course_upcoming_events($node),
+        'events' => $events = _barrio_boostrap_5_makehaven_d11_course_upcoming_events($node),
         'nouns' => _barrio_boostrap_5_makehaven_d11_course_nouns($type),
+        'status' => _barrio_boostrap_5_makehaven_d11_course_status($node, count($events)),
       ],
       '#cache' => ['tags' => ['civicrm_event_list'], 'max-age' => 3600],
     ];

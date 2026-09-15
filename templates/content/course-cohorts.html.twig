@@ -34,11 +34,15 @@
       {% endfor %}
     </ul>
   {% else %}
-    <p class="mh-cohorts__empty">
+    {% if status and status.sentence %}
+      <p class="course-status-line course-status-line--{{ status.tone }}">{{ status.sentence }}</p>
+    {% else %}
+      <p class="mh-cohorts__empty">
       {{ 'No @plural are open for registration right now. New @plural are announced regularly — follow this @single below to hear first.'|t({
         '@plural': nouns.instance_plural,
         '@single': nouns.single,
       }) }}
     </p>
+    {% endif %}
   {% endif %}
 </div>

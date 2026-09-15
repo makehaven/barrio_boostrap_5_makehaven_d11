@@ -83,7 +83,7 @@
     {% if not course_upcoming_in_body %}
       <section class="mh-program__cohorts mb-5">
         <h2 class="section-title text-center mb-4">{{ 'Upcoming @plural'|t({'@plural': nouns.instance_plural|capitalize}) }}</h2>
-        {% include '@barrio_boostrap_5_makehaven_d11/content/course-cohorts.html.twig' with { events: workshop_upcoming_events, nouns: nouns } only %}
+        {% include '@barrio_boostrap_5_makehaven_d11/content/course-cohorts.html.twig' with { events: workshop_upcoming_events, nouns: nouns, status: course_status } only %}
       </section>
     {% endif %}
 

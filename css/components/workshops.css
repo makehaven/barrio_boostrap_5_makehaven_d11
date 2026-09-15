@@ -261,3 +261,24 @@
   background: #eef0f4;
   color: var(--mh-color-neutral-600);
 }
+
+/* Program status chip (Programs and Partnerships Framework, 2026-09-15):
+   the one honest word about whether someone can act on a program today. */
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-text .course-status-chip {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-text .course-status-chip--ok { background: #e1efe3; color: #2f6b3a; }
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-text .course-status-chip--warn { background: #f6ebd4; color: #8a5a12; }
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-text .course-status-chip--info { background: #e0eaf2; color: #2e567a; }
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-text .course-status-chip--brand { background: var(--mh-color-brand-soft, #f6e3e1); color: var(--mh-color-brand-primary, #8b1919); }
+:is(.view-public-course-catalog, .view-public-program-catalog) .card-text .course-status-chip--quiet { background: #e9e5e4; color: #5d5858; }
+
+/* The same sentence on the program page, above the cohort list. */
+.mh-program .course-status-line {
+  font-size: 1.05rem;
+  color: var(--mh-color-text-muted, #5d5858);
+  max-width: 62ch;
+  margin: 0 auto 1.25rem;
+  text-align: center;
+}
