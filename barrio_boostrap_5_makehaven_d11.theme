@@ -542,6 +542,21 @@ function _barrio_boostrap_5_makehaven_d11_course_signin_prompt(NodeInterface $no
       ])
       . '</p>',
   ];
+  // Programs keep an interest list in CiviCRM that anyone can join with an
+  // email address (instructor_companion); no account needed.
+  if ($nouns['type'] === 'program' && \Drupal::hasService('instructor_companion.course_interest_groups')) {
+    try {
+      $build['interest'] = [
+        '#type' => 'link',
+        '#title' => t('No account? Leave your email instead'),
+        '#url' => Url::fromRoute('instructor_companion.course_interest_form', ['node' => $node->id()]),
+        '#attributes' => ['class' => ['btn', 'btn-outline-primary', 'mt-2', 'course-signin__interest'], 'rel' => 'nofollow'],
+      ];
+    }
+    catch (\Throwable $e) {
+      // Route absent (module older than the theme): the prompt still works.
+    }
+  }
   return $build;
 }
 
