@@ -139,7 +139,7 @@
       '  <div class="mh-feedback-panel__header">',
       '    <div>',
       '      <h2 class="mh-feedback-panel__title">Website feedback</h2>',
-      '      <p class="mh-feedback-panel__lede">Report a problem with this page or website feature. We will include the current page details automatically.</p>',
+      '      <p class="mh-feedback-panel__lede">Problems with the website itself, answered on the <a href="/feedback-status" target="_blank" rel="noopener">feedback board</a> — in batches, over weeks. If you need an answer today, read on.</p>',
       '    </div>',
       '    <button type="button" class="mh-feedback-panel__close" aria-label="Close feedback panel">&times;</button>',
       '  </div>',
