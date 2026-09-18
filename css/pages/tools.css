@@ -228,3 +228,41 @@ body.path-i .field--name-field-item-status .field__item a {
   margin-bottom: 10px;
   font-weight: bold;
 }
+
+/* ── Author-entered rich text on a phone ─────────────────── */
+/* A tool's prose is hand-written in CKEditor — Description (body) and
+   Instructions (field_item_instructions) both — and two things members paste
+   in there don't fit a 390px screen: wide comparison tables (the laser
+   cutters' material and DANGER tables, /i/424 and /i/12914) and bare URLs
+   used as their own link text. Both ran off the right edge, and because the
+   page clips horizontal overflow rather than scrolling, the far side of a
+   safety table was simply unreachable on a phone.
+   Keyed off `.node--type-item .text-formatted` so it covers every processed
+   text field on the node — and note it is NOT keyed off `body.path-i`: the
+   body class on an /i/ node is `path-node`, because the class comes from the
+   internal path, so the `body.path-i` rules elsewhere in this file never
+   match anything. */
+/* Only below the tablet breakpoint: `display: block` turns the table into a
+   scroll container, and on a wide screen that re-flows the column widths
+   (measured: two of the laser tables grow ~300px taller at 1280px) for no
+   gain, since they already fit. */
+@media (max-width: 767.98px) {
+  .node--type-item .text-formatted table {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* `overflow-wrap` only — deliberately not `word-break: break-word`, which
+   also feeds min-content sizing and re-flowed the laser tables' columns on
+   desktop (measured: +300px of height at 1280px for no benefit). */
+.node--type-item .text-formatted a,
+.node--type-item .text-formatted p,
+.node--type-item .text-formatted li,
+.node--type-item .text-formatted td,
+.node--type-item .text-formatted th {
+  overflow-wrap: break-word;
+}

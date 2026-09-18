@@ -1431,10 +1431,11 @@
 .field--name-field-member-badges .vocabulary-badges,
 .field--name-field-additional-badges .vocabulary-badges {
   display: grid;
-  grid-template-columns: 130px 1fr;
+  grid-template-columns: 130px minmax(0, 1fr);
   grid-template-areas:
     "image  title"
     "image  meta"
+    "image  status"
     "image  cta";
   column-gap: 1.1rem;
   row-gap: 0.35rem;
@@ -1454,10 +1455,11 @@
 .field--name-field-additional-badges .vocabulary-badges:has(.field--name-field-badge-video),
 .field--name-field-member-badges .vocabulary-badges:has(.mh-badge-video),
 .field--name-field-additional-badges .vocabulary-badges:has(.mh-badge-video) {
-  grid-template-columns: 130px 1fr auto;
+  grid-template-columns: 130px minmax(0, 1fr) auto;
   grid-template-areas:
     "image  title  video"
     "image  meta   video"
+    "image  status video"
     "image  cta    video";
 }
 .field--name-field-member-badges .vocabulary-badges + .vocabulary-badges,
@@ -1560,12 +1562,18 @@
 .field--name-field-additional-badges .vocabulary-badges .field--name-field-badge-checkout-requirement .field__label {
   display: none;
 }
+/* The pill used to share the `meta` cell with the checkout-requirement line,
+   one pushed to each end. That only holds while the column is wide: below
+   roughly 800px the two render on top of each other ("Active" printed over
+   "In person checkout required" — reported on a phone, 2026-09-18). Grid
+   can't reflow overlapping items, so the pill gets a row of its own at every
+   width instead of a breakpoint that has to be guessed right. */
 .field--name-field-member-badges .vocabulary-badges .mh-badge-status-pill,
 .field--name-field-additional-badges .vocabulary-badges .mh-badge-status-pill {
-  grid-area: meta;
-  justify-self: end;
+  grid-area: status;
+  justify-self: start;
   align-self: start;
-  margin: 0;
+  margin: 0.15rem 0 0;
 }
 
 /* Eligibility CTA: inline-sized, anchored bottom-left of the right column.
@@ -1693,51 +1701,105 @@
   background-color: var(--mh-color-brand-primary, #8b1919);
 }
 
-/* Narrow viewports: stack image above the right column. */
+/* ── Narrow viewports ─────────────────────────────────────── */
+/* Every `:has()` selector from the wide rules has to be restated in these
+   blocks, not left to the plain `.vocabulary-badges` rule:
+   `.vocabulary-badges:has(.mh-badge-video)` outranks `.vocabulary-badges`
+   whatever media query it sits in, so a narrow rule that only names the bare
+   class never wins. The 2026-09-12 lightbox rewrite added `.mh-badge-video`
+   to the wide rule but not to this block, which left phones on the
+   three-column desktop grid: the 220px video track hung off the right edge of
+   the card and off the screen, and the title column was squeezed to ~100px
+   (reported 2026-09-18 against /i/7255).
+
+   Keep `.mh-badge-video` and `.field--name-field-badge-video` together in
+   every selector list below — the raw field still renders on any badge the
+   lightbox doesn't claim. */
+
+/* Tablet and below: the image stays beside the text, but the video drops to
+   a full-width row of its own — there is no room for a 220px track beside a
+   130px badge image and a readable title. */
+@media (max-width: 767.98px) {
+  .field--name-field-member-badges .vocabulary-badges,
+  .field--name-field-additional-badges .vocabulary-badges {
+    grid-template-columns: 120px minmax(0, 1fr);
+    grid-template-areas:
+      "image  title"
+      "image  meta"
+      "image  status"
+      "image  cta";
+  }
+  .field--name-field-member-badges .vocabulary-badges:has(.field--name-field-badge-video),
+  .field--name-field-additional-badges .vocabulary-badges:has(.field--name-field-badge-video),
+  .field--name-field-member-badges .vocabulary-badges:has(.mh-badge-video),
+  .field--name-field-additional-badges .vocabulary-badges:has(.mh-badge-video) {
+    grid-template-columns: 120px minmax(0, 1fr);
+    grid-template-areas:
+      "image  title"
+      "image  meta"
+      "image  status"
+      "image  cta"
+      "video  video";
+  }
+  .field--name-field-member-badges .vocabulary-badges .field--name-field-member-badge-image,
+  .field--name-field-additional-badges .vocabulary-badges .field--name-field-member-badge-image,
+  .field--name-field-member-badges .vocabulary-badges .field--name-field-member-badge-image img,
+  .field--name-field-additional-badges .vocabulary-badges .field--name-field-member-badge-image img {
+    width: 120px;
+    height: 120px;
+  }
+  .field--name-field-member-badges .vocabulary-badges .field--name-field-badge-video,
+  .field--name-field-additional-badges .vocabulary-badges .field--name-field-badge-video,
+  .field--name-field-member-badges .vocabulary-badges .mh-badge-video,
+  .field--name-field-additional-badges .vocabulary-badges .mh-badge-video {
+    justify-self: start;
+    align-self: auto;
+    margin-top: 0.6rem;
+  }
+}
+
+/* Phones: stack the image above the text too — beside it there isn't enough
+   room left for the title or the "You have this badge" banner to sit on one
+   line. */
 @media (max-width: 480px) {
   .field--name-field-member-badges .vocabulary-badges,
   .field--name-field-additional-badges .vocabulary-badges {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
       "image"
       "title"
       "meta"
+      "status"
       "cta";
     justify-items: start;
     row-gap: 0.5rem;
   }
-  /* Single column is too narrow for a side-by-side video — restack it to the
-     bottom. Higher-specificity :has() rule (above) is overridden here by an
-     equally-specific rule inside the media query. */
   .field--name-field-member-badges .vocabulary-badges:has(.field--name-field-badge-video),
-  .field--name-field-additional-badges .vocabulary-badges:has(.field--name-field-badge-video) {
-    grid-template-columns: 1fr;
+  .field--name-field-additional-badges .vocabulary-badges:has(.field--name-field-badge-video),
+  .field--name-field-member-badges .vocabulary-badges:has(.mh-badge-video),
+  .field--name-field-additional-badges .vocabulary-badges:has(.mh-badge-video) {
+    grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
       "image"
       "title"
       "meta"
+      "status"
       "cta"
       "video";
   }
-  .field--name-field-member-badges .vocabulary-badges .field--name-field-badge-video,
-  .field--name-field-additional-badges .vocabulary-badges .field--name-field-badge-video {
-    justify-self: start;
-    align-self: auto;
-    margin-top: 0.5rem;
-  }
   .field--name-field-member-badges .vocabulary-badges .field--name-field-member-badge-image,
-  .field--name-field-additional-badges .vocabulary-badges .field--name-field-member-badge-image {
-    width: 110px;
-    height: 110px;
-  }
+  .field--name-field-additional-badges .vocabulary-badges .field--name-field-member-badge-image,
   .field--name-field-member-badges .vocabulary-badges .field--name-field-member-badge-image img,
   .field--name-field-additional-badges .vocabulary-badges .field--name-field-member-badge-image img {
     width: 110px;
     height: 110px;
   }
-  .field--name-field-member-badges .vocabulary-badges .mh-badge-status-pill,
-  .field--name-field-additional-badges .vocabulary-badges .mh-badge-status-pill {
-    justify-self: start;
+  /* The lightbox ships a 220px thumbnail; on the narrowest phones the card's
+     content box is narrower than that, so let it shrink with the column. */
+  .field--name-field-member-badges .vocabulary-badges .mh-badge-video,
+  .field--name-field-additional-badges .vocabulary-badges .mh-badge-video {
+    width: 100%;
+    max-width: 220px;
   }
 }
 
