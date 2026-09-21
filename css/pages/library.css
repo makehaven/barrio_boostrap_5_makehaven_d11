@@ -455,17 +455,30 @@ body.page-view-library-tool-directory .view-library-tool-directory .card.border-
 .node--type-library-item.node--view-mode-full .node__content > * { margin-bottom: 1rem; }
 .node--type-library-item.node--view-mode-full .node__content > *:last-child { margin-bottom: 0; }
 
-/* Status badge — green when available, brand red for any other state. */
+/* Status badge — green when available, brand red for any other state.
+   Logged-in members also see "by <borrower>", then "Borrowed: <date>" and
+   "Due: <date>", which lending_library separates with <br> tags. A flex row
+   ignores <br>, so every piece sat on one line and, on a phone, ran off the
+   right edge and dragged the whole page into horizontal scroll (Lior,
+   2026-09-21). Wrap, and let each <br> end the row. The pill loses its
+   perfect-circle ends when it wraps, which is the right trade. */
 .node--type-library-item.node--view-mode-full .lending-library-status {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: .5rem;
+  gap: .25rem .5rem;
   font-weight: 600;
   font-size: 1rem;
   padding: .7rem 1.1rem;
-  border-radius: 999px;
+  border-radius: 1.5rem;
   border: 1px solid transparent;
   margin: 0 0 1.25rem;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.node--type-library-item.node--view-mode-full .lending-library-status br {
+  flex-basis: 100%;
+  height: 0;
 }
 .node--type-library-item.node--view-mode-full .lending-library-status::before {
   font-size: 1.05em;
