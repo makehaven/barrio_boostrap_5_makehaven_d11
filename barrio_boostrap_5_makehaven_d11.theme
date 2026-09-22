@@ -1390,6 +1390,8 @@ function barrio_boostrap_5_makehaven_d11_preprocess_profile(array &$variables): 
       && _barrio_boostrap_5_makehaven_d11_text_has_content($profile->get('field_instructor_private_session')->value),
     'private_class_url' => Url::fromUserInput('/private-class-inquiry', ['query' => ['instructor' => _barrio_boostrap_5_makehaven_d11_person_name($owner)]])->toString(),
     'stats' => ['sessions' => 0, 'since' => '', 'students' => 0, 'upcoming' => 0, 'rating' => 0.0, 'ratings' => 0],
+    // Staff and the instructor get an Edit button; the profile has no tabs.
+    'edit_url' => $profile->access('update') ? $profile->toUrl('edit-form')->toString() : '',
     'courses' => [],
     'upcoming' => [],
   ];

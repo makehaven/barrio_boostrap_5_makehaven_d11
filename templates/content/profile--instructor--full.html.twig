@@ -38,7 +38,7 @@
           {% endif %}
         </div>
         <div class="mh-instructor__id">
-          <p class="mh-instructor__eyebrow">{{ 'MakeHaven instructor'|t }}</p>
+          <p class="mh-instructor__eyebrow">{{ 'MakeHaven instructor'|t }}{% if instructor.edit_url %} <a class="mh-instructor__edit" href="{{ instructor.edit_url }}">{{ 'Edit this page'|t }}</a>{% endif %}</p>
           <h1 class="mh-instructor__name">{{ instructor.name }}</h1>
           {% if instructor.topics %}
             <ul class="mh-instructor__topics list-unstyled">

@@ -56,3 +56,6 @@
 .course-people--directory .course-person__photo { flex-basis: 80px; width: 80px; height: 80px; }
 .course-people--directory .course-person__name { font-size: 1.2rem; }
 [data-bs-theme="dark"] .course-people--directory .course-person { background: #1e1e1e; border-color: #3a3232; }
+
+.mh-instructor__edit { margin-left: .75rem; font-size: .75rem; letter-spacing: 0; text-transform: none; color: #fff; border: 1px solid rgba(255,255,255,.6); border-radius: 999px; padding: .1rem .6rem; text-decoration: none; }
+.mh-instructor__edit:hover, .mh-instructor__edit:focus { background: rgba(255,255,255,.15); color: #fff; }
