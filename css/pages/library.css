@@ -446,7 +446,7 @@ body.page-view-library-tool-directory .view-library-tool-directory .card.border-
 
 /* The field stack becomes one clean card. */
 .node--type-library-item.node--view-mode-full .node__content {
-  background: var(--mh-color-surface, #fff);
+  background: var(--mh-color-surface);
   border: 1px solid var(--mh-color-border, #e5e7eb);
   border-radius: var(--mh-radius-lg, 16px);
   box-shadow: var(--mh-shadow-sm, 0 4px 14px rgba(30, 31, 36, .08));
@@ -573,4 +573,72 @@ body.page-view-library-tool-directory .view-library-tool-directory .card.border-
   background: transparent;
   color: #e8595d;
   border-color: #e8595d;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Library item page — "Recent issues reported" list, and phone gutters.
+   lending_library renders the issues as a list (was a six-column table that
+   got 244px of a 390px phone and grew rows hundreds of px tall).
+   ────────────────────────────────────────────────────────────────────────── */
+
+.lending-library-recent-issues__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.lending-library-issue {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--mh-color-border);
+  border-radius: var(--mh-radius-md);
+  background: var(--mh-color-surface);
+}
+
+.lending-library-issue__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.6rem;
+  font-size: 0.9rem;
+}
+
+.lending-library-issue__type {
+  font-weight: 600;
+}
+
+.lending-library-issue__type--damage,
+.lending-library-issue__type--missing {
+  color: var(--mh-color-brand-primary);
+}
+
+.lending-library-issue__when,
+.lending-library-issue__staff {
+  color: var(--mh-color-neutral-600);
+}
+
+.lending-library-issue__notes {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 575.98px) {
+  /* Five nested layers (page wrapper, container, column, article, card)
+     each added side padding; on a phone they took 146 of 390px. Keep the
+     card, drop the two outer layers that add nothing visible. */
+  body.node--type-library-item #main-wrapper {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  body.node--type-library-item article.node--type-library-item.node--view-mode-full {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  body.node--type-library-item article.node--type-library-item.node--view-mode-full > .node__content {
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+  }
 }
