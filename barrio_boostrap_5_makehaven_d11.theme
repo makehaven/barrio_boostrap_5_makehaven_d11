@@ -643,6 +643,11 @@ function barrio_boostrap_5_makehaven_d11_preprocess_login_with(array &$variables
     $variables['networks'] = [];
   }
   $variables['#cache']['tags'][] = 'config:social_auth_google.settings';
+  // Whether Google may create an account, or only sign into an existing one.
+  // Live has been login-only, so the old "no form to fill in" line promised
+  // something that bounced new people to the homepage (2026-09-24).
+  $variables['google_can_register'] = \Drupal::config('social_auth.settings')->get('user_allowed') === 'register';
+  $variables['#cache']['tags'][] = 'config:social_auth.settings';
   if (!empty($variables['destination'])) {
     return;
   }

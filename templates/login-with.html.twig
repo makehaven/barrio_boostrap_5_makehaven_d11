@@ -15,13 +15,20 @@
  *  - destination: internal path to return to after sign-in (set by
  *    barrio_boostrap_5_makehaven_d11_preprocess_login_with() from
  *    ?destination=; social_auth honours it).
+ *  - google_can_register: whether social_auth may create accounts
+ *    (user_allowed: register). When FALSE the button only signs existing
+ *    accounts in, and the lead line must not promise otherwise.
  */
 #}
 {% set options = destination ? {'query': {'destination': destination}} : {} %}
 {% if networks %}
 <div class="mh-social-signin">
   <p class="mh-social-signin__lead">
-    {{ 'No form to fill in. If you already have a MakeHaven account with the same email, it links to that.'|t }}
+    {% if google_can_register %}
+      {{ 'No form to fill in. If you already have a MakeHaven account with the same email, it links to that.'|t }}
+    {% else %}
+      {{ 'Already have a MakeHaven account? Sign in with the Google address it uses. New here? Use the form below.'|t }}
+    {% endif %}
   </p>
   <div class="mh-social-signin__buttons">
     {% for id, network in networks %}
