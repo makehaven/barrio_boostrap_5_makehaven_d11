@@ -731,6 +731,108 @@ function barrio_boostrap_5_makehaven_d11_preprocess_node(&$variables) {
   ) {
     $variables['reservation_page'] = _barrio_boostrap_5_makehaven_d11_build_reservation_page_data($node);
   }
+
+  if (
+    $node->getType() === 'badge_request'
+    && in_array($variables['view_mode'] ?? '', ['full', 'default'], TRUE)
+  ) {
+    $variables['badge_page'] = _barrio_boostrap_5_makehaven_d11_build_badge_page_data($node, $variables);
+  }
+}
+
+/**
+ * Data for the badge record page (node--badge-request--full.html.twig).
+ *
+ * The node title is machine-written ("Badge Request for X by User 123", or
+ * the older "Badge Issued to … by … on …" from D7) and the status never
+ * changes it, so the page is built from the fields instead. The member photo
+ * and profile link go through entity/field access: the photo field has
+ * custom field_permissions, so visitors who cannot see it get initials.
+ */
+function _barrio_boostrap_5_makehaven_d11_build_badge_page_data(NodeInterface $node, array &$variables): array {
+  $cache = CacheableMetadata::createFromRenderArray($variables);
+  $cache->addCacheContexts(['user.permissions']);
+
+  $data = [
+    'badge' => NULL,
+    'member' => NULL,
+    'status' => NULL,
+    'requested' => \Drupal::service('date.formatter')->format($node->getCreatedTime(), 'custom', 'F j, Y'),
+    'completed' => NULL,
+  ];
+
+  $term = $node->get('field_badge_requested')->entity;
+  if ($term && $term->access('view')) {
+    $cache->addCacheableDependency($term);
+    $image = NULL;
+    if ($term->hasField('field_member_badge_image') && ($file = $term->get('field_member_badge_image')->entity)) {
+      $image = [
+        'url' => \Drupal::service('file_url_generator')->generateString($file->getFileUri()),
+        'alt' => $term->get('field_member_badge_image')->alt ?: $term->label(),
+      ];
+    }
+    // Block tags become spaces so "<p>Badging:</p><p>Prior…" does not read "Badging:Prior".
+    $description = preg_replace('#<(?:/?(?:p|div|li|ul|ol|h[1-6]|tr|td)\b|br)[^>]*>#i', ' $0', (string) $term->get('description')->value);
+    $description = html_entity_decode(strip_tags($description), ENT_QUOTES);
+    $description = trim(preg_replace('/\s+/u', ' ', $description));
+    if (mb_strlen($description) > 260) {
+      $description = rtrim(mb_substr($description, 0, 260), " ,.;:") . '…';
+    }
+    $data['badge'] = [
+      'name' => $term->label(),
+      'url' => $term->toUrl()->toString(),
+      'image' => $image,
+      'description' => $description,
+    ];
+  }
+
+  $account = $node->get('field_member_to_badge')->entity;
+  if ($account) {
+    $cache->addCacheableDependency($account);
+    $first = $account->hasField('field_first_name') ? trim((string) $account->get('field_first_name')->value) : '';
+    $last = $account->hasField('field_last_name') ? trim((string) $account->get('field_last_name')->value) : '';
+    $name = trim("$first $last") ?: $account->getDisplayName();
+    $photo = NULL;
+    $profile = \Drupal::entityTypeManager()->getStorage('profile')->loadByUser($account, 'main');
+    if ($profile) {
+      $cache->addCacheableDependency($profile);
+      $field = $profile->hasField('field_member_photo') ? $profile->get('field_member_photo') : NULL;
+      if ($field && !$field->isEmpty() && $field->access('view') && ($file = $field->entity)) {
+        $photo = \Drupal::entityTypeManager()->getStorage('image_style')->load('medium_square')
+          ?->buildUrl($file->getFileUri());
+      }
+    }
+    $initials = mb_strtoupper(mb_substr($first ?: $name, 0, 1) . mb_substr($last, 0, 1));
+    $data['member'] = [
+      'name' => $name,
+      'pronouns' => $account->hasField('field_pronoun_txt') ? trim((string) $account->get('field_pronoun_txt')->value) : '',
+      'photo' => $photo,
+      'initials' => $initials,
+      'url' => $account->access('view') ? $account->toUrl()->toString() : NULL,
+    ];
+  }
+
+  $status = (string) $node->get('field_badge_status')->value;
+  $labels = [
+    'active' => [t('Badge earned'), 'earned'],
+    'pending' => [t('Awaiting sign-off'), 'pending'],
+    'expired' => [t('Expired'), 'inactive'],
+    'suspended' => [t('Suspended'), 'inactive'],
+    'rejected' => [t('Not approved'), 'inactive'],
+    'duplicate' => [t('Duplicate record'), 'inactive'],
+  ];
+  if (isset($labels[strtolower($status)])) {
+    [$label, $tone] = $labels[strtolower($status)];
+    $data['status'] = ['label' => $label, 'tone' => $tone];
+  }
+
+  if (!$node->get('field_class_completed_date')->isEmpty()) {
+    $completed = $node->get('field_class_completed_date')->date;
+    $data['completed'] = $completed ? $completed->format('F j, Y') : NULL;
+  }
+
+  $cache->applyTo($variables);
+  return $data;
 }
 
 /**

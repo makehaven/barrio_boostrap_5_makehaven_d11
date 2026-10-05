@@ -73,6 +73,7 @@ global-styling:
       css/pages/store.css: {}
       css/pages/events-calendar.css: {}
       css/pages/reservation-node.css: {}
+      css/pages/badge.css: {}
       css/pages/appointment-node.css: {}
       css/pages/appointments.css: {}
       css/pages/makerspace-dashboard.css: {}

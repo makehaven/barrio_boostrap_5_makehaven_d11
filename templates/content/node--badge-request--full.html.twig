@@ -1,0 +1,91 @@
+{#
+/**
+ * @file
+ * Badge record page: one member's badge for one tool or area.
+ *
+ * Data comes from _barrio_boostrap_5_makehaven_d11_build_badge_page_data().
+ * The machine-written node title is hidden (see badge.css); the card carries
+ * its own heading. Staff see the inline status form below the card.
+ */
+#}
+{% set b = badge_page %}
+<article{{ attributes.addClass('mh-badge-record') }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  <section class="mh-badge-record__card">
+    <div class="mh-badge-record__art">
+      {% if b.badge.image %}
+        <img src="{{ b.badge.image.url }}" alt="{{ b.badge.image.alt }}" loading="eager">
+      {% else %}
+        <span class="mh-badge-record__art-fallback" aria-hidden="true">{{ b.badge.name|default('?')|first|upper }}</span>
+      {% endif %}
+    </div>
+
+    <div class="mh-badge-record__body">
+      <p class="mh-badge-record__eyebrow">{{ 'MakeHaven badge'|t }}</p>
+      <h1 class="mh-badge-record__title">
+        {% if b.badge %}
+          <a href="{{ b.badge.url }}">{{ b.badge.name }}</a>
+        {% else %}
+          {{ label }}
+        {% endif %}
+      </h1>
+
+      {% if b.status %}
+        <span class="mh-badge-record__status mh-badge-record__status--{{ b.status.tone }}">{{ b.status.label }}</span>
+      {% endif %}
+
+      {% if b.member %}
+        <div class="mh-badge-record__member">
+          <span class="mh-badge-record__avatar">
+            {% if b.member.photo %}
+              <img src="{{ b.member.photo }}" alt="">
+            {% else %}
+              <span aria-hidden="true">{{ b.member.initials }}</span>
+            {% endif %}
+          </span>
+          <span class="mh-badge-record__member-text">
+            <span class="mh-badge-record__label">{{ b.status.tone == 'earned' ? 'Held by'|t : 'Member'|t }}</span>
+            {% if b.member.url %}
+              <a class="mh-badge-record__name" href="{{ b.member.url }}">{{ b.member.name }}</a>
+            {% else %}
+              <span class="mh-badge-record__name">{{ b.member.name }}</span>
+            {% endif %}
+            {% if b.member.pronouns %}<span class="mh-badge-record__pronouns">{{ b.member.pronouns }}</span>{% endif %}
+          </span>
+        </div>
+      {% endif %}
+
+      <dl class="mh-badge-record__facts">
+        <div>
+          <dt>{{ 'Requested'|t }}</dt>
+          <dd>{{ b.requested }}</dd>
+        </div>
+        {% if b.completed %}
+          <div>
+            <dt>{{ 'Class completed'|t }}</dt>
+            <dd>{{ b.completed }}</dd>
+          </div>
+        {% endif %}
+      </dl>
+    </div>
+  </section>
+
+  {% if b.badge.description %}
+    <section class="mh-badge-record__about">
+      <h2>{{ 'About this badge'|t }}</h2>
+      <p>{{ b.badge.description }}</p>
+      <a href="{{ b.badge.url }}">{{ 'How to earn the @name badge'|t({'@name': b.badge.name}) }} &rarr;</a>
+    </section>
+  {% endif %}
+
+  {# Only rendered (as an inline form) for issuers and staff. #}
+  {% set status_form = content.field_badge_status|render %}
+  {% if status_form|striptags|trim %}
+    <section class="mh-badge-record__staff">
+      <h2>{{ 'Badge status'|t }}</h2>
+      {{ status_form }}
+    </section>
+  {% endif %}
+</article>
