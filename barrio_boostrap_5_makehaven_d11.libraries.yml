@@ -148,3 +148,9 @@ page-feedback:
   dependencies:
     - core/drupal
     - core/once
+
+# Attached via libraries-extend on navigation/body-scroll-lock (see info.yml).
+navigation-scroll-lock:
+  css:
+    theme:
+      css/base/navigation-scroll-lock.css: {}

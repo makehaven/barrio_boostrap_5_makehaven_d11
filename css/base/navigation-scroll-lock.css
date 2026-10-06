@@ -1,0 +1,38 @@
+/**
+ * @file
+ * Flat (un-nested) copy of core Navigation's body-scroll-lock.css.
+ *
+ * Core ships css/components/body-scroll-lock.css with native CSS nesting and a
+ * bare type selector inside the rule:
+ *
+ *   [data-admin-toolbar-body-scroll="locked"] {
+ *     overflow: clip;
+ *     body { overflow: clip; }
+ *     @media (min-width: 64rem) { overflow: initial; body { ... } }
+ *   }
+ *
+ * Browsers with the original (strict) nesting parser - Safari 16.5-17.1 and
+ * Chrome/Edge 112-119 - reject a nested selector that starts with an
+ * identifier, and error recovery swallows everything after it, including the
+ * desktop @media release. Only `overflow: clip` on <html> survives, and core
+ * sets data-admin-toolbar-body-scroll="locked" whenever the sidebar is
+ * expanded, at every width. Result on those browsers: with the sidebar open
+ * the page has no scrollbar and cannot be scrolled (ledger #45790, Safari 17; copied from makerspace_gin e8c46b8).
+ *
+ * These rules restate core's intent without nesting: lock the page only while
+ * the sidebar is an overlay (below core's 64rem / 1024px breakpoint), and let
+ * it scroll normally beside the expanded sidebar on desktop. In current
+ * browsers they match what core already does, so they are a no-op there.
+ * Remove once core flattens the file or the strict-nesting browsers age out.
+ */
+
+html[data-admin-toolbar-body-scroll="locked"] body {
+  overflow: clip;
+}
+
+@media (min-width: 64rem) {
+  html[data-admin-toolbar-body-scroll="locked"],
+  html[data-admin-toolbar-body-scroll="locked"] body {
+    overflow: initial;
+  }
+}

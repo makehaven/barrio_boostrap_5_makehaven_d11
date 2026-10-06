@@ -35,3 +35,10 @@ regions:
   footer_third: 'Footer third'
   footer_fourth: 'Footer fourth'
   footer_fifth: 'Footer fifth'
+
+libraries-extend:
+  # Flat fallback for core's nested body-scroll-lock.css, which strict-nesting
+  # browsers (Safari 16.5-17.1) misparse into a permanent scroll lock. Same fix
+  # as makerspace_gin (ledger #45790).
+  navigation/body-scroll-lock:
+    - barrio_boostrap_5_makehaven_d11/navigation-scroll-lock
