@@ -16,11 +16,24 @@ body.page-view-store .view-id-store .view-content.row {
   margin: 0;
 }
 
-body.page-view-store .view-id-store .view-content.row > .col {
+/* views_bootstrap_cards wraps each card as `.row > .col` (columns: 1), so
+   the grid item is that inner `.row`. Both wrappers must stretch to the grid
+   row's height or `.card { height: 100% }` resolves to the card's own content
+   and the buttons float at whatever height each description ends. */
+body.page-view-store .view-id-store .view-content.row > .col,
+body.page-view-store .view-id-store .view-content.row > .row,
+body.page-view-store .view-id-store .view-content.row > .row > .col {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   max-width: 100%;
+  margin: 0;
   padding: 0;
   flex: unset;
+}
+
+body.page-view-store .view-id-store .view-content.row > .row > .col {
+  flex: 1 1 auto;
 }
 
 /* Card container */
@@ -88,6 +101,38 @@ body.page-view-store .view-id-store .card-text {
   line-height: 1.45;
   margin-bottom: 0.75rem;
   flex-grow: 1;
+}
+
+/* Description on top, buy buttons pinned to the bottom of every card, so
+   Purchase sits at the same height across a row regardless of how long each
+   item's description is. */
+body.page-view-store .view-id-store .card-text {
+  display: flex;
+  flex-direction: column;
+}
+
+body.page-view-store .view-id-store .mh-store-actions {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+body.page-view-store .view-id-store .mh-store-actions > a.add-cart {
+  padding: 8px 18px;
+  min-height: 39px;
+  background-color: var(--mh-color-brand-primary, #8b1919);
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+body.page-view-store .view-id-store .mh-store-actions > a.add-cart:hover {
+  background-color: var(--mh-color-brand-primary-strong, #710a0a);
+  color: #fff;
 }
 
 /* Add-to-cart / buy link.
