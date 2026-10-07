@@ -72,6 +72,49 @@
           head.remove();
         });
 
+        // Search box (feedback #44234): filters questions by their question and
+        // answer text, and opens the matches once only a few are left.
+        var search = document.createElement('div');
+        search.className = 'mh-faq__search mb-3';
+        search.innerHTML =
+          '<label class="visually-hidden" for="mh-faq-search"></label>' +
+          '<input type="search" id="mh-faq-search" class="form-control form-control-lg" autocomplete="off">' +
+          '<p class="mh-faq__no-match text-muted mt-3" hidden></p>';
+        search.querySelector('label').textContent = Drupal.t('Search the FAQ');
+        var input = search.querySelector('input');
+        input.placeholder = Drupal.t('Search the FAQ, e.g. guests, storage, cancel');
+        var noMatch = search.querySelector('.mh-faq__no-match');
+        noMatch.innerHTML = Drupal.t('No question matches that. Ask us at <a href="mailto:info@makehaven.org">info@makehaven.org</a>.');
+        parent.insertBefore(search, accordion);
+
+        var items = Array.prototype.slice.call(accordion.querySelectorAll('.accordion-item'));
+        var haystacks = items.map(function (item) {
+          return item.textContent.toLowerCase();
+        });
+        input.addEventListener('input', function () {
+          var terms = input.value.toLowerCase().split(/\s+/).filter(Boolean);
+          var shown = [];
+          items.forEach(function (item, i) {
+            var match = terms.every(function (t) {
+              return haystacks[i].indexOf(t) !== -1;
+            });
+            item.hidden = !match;
+            if (match) {
+              shown.push(item);
+            }
+          });
+          noMatch.hidden = shown.length > 0;
+          var open = terms.length > 0 && shown.length <= 3;
+          items.forEach(function (item) {
+            var panel = item.querySelector('.accordion-collapse');
+            var btn = item.querySelector('.accordion-button');
+            var expand = open && !item.hidden;
+            panel.classList.toggle('show', expand);
+            btn.classList.toggle('collapsed', !expand);
+            btn.setAttribute('aria-expanded', expand ? 'true' : 'false');
+          });
+        });
+
         // Deep link support: /faq#mh-faq-q3 opens that question.
         if (window.location.hash) {
           var target = field.querySelector(window.location.hash);

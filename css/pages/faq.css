@@ -61,3 +61,7 @@
 .page-node-5045 main.main-content { padding-top: 0; }
 .page-node-5045 section.section { padding-top: 0; }
 .page-node-5045 #main-wrapper { background: transparent; }
+
+/* Search box above the accordion (js/faq-accordion.js). */
+.mh-faq__search .form-control { border-color: #d6d6d6; }
+.mh-faq__search .form-control:focus { border-color: var(--mh-red); box-shadow: 0 0 0 .2rem rgba(134, 18, 22, .15); }
