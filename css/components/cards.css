@@ -24,6 +24,22 @@
     padding-bottom: 30px;
 }
 
+/* The grid prints rows of three plain .col cells, which share the row
+   equally: a search with one result drew a single full-width card with a
+   badly cropped photo. Fix each cell at a third so every card is the same
+   size; stack them on phones. */
+.view-member-list .view-content .row > .col {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+@media (min-width: 576px) {
+    .view-member-list .view-content .row > .col {
+        flex: 0 0 33.333%;
+        max-width: 33.333%;
+    }
+}
+
 .view-member-list .view-content .card {
     display: flex;
     flex-direction: column;

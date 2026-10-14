@@ -90,3 +90,17 @@ form#profile-main-add-form #edit-submit:before {
     padding-top: 30px;
     padding-bottom: 30px;
 }
+
+/* CiviCRM radio groups (Gender Identity, SMS) show a bare "x" once an option
+   is picked. Say what it does: it clears the choice. */
+.user-form .crm-container .crm-clear-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+    color: var(--mh-color-neutral-700);
+}
+
+.user-form .crm-container .crm-clear-link::after {
+    content: "Clear selection";
+}
