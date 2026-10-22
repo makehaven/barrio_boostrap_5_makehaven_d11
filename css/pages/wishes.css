@@ -1,0 +1,109 @@
+/* === WISHES (/wishes view) ========================================= */
+/* Barrio wraps every view's rows in `.view-content.row` (Bootstrap flex)
+   and the wish teasers carry no column class, so each card shrank to its
+   content and they sat side by side (#44859). The Wishes asset injector
+   is set to skip this theme, so its vote-button styling never loaded here
+   either; the buttons are restyled below with the theme tokens. */
+
+.view-wishes .view-content.row {
+  flex-direction: column;
+  gap: var(--mh-space-md);
+  margin: 0;
+}
+.view-wishes .view-content.row > table { width: 100%; }
+.view-wishes .view-content.row > .views-row {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+}
+
+.view-wishes .node--type-wish.node--view-mode-teaser {
+  display: grid;
+  grid-template-columns: minmax(0, 200px) minmax(0, 1fr);
+  grid-template-areas:
+    "header header"
+    "image  body"
+    "footer footer";
+  gap: var(--mh-space-xs) var(--mh-space-lg);
+  padding: var(--mh-space-lg);
+  background: var(--mh-color-surface);
+  border: 1px solid var(--mh-color-border);
+  border-radius: var(--mh-radius-md);
+  box-shadow: var(--mh-shadow-xs);
+}
+/* Display Suite floats the two columns at 50%; the grid places them. */
+.view-wishes .node--type-wish .group-header { grid-area: header; }
+.view-wishes .node--type-wish .group-left { grid-area: image; }
+.view-wishes .node--type-wish .group-right { grid-area: body; }
+.view-wishes .node--type-wish .group-footer { grid-area: footer; }
+.view-wishes .node--type-wish .group-left,
+.view-wishes .node--type-wish .group-right {
+  float: none;
+  width: auto;
+}
+/* A wish without a photo gives the text the whole width. */
+.view-wishes .node--type-wish:not(:has(.field--name-field-wish-image)) .group-right {
+  grid-column: 1 / -1;
+}
+.view-wishes .node--type-wish .group-left img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--mh-radius-sm);
+}
+.view-wishes .node--type-wish h2 {
+  font-size: 1.35rem;
+  margin-bottom: var(--mh-space-2xs);
+}
+.view-wishes .node--type-wish .field--label-inline {
+  display: inline-flex;
+  gap: var(--mh-space-2xs);
+  margin-right: var(--mh-space-md);
+  font-size: 0.9rem;
+}
+.view-wishes .node--type-wish .field--label-inline .field__label::after {
+  content: ":";
+}
+.view-wishes .node--type-wish .view-eva {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+@media (max-width: 575.98px) {
+  .view-wishes .node--type-wish.node--view-mode-teaser {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "header" "image" "body" "footer";
+    padding: var(--mh-space-md);
+  }
+  .view-wishes .node--type-wish .group-left { max-width: 320px; }
+}
+
+/* Vote buttons: outlined until voted, filled once voted. */
+.flag-wish-vote {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mh-space-xs);
+  margin-top: var(--mh-space-xs);
+}
+.flag-wish-vote a {
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  border: 1px solid var(--mh-color-brand-primary);
+  border-radius: var(--mh-radius-sm);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.flag-wish-vote.action-flag a {
+  background: var(--mh-color-surface);
+  color: var(--mh-color-brand-primary);
+}
+.flag-wish-vote.action-unflag a,
+.flag-wish-vote.action-flag a:hover {
+  background: var(--mh-color-brand-primary);
+  color: #fff;
+}
+.flag-wish-vote.action-unflag a:hover {
+  background: var(--mh-color-brand-primary-strong);
+  border-color: var(--mh-color-brand-primary-strong);
+}

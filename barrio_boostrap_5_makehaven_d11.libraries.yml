@@ -100,6 +100,7 @@ global-styling:
       css/pages/businesses.css: {}
       css/pages/financial.css: {}
       css/pages/rooms.css: {}
+      css/pages/wishes.css: {}
       css/mockup-port.css: {}
   dependencies: # Ensure it loads after Bootstrap and jQuery
     - core/jquery

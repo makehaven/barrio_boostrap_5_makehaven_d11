@@ -378,7 +378,7 @@ function _barrio_boostrap_5_makehaven_d11_course_instructor_teasers(array $uids)
  *  - workshop_flag_link: Flag / login-to-notify link.
  *  - workshop_interest_count: number of interested users.
  *  - workshop_feedback: ['avg' => float, 'count' => int] from webform ratings.
- *  - workshop_runs_count: total historical runs.
+ *  - workshop_runs_count: runs so far (see _course_runs_so_far()).
  */
 function barrio_boostrap_5_makehaven_d11_preprocess_node__course(array &$variables): void {
   /** @var \Drupal\node\NodeInterface $node */
@@ -518,8 +518,23 @@ function barrio_boostrap_5_makehaven_d11_preprocess_node__course(array &$variabl
   catch (\Throwable $e) {}
 
   // 4. Stats.
-  $variables['workshop_runs_count'] = (int) ($node->get('field_stat_runs')->value ?? 0);
+  $variables['workshop_runs_count'] = _barrio_boostrap_5_makehaven_d11_course_runs_so_far($node);
   $variables['course_status'] = _barrio_boostrap_5_makehaven_d11_course_status($node, count($variables['workshop_upcoming_events'] ?? []));
+}
+
+/**
+ * How many times a course has run, for "cohorts so far" / "Run N times".
+ *
+ * field_stat_runs counts every linked CiviCRM event, upcoming ones included,
+ * and only events: GEMS showed "19 cohorts so far" while cohort 30 was next
+ * (#45371). So: past linked runs plus the staff-entered runs from before the
+ * events were kept (field_runs_before_records).
+ */
+function _barrio_boostrap_5_makehaven_d11_course_runs_so_far(NodeInterface $node): int {
+  $value = static fn(string $field): int => $node->hasField($field)
+    ? (int) ($node->get($field)->value ?? 0)
+    : 0;
+  return max(0, $value('field_stat_runs') - $value('field_stat_upcoming')) + $value('field_runs_before_records');
 }
 
 /**
@@ -679,7 +694,7 @@ function barrio_boostrap_5_makehaven_d11_preprocess_node__course__program__full(
  * instructor_companion's CourseStatsSync — fast, no joins.
  *
  * Sets:
- *  - workshop_runs_count: lifetime instance count (field_stat_runs).
+ *  - workshop_runs_count: runs so far (see _course_runs_so_far()).
  *  - workshop_upcoming_count: scheduled future instances (field_stat_upcoming).
  *  - attributes.class += 'course-teaser--member-only' on badge_class courses
  *    so workshops.css renders a "Member Only" chip on the card.
@@ -689,9 +704,7 @@ function barrio_boostrap_5_makehaven_d11_preprocess_node__course__teaser(array &
   $node = $variables['node'];
 
   // Denormalized stats — set by instructor_companion.stats_sync on save.
-  $variables['workshop_runs_count'] = $node->hasField('field_stat_runs')
-    ? (int) ($node->get('field_stat_runs')->value ?? 0)
-    : 0;
+  $variables['workshop_runs_count'] = _barrio_boostrap_5_makehaven_d11_course_runs_so_far($node);
   $variables['workshop_upcoming_count'] = $node->hasField('field_stat_upcoming')
     ? (int) ($node->get('field_stat_upcoming')->value ?? 0)
     : 0;
