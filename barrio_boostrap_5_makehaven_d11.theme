@@ -1651,10 +1651,200 @@ function barrio_boostrap_5_makehaven_d11_preprocess_profile(array &$variables): 
     // The page still renders with whatever was gathered.
   }
 
+  // Their member page, when this viewer may open it (privacy-gated route).
+  $member_url = Url::fromRoute('entity.user.canonical', ['user' => $uid]);
+  $data['member_url'] = $member_url->access() ? $member_url->toString() : '';
+
   $variables['instructor'] = $data;
   $variables['#attached']['library'][] = 'barrio_boostrap_5_makehaven_d11/global-styling';
   $variables['#cache']['tags'][] = 'civicrm_event_list';
   $variables['#cache']['max-age'] = 3600;
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for user.
+ *
+ * The member page (/user/{uid}) printed the account with the main profile
+ * embedded inside it, and the profile embedded the account again: the name
+ * and pronouns twice, first and last name as two bare lines, "Member
+ * profiles" labels, no photo, the Slack ID as a raw number (JR, 2026-10-22).
+ * Full view on the member's own page only — /areas-of-interest-users renders
+ * accounts in full view too and keeps the plain render.
+ *
+ * Every field is read through field access, so the page shows each viewer
+ * exactly what the field permissions already allow. Who may open the page at
+ * all is makerspace_user_links' ProfileVisibility; the viewer-dependent cache
+ * metadata is added there too (hook_user_view), because a theme cannot bubble
+ * cache contexts from preprocess.
+ *
+ * Sets $variables['member'] for user--full.html.twig.
+ */
+function barrio_boostrap_5_makehaven_d11_preprocess_user(array &$variables): void {
+  /** @var \Drupal\user\UserInterface $account */
+  $account = $variables['elements']['#user'] ?? NULL;
+  $route_match = \Drupal::routeMatch();
+  if (!$account || ($variables['elements']['#view_mode'] ?? '') !== 'full'
+    || $route_match->getRouteName() !== 'entity.user.canonical'
+    || (int) ($route_match->getRawParameter('user')) !== (int) $account->id()) {
+    return;
+  }
+  $viewer = \Drupal::currentUser();
+  $etm = \Drupal::entityTypeManager();
+  $uid = (int) $account->id();
+  /** @var \Drupal\profile\ProfileStorageInterface $profile_storage */
+  $profile_storage = $etm->getStorage('profile');
+  $main = $profile_storage->loadByUser($account, 'main') ?: NULL;
+  $style = $etm->getStorage('image_style')->load('medium_square');
+
+  // A field's value when it exists, is set, and this viewer may see it.
+  $field = static function ($entity, string $name) {
+    if (!$entity || !$entity->hasField($name) || $entity->get($name)->isEmpty()) {
+      return NULL;
+    }
+    return $entity->get($name)->access('view') ? $entity->get($name) : NULL;
+  };
+  $terms = static function ($items): array {
+    $labels = [];
+    foreach ($items ? $items->referencedEntities() : [] as $term) {
+      $labels[] = $term->label();
+    }
+    return $labels;
+  };
+
+  $name = _barrio_boostrap_5_makehaven_d11_person_name($account);
+  $parts = preg_split('~\s+~', trim($name)) ?: [];
+  $current = $account->hasRole('member');
+  $own = (int) $viewer->id() === $uid;
+  $public = $current && $main && $main->hasField('field_member_profile_privacy')
+    && strtolower((string) ($main->get('field_member_profile_privacy')->entity?->label() ?? '')) === 'public';
+
+  $data = [
+    'name' => $name,
+    'initials' => mb_strtoupper(mb_substr($parts[0] ?? '', 0, 1) . mb_substr($parts[count($parts) - 1] ?? '', 0, 1)) ?: '?',
+    'pronouns' => ($f = $field($account, 'field_pronoun_txt')) ? trim((string) $f->value) : '',
+    'pronunciation' => ($f = $field($account, 'field_user_name_pronunciation')) ? trim((string) $f->value) : '',
+    'photo' => '',
+    'role_line' => '',
+    'bio' => [],
+    'goals' => [],
+    'interests' => [],
+    'skills' => [],
+    'awards' => [],
+    'badges' => [],
+    'links' => [],
+    'slack_url' => '',
+    'instagram' => NULL,
+    'instructor_url' => '',
+    'since' => '',
+    'current' => $current,
+    'own' => $own,
+    'public' => $public,
+    'edit_url' => '',
+  ];
+
+  foreach ([[$main, 'field_member_photo'], [$account, 'user_picture']] as [$entity, $image_field]) {
+    if (($f = $field($entity, $image_field)) && $f->entity && $style) {
+      $data['photo'] = $style->buildUrl($f->entity->getFileUri());
+      break;
+    }
+  }
+
+  if ($main) {
+    if ($f = $field($main, 'field_member_bio')) {
+      // Placeholder bios ("na", "-", "none") read as empty.
+      $bio = trim((string) $f->value);
+      if (preg_match_all('~\pL~u', $bio) >= 12) {
+        $data['bio'] = array_values(array_filter(array_map('trim', preg_split("~\R\s*\R~", $bio))));
+      }
+    }
+    if ($f = $field($main, 'field_member_goal')) {
+      $allowed = $f->getFieldDefinition()->getFieldStorageDefinition()->getSetting('allowed_values') ?: [];
+      foreach ($f as $item) {
+        $data['goals'][] = $allowed[$item->value] ?? $item->value;
+      }
+    }
+    $data['interests'] = $terms($field($main, 'field_member_areas_interest'));
+    $data['skills'] = $terms($field($main, 'field_member_skills'));
+    $data['awards'] = $terms($field($main, 'field_member_awards'));
+
+    $title = ($f = $field($main, 'field_member_company_title')) ? trim((string) $f->value) : '';
+    $company = implode(', ', $terms($field($main, 'field_member_company')));
+    $data['role_line'] = $title && $company ? t('@title at @company', ['@title' => $title, '@company' => $company]) : ($title ?: $company);
+
+    if ($f = $field($main, 'field_member_links')) {
+      foreach ($f as $item) {
+        try {
+          $url = $item->getUrl();
+          if ($url->isExternal() || $url->access()) {
+            $href = $url->toString();
+            $data['links'][] = [
+              'url' => $href,
+              'title' => trim((string) $item->title) ?: preg_replace('~^https?://(www\.)?~', '', rtrim($href, '/')),
+            ];
+          }
+        }
+        catch (\Throwable $e) {
+          // A malformed stored link is skipped.
+        }
+      }
+    }
+
+    // Slack member IDs (U…) open their profile in the MakeHaven workspace;
+    // about 40 rows hold a name or handle instead, which links nowhere.
+    if (($f = $field($main, 'field_member_slack_id_number')) && preg_match('~^[UW][A-Z0-9]{6,}$~', trim((string) $f->value))) {
+      $data['slack_url'] = 'https://makehaven.slack.com/team/' . trim((string) $f->value);
+    }
+
+    // Stored as typed: "@name", "name", a full URL, or "N/A".
+    if ($f = $field($main, 'field_member_instagram')) {
+      $handle = trim((string) $f->value);
+      $handle = preg_replace('~^(https?://)?(www\.)?instagram\.com/~i', '', $handle);
+      $handle = trim(ltrim($handle, '@'), '/ ');
+      if (preg_match('~^[A-Za-z0-9._]{1,30}$~', $handle) && !in_array(strtolower($handle), ['na', 'n.a', 'none', 'no', 'null', '-'], TRUE)) {
+        $data['instagram'] = ['handle' => $handle, 'url' => 'https://www.instagram.com/' . $handle . '/'];
+      }
+    }
+
+    // Join date convention: the main profile's created date.
+    if ($current) {
+      $data['since'] = date('Y', (int) $main->getCreatedTime());
+    }
+
+    $edit = Url::fromRoute('profile.user_page.single', ['user' => $uid, 'profile_type' => 'main']);
+    $data['edit_url'] = $edit->access() ? $edit->toString() : '';
+  }
+
+  // Badges earned: active badge requests, as the badges page counts them.
+  try {
+    $nids = $etm->getStorage('node')->getQuery()
+      ->accessCheck(FALSE)
+      ->condition('type', 'badge_request')
+      ->condition('status', 1)
+      ->condition('field_member_to_badge', $uid)
+      ->condition('field_badge_status', 'active')
+      ->execute();
+    $seen = [];
+    foreach ($nids ? $etm->getStorage('node')->loadMultiple($nids) : [] as $node) {
+      $term = $node->get('field_badge_requested')->entity;
+      if ($term && !isset($seen[$term->id()])) {
+        $seen[$term->id()] = TRUE;
+        $data['badges'][] = ['label' => $term->label(), 'url' => $term->toUrl()->toString()];
+      }
+    }
+    usort($data['badges'], static fn($a, $b) => strnatcasecmp($a['label'], $b['label']));
+  }
+  catch (\Throwable $e) {
+    // The page renders without badges.
+  }
+
+  $instructor = $profile_storage->loadByUser($account, 'instructor');
+  if ($instructor && $instructor->isPublished() && $instructor->access('view')
+    && $instructor->hasField('field_instructor_status') && $instructor->get('field_instructor_status')->value === 'active') {
+    $data['instructor_url'] = $instructor->toUrl()->toString();
+  }
+
+  $variables['member'] = $data;
+  $variables['#attached']['library'][] = 'barrio_boostrap_5_makehaven_d11/global-styling';
 }
 
 /**
@@ -1698,6 +1888,10 @@ function barrio_boostrap_5_makehaven_d11_preprocess_page(array &$variables): voi
 function barrio_boostrap_5_makehaven_d11_preprocess_html(&$variables) {
   if (_barrio_boostrap_5_makehaven_d11_mh_banner_crumb() !== NULL) {
     $variables['attributes']['class'][] = 'mh-banner-page';
+  }
+  // Member pages (/user/{uid}): own hero (user--full.html.twig), same treatment.
+  if (\Drupal::routeMatch()->getRouteName() === 'entity.user.canonical') {
+    $variables['attributes']['class'][] = 'page-user-profile';
   }
   // Instructor profile pages: own hero (profile--instructor--full.html.twig),
   // so hide the theme title block and give the tab the person's name instead

@@ -40,6 +40,9 @@
         <div class="mh-instructor__id">
           <p class="mh-instructor__eyebrow">{{ 'MakeHaven instructor'|t }}{% if instructor.edit_url %} <a class="mh-instructor__edit" href="{{ instructor.edit_url }}">{{ 'Edit this page'|t }}</a>{% endif %}</p>
           <h1 class="mh-instructor__name">{{ instructor.name }}</h1>
+          {% if instructor.member_url %}
+            <p class="mh-instructor__member"><a href="{{ instructor.member_url }}">{{ 'Member profile'|t }} &rarr;</a></p>
+          {% endif %}
           {% if instructor.topics %}
             <ul class="mh-instructor__topics list-unstyled">
               {% for t in instructor.topics %}<li>{{ t }}</li>{% endfor %}

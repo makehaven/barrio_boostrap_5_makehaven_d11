@@ -1,0 +1,29 @@
+/* === MEMBER PAGE (/user/{uid}, user--full.html.twig) ==================
+ * Shares the instructor page hero (.mh-instructor__* in instructor.css). */
+.page-user-profile .block-page-title-block,
+.page-user-profile .block-system-breadcrumb-block,
+.page-user-profile #sidebar_first { display: none; }
+.page-user-profile main#content.main-content { flex: 0 0 100%; max-width: 100%; }
+.page-user-profile { overflow-x: hidden; }
+.page-user-profile main.main-content,
+.page-user-profile section.section { padding-top: 0; }
+.page-user-profile #main-wrapper { background: transparent; }
+
+.mh-member__say { color: rgba(255,255,255,.85); margin: 0 0 .35rem; }
+.mh-member__role { color: #fff; margin: 0 0 .5rem; font-weight: 600; }
+.mh-member__actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
+
+.mh-member__self a { font-weight: 600; margin-left: .25rem; }
+
+.mh-member__chips { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0; padding: 0; }
+.mh-member__chips li { font-size: .9rem; padding: .2rem .75rem; border-radius: 999px; background: var(--mh-color-neutral-100, #f4efee); border: 1px solid var(--mh-color-neutral-200, #e6dedc); }
+.mh-member__chips a { text-decoration: none; }
+.mh-member__goals { padding-left: 1.2rem; margin: 0; }
+.mh-member__links li { padding: .3rem 0; overflow-wrap: anywhere; }
+.mh-member__extras .field__label { font-weight: 700; }
+
+[data-bs-theme="dark"] .mh-member .card { background: #1e1e1e; }
+[data-bs-theme="dark"] .mh-member__chips li { background: #2a2424; border-color: #3a3232; }
+@media (max-width: 575.98px) {
+  .mh-member .mh-instructor__photo { width: 112px; height: 112px; flex-basis: 112px; }
+}

@@ -1,0 +1,138 @@
+{#
+/**
+ * @file
+ * Member page (/user/{uid}, full view).
+ *
+ * One hero and one body built from the account and the main profile, in
+ * place of the account render with the profile (and the account again)
+ * nested inside it. Each value has already passed field access, so a viewer
+ * sees only what the field permissions allow. Whatever other modules add to
+ * the account render (task stats, masquerade, staff fields) prints below the
+ * body. Falls back to the plain render when the preprocess did not run
+ * (e.g. /areas-of-interest-users rows).
+ *
+ * Variables: member (see barrio_boostrap_5_makehaven_d11_preprocess_user()).
+ */
+#}
+{% if member is not defined %}
+  <article{{ attributes.addClass('profile') }}>{{ content }}</article>
+{% else %}
+{% set m = member %}
+{% set first = m.name|split(' ')|first %}
+{% set extras = content|without('field_pronoun_txt', 'field_user_name_pronunciation', 'main_profiles', 'member_for') %}
+<article{{ attributes.addClass('profile', 'mh-page', 'mh-member') }}>
+  <section class="mh-page__banner mh-instructor__banner mh-member__banner">
+    <div class="container">
+      <div class="mh-instructor__hero">
+        <div class="mh-instructor__photo">
+          {% if m.photo %}
+            <img src="{{ m.photo }}" alt="{{ m.name }}" width="160" height="160">
+          {% else %}
+            <span class="mh-instructor__initials" aria-hidden="true">{{ m.initials }}</span>
+          {% endif %}
+        </div>
+        <div class="mh-instructor__id">
+          <p class="mh-instructor__eyebrow">
+            {% if m.current %}{{ 'MakeHaven member'|t }}{% if m.since %} {{ 'since @year'|t({'@year': m.since}) }}{% endif %}{% else %}{{ 'Not a current member'|t }}{% endif %}
+            {% if m.edit_url %} <a class="mh-instructor__edit" href="{{ m.edit_url }}">{{ m.own ? 'Edit my profile'|t : 'Edit profile'|t }}</a>{% endif %}
+          </p>
+          <h1 class="mh-instructor__name">{{ m.name }}</h1>
+          {% if m.pronouns or m.pronunciation %}
+            <p class="mh-member__say">
+              {%- if m.pronouns %}<span>{{ m.pronouns }}</span>{% endif -%}
+              {%- if m.pronouns and m.pronunciation %} &middot; {% endif -%}
+              {%- if m.pronunciation %}<span>{{ 'Says it: @how'|t({'@how': m.pronunciation}) }}</span>{% endif -%}
+            </p>
+          {% endif %}
+          {% if m.role_line %}<p class="mh-member__role">{{ m.role_line }}</p>{% endif %}
+          {% if m.slack_url or m.instagram or m.instructor_url %}
+            <div class="mh-member__actions">
+              {% if m.slack_url %}<a class="btn btn-light btn-sm" href="{{ m.slack_url }}" target="_blank" rel="noopener">{{ 'Message on Slack'|t }}</a>{% endif %}
+              {% if m.instructor_url %}<a class="btn btn-outline-light btn-sm" href="{{ m.instructor_url }}">{{ 'Instructor page'|t }}</a>{% endif %}
+              {% if m.instagram %}<a class="btn btn-outline-light btn-sm" href="{{ m.instagram.url }}" target="_blank" rel="noopener me">{{ '@handle on Instagram'|t({'@handle': '@' ~ m.instagram.handle}) }}</a>{% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% if m.own %}
+    <div class="container">
+      <p class="mh-member__self alert {{ m.public ? 'alert-info' : 'alert-secondary' }} mt-4 mb-0">
+        {% if m.public %}
+          {{ 'This is your profile as others see it. It is set to Public, so anyone can open it, including visitors who are not logged in (they do not see your photo, bio, interests or Slack).'|t }}
+        {% elseif m.current %}
+          {{ 'This is your profile as other members see it. It is set to Members Only, so visitors who are not logged in cannot open it.'|t }}
+        {% else %}
+          {{ 'Only you and MakeHaven staff can see this page while you are not a current member.'|t }}
+        {% endif %}
+        {% if m.edit_url %}<a href="{{ m.edit_url }}">{{ 'Change it'|t }}</a>{% endif %}
+      </p>
+    </div>
+  {% endif %}
+
+  <div class="container py-5">
+    <div class="row g-5">
+      <div class="col-lg-7 mh-member__main">
+        {% if m.bio %}
+          <h2 class="section-title text-start mb-3">{{ 'About @name'|t({'@name': first}) }}</h2>
+          <div class="mh-instructor__bio">
+            {% for para in m.bio %}<p>{{ para|nl2br }}</p>{% endfor %}
+          </div>
+        {% elseif m.own %}
+          <p class="text-muted">{{ 'You have not written a bio yet. A sentence or two about what you make helps other members find you.'|t }} {% if m.edit_url %}<a href="{{ m.edit_url }}">{{ 'Add one'|t }}</a>{% endif %}</p>
+        {% endif %}
+
+        {% if m.interests %}
+          <h2 class="section-title text-start mb-3 mt-4">{{ 'Interested in'|t }}</h2>
+          <ul class="mh-member__chips list-unstyled">{% for t in m.interests %}<li>{{ t }}</li>{% endfor %}</ul>
+        {% endif %}
+
+        {% if m.skills %}
+          <h2 class="section-title text-start mb-3 mt-4">{{ 'Skills'|t }}</h2>
+          <ul class="mh-member__chips list-unstyled">{% for t in m.skills %}<li>{{ t }}</li>{% endfor %}</ul>
+        {% endif %}
+
+        {% if m.goals %}
+          <h2 class="section-title text-start mb-3 mt-4">{{ 'Here to'|t }}</h2>
+          <ul class="mh-member__goals">{% for g in m.goals %}<li>{{ g }}</li>{% endfor %}</ul>
+        {% endif %}
+
+        {% if extras|render|striptags|trim %}
+          <div class="mh-member__extras mt-4">{{ extras }}</div>
+        {% endif %}
+      </div>
+
+      <aside class="col-lg-5 mh-member__aside">
+        <div class="card border-0 shadow-sm p-4 mb-4">
+          <h3 class="h5 fw-bold">{{ 'Badges'|t }}{% if m.badges %} <span class="text-muted fw-normal">{{ m.badges|length }}</span>{% endif %}</h3>
+          {% if m.badges %}
+            <ul class="mh-member__chips mh-member__badges list-unstyled mb-0">
+              {% for b in m.badges %}<li><a href="{{ b.url }}">{{ b.label }}</a></li>{% endfor %}
+            </ul>
+          {% else %}
+            <p class="text-muted mb-0">{{ m.own ? 'Earn badges to use the tools that need one.'|t : 'No badges yet.'|t }}</p>
+          {% endif %}
+        </div>
+
+        {% if m.awards %}
+          <div class="card border-0 shadow-sm p-4 mb-4">
+            <h3 class="h5 fw-bold">{{ 'Recognition'|t }}</h3>
+            <ul class="mh-member__chips list-unstyled mb-0">{% for t in m.awards %}<li>{{ t }}</li>{% endfor %}</ul>
+          </div>
+        {% endif %}
+
+        {% if m.links %}
+          <div class="card border-0 shadow-sm p-4 mb-4">
+            <h3 class="h5 fw-bold">{{ 'Elsewhere'|t }}</h3>
+            <ul class="list-unstyled mb-0 mh-member__links">
+              {% for l in m.links %}<li><a href="{{ l.url }}" target="_blank" rel="noopener nofollow">{{ l.title }}</a></li>{% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      </aside>
+    </div>
+  </div>
+</article>
+{% endif %}

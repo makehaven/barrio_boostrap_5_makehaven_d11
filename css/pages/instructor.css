@@ -59,3 +59,6 @@
 
 .mh-instructor__edit { margin-left: .75rem; font-size: .75rem; letter-spacing: 0; text-transform: none; color: #fff; border: 1px solid rgba(255,255,255,.6); border-radius: 999px; padding: .1rem .6rem; text-decoration: none; }
 .mh-instructor__edit:hover, .mh-instructor__edit:focus { background: rgba(255,255,255,.15); color: #fff; }
+.mh-instructor__member { margin: 0 0 .5rem; font-size: .9rem; }
+.mh-instructor__member a { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
+.mh-instructor__member a:hover, .mh-instructor__member a:focus { color: #fff; text-decoration-thickness: 2px; }
