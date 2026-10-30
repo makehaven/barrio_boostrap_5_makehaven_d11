@@ -193,7 +193,7 @@
         '#toolbar-administration,.toolbar,.toolbar-bar,.toolbar-tray,.toolbar-oriented,.toolbar-menu-administration,.gin-toolbar,.gin-secondary-toolbar,.gin-breadcrumb-wrapper,.gin-sidebar-toggle,.gin-toggle-sidebar,.admin-toolbar,.region-breadcrumb,.block-page-title-block,.breadcrumb,.tabs,.messages-list,header,footer,.region-header,.region-footer,.region-top-header,.region-primary-menu,.region-secondary-menu,.navbar,.navbar-brand,.block-system-branding-block,.block-system-menu-block,.local-tasks-block,.tabs-wrapper,.page-title,.dialog-off-canvas-main-canvas > nav,.dialog-off-canvas-main-canvas > header,.ui-dialog,.ui-widget-overlay,.chatbot-footer,.ai-chatbot,.contextual,[data-contextual-id],[data-drupal-contextual-id],[class*="chatbot"],[id*="chatbot"]{display:none !important;}',
         'main,.region-content,.layout-content{padding:0 !important;margin:0 !important;}',
         'body{overflow:auto !important;}',
-        '#mh-feedback-form-shell{padding:1rem 1rem 1.25rem !important;}',
+        '#mh-feedback-form-shell{padding:1rem 1rem calc(2rem + env(safe-area-inset-bottom)) !important;}',
         '#mh-feedback-form-shell form{margin:0 !important;}',
         '#mh-feedback-form-shell .js-form-item,#mh-feedback-form-shell .form-actions{margin-bottom:1rem !important;}',
         '#mh-feedback-form-shell .form-actions{padding-top:.25rem !important;}',
@@ -356,7 +356,11 @@
     panel.style.left = 'auto';
     panel.style.zIndex = '2147482999';
     panel.style.width = 'min(30rem, calc(100vw - 2rem))';
+    // 100vh on mobile browsers is the height with the URL bar hidden, so the
+    // panel's bottom (the Submit button) sat off-screen. 100dvh tracks the
+    // visible viewport; browsers without dvh ignore it and keep 100vh.
     panel.style.height = '100vh';
+    panel.style.height = '100dvh';
     panel.style.background = '#fff';
     panel.style.boxShadow = '0 18px 45px rgba(0,0,0,.28)';
     panel.style.transform = 'translateX(100%)';
@@ -375,6 +379,7 @@
 
     frame.style.pointerEvents = 'auto';
     frame.style.flex = '1 1 auto';
+    frame.style.minHeight = '0';
     frame.style.width = '100%';
     frame.style.border = '0';
     frame.style.display = 'block';
