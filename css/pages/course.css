@@ -130,3 +130,93 @@
 .course-person__topic { font-size: .75rem; padding: .1rem .5rem; border-radius: 999px; background: var(--mh-color-neutral-100, #efe9e7); color: var(--bs-secondary-color, #555); }
 .course-person__more { font-size: .85rem; font-weight: 600; text-decoration: none; }
 [data-bs-theme="dark"] .course-person__photo, [data-bs-theme="dark"] .course-person__topic { background: #2a2424; }
+
+/* ── Always-open program pages (/entrepreneurship, 2026-10-30) ──────
+   Components the program body uses: live stat cards ([[ENTREPRENEUR_STATS]]),
+   a two-path "where do I start" pair, a stage pipeline, and image/text
+   feature rows. Plain Bootstrap grid underneath; these add the look. */
+.mh-stat-card__number {
+  font-family: var(--mh-font-display);
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--mh-color-brand-primary);
+}
+.mh-stat-card__label { color: var(--mh-color-neutral-600); }
+
+.mh-paths { margin: var(--mh-space-xl) 0; }
+.mh-path {
+  height: 100%;
+  padding: var(--mh-space-lg);
+  border-radius: var(--mh-radius-lg);
+  background: var(--mh-color-surface-muted);
+  border-top: 5px solid var(--mh-color-brand-primary);
+}
+.mh-path--member { border-top-color: var(--mh-color-neutral-600); }
+.mh-path h2 { font-size: 1.35rem; margin-top: 0; }
+.mh-path .btn { margin: 0 var(--mh-space-xs) var(--mh-space-xs) 0; }
+
+.mh-pipeline {
+  list-style: none;
+  padding: 0;
+  margin: var(--mh-space-lg) 0 var(--mh-space-2xl);
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--mh-space-sm);
+  counter-reset: mh-stage;
+}
+.mh-pipeline li {
+  counter-increment: mh-stage;
+  position: relative;
+  padding: var(--mh-space-md);
+  border-radius: var(--mh-radius-md);
+  background: var(--mh-color-surface);
+  box-shadow: var(--mh-shadow-sm);
+}
+.mh-pipeline li::before {
+  content: counter(mh-stage);
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: var(--mh-space-xs);
+  border-radius: 50%;
+  background: var(--mh-color-brand-primary);
+  color: #fff;
+  font-weight: 700;
+}
+.mh-pipeline li:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  right: calc(var(--mh-space-sm) * -0.85);
+  top: 1.35rem;
+  color: var(--mh-color-brand-primary);
+  font-weight: 700;
+}
+.mh-pipeline strong { display: block; font-size: 1.05rem; }
+.mh-pipeline span { display: block; font-size: 0.9rem; color: var(--mh-color-neutral-600); }
+@media (max-width: 767.98px) {
+  .mh-pipeline { grid-template-columns: 1fr; }
+  .mh-pipeline li:not(:last-child)::after { content: "↓"; right: auto; left: 50%; top: auto; bottom: -1.15rem; }
+}
+
+.mh-feature { align-items: center; margin-bottom: var(--mh-space-2xl); }
+.mh-feature img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: var(--mh-radius-lg);
+  box-shadow: var(--mh-shadow-sm);
+}
+.mh-feature h3 { margin-top: 0; }
+
+.mh-story {
+  height: 100%;
+  padding: var(--mh-space-md);
+  border-radius: var(--mh-radius-md);
+  background: var(--mh-color-surface);
+  box-shadow: var(--mh-shadow-sm);
+  border-left: 4px solid var(--mh-color-brand-primary);
+}
+.mh-story strong { display: block; font-size: 1.1rem; margin-bottom: var(--mh-space-2xs); }

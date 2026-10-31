@@ -83,15 +83,20 @@ function barrio_boostrap_5_makehaven_d11_form_system_theme_settings_alter(&$form
  *   of it), view (catalog-card button label).
  */
 /**
- * The honest status of a program: one chip, one sentence.
+ * The honest status of a program: one chip, one sentence, one next step.
  *
  * Two dimensions (Programs and Partnerships Framework, 2026-09-14): enrollment
  * is DERIVED from linked events (an upcoming one = enrolling), offering mode
  * is the ONE thing staff set (field_offering_mode). Returns NULL for
- * non-program courses and for programs that are enrolling — the cohort rows
- * say it better than a chip.
+ * non-program courses. An enrolling program has no chip sentence — the cohort
+ * rows say it better — but still has an action.
  *
- * @return array{key:string,chip:string,tone:string,sentence:string}|null
+ * Every program offers something to do (JR 2026-10-30: people looking for a
+ * program they can enroll in should not lose it among the rest): `action` is
+ * the card button label and `anchor` the section of the program page it opens
+ * — #cohorts (Register rows) or #stay-informed (Notify Me / interest form).
+ *
+ * @return array{key:string,chip:string,tone:string,sentence:string,action:string,anchor:string}|null
  */
 function _barrio_boostrap_5_makehaven_d11_course_status(NodeInterface $node, int $upcoming): ?array {
   $type = $node->hasField('field_course_type') ? $node->get('field_course_type')->value : NULL;
@@ -99,29 +104,40 @@ function _barrio_boostrap_5_makehaven_d11_course_status(NodeInterface $node, int
     return NULL;
   }
   if ($upcoming > 0) {
-    return ['key' => 'enrolling', 'chip' => t('Enrolling now'), 'tone' => 'ok', 'sentence' => ''];
+    return ['key' => 'enrolling', 'chip' => t('Enrolling now'), 'tone' => 'ok', 'sentence' => '',
+      'action' => t('Register for a cohort'), 'anchor' => 'cohorts'];
   }
   $mode = $node->hasField('field_offering_mode') ? (string) ($node->get('field_offering_mode')->value ?? '') : '';
   switch ($mode) {
     case 'interest_list':
       return ['key' => 'interest', 'chip' => t('Interest list'), 'tone' => 'warn',
-        'sentence' => t('The next cohort runs once enough people ask. Join the interest list and we will email you when it is scheduled.')];
+        'sentence' => t('The next cohort runs once enough people ask. Join the interest list and we will email you when it is scheduled.'),
+        'action' => t('Join the interest list'), 'anchor' => 'stay-informed'];
 
     case 'partner_groups':
       return ['key' => 'partner', 'chip' => t('For partner groups'), 'tone' => 'info',
-        'sentence' => t('Delivered for organizations that bring their own participants, and run publicly when there is demand. Follow the program to hear about a public cohort, or ask about bringing it to your organization.')];
+        'sentence' => t('Delivered for organizations that bring their own participants, and run publicly when there is demand. Follow the program to hear about a public cohort, or ask about bringing it to your organization.'),
+        'action' => t('Ask for a public cohort'), 'anchor' => 'stay-informed'];
 
     case 'partner_delivered':
       return ['key' => 'partner-run', 'chip' => t('Running with a partner'), 'tone' => 'brand',
-        'sentence' => t('Currently delivered for a partner organization; enrollment is through them. Follow the program to hear about a public cohort.')];
+        'sentence' => t('Currently delivered for a partner organization; enrollment is through them. Follow the program to hear about a public cohort.'),
+        'action' => t('Hear about a public cohort'), 'anchor' => 'stay-informed'];
+
+    case 'always_open':
+      return ['key' => 'open', 'chip' => t('Always open'), 'tone' => 'info',
+        'sentence' => t('No enrollment dates: members can use this any time. Follow the program to hear about seminars and new sessions.'),
+        'action' => t('Get started'), 'anchor' => ''];
 
     case 'paused':
       return ['key' => 'paused', 'chip' => t('Not currently offered'), 'tone' => 'quiet',
-        'sentence' => t('Not currently offered. Follow the program and we will email you if it comes back.')];
+        'sentence' => t('Not currently offered. Follow the program and we will email you if it comes back.'),
+        'action' => t('Ask us to bring it back'), 'anchor' => 'stay-informed'];
 
     default:
       return ['key' => 'planned', 'chip' => t('Next cohort not yet scheduled'), 'tone' => 'quiet',
-        'sentence' => t('No cohort is open right now. Follow the program to hear first when the next one is announced.')];
+        'sentence' => t('No cohort is open right now. Follow the program to hear first when the next one is announced.'),
+        'action' => t('Get notified'), 'anchor' => 'stay-informed'];
   }
 }
 
@@ -576,9 +592,16 @@ function _barrio_boostrap_5_makehaven_d11_google_signin_available(): bool {
 function _barrio_boostrap_5_makehaven_d11_course_signin_prompt(NodeInterface $node, array $nouns): array {
   $dest = $node->toUrl()->toString();
   $query = ['query' => ['destination' => $dest]];
-  $lead = $nouns['type'] === 'program'
-    ? t('Sign in to follow this program and hear first when the next @instance opens.', ['@instance' => $nouns['instance']])
-    : t('Sign in to follow this @single and hear when it is next scheduled.', ['@single' => $nouns['single']]);
+  $always_open = $node->hasField('field_offering_mode') && $node->get('field_offering_mode')->value === 'always_open';
+  if ($always_open) {
+    // No cohorts to announce: following means hearing about sessions.
+    $lead = t('Sign in to follow this program and hear about seminars and new sessions.');
+  }
+  else {
+    $lead = $nouns['type'] === 'program'
+      ? t('Sign in to follow this program and hear first when the next @instance opens.', ['@instance' => $nouns['instance']])
+      : t('Sign in to follow this @single and hear when it is next scheduled.', ['@single' => $nouns['single']]);
+  }
 
   $build = [
     '#type' => 'container',
@@ -889,6 +912,25 @@ function barrio_boostrap_5_makehaven_d11_preprocess_field(array &$variables): vo
   // the program template uses. Lets staff put the cohort list mid-page,
   // between the overview and the schedule, instead of at the bottom.
   $node = $variables['element']['#object'];
+
+  // [[ENTREPRENEUR_STATS]] → live entrepreneurship counts (business
+  // directory, incubating ventures, members with business goals) from
+  // makerspace_business_visibility, so /entrepreneurship never shows numbers
+  // typed months ago.
+  if (strpos($text, '[[ENTREPRENEUR_STATS]]') !== FALSE) {
+    try {
+      $build = \Drupal::service('plugin.manager.block')
+        ->createInstance('entrepreneur_stats_block', [])
+        ->build();
+    }
+    catch (\Throwable $e) {
+      $variables['items'][0]['content']['#text'] = str_replace('[[ENTREPRENEUR_STATS]]', '', $text);
+      return;
+    }
+    _barrio_boostrap_5_makehaven_d11_embed_widget($variables, '[[ENTREPRENEUR_STATS]]', $build);
+    return;
+  }
+
   if ($node->bundle() === 'course' && strpos($text, '[[COURSE_UPCOMING]]') !== FALSE) {
     $type = $node->hasField('field_course_type') ? $node->get('field_course_type')->value : NULL;
     $build = [

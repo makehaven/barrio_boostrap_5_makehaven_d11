@@ -11,6 +11,10 @@
  *  - workshop_runs_count: Total historical runs.
  *  - course_nouns: type-aware wording — the button says "View program" on a
  *    program card, "View workshop" on a workshop card, etc.
+ *  - course_status: a program's chip, plus `action` (the button label: the
+ *    next step for that program, e.g. "Join the interest list") and `anchor`
+ *    (the program-page section the button opens). Non-programs keep the
+ *    "View workshop" button.
  *  - attributes adds 'course-teaser--member-only' on badge_class courses.
  */
 #}
@@ -63,7 +67,12 @@
         </div>
       {% endif %}
 
-      <a href="{{ url }}" class="btn btn-primary">{{ course_nouns.view }} →</a>
+      {% if course_status and course_status.action %}
+        {# The title already links to the page; the button is the next step. #}
+        <a href="{{ url }}{{ course_status.anchor ? '#' ~ course_status.anchor }}" class="btn btn-primary">{{ course_status.action }} →</a>
+      {% else %}
+        <a href="{{ url }}" class="btn btn-primary">{{ course_nouns.view }} →</a>
+      {% endif %}
     </div>
   </div>
 

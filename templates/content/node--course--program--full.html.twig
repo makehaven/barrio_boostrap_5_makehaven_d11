@@ -80,7 +80,9 @@
       </div>
     {% endif %}
 
-    {% if not course_upcoming_in_body %}
+    {# An always-open program has no cohorts; show the section only once it
+       has scheduled sessions (e.g. a seminar linked to it). #}
+    {% if not course_upcoming_in_body and not (course_status.key|default('') == 'open' and not workshop_upcoming_events) %}
       <section class="mh-program__cohorts mb-5">
         <h2 class="section-title text-center mb-4">{{ 'Upcoming @plural'|t({'@plural': nouns.instance_plural|capitalize}) }}</h2>
         {% include '@barrio_boostrap_5_makehaven_d11/content/course-cohorts.html.twig' with { events: workshop_upcoming_events, nouns: nouns, status: course_status } only %}
@@ -106,7 +108,7 @@
 
 
       <div class="col-md-4">
-        <div class="card h-100 border-0 shadow-sm p-4 mh-program__card course-action-card">
+        <div class="card h-100 border-0 shadow-sm p-4 mh-program__card course-action-card" id="stay-informed">
           <h3 class="h5 fw-bold">{{ 'Stay informed'|t }}</h3>
           <div class="course-notify-area">
             {{ workshop_flag_link }}
