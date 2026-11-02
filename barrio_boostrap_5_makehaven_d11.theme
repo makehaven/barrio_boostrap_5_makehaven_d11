@@ -237,7 +237,7 @@ function _barrio_boostrap_5_makehaven_d11_course_upcoming_events(NodeInterface $
       return [];
     }
     $result = $database->select('civicrm_event', 'e')
-      ->fields('e', ['id', 'start_date', 'title'])
+      ->fields('e', ['id', 'start_date', 'title', 'event_type_id', 'is_monetary'])
       ->condition('e.id', $linked, 'IN')
       ->condition('e.is_template', 0)
       ->condition('e.is_active', 1)
@@ -257,6 +257,7 @@ function _barrio_boostrap_5_makehaven_d11_course_upcoming_events(NodeInterface $
         'url' => '/civicrm-event/' . $row->id,
         'info' => '/civicrm/event/info?id=' . $row->id . '&reset=1',
         'register' => '/civicrm/event/register?id=' . $row->id . '&reset=1',
+        'reduce' => _barrio_boostrap_5_makehaven_d11_price_reduction_url($row),
       ];
     }
   }
@@ -264,6 +265,35 @@ function _barrio_boostrap_5_makehaven_d11_course_upcoming_events(NodeInterface $
     return [];
   }
   return $rows;
+}
+
+/**
+ * The need-based price reduction form for one event, or NULL.
+ *
+ * The request form is linked only from the event info page (views
+ * event_sliding_scale_info: program form for event type 7, workshop form for
+ * types 6 and 16). The cohort list's Register button goes straight to the
+ * registration form, so anyone who needed the reduced price never saw the
+ * offer (Ashley, ledger #46671). Same forms, same event types, same query
+ * string as those views.
+ */
+function _barrio_boostrap_5_makehaven_d11_price_reduction_url(object $row): ?string {
+  if (empty($row->is_monetary)) {
+    return NULL;
+  }
+  $paths = [
+    7 => '/program-income-based-price-adjustment-request',
+    6 => '/workshop-income-based-price-adjustment-request',
+    16 => '/workshop-income-based-price-adjustment-request',
+  ];
+  $path = $paths[(int) ($row->event_type_id ?? 0)] ?? NULL;
+  if (!$path) {
+    return NULL;
+  }
+  return $path . '?' . http_build_query([
+    'event_name' => (string) $row->title,
+    'event_id' => (int) $row->id,
+  ], '', '&', PHP_QUERY_RFC3986);
 }
 
 /**

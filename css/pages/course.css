@@ -66,6 +66,8 @@
 .mh-cohort__title a { text-decoration: none; color: var(--mh-red, var(--mh-color-brand-primary)); }
 .mh-cohort__label { color: var(--mh-red, var(--mh-color-brand-primary)); font-weight: 600; }
 .mh-cohort__actions { margin-left: auto; display: flex; gap: .5rem; }
+.mh-cohort__actions:has(.mh-cohort__reduce) { flex-direction: column; align-items: flex-end; gap: .25rem; }
+.mh-cohort__reduce { color: var(--mh-red, var(--mh-color-brand-primary)); text-align: right; }
 .mh-cohorts__empty {
   text-align: center;
   color: var(--bs-secondary-color, #6c757d);
@@ -77,6 +79,8 @@
 @media (max-width: 575.98px) {
   .mh-cohort__actions { margin-left: 0; width: 100%; }
   .mh-cohort__actions .btn { width: 100%; }
+  .mh-cohort__actions:has(.mh-cohort__reduce) { align-items: stretch; }
+  .mh-cohort__reduce { text-align: center; }
 }
 
 /* ── Signed-out follow prompt (course-signin) ─────────────────────── */

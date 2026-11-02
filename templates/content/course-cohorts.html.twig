@@ -29,6 +29,9 @@
           </div>
           <div class="mh-cohort__actions">
             <a href="{{ ev.register }}" class="btn btn-mh-red btn-sm">{{ 'Register'|t }} &rarr;</a>
+            {% if ev.reduce %}
+              <a href="{{ ev.reduce }}" class="mh-cohort__reduce small">{{ 'Need a reduced price? Apply before you register'|t }}</a>
+            {% endif %}
           </div>
         </li>
       {% endfor %}
