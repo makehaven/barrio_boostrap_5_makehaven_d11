@@ -109,9 +109,16 @@
           used = usedMatch ? parseInt(usedMatch[1], 10) : null;
         }
 
+        // The view rewrites a sold-out event's count to the words
+        // "Capacity Status: Full", with no number for the checks below.
+        const saysFull = /\bfull\b/i.test(remainingText);
+
         let statusText = "Open Seats";
         let statusCls = "is-open";
-        if (spots !== null) {
+        if (saysFull) {
+          statusText = "Full";
+          statusCls = "is-full";
+        } else if (spots !== null) {
           if (spots <= 0) {
             statusText = "Full";
             statusCls = "is-full";
@@ -183,7 +190,74 @@
         }
 
         section.classList.add("mh-enhanced-info-bar");
+
+        // Deferred so it reads the page after any other DOM-ready script that
+        // swaps the Register button (the event_information_bar view has one).
+        setTimeout(() => {
+          const panel = buildActionPanel();
+          if (panel) {
+            cap.insertAdjacentElement("afterend", panel);
+          }
+        }, 0);
       });
     },
   };
+
+  /**
+   * Price, Register and the reduced-price offer, near the top of the page.
+   *
+   * CiviCRM's own button, fee table and the need-based card stay where they
+   * are, below the description, so this only repeats what is already true on
+   * the page and shows nothing it cannot find there. A members-only notice
+   * from makehaven_event_capacity takes the button's place.
+   */
+  function buildActionPanel() {
+    const bottom = document.querySelector(".crm-actionlinks-bottom");
+    if (!bottom) {
+      return null;
+    }
+    const panel = document.createElement("div");
+    panel.className = "mh-event-actions";
+
+    const prices = [
+      ...document.querySelectorAll(".event_fees-section table tr"),
+    ]
+      .map((row) => [...row.cells].map((c) => c.textContent.trim()))
+      .filter((cells) => cells.length >= 2 && cells[0]);
+    const hasCharge = prices.some((cells) => /[1-9]/.test(cells[1]));
+    if (hasCharge && prices.length <= 3) {
+      const list = document.createElement("p");
+      list.className = "mh-event-actions__prices";
+      prices.forEach((cells) => {
+        const item = document.createElement("span");
+        item.textContent = `${cells[0]}: ${cells[1].replace(/\.00$/, "")}`;
+        list.appendChild(item);
+      });
+      panel.appendChild(list);
+    }
+
+    const notice = bottom.querySelector(".mh-members-only");
+    const register = [...bottom.querySelectorAll("a.crm-register-button")].find(
+      (link) => link.offsetParent !== null
+    );
+    if (notice && !register) {
+      panel.appendChild(notice.cloneNode(true));
+    } else if (register) {
+      panel.appendChild(register.cloneNode(true));
+    } else {
+      return null;
+    }
+
+    const reduced = document.querySelector(
+      '.view-event-sliding-scale-info a[href*="price-adjustment"]'
+    );
+    if (reduced && register) {
+      const offer = document.createElement("a");
+      offer.className = "mh-event-actions__reduced";
+      offer.href = reduced.getAttribute("href");
+      offer.textContent = "Need a reduced price? Apply before you register";
+      panel.appendChild(offer);
+    }
+    return panel;
+  }
 })(Drupal, window.once);

@@ -1702,3 +1702,85 @@ body.page-civicrm-event-info .view-id-event_instructor .view-content:has(.views-
   color: rgba(255, 255, 255, .85);
   border-color: rgba(255, 255, 255, .12);
 }
+
+/* ── Registration journey (2026-11-05, docs/flows/event-registration.md) ──── */
+
+/* Event page: price, Register and the reduced-price offer near the top. Built
+   by js/events-info-hero.js from what is further down the page. */
+.mh-event-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--mh-space-sm) var(--mh-space-lg);
+  margin: var(--mh-space-md) 0;
+  padding: var(--mh-space-md);
+  background: var(--mh-color-surface);
+  border: 1px solid var(--mh-color-border);
+  border-radius: 0.75rem;
+}
+.mh-event-actions__prices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mh-space-2xs) var(--mh-space-md);
+  flex-basis: 100%;
+  margin: 0;
+  font-weight: 600;
+}
+.mh-event-actions a.crm-register-button {
+  display: inline-block;
+  padding: var(--mh-space-xs) var(--mh-space-lg);
+  background: var(--mh-color-brand-primary);
+  color: #fff;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.mh-event-actions a.crm-register-button:hover,
+.mh-event-actions a.crm-register-button:focus {
+  background: var(--mh-color-brand-primary-strong);
+  color: #fff;
+}
+.mh-event-actions__reduced { font-size: 0.95rem; }
+
+/* Members-only notice: event page and (staff only) the form. */
+.mh-members-only {
+  flex-basis: 100%;
+  padding: var(--mh-space-md);
+  background: #fffbe6;
+  border-left: 4px solid var(--mh-color-accent-gold);
+  border-radius: 0.25rem;
+}
+.mh-members-only__text { margin: 0 0 var(--mh-space-xs); }
+.mh-members-only__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--mh-space-xs) var(--mh-space-md);
+}
+.mh-members-only .btn-primary {
+  background: var(--mh-color-brand-primary);
+  border-color: var(--mh-color-brand-primary);
+  color: #fff;
+}
+
+/* Registration form: when and where. Added by makerspace_event_registration. */
+.mh-reg-summary {
+  margin: 0 0 var(--mh-space-lg);
+  padding: var(--mh-space-md);
+  background: var(--mh-color-surface-muted);
+  border-left: 4px solid var(--mh-color-brand-primary);
+  border-radius: 0.25rem;
+}
+.mh-reg-summary p { margin: 0; }
+.mh-reg-summary__when { font-weight: 600; }
+.mh-reg-summary__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mh-space-2xs) var(--mh-space-md);
+  margin-top: var(--mh-space-xs) !important;
+  font-size: 0.95rem;
+}
+
+[data-bs-theme="dark"] .mh-event-actions { background: #1e1e1e; border-color: rgba(255, 255, 255, .15); }
+[data-bs-theme="dark"] .mh-reg-summary { background: #1e1e1e; }
+[data-bs-theme="dark"] .mh-members-only { background: #2b2610; color: rgba(255, 255, 255, .87); }
