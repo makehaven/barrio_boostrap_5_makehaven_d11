@@ -1210,6 +1210,89 @@ function barrio_boostrap_5_makehaven_d11_preprocess_paragraph(&$variables) {
 }
 
 /**
+ * The price text for one /events card: "Free", "$176 · Members $150" or a range.
+ *
+ * Loads every event in the view's results on the first call. Returns '' when
+ * the price cannot be read, so a card simply goes without a price line.
+ */
+function _barrio_boostrap_5_makehaven_d11_event_card_price($view, int $event_id): string {
+  $cache = &drupal_static(__FUNCTION__, []);
+  $key = $view->id() . ':' . $view->current_display;
+  if (!isset($cache[$key])) {
+    $cache[$key] = [];
+    $ids = [];
+    foreach ($view->result as $row) {
+      if (!empty($row->_entity)) {
+        $ids[] = (int) $row->_entity->id();
+      }
+    }
+    if ($ids) {
+      try {
+        $database = \Drupal::database();
+        $free = $database->select('civicrm_event', 'e')
+          ->fields('e', ['id', 'is_monetary'])
+          ->condition('e.id', $ids, 'IN')
+          ->execute()
+          ->fetchAllKeyed();
+        $query = $database->select('civicrm_price_set_entity', 'pse');
+        $query->join('civicrm_price_field', 'pf', 'pf.price_set_id = pse.price_set_id AND pf.is_active = 1');
+        $query->join('civicrm_price_field_value', 'pv', 'pv.price_field_id = pf.id AND pv.is_active = 1');
+        $query->condition('pse.entity_table', 'civicrm_event')
+          ->condition('pse.entity_id', $ids, 'IN')
+          ->condition('pv.visibility_id', 1)
+          ->fields('pse', ['entity_id'])
+          ->fields('pv', ['label', 'amount']);
+        $options = [];
+        foreach ($query->execute() as $option) {
+          $options[(int) $option->entity_id][] = $option;
+        }
+        foreach ($free as $id => $is_monetary) {
+          $cache[$key][(int) $id] = $is_monetary
+            ? _barrio_boostrap_5_makehaven_d11_format_card_price($options[(int) $id] ?? [])
+            : 'Free';
+        }
+      }
+      catch (\Throwable $e) {
+        \Drupal::logger('barrio_boostrap_5_makehaven_d11')->warning('Event card prices unavailable: @message', ['@message' => $e->getMessage()]);
+      }
+    }
+  }
+  return $cache[$key][$event_id] ?? '';
+}
+
+/**
+ * Formats an event's active price options for a card.
+ *
+ * @param object[] $options
+ *   Rows with label and amount.
+ */
+function _barrio_boostrap_5_makehaven_d11_format_card_price(array $options): string {
+  if (!$options) {
+    return '';
+  }
+  $money = static fn(float $amount): string => '$' . (floor($amount) === $amount ? number_format($amount) : number_format($amount, 2));
+  $member = [];
+  $other = [];
+  foreach ($options as $option) {
+    $is_member = preg_match('/\bmembers?\b/i', (string) $option->label) && !preg_match('/non[- ]?member/i', (string) $option->label);
+    if ($is_member) {
+      $member[] = (float) $option->amount;
+    }
+    else {
+      $other[] = (float) $option->amount;
+    }
+  }
+  $all = array_merge($member, $other);
+  if (max($all) <= 0) {
+    return 'Free';
+  }
+  if ($member && $other && count(array_unique($other)) === 1 && count(array_unique($member)) === 1) {
+    return $money($other[0]) . ' · Members ' . $money($member[0]);
+  }
+  return min($all) === max($all) ? $money($all[0]) : $money(min($all)) . '–' . $money(max($all));
+}
+
+/**
  * Implements hook_preprocess_views_view_field().
  */
 function barrio_boostrap_5_makehaven_d11_preprocess_views_view_field(array &$variables) {
@@ -1228,6 +1311,24 @@ function barrio_boostrap_5_makehaven_d11_preprocess_views_view_field(array &$var
       $chip = '<span class="event-card-chip event-card-chip--member-only">' . t('Member Only') . '</span> ';
       // Output may be a string or a Markup object — coerce safely.
       $variables['output'] = \Drupal\Core\Render\Markup::create($chip . (string) $variables['output']);
+    }
+  }
+
+  // Price line on /events cards, above the summary.
+  if (!empty($variables['view'])
+      && $variables['view']->id() === 'event_set'
+      && !empty($variables['field']) && $variables['field']->field === 'nothing'
+      && !empty($variables['row']->_entity)
+      && $variables['row']->_entity->getEntityTypeId() === 'civicrm_event') {
+    $price = _barrio_boostrap_5_makehaven_d11_event_card_price($variables['view'], (int) $variables['row']->_entity->id());
+    if ($price !== '') {
+      $line = '<div class="event-card-price">' . \Drupal\Component\Utility\Html::escape($price) . '</div>';
+      $output = (string) $variables['output'];
+      $variables['output'] = \Drupal\Core\Render\Markup::create(
+        str_contains($output, '<div class="summary">')
+          ? str_replace('<div class="summary">', $line . '<div class="summary">', $output)
+          : $output . $line
+      );
     }
   }
 
@@ -1373,6 +1474,10 @@ function _barrio_boostrap_5_makehaven_d11_mh_banner_crumb(): ?array {
   // the pill links back to the events listing.
   if (strpos(\Drupal::service('path.current')->getPath(), '/civicrm/event/info') === 0) {
     return [['Home', '/'], ['Events', '/events'], ['Event Details', NULL]];
+  }
+  // The form carries the same banner, so it reads as the same site.
+  if (strpos(\Drupal::service('path.current')->getPath(), '/civicrm/event/register') === 0) {
+    return [['Home', '/'], ['Events', '/events'], ['Register', NULL]];
   }
 
   // View pages, keyed by route name (stable across environments). Value is the

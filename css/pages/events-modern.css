@@ -517,7 +517,7 @@ body.page-civicrm-event-info #crm-main-content-wrapper .event-info table.fee_blo
 
 body.page-civicrm-event-info #crm-main-content-wrapper .event-info table.fee_block-table {
   width: auto;
-  min-width: 26rem;
+  max-width: 100%;
 }
 
 body.page-civicrm-event-info #crm-main-content-wrapper .event-info table.fee_block-table td.fee_amount-value {
@@ -1784,3 +1784,257 @@ body.page-civicrm-event-info .view-id-event_instructor .view-content:has(.views-
 [data-bs-theme="dark"] .mh-event-actions { background: #1e1e1e; border-color: rgba(255, 255, 255, .15); }
 [data-bs-theme="dark"] .mh-reg-summary { background: #1e1e1e; }
 [data-bs-theme="dark"] .mh-members-only { background: #2b2610; color: rgba(255, 255, 255, .87); }
+
+/* ── Registration design round (JR 2026-11-05) ───────────────────────────── */
+
+/* Event page: one button colour, no repeated price table, smaller instructor line. */
+body.page-civicrm-event-info #crm-main-content-wrapper .event-info > .crm-actionlinks-bottom a.crm-register-button {
+  background: var(--mh-color-brand-primary);
+  border-color: var(--mh-color-brand-primary);
+  color: #fff;
+}
+body.page-civicrm-event-info #crm-main-content-wrapper .event-info > .crm-actionlinks-bottom a.crm-register-button:hover,
+body.page-civicrm-event-info #crm-main-content-wrapper .event-info > .crm-actionlinks-bottom a.crm-register-button:focus {
+  background: var(--mh-color-brand-primary-strong);
+  border-color: var(--mh-color-brand-primary-strong);
+  color: #fff;
+}
+body.mh-event-prices-shown #crm-main-content-wrapper .event-info > .event_fees-section { display: none; }
+body.page-civicrm-event-info .view-event-information-bar .views-field-field-civi-event-instructor {
+  margin: var(--mh-space-sm) 0 0;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+
+/* That field's only content is a line break (event_information_bar view). */
+body.page-civicrm-event-info .view-event-information-bar .views-field-nothing { display: none; }
+
+/* The view block's bottom padding (rooms.css) left a blank band here. */
+body.page-civicrm-event-info .block-views-blockevent-information-bar-event-info .views-element-container { padding-bottom: 0; }
+
+/* Listing cards. */
+.event-card-price {
+  margin-top: var(--mh-space-xs);
+  font-weight: 700;
+  color: var(--mh-color-neutral-900);
+}
+/* Chosen copies the select's class, and with it a second arrow and box. */
+body.page-view-event-set .view-filters .chosen-container {
+  padding: 0;
+  border: 0;
+  background-image: none;
+}
+
+/* Form: a readable column under the banner. */
+body.page-civicrm-event-register .mh-reg-summary,
+body.page-civicrm-event-register #crm-main-content-wrapper {
+  max-width: 44rem;
+  margin-inline: auto;
+}
+body.page-civicrm-event-register #crm-main-content-wrapper { padding-inline: var(--mh-space-md); }
+/* One left edge for every section. */
+body.page-civicrm-event-register #Register .crm-event-register-form-block > .crm-section,
+body.page-civicrm-event-register #Register .crm-event-register-form-block > fieldset,
+body.page-civicrm-event-register #Register #billing-payment-block,
+body.page-civicrm-event-register #Register .crm-section.custom_pre-section,
+body.page-civicrm-event-register #Register .crm-section.custom_post-section,
+body.page-civicrm-event-register #Register #intro_text {
+  padding: 0 !important;
+  margin-inline: 0 !important;
+}
+body.page-civicrm-event-register #Register #phone-Primary-1,
+body.page-civicrm-event-register #Register #email-Primary {
+  width: 100% !important;
+  max-width: none !important;
+}
+body.page-civicrm-event-register #Register .mh-dob-part {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+body.page-civicrm-event-register #Register fieldset.crm-profile-name-event_registration .editrow_custom_114-section { grid-column: 1 / -1; }
+body.page-civicrm-event-register #Register .crm-section > .label,
+body.page-civicrm-event-register #Register .crm-section > .content {
+  float: none;
+  width: 100%;
+  margin-left: 0;
+  text-align: left;
+}
+body.page-civicrm-event-register #Register .crm-section > .label { margin-bottom: var(--mh-space-2xs); }
+body.page-civicrm-event-register #Register .crm-section > .content input[type="text"].crm-form-text:not(.mh-dob-input) { width: 100%; max-width: 100%; }
+body.page-civicrm-event-register #Register fieldset.crm-profile legend { padding: 0; }
+body.page-civicrm-event-register #Register input.mh-dob-input { width: 4rem; text-align: center; }
+body.page-civicrm-event-register #Register .mh-dob-part--year input.mh-dob-input { width: 5.5rem; }
+body.page-civicrm-event-register #Register #postal_code-Primary { width: 8rem; }
+
+/* A number that is nearly always 1 does not need the whole width. */
+body.page-civicrm-event-register #noOfparticipants .content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--mh-space-xs);
+}
+body.page-civicrm-event-register #noOfparticipants select { width: 5rem; }
+body.page-civicrm-event-register #noOfparticipants br { display: none; }
+body.page-civicrm-event-register #noOfparticipants .description { flex-basis: 100%; }
+
+/* Waiver: the agreement stays visible, the text is one click away. */
+.mh-waiver-text { margin-top: var(--mh-space-xs); }
+.mh-waiver-text summary,
+.mh-optional-questions summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--mh-color-brand-primary);
+}
+.mh-waiver-text p { margin: var(--mh-space-xs) 0 0; }
+body.page-civicrm-event-register #Register .helprow-custom_63-section { margin-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+body.page-civicrm-event-register #Register .editrow_custom_63-section { border-top: 0 !important; border-top-left-radius: 0; border-top-right-radius: 0; }
+body.page-civicrm-event-register #Register .helprow-custom_63-section h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+body.page-civicrm-event-register #Register .crm-option-label-pair:has(input[type="checkbox"]) {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--mh-space-xs);
+}
+body.page-civicrm-event-register #Register .crm-option-label-pair input[type="checkbox"] { flex: none; margin-top: 0.3rem; }
+body.page-civicrm-event-register #Register .crm-option-label-pair:has(input[type="checkbox"]) label { margin: 0; }
+
+/* Optional questions, closed until someone chooses to answer them. */
+body.page-civicrm-event-register #Register .mh-optional-questions {
+  padding: var(--mh-space-sm) var(--mh-space-md);
+  border: 1px solid var(--mh-color-border);
+  border-radius: var(--mh-radius-md);
+}
+.mh-optional-questions[open] summary { margin-bottom: var(--mh-space-md); }
+body.page-civicrm-event-register #Register .mh-optional-questions .messages.help {
+  margin: 0 0 var(--mh-space-md);
+  padding: 0;
+  background: transparent;
+  border: 0;
+  color: var(--mh-color-neutral-700);
+}
+.mh-optional-questions fieldset.crm-profile > legend { display: none; }
+body.page-civicrm-event-register #Register .mh-optional-questions fieldset.crm-profile-name-Event_Demographics { grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
+body.page-civicrm-event-register #Register .mh-optional-questions .crm-multiple-checkbox-radio-options { display: block; }
+body.page-civicrm-event-register #Register .mh-optional-questions .helprow-postal_code-Primary-section,
+body.page-civicrm-event-register #Register .mh-optional-questions .editrow_postal_code-Primary-section { grid-column: 1 / -1; }
+
+/* Price: each option is a row with the amount at the right. */
+body.page-civicrm-event-register #priceset .price-set-row .crm-option-label-pair {
+  display: flex;
+  align-items: center;
+  gap: var(--mh-space-sm);
+  padding: var(--mh-space-sm) var(--mh-space-md);
+  border: 1px solid var(--mh-color-border);
+  border-radius: var(--mh-radius-md);
+}
+body.page-civicrm-event-register #priceset .price-set-row .crm-option-label-pair:has(input:checked) { border-color: var(--mh-color-brand-primary); }
+body.page-civicrm-event-register #priceset .price-set-row input[type="radio"] { flex: none; margin: 0; }
+body.page-civicrm-event-register #priceset .price-set-row label {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--mh-space-2xs) var(--mh-space-md);
+  margin: 0;
+}
+body.page-civicrm-event-register #priceset .crm-price-amount-label-separator { display: none; }
+body.page-civicrm-event-register #priceset .crm-price-amount-amount { font-weight: 700; white-space: nowrap; }
+.mh-member-price-note { margin: 0; font-size: 0.95rem; }
+
+/* Discount code: field and button on one line. */
+body.page-civicrm-event-register #Register .cividiscount-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--mh-space-2xs) var(--mh-space-sm);
+  align-items: center;
+}
+body.page-civicrm-event-register #Register .cividiscount-section > .label:first-child { grid-column: 1 / -1; }
+body.page-civicrm-event-register #Register .cividiscount-section > .label:empty,
+body.page-civicrm-event-register #Register .cividiscount-section > .clear { display: none; }
+body.page-civicrm-event-register #Register #_qf_Register_reload {
+  min-height: 2.65rem;
+  padding-inline: var(--mh-space-lg);
+  background: var(--mh-color-surface);
+  border: 1px solid var(--mh-color-brand-primary);
+  border-radius: var(--mh-radius-pill);
+  color: var(--mh-color-brand-primary);
+}
+
+/* Card box: one field, like the others. */
+body.page-civicrm-event-register #crm-payment-js-billing-form-container {
+  border: 0;
+  padding: 0;
+  min-height: 0;
+}
+body.page-civicrm-event-register #card-element {
+  max-width: none;
+  margin: 0;
+  padding: 0.7rem 0.65rem;
+  background: #fff;
+  border: 1px solid #cbd3dc;
+  border-radius: 10px;
+  box-shadow: none;
+}
+body.page-civicrm-event-register #card-element.StripeElement--focus { border-color: var(--mh-color-brand-primary); }
+body.page-civicrm-event-register .mh-card-help h3 { margin: 0 0 var(--mh-space-2xs); font-size: 1rem; }
+
+/* Every submit button on every step: the site's action colour. */
+body.page-civicrm-event-register .crm-container .crm-submit-buttons button,
+body.page-civicrm-event-register .crm-container .crm-submit-buttons .crm-button {
+  min-height: 2.75rem;
+  padding-inline: var(--mh-space-xl);
+  background: var(--mh-color-brand-primary);
+  border: 1px solid var(--mh-color-brand-primary);
+  border-radius: var(--mh-radius-pill);
+  color: #fff;
+  font-weight: 600;
+}
+body.page-civicrm-event-register .crm-container .crm-submit-buttons button:hover,
+body.page-civicrm-event-register .crm-container .crm-submit-buttons button:focus {
+  background: var(--mh-color-brand-primary-strong);
+  border-color: var(--mh-color-brand-primary-strong);
+  color: #fff;
+}
+@media (max-width: 767px) {
+  body.page-civicrm-event-register .crm-container .crm-submit-buttons button { width: 100%; }
+}
+
+/* Errors: a list at the top that links to each field. */
+.mh-form-errors {
+  margin: 0 0 var(--mh-space-lg);
+  padding: var(--mh-space-md);
+  background: #fdf1f1;
+  border: 1px solid var(--mh-color-brand-primary);
+  border-radius: var(--mh-radius-md);
+  color: var(--mh-color-neutral-900);
+  scroll-margin-top: 6rem;
+}
+.mh-form-errors:focus { outline: none; }
+.mh-form-errors p { margin: 0 0 var(--mh-space-2xs); font-weight: 700; }
+.mh-form-errors ul { margin: 0; padding-left: 1.25rem; }
+.mh-form-errors a { color: var(--mh-color-brand-primary); }
+body.page-civicrm-event-register .swal2-confirm { background-color: var(--mh-color-brand-primary) !important; }
+
+[data-bs-theme="dark"] body.page-civicrm-event-register #crm-main-content-wrapper { background: transparent; }
+[data-bs-theme="dark"] .mh-form-errors { background: #2a1516; color: rgba(255, 255, 255, .87); }
+[data-bs-theme="dark"] .mh-form-errors a,
+[data-bs-theme="dark"] .mh-waiver-text summary,
+[data-bs-theme="dark"] .mh-optional-questions summary { color: #e8595d; }
+[data-bs-theme="dark"] .event-card-price { color: #f1f1f1; }
+body.page-civicrm-event-register #Register .mh-optional-questions .messages.help p { color: inherit; }
+[data-bs-theme="dark"] body.page-civicrm-event-register #Register .mh-optional-questions .messages.help { color: rgba(255, 255, 255, .72); }
+/* The form's text was dark on dark: labels and help used fixed neutral colours. */
+[data-bs-theme="dark"] body.page-civicrm-event-register #crm-main-content-wrapper :is(p, li, legend, label, h2, h3, .label, .content, .description, .crm-price-amount-label, .crm-price-amount-amount, .mh-dob-part__label),
+[data-bs-theme="dark"] .mh-reg-summary p {
+  color: rgba(255, 255, 255, .87);
+}
+[data-bs-theme="dark"] .mh-reg-summary a,
+[data-bs-theme="dark"] .mh-member-price-note a { color: #e8595d; }
+[data-bs-theme="dark"] body.page-civicrm-event-register #Register :is(input[type="text"], input[type="email"], input[type="tel"], select) { color: #1e1f24; }
+[data-bs-theme="dark"] body.page-civicrm-event-register #Register .crm-submit-buttons { background: transparent; border-top-color: rgba(255, 255, 255, .15); }
+[data-bs-theme="dark"] body.page-civicrm-event-register #Register #_qf_Register_reload { background: transparent; border-color: #e8595d; color: #e8595d; }
+
+[data-bs-theme="dark"] body.page-civicrm-event-register #Register .messages.status a { color: var(--mh-color-brand-primary); }

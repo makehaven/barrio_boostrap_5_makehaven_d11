@@ -234,6 +234,9 @@
         list.appendChild(item);
       });
       panel.appendChild(list);
+      // The panel now says this, so the table further down need not. Only when
+      // the panel shows every price, and only once this script has run.
+      document.body.classList.add("mh-event-prices-shown");
     }
 
     const notice = bottom.querySelector(".mh-members-only");
