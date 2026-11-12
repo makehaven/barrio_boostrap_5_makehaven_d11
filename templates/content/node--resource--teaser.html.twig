@@ -2,21 +2,30 @@
 /**
  * @file
  * Resource node — teaser view mode.
- * Bootstrap card mirroring node--project--teaser: hero logo (or emoji
- * fallback by type), title, type chip, area-of-interest chips, trimmed
+ * Bootstrap card mirroring node--project--teaser: hero logo (or a
+ * monogram tile tinted by type), title, type chip, area-of-interest chips (first 3 + count), trimmed
  * body, member-benefit highlight, endorsement pill, CTA buttons.
  */
 #}
 {{ attach_library('bootstrap_barrio/node') }}
 
-{# Pick an emoji fallback when there is no logo, based on resource type term. #}
+{# No logo: a monogram tile (first letters of the first two words), tinted by
+   resource type, instead of a stock emoji. #}
 {% set type_term = node.field_resource_type.entity ? node.field_resource_type.entity.label|lower : '' %}
-{% set fallback_emoji = '🛒' %}
-{% if 'material' in type_term %}{% set fallback_emoji = '📦' %}
-{% elseif 'equipment' in type_term %}{% set fallback_emoji = '🛠️' %}
-{% elseif 'education' in type_term %}{% set fallback_emoji = '🎓' %}
-{% elseif 'service' in type_term %}{% set fallback_emoji = '🤝' %}
+{% set type_key = 'other' %}
+{% if 'material' in type_term %}{% set type_key = 'materials' %}
+{% elseif 'equipment' in type_term %}{% set type_key = 'equipment' %}
+{% elseif 'education' in type_term %}{% set type_key = 'education' %}
+{% elseif 'service' in type_term %}{% set type_key = 'services' %}
 {% endif %}
+{% set initials = '' %}
+{% for word in node.label|replace({'&': ' ', '-': ' ', '(': ' '})|split(' ')|filter(w => w|trim is not empty and w|lower not in ['the', 'a', 'an', 'of', 'and'])|slice(0, 2) %}
+  {% set initials = initials ~ word|first|upper %}
+{% endfor %}
+
+{# Area chips: show the first few; the rest collapse into a "+N" count. #}
+{% set area_max = 3 %}
+{% set area_count = node.field_resource_area_interest|length %}
 
 {% set has_benefit = content.field_resource_benefit_desc|render|trim is not empty %}
 
@@ -28,8 +37,8 @@
         {{ content.field_resource_logo }}
       </a>
     {% else %}
-      <a href="{{ url }}" class="resource-card__no-image" rel="bookmark" aria-label="{{ node.label }}">
-        <span aria-hidden="true">{{ fallback_emoji }}</span>
+      <a href="{{ url }}" class="resource-card__no-image resource-card__no-image--{{ type_key }}" rel="bookmark" aria-label="{{ node.label }}">
+        <span aria-hidden="true">{{ initials }}</span>
       </a>
     {% endif %}
     {% if has_benefit %}
@@ -52,8 +61,11 @@
     {% endif %}
 
     {% if content.field_resource_area_interest|render|trim %}
-      <div class="resource-card__areas">
+      <div class="resource-card__areas{{ area_count > area_max ? ' resource-card__areas--capped' : '' }}">
         {{ content.field_resource_area_interest }}
+        {% if area_count > area_max %}
+          <a href="{{ url }}" class="resource-card__areas-more" title="{{ 'See all areas'|t }}">+{{ area_count - area_max }}</a>
+        {% endif %}
       </div>
     {% endif %}
 
