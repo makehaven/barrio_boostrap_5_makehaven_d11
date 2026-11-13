@@ -1847,6 +1847,13 @@ body.page-civicrm-event-register #Register #email-Primary {
   width: 100% !important;
   max-width: none !important;
 }
+/* Name boxes kept CiviCRM's size="30" width and stopped short of their column. */
+body.page-civicrm-event-register #Register #first_name,
+body.page-civicrm-event-register #Register #last_name { width: 100% !important; }
+/* A phone number does not need the whole row: line it up with First Name. */
+@media (min-width: 576px) {
+  body.page-civicrm-event-register #Register #phone-Primary-1 { max-width: calc((100% - var(--mh-space-md)) / 2) !important; }
+}
 body.page-civicrm-event-register #Register .mh-dob-part {
   display: flex;
   flex-direction: column;
@@ -1878,15 +1885,14 @@ body.page-civicrm-event-register #noOfparticipants select { width: 5rem; }
 body.page-civicrm-event-register #noOfparticipants br { display: none; }
 body.page-civicrm-event-register #noOfparticipants .description { flex-basis: 100%; }
 
-/* Waiver: the agreement stays visible, the text is one click away. */
-.mh-waiver-text { margin-top: var(--mh-space-xs); }
-.mh-waiver-text summary,
+/* Waiver: short on purpose, so the text shows in full above the agreement
+   (JR 2026-11-10: it had been folded behind "Read the waiver"). */
+body.page-civicrm-event-register #Register .helprow-custom_63-section p { margin: var(--mh-space-xs) 0 0; }
 .mh-optional-questions summary {
   cursor: pointer;
   font-weight: 600;
   color: var(--mh-color-brand-primary);
 }
-.mh-waiver-text p { margin: var(--mh-space-xs) 0 0; }
 body.page-civicrm-event-register #Register .helprow-custom_63-section { margin-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
 body.page-civicrm-event-register #Register .editrow_custom_63-section { border-top: 0 !important; border-top-left-radius: 0; border-top-right-radius: 0; }
 body.page-civicrm-event-register #Register .helprow-custom_63-section h3 {
@@ -1944,6 +1950,20 @@ body.page-civicrm-event-register #priceset .crm-price-amount-label-separator { d
 body.page-civicrm-event-register #priceset .crm-price-amount-amount { font-weight: 700; white-space: nowrap; }
 .mh-member-price-note { margin: 0; font-size: 0.95rem; }
 
+/* Discount code: behind a link-style toggle until asked for (JR 2026-11-10). */
+body.page-civicrm-event-register #Register .mh-discount-toggle {
+  align-self: flex-start;
+  margin: 0;
+  padding: var(--mh-space-2xs) 0;
+  background: none;
+  border: 0;
+  color: var(--mh-color-brand-primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+body.page-civicrm-event-register #Register .mh-discount-toggle:focus-visible { outline: 2px solid var(--mh-color-brand-primary); outline-offset: 2px; }
 /* Discount code: field and button on one line. */
 body.page-civicrm-event-register #Register .cividiscount-section {
   display: grid;
@@ -2021,8 +2041,8 @@ body.page-civicrm-event-register .swal2-confirm { background-color: var(--mh-col
 [data-bs-theme="dark"] body.page-civicrm-event-register #crm-main-content-wrapper { background: transparent; }
 [data-bs-theme="dark"] .mh-form-errors { background: #2a1516; color: rgba(255, 255, 255, .87); }
 [data-bs-theme="dark"] .mh-form-errors a,
-[data-bs-theme="dark"] .mh-waiver-text summary,
-[data-bs-theme="dark"] .mh-optional-questions summary { color: #e8595d; }
+[data-bs-theme="dark"] .mh-optional-questions summary,
+[data-bs-theme="dark"] body.page-civicrm-event-register #Register .mh-discount-toggle { color: #e8595d; }
 [data-bs-theme="dark"] .event-card-price { color: #f1f1f1; }
 body.page-civicrm-event-register #Register .mh-optional-questions .messages.help p { color: inherit; }
 [data-bs-theme="dark"] body.page-civicrm-event-register #Register .mh-optional-questions .messages.help { color: rgba(255, 255, 255, .72); }
