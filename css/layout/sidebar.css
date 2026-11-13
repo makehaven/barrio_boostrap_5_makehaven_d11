@@ -258,6 +258,15 @@ body.path-blog #sidebar_first .block-menu .dropdown-menu .dropdown-item a.is-act
   box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
 }
 
+/* Dark mode: the sidebar is an <aside>, so the theme's dark surface flip
+   (section, main, .card in mockup-port.css) never reached these cards. They
+   stayed light grey under white headings ("Staff Actions", "Member Actions";
+   feedback 21060, 2026-11). The menu block keeps its transparent override. */
+[data-bs-theme="dark"] .sidebar aside.section .block {
+  background-color: #262626;
+  border-color: rgba(255, 255, 255, .08);
+}
+
 .sidebar .block {
   border-width: 0;
 }
