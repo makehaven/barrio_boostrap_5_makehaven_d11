@@ -46,6 +46,19 @@ a.btn.btn-primary {
     background-color: var(--mh-color-brand-primary-strong) !important;
 }
 
+/* Outline buttons fill with the brand colour on hover. Bootstrap's own
+   .btn:hover loads after this file and took the text colour from
+   --bs-btn-hover-color, which resolves to the dark body colour here: dark
+   text on dark red, unreadable (JR, /teach-workshop, 2026-11-16). */
+.btn.btn-outline-primary:hover,
+.btn.btn-outline-primary:focus,
+.btn.btn-outline-primary:active,
+.btn.btn-outline-primary.active {
+    background-color: var(--mh-color-brand-primary-strong);
+    border-color: var(--mh-color-brand-primary-strong);
+    color: var(--mh-color-surface);
+}
+
 button#edit-submit {
     color: var(--mh-color-surface);
 }
